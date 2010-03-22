@@ -272,7 +272,9 @@
             setter: function( val ){
               if( this._wrappedEls.length == 1 && val === true ){
                 var c = Y.one(this._wrappedEls[0]), h = this.get("host");
-                h.setXY( c.getXY() );
+                if( c.getStyle( "position" ) == "absolute" ){
+                  h.setXY( c.getXY() );
+                }
                 h.setStyle( "width" , c.getComputedStyle( "width" ) || c.getAttribute( "width" ) + "px" );
                 h.setStyle( "height" , c.getComputedStyle( "height" ) || c.getAttribute( "height" ) + "px" );
               }
