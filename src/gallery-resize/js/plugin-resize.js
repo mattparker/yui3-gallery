@@ -728,7 +728,7 @@
                if( this._wrappedEls === false ){
                  return; 
                }
-console.log( this._wrappedEls);
+
                // private function does the hard work:
                var doResize = function( el ){
                  var oPos = this._getPosition( el );
