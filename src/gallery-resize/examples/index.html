@@ -55,32 +55,25 @@ body {
 <!--BEGIN SOURCE CODE FOR EXAMPLE =============================== --> 
  
 <style> 
-    #demo , #demo28{
+    #demo , #demo2{
         height: 100px;
-        width: 100px;
+        width: 200px;
         border: 1px solid black;
         background-color: #8DD5E7;
         position: absolute;
         padding: 7px;
-        left: 100px;
+        left: 350px;
     }
-    #demo h2 {
-        padding: 0;
-        margin: 0;
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        font-size: 110%;
-        color: black;
-        font-weight: bold;
-        cursor: move;
-    }
-    #demo28{
-      left: 400px;
+
+    #demo2{
+      left: 600px;
       background-color: green;
     } 
     
-    
+     code{
+     display: block;
+     white-space: pre;
+    }   
 
 
 </style> 
@@ -106,7 +99,7 @@ body {
   <p>There is one exception: wrappers.  This plugin does not wrap elements for
      you that need it, like images or textareas.  There's a good reason
      for this, and you can still resize these elements.  See
-     <a href="">this example</a> for discussion and a demo.
+     <a href="demo-wrap.html">this example</a> for discussion and a demo.
   </p>
   <p>This uses drag drop, and plugs in a dd instance into the node, so most events
      come from the default plugin infrastructure or the drag-drop.  But I might
@@ -119,7 +112,8 @@ body {
  <h2>Simple example</h2>
  
  <div id="demo">
-   This element is resizeable, with default options.
+   This element is resizeable, with default options.<br/>
+   If I said I lived in one of the 50 United States in my heart would it count?
  </div>
  <script type="text/javascript">
    YUI( {base:"../../../../My Documents/Downloads/yui_3.1.0pr1/yui/build/"} ).use(  "*", function(Y) {
@@ -149,6 +143,11 @@ body {
  <p> Config options are also the same as in YUI2.x, so you can pass an object 
     as the second argument to plug to change the behaviour of the resize:
     
+  <div id="demo2">
+    This Javascript was brought to you by the United Kingdom.<br/>
+    We're sorry we won't be seeing you at JSConf...
+  </div>  
+  
     <code>
      
       // This will also make it draggable, zany handles, animate the final 
