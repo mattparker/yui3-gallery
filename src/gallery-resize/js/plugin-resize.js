@@ -252,7 +252,7 @@
             lazyAdd: false,
             validator: function(val) {
               return Y.Lang.isString(val);
-            }
+            },
             setter: function( val ) {
               if( val ){
                 this._wrappedEls = Y.Array( Y.all( "#" + this.get("host").get("id") + " " + val ) );

@@ -252,10 +252,16 @@ YUI.add('gallery-resize', function(Y) {
           wrappedEls: {
             value: false,
             lazyAdd: false,
+            validator: function(val) {
+              return Y.Lang.isString(val);
+            },
             setter: function( val ) {
-              this._wrappedEls = Y.Array( Y.all( "#" + this.get("host").get("id") + " " + val ) );
+              if( val ){
+                this._wrappedEls = Y.Array( Y.all( "#" + this.get("host").get("id") + " " + val ) );
+              }
             }
           },
+          
           
           /**
            * Whether to 'hug' the wrapped element.
