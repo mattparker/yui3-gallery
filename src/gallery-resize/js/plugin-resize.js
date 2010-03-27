@@ -275,7 +275,8 @@
             setter: function( val ){
               if( this._wrappedEls !== undefined && this._wrappedEls.length == 1 && val === true ){
                 var c = this._wrappedEls[0], h = this.get("host"),
-                    hHeight = parseInt( c.getComputedStyle( "height" ) || c.getAttribute( "height" ), 10 ) ;
+                    hHeight = parseInt( c.getComputedStyle( "height" ) || c.getAttribute( "height" ), 10 ) ,
+                    hWidth = parseInt( c.getComputedStyle( "width" ) || c.getAttribute( "width" ) , 10 );
 
                 if( c.getStyle( "position" ) == "absolute" ){
                   h.setXY( c.getXY() );
@@ -283,9 +284,10 @@
                 
                 if( Y.UA.ie ){
                   hHeight += 8;
+                  hWidth += 5;
                 }
 
-                h.setStyle( "width" ,  parseInt( c.getComputedStyle( "width" ) || c.getAttribute( "width" ) , 10 ) + "px" );
+                h.setStyle( "width" ,  hWidth + "px" );
                 h.setStyle( "height" , hHeight + "px" );
               }
             }
@@ -587,8 +589,7 @@
 
 
                // Are we resizing at set ratio - by config or shift key?
-               if( this.get( "ratio" ) ||
-                   ( this.get("autoRatio") && ev.currentTarget._ev_md.shiftKey  ) ) {
+               if( this.get( "ratio" ) || ( this.get("autoRatio") && ev.currentTarget._ev_md.shiftKey  ) ) {
                  this._ratioValue = parseInt( el.getComputedStyle( "height" ) , 10 ) / parseInt( el.getComputedStyle( "width" ) , 10 );
                }
                
@@ -596,8 +597,8 @@
                   el.addClass( "yui3-resize-ghost" );
                }
                
-               this._originalPosition = this._getPosition( el );
-               
+               this._originalPosition = this._getPosition( this._resizeNode );
+ 
                this._startChildResize();
                
                // show the status panel:
@@ -631,6 +632,7 @@
           
                // get the current location
                var coords = this._getPosition( this._resizeNode  ),
+                   orig = this._originalPosition,
                    w = coords.w,
                    h = coords.h,
                    t = coords.t,
@@ -660,6 +662,8 @@
                if ( ch.hasClass( "yui3-resize-handle-r" ) ) {
                    
                  calcdW = dw;
+                 t = orig.t;
+                 l = orig.l;
                
                }
                
@@ -667,19 +671,22 @@
 
                  calcdW = -dw;
                  calcdL = dw;
+                 t = orig.t;
                }
                    
                else if( ch.hasClass( "yui3-resize-handle-t" ) ) {
                    
                  calcdH = -dh;
                  calcdT = dh;
+                 l = orig.l;
                
                }
                
                else if ( ch.hasClass( "yui3-resize-handle-b" ) ) {
                
                  calcdH = dh;
-               
+                 l = orig.l;
+                 t = orig.t;
                }
                
                else if( ch.hasClass( "yui3-resize-handle-tl" ) ) {
@@ -695,6 +702,7 @@
                  calcdW = dw;
                  calcdH = -dh;
                  calcdT = dh;
+                 l = orig.l;
                
                }
 
@@ -702,15 +710,18 @@
                
                  calcdW = -dw;
                  calcdH = dh;
-                 calcdL = dw;               
+                 calcdL = dw;
+                 t = orig.t;           
                }               
 
                else if( ch.hasClass( "yui3-resize-handle-br" ) ) {
                
                  calcdW = dw;
-                 calcdH = dh;               
+                 calcdH = dh;
+                 t = orig.t; calcdT = 0;
+                 l = orig.l; calcdL = 0;
                }
-               
+
                finalCoords = this._constrainResize( { w: w + calcdW, 
                                                           h: h + calcdH,
                                                           t: t + calcdT,
@@ -1118,5 +1129,7 @@
         } );
         
         Y.Plugin.Resize = Resize;
+
+
 
 
