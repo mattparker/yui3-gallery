@@ -823,7 +823,7 @@
 
               return { w : parseInt( node.getStyle( "width" ), 10 ),
                        h : parseInt( node.getStyle( "height" ) , 10 ),
-                       t : parseInt( node.getStyle( "top" ) , 10 ),
+                       t : parseInt( node.getY() , 10 ),
                        l : parseInt( node.getX() , 10 ) };
             },
             
