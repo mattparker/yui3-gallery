@@ -614,9 +614,10 @@ function populateForm1()
 	{
 		var e = this.form.elements[i];
 
+		var name = e.tagName.toLowerCase();
 		var type = (e.type ? e.type.toLowerCase() : null);
 		if (collect_buttons &&
-			(type == 'submit' || type == 'reset' || type == 'button'))
+			(type == 'submit' || type == 'reset' || name == 'button'))
 		{
 			this.button_list.push(e);
 		}
@@ -625,8 +626,6 @@ function populateForm1()
 		{
 			continue;
 		}
-
-		var name = e.tagName.toLowerCase();
 
 		var v = this.default_value_map[ e.name ];
 		if (name == 'input' && type == 'file')
@@ -1062,18 +1061,18 @@ FormManager.prototype =
 			{
 				this.displayMessage(e[i], info.error, 'error');
 				status = false;
-			}
-			if (!info.keepGoing)
-			{
 				continue;
 			}
 
-			if (this.validation.regex[e_id] &&
-				!this.validation.regex[e_id].test(e[i].value))
+			if (info.keepGoing)
 			{
-				this.displayMessage(e[i], msg_list ? msg_list.regex : null, 'error');
-				status = false;
-				continue;
+				if (this.validation.regex[e_id] &&
+					!this.validation.regex[e_id].test(e[i].value))
+				{
+					this.displayMessage(e[i], msg_list ? msg_list.regex : null, 'error');
+					status = false;
+					continue;
+				}
 			}
 
 			var f     = this.validation.fn[e_id];
@@ -1148,6 +1147,14 @@ FormManager.prototype =
 		};
 
 		this.user_button_list.push(info);
+	},
+
+	/**
+	 * @return {boolean} <code>true</code> if form is enabled
+	 */
+	isFormEnabled: function()
+	{
+		return this.enabled;
 	},
 
 	/**
@@ -1258,7 +1265,7 @@ FormManager.prototype =
 	 * @param e {String|Object} The selector for the element or the element itself
 	 * @param msg {String} The message
 	 * @param type {String} The message type (see Y.FormManager.status_order)
-	 * @param scroll {boolean} <code>true</code> if the form row should be scrolled into view
+	 * @param scroll {boolean} (Optional) <code>true</code> if the form row should be scrolled into view
 	 */
 	displayMessage: function(
 		/* id/object */	e,
@@ -1364,4 +1371,4 @@ FormManager.prototype =
 Y.FormManager = FormManager;
 
 
-}, 'gallery-2010.03.02-18' ,{requires:['node-base','substitute']});
+}, 'gallery-2010.04.02-17-26' ,{requires:['node-base','substitute']});
