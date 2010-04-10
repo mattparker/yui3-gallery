@@ -147,16 +147,16 @@ YUI.add('gallery-treeviewlite', function(Y) {
                      /**
                       * <p>Event fired when a list is opened</p>
                       * @event open
-                      * @param {EventFacade} e Event object
+                      * @param {EventFacade} ev Event object
                       */
-                     this.fire( "open" );
+                     this.fire( "open" , ev );
                    } else {
                      /**
                       * <p>Event fired when a list is collapsed</p>
                       * @event collapse
-                      * @param {EventFacade} e Event object
+                      * @param {EventFacade} ev Event object
                       */
-                     this.fire( "collapse" );
+                     this.fire( "collapse" , ev );
                    }
                    parent.toggleClass( CSS_COLLAPSED );
                  }
