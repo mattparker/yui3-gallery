@@ -76,25 +76,8 @@ YUI.add('gallery-treeviewlite', function(Y) {
              */
             initializer: function(){
             
-              var host = this.get(HOST);
-              
-              host.addClass( CSS_TOP );
-              
-              Y.each( host.all( "li" ) , function(n){ 
-                   
-                   // add class if they have child lists
-                   n.removeClass( CSS_HAS_CHILD );
-                   if( n.one( "ol li,ul li" ) ){
-                       n.addClass( CSS_HAS_CHILD );
-                   }
-                   
-                   // add a 'last child' css.
-                   n.removeClass( CSS_FINAL_CHILD );
-                   if( n.next() === null ) {
-                     n.addClass( CSS_FINAL_CHILD );
-                   }
-              });
-                
+
+              this.renderUI();
               this.bindUI();
                 
 
@@ -114,6 +97,31 @@ YUI.add('gallery-treeviewlite', function(Y) {
                               .removeClass( CSS_FINAL_CHILD );
               // remove event(s);
               Y.each( this._delegates , function(d){d.detach( );} );
+            },
+
+            /**
+             * <p>Adds some CSS to the various nodes in the tree.</p>
+             * @method bindUI
+             */
+            renderUI : function() {
+              var host = this.get(HOST);
+              
+              host.addClass( CSS_TOP );
+              
+              Y.each( host.all( "li" ) , function(n){ 
+                   
+                   // add class if they have child lists
+                   n.removeClass( CSS_HAS_CHILD );
+                   if( n.one( "ol li,ul li" ) ){
+                       n.addClass( CSS_HAS_CHILD );
+                   }
+                   
+                   // add a 'last child' css.
+                   n.removeClass( CSS_FINAL_CHILD );
+                   if( n.next() === null ) {
+                     n.addClass( CSS_FINAL_CHILD );
+                   }
+              });            
             },
 
 
