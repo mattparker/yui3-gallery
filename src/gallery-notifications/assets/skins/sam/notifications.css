@@ -5,18 +5,18 @@
 {
 	position: fixed;
 	right: 50px;
-	bottom: 0px;	
-	
+	bottom: 0px;
+
 	width: 100px;
 	height: 12px;
 	padding: 10px;
-	
+
 	border: #CCC 1px solid;
-	
+
 	text-align: center;
 	font-size: 12px;
 	cursor: pointer;
-	
+
 	opacity: 0.95;
 }
 .yui3-notifications .closed
@@ -24,7 +24,7 @@
 	color: #000;
 	background-color: #DDD;
 }
-.yui3-notifications .open 
+.yui3-notifications .open
 {
 	color: #000;
 	background-color: #EEE;
@@ -40,23 +40,23 @@
 {
 	position: fixed;
 	right: 50px;
-	bottom: 0px;	
-	
+	bottom: 0px;
+
 	width: 200px;
 	margin-bottom: 32px;
 	padding: 10px;
-	
+
 	background-color: #EEE;
 	color: #000;
 	border: #CCC 1px solid;
-	
+
 	text-align: left;
 	font-size: 12px;
-	
+
 	opacity: 0.9;
-	
+
 	max-height: 300px;
-	overflow-y: auto; 
+	overflow-y: auto;
 }
 
 .yui3-notifications-pop ul

@@ -5,8 +5,8 @@ YUI.add('gallery-widget-io', function(Y) {
         WidgetIO.superclass.constructor.apply(this, arguments);
     }
 
-    /* 
-     * The namespace for the plugin. This will be the property on the widget, which will 
+    /*
+     * The namespace for the plugin. This will be the property on the widget, which will
      * reference the plugin instance, when it's plugged in
      */
     WidgetIO.NS = 'io';
@@ -42,7 +42,7 @@ YUI.add('gallery-widget-io', function(Y) {
 
         /*
          * The default formatter to use when formatting response data. The default
-         * implementation simply passes back the response data passed in. 
+         * implementation simply passes back the response data passed in.
          */
         formatter: {
             valueFn: function() {
@@ -79,7 +79,7 @@ YUI.add('gallery-widget-io', function(Y) {
 
                     cfg.on.start = cfg.on.start || Y.bind(this._defStartHandler, this);
                     cfg.on.complete = cfg.on.complete || Y.bind(this._defCompleteHandler, this);
-    
+
                     cfg.on.success = cfg.on.success || Y.bind(this._defSuccessHandler, this);
                     cfg.on.failure = cfg.on.failure || Y.bind(this._defFailureHandler, this);
 
@@ -91,7 +91,7 @@ YUI.add('gallery-widget-io', function(Y) {
         },
 
         /*
-         * Helper method for setting host content 
+         * Helper method for setting host content
          */
         setContent: function(content) {
             this.get('host').get('contentBox').setContent(content);

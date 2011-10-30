@@ -1,7 +1,7 @@
 (function () {
     var YAHOO = Y.Port(),
         Dom = YAHOO.util.Dom,
-        Lang = YAHOO.lang, 
+        Lang = YAHOO.lang,
         Event = YAHOO.util.Event,
         TV = YAHOO.widget.TreeView,
         TVproto = TV.prototype;
@@ -37,11 +37,11 @@
         oldValue:undefined
         // Each node type is free to add its own properties to this as it sees fit.
     };
-    
+
     /**
-     * Validator function for edited data, called from the TreeView instance scope, 
-     * receives the arguments (newValue, oldValue, nodeInstance) 
-     * and returns either the validated (or type-converted) value or undefined. 
+     * Validator function for edited data, called from the TreeView instance scope,
+     * receives the arguments (newValue, oldValue, nodeInstance)
+     * and returns either the validated (or type-converted) value or undefined.
      * An undefined return will prevent the editor from closing
      * @property validator
      * @type function
@@ -49,9 +49,9 @@
      * @for YAHOO.widget.TreeView
      */
     TVproto.validator = null;
-    
+
     /**
-     * Entry point for initializing the editing plug-in.  
+     * Entry point for initializing the editing plug-in.
      * TreeView will call this method on initializing if it exists
      * @method _initEditor
      * @for YAHOO.widget.TreeView
@@ -59,30 +59,30 @@
      */
 
     TVproto._initEditor = function () {
-        /** 
+        /**
          * Fires when the user clicks on the ok button of a node editor
-         * @event editorSaveEvent 
-         * @type CustomEvent 
-         * @param oArgs.newValue {mixed} the new value just entered 
-         * @param oArgs.oldValue {mixed} the value originally in the tree 
-         * @param oArgs.node {YAHOO.widget.Node} the node that has the focus 
+         * @event editorSaveEvent
+         * @type CustomEvent
+         * @param oArgs.newValue {mixed} the new value just entered
+         * @param oArgs.oldValue {mixed} the value originally in the tree
+         * @param oArgs.node {YAHOO.widget.Node} the node that has the focus
          * @for YAHOO.widget.TreeView
-         */ 
-        // this.publish("editorSaveEvent"); 
-        
-        /** 
+         */
+        // this.publish("editorSaveEvent");
+
+        /**
          * Fires when the user clicks on the cancel button of a node editor
-         * @event editorCancelEvent 
-         * @type CustomEvent 
-         * @param {YAHOO.widget.Node} node the node that has the focus 
+         * @event editorCancelEvent
+         * @type CustomEvent
+         * @param {YAHOO.widget.Node} node the node that has the focus
          * @for YAHOO.widget.TreeView
-         */ 
-        // this.publish("editorCancelEvent"); 
+         */
+        // this.publish("editorCancelEvent");
 
     };
 
     /**
-     * Entry point of the editing plug-in.  
+     * Entry point of the editing plug-in.
      * TreeView will call this method if it exists when a node label is clicked
      * @method _nodeEditing
      * @param node {YAHOO.widget.Node} the node to be edited
@@ -132,7 +132,7 @@
 
                 editorData.inputContainer = ed.appendChild(document.createElement('div'));
                 Dom.addClass(editorData.inputContainer,'ygtv-input');
-                
+
                 Y.on('keydown', function (ev) {
                     var editorData = TV.editorData,
                         KEY = Y.TreeView.KEY;
@@ -140,7 +140,7 @@
                         case KEY.ENTER:
                             Y.log('ENTER');
                             ev.halt();
-                            if (editorData.saveOnEnter) { 
+                            if (editorData.saveOnEnter) {
                                 this._closeEditor(true);
                             }
                             break;
@@ -153,7 +153,7 @@
                 }, ed, this);
 
 
-                
+
             } else {
                 ed = editorData.editorPanel;
             }
@@ -172,7 +172,7 @@
             return true;  // If inline editor available, don't do anything else.
         }
     };
-    
+
     /**
      * Method to be associated with an event (clickEvent, dblClickEvent or enterKeyPressed) to pop up the contents editor
      *  It calls the corresponding node editNode method.
@@ -187,7 +187,7 @@
             oArgs.node.editNode();
         }
     };
-    
+
     /**
      * Method to be called when the inline editing is finished and the editor is to be closed
      * @method _closeEditor
@@ -196,22 +196,22 @@
      * @for YAHOO.widget.TreeView
      */
     TVproto._closeEditor = function (save) {
-        var ed = TV.editorData, 
+        var ed = TV.editorData,
             node = ed.node,
             close = true;
-        if (save) { 
+        if (save) {
             close = (ed.node.saveEditorValue(ed) !== false);
         } else {
-            this.fire('editorCancelEvent', node); 
+            this.fire('editorCancelEvent', node);
         }
-            
+
         if (close) {
-            Dom.setStyle(ed.editorPanel,'display','none');  
+            Dom.setStyle(ed.editorPanel,'display','none');
             ed.active = false;
             node.focus();
         }
     };
-    
+
     /**
      *  Entry point for TreeView's destroy method to destroy whatever the editing plug-in has created
      * @method _destroyEditor
@@ -229,9 +229,9 @@
             ed.active = false;
         }
     };
-    
+
     var Nproto = YAHOO.widget.Node.prototype;
-    
+
     /**
      * Signals if the label is editable.  (Ignored on TextNodes with href set.)
      * @property editable
@@ -239,7 +239,7 @@
      * @for YAHOO.widget.Node
      */
     Nproto.editable = false;
-    
+
     /**
      * pops up the contents editor, if there is one and the node is declared editable
      * @method editNode
@@ -248,7 +248,7 @@
     Nproto.editNode = function () {
         this.tree._nodeEditing(this);
     };
-    
+
     /** Placeholder for a function that should provide the inline node label editor.
      *   Leaving it set to null will indicate that this node type is not editable.
      * It should be overridden by nodes that provide inline editing.
@@ -283,16 +283,16 @@
      * @for YAHOO.widget.Node
      */
     Nproto.saveEditorValue = function (editorData) {
-        var node = editorData.node, 
+        var node = editorData.node,
             value,
             validator = node.tree.validator;
-            
+
         value = this.getEditorValue(editorData);
-        
+
         if (Lang.isFunction(validator)) {
             value = validator(value,editorData.oldValue,node);
-            if (Lang.isUndefined(value)) { 
-                return false; 
+            if (Lang.isUndefined(value)) {
+                return false;
             }
         }
 
@@ -307,7 +307,7 @@
             this.displayEditedValue(value, editorData);
         }
     };
-    
+
     /**
      * Returns the value(s) from the input element(s) .
      * Should be overridden by each node type.
@@ -330,10 +330,10 @@
      */
     Nproto.displayEditedValue = function (value,editorData) {
     };
-    
+
     var TNproto = YAHOO.widget.TextNode.prototype;
-    
-    /** 
+
+    /**
      *  Places an &lt;input&gt;  textbox in the input container and loads the label text into it.
      * @method fillEditorContainer
      * @param editorData {YAHOO.widget.TreeView.editorData}  a shortcut to the static object holding editing information
@@ -341,7 +341,7 @@
      * @for YAHOO.widget.TextNode
      */
     TNproto.fillEditorContainer = function (editorData) {
-    
+
         var input;
         // If last node edited is not of the same type as this one, delete it and fill it with our editor
         if (editorData.nodeType != this._type) {
@@ -350,7 +350,7 @@
             editorData.node.destroyEditorContents(editorData);
 
             editorData.inputElement = input = editorData.inputContainer.appendChild(document.createElement('input'));
-            
+
         } else {
             // if the last node edited was of the same time, reuse the input element.
             input = editorData.inputElement;
@@ -360,7 +360,7 @@
         input.focus();
         input.select();
     };
-    
+
     /**
      * Returns the value from the input element.
      * Overrides Node.getEditorValue.

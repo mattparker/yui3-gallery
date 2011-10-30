@@ -1,7 +1,7 @@
 YUI.add("gallery-resource",function(Y){
 /*
 	 * Resource - A RESTful wrapper around Y.io
-	 * 
+	 *
 	 * Oddnut Software
 	 * Copyright (c) 2009 Eric Ferraiuolo - http://eric.ferraiuolo.name
 	 * YUI BSD License - http://developer.yahoo.com/yui/license.html

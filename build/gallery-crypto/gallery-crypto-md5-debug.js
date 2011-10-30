@@ -7,12 +7,12 @@ Y.mix(_C, {
 	 * Adds two numerics as if they were 32-bit integers.
 	 *
 	 * @method add32Bit
-	 * 
-	 * @param {int} first operand 
+	 *
+	 * @param {int} first operand
 	 * @param {int} second operand
-	 * 
+	 *
 	 * @static
-	 */ 
+	 */
 	add32Bit: function (x,y) {
 		return (x  + y) & 0xffffffff;
 	},
@@ -20,24 +20,24 @@ Y.mix(_C, {
 	 * Converts a standard JavaScript string (utf16) to a UTF8 string
 	 *
 	 * @method utf16ToUtf8
-	 * 
+	 *
 	 * @param {string} The utf16 encoded string to convert to a utf8 array
-	 * 
+	 *
 	 * @static
-	 */ 
+	 */
 	utf16ToUtf8: function(string) {
 		var output = "", cd, pr, i = 0;
-		
+
 		while (i < string.length) {
 			cd = string.charCodeAt(i);
 			pr = i + 1 < string.length ? string.charCodeAt(i + 1) : 0;
-			
+
 			if (0xd800 <= cd && cd <= 0xdbff && 0xdc00 <= pr && pr <= 0xdfff) {
 				// Surrogate Pair
 				cd = 0x10000 + ((cd & 0x3ff) + (pr & 0x03ff));
 				i += 1;
 			}
-			
+
 			if (cd <= 0x007f) {
 				output += String.fromCharCode(cd);
 			} else if (cd <= 0x07ff) {
@@ -63,11 +63,11 @@ Y.mix(_C, {
 	 * greater than 255 will be silently dropped.
 	 *
 	 * @method utf8ToByteArray
-	 * 
+	 *
 	 * @param {string} The utf8 encoded string to convert to a byte array
-	 * 
+	 *
 	 * @static
-	 */ 
+	 */
 	utf8ToByteArray: function(string) {
 		var output = Array(string.length >> 2), i, j;
 		for (i = 0 ; i < output.length ; i += 1) { output[i] = 0; }
@@ -98,11 +98,11 @@ Y.mix(_C, {
 	 * Converts a standard JavaScript string (utf16) to a Byte Array
 	 *
 	 * @method stringToByteArray
-	 * 
+	 *
 	 * @param {string} The utf16 encoded string to convert to a byte array
-	 * 
+	 *
 	 * @static
-	 */ 
+	 */
 	stringToByteArray: function(string) {
 		return _C.utf8ToByteArray(_C.utf16ToUtf8(string));
 	}
@@ -132,7 +132,7 @@ _C.MD5 = function (msg) {
 		II = function(a, b, c, d, x, s, ac) {
 			return transform_common((c ^ (b | (~d))), a, b, x, s, ac);
 		},
-		data = _C.stringToByteArray(msg), 
+		data = _C.stringToByteArray(msg),
 		len = msg.length * 8,
 		a = 0x67452301,
 		b = 0xefcdab89,
@@ -142,7 +142,7 @@ _C.MD5 = function (msg) {
 	data[(((len + 64) >>> 9) << 4) + 14] = len;
 	for ( i = 0 ; i < data.length ; i += 16) {
 		s1 = a; s2 = b; s3 = c; s4 = d;
-		
+
 			/* Round 1 */
 	  a = FF (a, b, c, d, data[i + 0], 7, 0xd76aa478); /* 1 */
 	  d = FF (d, a, b, c, data[i + 1], 12, 0xe8c7b756); /* 2 */
@@ -160,7 +160,7 @@ _C.MD5 = function (msg) {
 	  d = FF (d, a, b, c, data[i +13], 12, 0xfd987193); /* 14 */
 	  c = FF (c, d, a, b, data[i +14], 17, 0xa679438e); /* 15 */
 	  b = FF (b, c, d, a, data[i +15], 22, 0x49b40821); /* 16 */
-	
+
 	 /* Round 2 */
 	  a = GG (a, b, c, d, data[i + 1], 5, 0xf61e2562); /* 17 */
 	  d = GG (d, a, b, c, data[i + 6], 9, 0xc040b340); /* 18 */
@@ -178,7 +178,7 @@ _C.MD5 = function (msg) {
 	  d = GG (d, a, b, c, data[i + 2], 9, 0xfcefa3f8); /* 30 */
 	  c = GG (c, d, a, b, data[i + 7], 14, 0x676f02d9); /* 31 */
 	  b = GG (b, c, d, a, data[i +12], 20, 0x8d2a4c8a); /* 32 */
-	
+
 	  /* Round 3 */
 	  a = HH (a, b, c, d, data[i + 5], 4, 0xfffa3942); /* 33 */
 	  d = HH (d, a, b, c, data[i + 8], 11, 0x8771f681); /* 34 */
@@ -196,7 +196,7 @@ _C.MD5 = function (msg) {
 	  d = HH (d, a, b, c, data[i +12], 11, 0xe6db99e5); /* 46 */
 	  c = HH (c, d, a, b, data[i +15], 16, 0x1fa27cf8); /* 47 */
 	  b = HH (b, c, d, a, data[i + 2], 23, 0xc4ac5665); /* 48 */
-	
+
 	  /* Round 4 */
 	  a = II (a, b, c, d, data[i + 0], 6, 0xf4292244); /* 49 */
 	  d = II (d, a, b, c, data[i + 7], 10, 0x432aff97); /* 50 */
@@ -214,7 +214,7 @@ _C.MD5 = function (msg) {
 	  d = II (d, a, b, c, data[i +11], 10, 0xbd3af235); /* 62 */
 	  c = II (c, d, a, b, data[i + 2], 15, 0x2ad7d2bb); /* 63 */
 	  b = II (b, c, d, a, data[i + 9], 21, 0xeb86d391); /* 64 */
-	  
+
 	  a = _C.add32Bit(a, s1);
 	  b = _C.add32Bit(b, s2);
 	  c = _C.add32Bit(c, s3);

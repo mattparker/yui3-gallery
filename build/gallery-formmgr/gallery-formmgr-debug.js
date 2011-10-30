@@ -5,38 +5,38 @@ YUI.add('gallery-formmgr', function(Y) {
 /**********************************************************************
  * <p>FormManager provides support for initializing a form, pre-validating
  * user input, and displaying messages returned by the server.</p>
- * 
+ *
  * <p><strong>Required Markup Structure</strong></p>
- * 
+ *
  * <p>Each element (or tighly coupled set of elements) must be contained by
  * an element that has the CSS class <code>formmgr-row</code>.  Within each
  * row, validation messages are displayed inside the container with CSS
  * class <code>formmgr-message-text</code>.
- * 
+ *
  * <p>When a message is displayed inside a row, the CSS class
  * <code>formmgr-has{type}</code> is placed on the row container and the
  * containing fieldset (if any), where <code>{type}</code> is the message
  * type passed to <code>displayMessage()</code>.</p>
- * 
+ *
  * <p><strong>Initializing the Form</strong></p>
- * 
+ *
  * <p>Default values can be either encoded in the markup or passed to the
  * FormManager constructor via <code>config.default_value_map</code>.  (The
  * former method is obviously better for progressive enhancement.)  The
  * values passed to the constructor override the values encoded in the
  * markup.</p>
- * 
+ *
  * <p><code>prepareForm()</code> must be called before the form is
  * displayed.  To initialize focus to the first element in a form, call
  * <code>initFocus()</code>.  If the form is in an overlay, you can delay
  * these calls until just before showing the overlay.</p>
- * 
+ *
  * <p>The default values passed to the constructor are inserted by
  * <code>populateForm()</code>.  (This is automatically called by
  * <code>prepareForm()</code>.)</p>
- * 
+ *
  * <p><strong>Displaying Messages</strong></p>
- * 
+ *
  * <p>To display a message for a single form row, call
  * <code>displayMessage()</code>.  To display a message for the form in
  * general, call <code>displayFormMessage()</code>.  These functions can be
@@ -181,7 +181,7 @@ var decimal_class_re  = /(?:^|\s+)yiv-decimal(?::\[([-+]?(?:[0-9]+\.?|[0-9]+\.[0
 /**
  * Regular expression used to determine if a value is an integer.
  * This can be localized, e.g., allow for thousands separator.
- * 
+ *
  * @config Y.FormManager.integer_value_re
  * @type {RegExp}
  * @static
@@ -191,7 +191,7 @@ FormManager.integer_value_re = /^[-+]?[0-9]+$/;
 /**
  * Regular expression used to determine if a value is a decimal number.
  * This can be localized, e.g., use the correct decimal separator.
- * 
+ *
  * @config Y.FormManager.decimal_value_re
  * @type {RegExp}
  * @static
@@ -201,7 +201,7 @@ FormManager.decimal_value_re = /^[-+]?(?:[0-9]+\.?|[0-9]*\.[0-9]+)$/;
 /**
  * The CSS class which marks each row of the form.  Typically, each element
  * (or a very tightly coupled set of elements) is placed in a separate row.
- * 
+ *
  * @property Y.FormManager.row_marker_class
  * @type {String}
  */
@@ -210,7 +210,7 @@ FormManager.row_marker_class = 'formmgr-row';
 /**
  * The CSS class which marks the container for the status message within a
  * row of the form.
- * 
+ *
  * @property Y.FormManager.status_marker_class
  * @type {String}
  */
@@ -218,7 +218,7 @@ FormManager.status_marker_class = 'formmgr-message-text';
 
 /**
  * The CSS class placed on <code>status_node</code> when it is empty.
- * 
+ *
  * @property Y.FormManager.status_none_class
  * @type {String}
  */
@@ -228,7 +228,7 @@ FormManager.status_none_class = 'formmgr-status-hidden';
  * The CSS class placed on <code>status_node</code> when
  * <code>displayFormMessage()</code> is called with
  * <code>error=false</code>.
- * 
+ *
  * @property Y.FormManager.status_success_class
  * @type {String}
  */
@@ -238,7 +238,7 @@ FormManager.status_success_class = 'formmgr-status-success';
  * The CSS class placed on <code>status_node</code> when
  * <code>displayFormMessage()</code> is called with
  * <code>error=true</code>.
- * 
+ *
  * @property Y.FormManager.status_failure_class
  * @type {String}
  */
@@ -248,7 +248,7 @@ FormManager.status_failure_class = 'formmgr-status-failure';
  * The prefix for all CSS classes placed on a form row when pre-validation
  * fails.  The full CSS class is formed by appending the value from
  * <code>Y.FormManager.status_order</code>.
- * 
+ *
  * @property Y.FormManager.row_status_prefix
  * @type {String}
  */
@@ -260,7 +260,7 @@ var row_status_regex   = new RegExp(class_re_prefix + row_status_pattern + class
 
 /**
  * <p>Map of localizable strings used by pre-validation.</p>
- * 
+ *
  * <dl>
  * <dt><code>validation_error</code></dt>
  * <dd>Displayed in <code>status_node</code> by <code>notifyErrors()</code> when pre-validation fails.</dd>
@@ -275,7 +275,7 @@ var row_status_regex   = new RegExp(class_re_prefix + row_status_pattern + class
  * <dt><code>decimal</code>, <code>decimal_too_small</code>, <code>decimal_too_large</code>, <code>decimal_out_of_range</code></dt>
  * <dd>Displayed when <code>yiv-decimal</code> fails on an input field.</dd>
  * </dl>
- * 
+ *
  * @config Y.FormManager.Strings
  * @type {Object}
  * @static
@@ -305,10 +305,10 @@ FormManager.Strings =
 /**
  * <p>Names of supported status values, highest precedence first.  Default:
  * <code>[ 'error', 'warn', 'success', 'info' ]</code></p>
- * 
+ *
  * <p>This is static because it links to CSS rules that define the
  * appearance of each status type:  .formmgr-has{status}</p>
- * 
+ *
  * @config Y.FormManager.status_order
  * @type {Array}
  * @static
@@ -323,7 +323,7 @@ FormManager.status_order =
 
 /**
  * Get the precedence of the given status name.
- * 
+ *
  * @method Y.FormManager.getStatusPrecedence
  * @static
  * @param status {String} The name of the status value.
@@ -345,7 +345,7 @@ FormManager.getStatusPrecedence = function(
 
 /**
  * Compare two status values.
- * 
+ *
  * @method Y.FormManager.statusTakesPrecendence
  * @static
  * @param orig_status {String} The name of the original status value.
@@ -361,7 +361,7 @@ FormManager.statusTakesPrecendence = function(
 
 /**
  * Get the status of the given fieldset or form row.
- * 
+ *
  * @method Y.FormManager.getElementStatus
  * @static
  * @param e {String|Object} The descriptor or DOM element.
@@ -393,7 +393,7 @@ function getId(
 
 /**
  * Trim leading and trailing whitespace from the specified fields.
- * 
+ *
  * @method Y.FormManager.cleanValues
  * @static
  * @param e {Array|NodeList} The fields to clean.
@@ -432,7 +432,7 @@ function hasLimit(
 
 /**
  * Validate an input based on its CSS data.
- * 
+ *
  * @method Y.FormManager.validateFromCSSData
  * @static
  * @param e {DOM Element} The field to validate.
@@ -726,7 +726,7 @@ FormManager.prototype =
 
 	/**
 	 * Set the default values for all form elements.
-	 * 
+	 *
 	 * @param default_value_map {Object} Mapping of form element names to values.
 	 */
 	setDefaultValues: function(
@@ -737,7 +737,7 @@ FormManager.prototype =
 
 	/**
 	 * Set the default values for a single form element.
-	 * 
+	 *
 	 * @param field_name {String} The form element name.
 	 * @param default_value {String|Int|Float} The default value.
 	 */
@@ -764,7 +764,7 @@ FormManager.prototype =
 
 	/**
 	 * Set the validation function for a form element.
-	 * 
+	 *
 	 * @param id {String|Object} The selector for the element or the element itself
 	 * @param f {Function|String|Object}
 	 *		The function to call after basic validations succeed.  If this
@@ -782,12 +782,12 @@ FormManager.prototype =
 
 	/**
 	 * <p>Set the regular expression used to validate the field value.</p>
-	 * 
+	 *
 	 * <p><strong>Since there is no default message for failed regular
 	 * expression validation, this function will complain if you have not
 	 * already called <code>setErrorMessages()</code> or
 	 * <code>addErrorMessage</code> to specify an error message.</strong></p>
-	 * 
+	 *
 	 * @param id {String|Object} The selector for the element or the element itself
 	 * @param regex {String|RegExp} The regular expression to use
 	 * @param flags {String} If regex is a String, these are the flags used to construct a RegExp.
@@ -817,7 +817,7 @@ FormManager.prototype =
 	/**
 	 * <p>Set the error messages for a form element.  This can be used to
 	 * override the default messages for individual elements</p>
-	 * 
+	 *
 	 * <p>The valid error types are:</p>
 	 *	<dl>
 	 *	<dt><code>required</code></dt>
@@ -832,7 +832,7 @@ FormManager.prototype =
 	 *	<dt><code>regex</code></dt>
 	 *		<dd>This <string>must</strong> be set for elements which validate with regular expressions.</dd>
 	 *	</dl>
-	 * 
+	 *
 	 * @param id {String|Object} The selector for the element or the element itself
 	 * @param map {Object} Map of error types to error messages.
 	 */
@@ -845,7 +845,7 @@ FormManager.prototype =
 
 	/**
 	 * Set one particular error message for a form element.
-	 * 
+	 *
 	 * @param id {String|Object} The selector for the element or the element itself
 	 * @param error_type {String} The error message type.  Refer to setErrorMessages() for details.
 	 * @param msg {String} The error message
@@ -902,7 +902,7 @@ FormManager.prototype =
 
 	/**
 	 * Check if form values have been modified.
-	 * 
+	 *
 	 * @return {boolean} <code>false</code> if all form elements have the default values passed to the constructor
 	 */
 	isChanged: function()
@@ -962,7 +962,7 @@ FormManager.prototype =
 
 	/**
 	 * Prepare the form for display.
-	 * 
+	 *
 	 * @return {boolean} <code>true</code> if both pre & post hooks are happy
 	 */
 	prepareForm: function()
@@ -987,7 +987,7 @@ FormManager.prototype =
 
 	/**
 	 * Hook called before <code>prepareForm()</code> executes.
-	 * 
+	 *
 	 * @return {boolean} <code>false</code> cancels <code>prepareForm()</code>.
 	 */
 	prePrepareForm: function()
@@ -997,7 +997,7 @@ FormManager.prototype =
 
 	/**
 	 * Hook called after <code>prepareForm()</code> executes.
-	 * 
+	 *
 	 * @return {boolean} Return value from this function is returned by <code>prepareForm()</code>.
 	 */
 	postPrepareForm: function()
@@ -1119,7 +1119,7 @@ FormManager.prototype =
 	 * Hook called at the end of <code>validateForm()</code>.  This is the
 	 * best place to put holistic validations that touch multiple form
 	 * elements.
-	 * 
+	 *
 	 * @return {boolean} <code>false</code> if validation fails
 	 */
 	postValidateForm: function(
@@ -1135,7 +1135,7 @@ FormManager.prototype =
 	/**
 	 * Register a button that can be disabled.  Buttons contained within
 	 * the form DOM element are automatically registered.
-	 * 
+	 *
 	 * @param el {String|Object} The selector for the element or the element itself
 	 */
 	registerButton: function(
@@ -1175,7 +1175,7 @@ FormManager.prototype =
 
 	/**
 	 * Set the enabled state all the registered buttons.
-	 * 
+	 *
 	 * @param enabled {boolean} <code>true</code> to enable the form, <code>false</code> to disable the form
 	 */
 	setFormEnabled: function(
@@ -1218,7 +1218,7 @@ FormManager.prototype =
 
 	/**
 	 * Get the message type displayed for the row containing the specified element.
-	 * 
+	 *
 	 * @param e {String|Object} The selector for the element or the element itself
 	 * @return {mixed} The status (String) or <code>false</code>.
 	 */
@@ -1261,7 +1261,7 @@ FormManager.prototype =
 	 * Display a message for the form row containing the specified element.
 	 * The message will only be displayed if no message with a higher
 	 * precedence is already visible. (see Y.FormManager.status_order)
-	 * 
+	 *
 	 * @param e {String|Object} The selector for the element or the element itself
 	 * @param msg {String} The message
 	 * @param type {String} The message type (see Y.FormManager.status_order)
@@ -1330,7 +1330,7 @@ FormManager.prototype =
 
 	/**
 	 * Display a message in <code>status_node</code>.
-	 * 
+	 *
 	 * @param msg {String} The message
 	 * @param error {boolean} <code>true</code> if the message is an error
 	 * @param scroll {boolean} <code>true</code> if <code>status_node</code> should be scrolled into view

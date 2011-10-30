@@ -15,7 +15,7 @@ Slideshow.ATTRS = {
     },
     auto_advance: { value: true },
     slides: { value: [] },
-    current_slide: { 
+    current_slide: {
         value: 0,
         validator: function(val) {
             return this._validate_current_slide(val);
@@ -73,7 +73,7 @@ Y.extend(Slideshow, Y.Widget, {
         var slides = this.get('slides'),
             slide_count = slides.size(),
             current_slide = Y.Array.indexOf(slides.hasClass(Slideshow.CURRENT_CLASS), true);
-        
+
         this.set('slide_count', slide_count);
         if (current_slide > -1) {
             this.set('current_slide', current_slide);
@@ -88,44 +88,44 @@ Y.extend(Slideshow, Y.Widget, {
         if (this.get('activate_play_pause_buttons')) {
             this._init_play_pause_buttons();
         }
-        
+
         if (this.get('activate_next_prev_buttons')) {
             this._init_next_prev_buttons();
         }
-        
+
         if (this.get('activate_slide_buttons')) {
             this._init_buttons();
         }
         this.initial_slide = true;
     },
-    
+
     syncUI: function() {
         this._update_slide_display();
         if (this.get('auto_advance')) {
             this._pause();
-            
+
         }
     },
-    
+
     run: function() {
         this.set('auto_advance', true);
         this.advance();
     },
-    
+
     stop: function() {
         this.timer.cancel();
         this.set('auto_advance', false);
     },
-    
+
     show_slide: function(slide_number) {
         this.timer.cancel();
         if (slide_number != this.get('current_slide')) {
-            this.set('current_slide', slide_number);        
+            this.set('current_slide', slide_number);
             this.syncUI();
         }
 
     },
-    
+
     _display_slide: function(slide_number) {
         this._before_display();
         this.get('slides').item(slide_number).addClass(Slideshow.CURRENT_CLASS);
@@ -133,7 +133,7 @@ Y.extend(Slideshow, Y.Widget, {
     },
     _before_display: function() {
         this.fire('slideshow:before-slide-displayed', {
-            slide: this.get('slides').item(this.display_slide), 
+            slide: this.get('slides').item(this.display_slide),
             slide_number: this.display_slide
         });
     },
@@ -151,7 +151,7 @@ Y.extend(Slideshow, Y.Widget, {
     },
     _before_hide: function() {
         this.fire('slideshow:before-slide-hidden', {
-            slide: this.get('slides').item(this.hide_slide), 
+            slide: this.get('slides').item(this.hide_slide),
             slide_number: this.hide_slide
         });
     },
@@ -161,7 +161,7 @@ Y.extend(Slideshow, Y.Widget, {
             slide_number: this.hide_slide
         });
     },
-    
+
     advance: function() {
         this.show_slide(this._get_next_slide());
     },
@@ -169,11 +169,11 @@ Y.extend(Slideshow, Y.Widget, {
     previous: function() {
         this.show_slide(this._get_previous_slide());
     },
-    
+
     _pause: function() {
         this.timer = Y.later(this.get('pause_time'), this, 'advance');
     },
-    
+
     _get_next_slide: function() {
         var next_slide = this.get('current_slide') + 1;
         if (next_slide >= this.get('slide_count')) {
@@ -191,13 +191,13 @@ Y.extend(Slideshow, Y.Widget, {
             return prev_slide;
         }
     },
-    
+
     _update_slide_display: function() {
         var current = this.get('current_slide'),
             count = this.get('slide_count'),
             slides = this.get('slides'),
             i;
-            
+
         for (i = 0; i < count; i++) {
             if (i == current) {
                 if (!slides.item(i).hasClass(Slideshow.CURRENT_CLASS)) {
@@ -209,7 +209,7 @@ Y.extend(Slideshow, Y.Widget, {
                 }
             }
         }
-        
+
         // If this is the initial slide we don't want to do the transition as it will flicker
         if (this.initial_slide) {
             this.initial_slide = false;
@@ -241,7 +241,7 @@ Y.extend(Slideshow, Y.Widget, {
             }
         }
     },
-    
+
     _init_play_pause_buttons: function() {
         this.play_btn = this.get('play_button');
         this.pause_btn = this.get('pause_button');
@@ -331,7 +331,7 @@ Y.extend(Slideshow, Y.Widget, {
             });
         }
     },
-    
+
     _applyParsedConfig : function(node, cfg, parsedCfg) {
         // mix instead of aggregate
         return (parsedCfg) ? Y.mix(cfg, parsedCfg, false) : cfg;
@@ -344,7 +344,7 @@ Y.extend(Slideshow, Y.Widget, {
         // Converting from seconds to microseconds
         return val * 1000;
     },
-    
+
     _validate_current_slide: function(val) {
         var min = 0,
             max = this.get("slide_count");

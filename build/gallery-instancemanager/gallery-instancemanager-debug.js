@@ -6,11 +6,11 @@ YUI.add('gallery-instancemanager', function(Y) {
  * <p>Stores instances of JavaScript components.  Allows a constructor to
  * be passed in place of an instance.  This enables lazy construction on
  * demand.</p>
- * 
+ *
  * <p>One use is to create a global repository of JavaScript components
  * attached to DOM id's, e.g., YUI Buttons built on top of HTML
  * buttons.</p>
- * 
+ *
  * @module gallery-instancemanager
  * @class InstanceManager
  * @constructor
@@ -26,7 +26,7 @@ InstanceManager.prototype =
 {
 	/**
 	 * Retrieve an object.
-	 * 
+	 *
 	 * @param id {String} The id of the object to retrieve.
 	 */
 	get: function(
@@ -58,7 +58,7 @@ InstanceManager.prototype =
 
 	/**
 	 * Retrieve an object only if it has already been constructed.
-	 * 
+	 *
 	 * @param id {String} The id of the object to retrieve.
 	 */
 	getIfConstructed: function(
@@ -69,7 +69,7 @@ InstanceManager.prototype =
 
 	/**
 	 * Store an object or ctor+args.
-	 * 
+	 *
 	 * @param id {String} The id of the object.
 	 * @param objOrCtor {Object|Function|String} The object or the object's constructor.
 	 * @param args {Array} The array of arguments to pass to the constructor.
@@ -105,7 +105,7 @@ InstanceManager.prototype =
 
 	/**
 	 * Remove an object.
-	 * 
+	 *
 	 * @param id {String} The id of the object.
 	 * @return {mixed} the object that was removed or <code>false</code> if the slot was empty
 	 */
@@ -134,7 +134,7 @@ InstanceManager.prototype =
 
 	/**
 	 * Call a function on every object.
-	 * 
+	 *
 	 * @param behavior {Function|String|Object} The function to call or the name of the function or an object {fn:,scope:}
 	 * @param arguments {Array} The arguments to pass to the function.
 	 * @param skip_unconstructed {boolean} Optional.  Pass <code>true</code> to skip unconstructed slots.

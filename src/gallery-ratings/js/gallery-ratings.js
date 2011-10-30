@@ -9,13 +9,13 @@
         Ratings.superclass.constructor.apply(this, arguments);
     }
 
-    /* 
-     * Required NAME static field, to identify the Widget class and 
-     * used as an event prefix, to generate class names etc. (set to the 
-     * class name in camel case). 
+    /*
+     * Required NAME static field, to identify the Widget class and
+     * used as an event prefix, to generate class names etc. (set to the
+     * class name in camel case).
      */
     Ratings.NAME = "ratings";
-  
+
     /*
      * The attribute configuration for the widget. This defines the core user facing state of the widget
      */
@@ -43,7 +43,7 @@
         }
     };
 
-    /* 
+    /*
      * The HTML_PARSER static constant is used if the Widget supports progressive enhancement, and is
      * used to populate the configuration for the Ratings instance from markup already on the page.
      */
@@ -54,7 +54,7 @@
             var val = parseFloat(srcNode.get('innerHTML'), 10);
             return Lang.isNumber(val) ? val : 0;
         }
-  
+
     };
 
     /* Templates for any markup the widget uses. Usually includes {} tokens, which are replaced through Y.substitute */
@@ -68,15 +68,15 @@
         '<li><a href="#" title="4 stars out of 5" class="yui3-four-stars">4<\/a><\/li>' +
         '<li><a href="#" title="5 stars out of 5" class="yui3-five-stars">5<\/a><\/li>' +
         '<\/ul><\/div>';
-  
+
 
     /* Ratings extends the base Widget class */
     Y.extend(Ratings, Y.Widget, {
 
         initializer: function () { },
-  
+
         destructor : function () { },
-  
+
         renderUI : function () {
             this._renderList();
         },
@@ -118,9 +118,9 @@
                 ratings_width: this._getWidth(),
                 ratings_string: this._getRatingsString()
             })));
-          
+
         },
-      
+
         _onClick : function (e) {
             var node = e.target;
             if (node.get("tagName") === "A") {
@@ -142,7 +142,7 @@
                 node.set("innerHTML", this._getRatingsString());
             }
         }
-  
+
     });
 
     Y.Ratings = Ratings;

@@ -22,7 +22,7 @@ var idle    = false,        //indicates if the user is idle
 //-------------------------------------------------------------------------
 // Private functions
 //-------------------------------------------------------------------------
-    
+
 /* (intentionally not documented)
  * Handles a user event indicating that the user isn't idle.
  * @param {Event} event A DOM2-normalized event object.
@@ -32,18 +32,18 @@ function handleUserEvent(){
 
     //clear any existing timeout
     clearTimeout(tId);
-    
+
     //if the idle timer is enabled
     if (enabled){
-    
+
         //if it's idle, that means the user is no longer idle
         if (idle){
-            toggleIdleState();           
-        } 
+            toggleIdleState();
+        }
 
         //set a new timeout
         tId = setTimeout(toggleIdleState, timeout);
-    }    
+    }
 }
 
 /* (intentionally not documented)
@@ -54,9 +54,9 @@ function toggleIdleState(){
 
     //toggle the state
     idle = !idle;
-    
+
     //fire appropriate event
-    Y.IdleTimer.fire(idle ? "idle" : "active");            
+    Y.IdleTimer.fire(idle ? "idle" : "active");
 }
 
 //-------------------------------------------------------------------------
@@ -70,7 +70,7 @@ function toggleIdleState(){
  * @static
  */
 Y.IdleTimer = {
-    
+
     /**
      * Indicates if the idle timer is running or not.
      * @return {Boolean} True if the idle timer is running, false if not.
@@ -80,17 +80,17 @@ Y.IdleTimer = {
     isRunning: function(){
         return enabled;
     },
-    
+
     /**
      * Indicates if the user is idle or not.
      * @return {Boolean} True if the user is idle, false if not.
      * @method isIdle
      * @static
-     */        
+     */
     isIdle: function(){
         return idle;
     },
-    
+
     /**
      * Starts the idle timer. This adds appropriate event handlers
      * and starts the first timeout.
@@ -98,43 +98,43 @@ Y.IdleTimer = {
      * @return {void}
      * @method start
      * @static
-     */ 
+     */
     start: function(newTimeout){
-        
+
         //set to enabled
         enabled = true;
-        
+
         //set idle to false to begin with
         idle = false;
-        
+
         //assign a new timeout if necessary
         if (typeof newTimeout == "number"){
             timeout = newTimeout;
         }
-        
+
         //assign appropriate event handlers
         Y.on("mousemove", handleUserEvent, document);
         Y.on("keydown", handleUserEvent, document);
-        
+
         //set a timeout to toggle state
         tId = setTimeout(toggleIdleState, timeout);
     },
-    
+
     /**
      * Stops the idle timer. This removes appropriate event handlers
      * and cancels any pending timeouts.
      * @return {void}
      * @method stop
      * @static
-     */         
+     */
     stop: function(){
-    
+
         //set to disabled
         enabled = false;
-        
+
         //clear any pending timeouts
         clearTimeout(tId);
-        
+
         //detach the event handlers
         Y.detach("mousemove", handleUserEvent, document);
         Y.detach("keydown", handleUserEvent, document);

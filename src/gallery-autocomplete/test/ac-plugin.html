@@ -83,8 +83,8 @@ YUI({
 
     var input = window.input = Y.get("#input");
     input.plug(Y.Plugin.ACPlugin);
-    
-  
+
+
     var myDS = new Y.DataSource.Get({
         source : "http://query.yahooapis.com/v1/public/yql?" +
             "format=json&" +
@@ -106,7 +106,7 @@ YUI({
         )},
         dataSource : myDS
     });
-    
+
     var myWidget = (function () {
         var data = [],
             node = Y.one('#aclist'),
@@ -120,7 +120,7 @@ YUI({
             myWidget.focus(index);
         }, "li");
         Y.on("click", function () { myWidget.hide() }, document);
-        
+
         return {
             setData : function (d) {
                 if (d.length) {
@@ -152,7 +152,7 @@ YUI({
                 if (!data.length) return this;
                 if (i >= data.length) i = 0;
                 if (i < 0) i = data.length - 1;
-                
+
                 var list = node.all("li"),
                     current = node.one(".selected"),
                     intent = list.item(i);
@@ -189,7 +189,7 @@ YUI({
             }
         };
     })();
-        
+
 
     input.ac.on("ac:load", function (e) {
         myWidget.setData(e.results).render();
@@ -209,7 +209,7 @@ YUI({
     input.ac.on("ac:next", myWidget.next, myWidget);
     input.ac.on("ac:previous", myWidget.previous, myWidget);
     Y.on("key", myWidget.select, input, "down:13,10");
-    
+
 });
 </script>
 

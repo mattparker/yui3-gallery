@@ -4,12 +4,12 @@ YUI.add('gallery-speedns', function(Y) {
  * Static class that holds all the utility functions.
  */
 var SpeedNS = {
-   
+
     /**
      * Regular expression to match a domain name from uri.
      */
     domainRegex: /((http)|(https)):\/\/[A-Za-z0-9.\-]+\//,
-   
+
    /**
     * Fires DNS lookups for all the links in the current document.
     *
@@ -24,11 +24,11 @@ var SpeedNS = {
            var uri = links[i].href,
                matches = SpeedNS.domainRegex.exec(uri),
                domain = matches[0];
-           
+
            // hash each domain name.
            uniqueLinks[domain] = false;
        }
-       
+
        for (var ud in uniqueLinks) {
            /**
             * We do it only if its a property that is created on object, because
@@ -40,12 +40,12 @@ var SpeedNS = {
            }
        }
    },
-   
+
    /**
-    * Prefetches DNS for the domain using hidden image technique. Uses the 
+    * Prefetches DNS for the domain using hidden image technique. Uses the
     * favicon image as source.
     *
-    * @param {String} domain is the domain for which the DNS should be 
+    * @param {String} domain is the domain for which the DNS should be
     *  prefetched.
     */
    prefetchDNSForDomain: function(domain) {

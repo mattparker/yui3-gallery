@@ -19,39 +19,39 @@
 		.yui-shoveler {
 			margin-bottom: 40px;
 		}
-		
+
 		h1 {
 			font-size: 200%;
 			font-weight: bold;
 		}
-		
+
 		h2 {
 			font-size: 125%;
 			font-weight: bold;
 		}
-		
+
 		p {
 			padding: 5px;
 		}
-		
+
 	</style>
 
   </head>
   <body class="yui-skin-sam">
-  
+
   <h1>
 	YUI Shoveler
   </h1>
   <p>
 	The shoveler is a carousel like module that allows you to shovel back and forth between content.
   </p>
-  
+
   <h2>
 	Code
   </h2>
   <p>Build: <a href="gallery-shoveler.zip">gallery-shoveler.zip</a></p>
   <p>Source and Test: <a href="gallery-shoveler-src.zip">gallery-shoveler-src.zip</a></p>
-  
+
   <h2>
 	Examples
   </h2>
@@ -65,7 +65,7 @@
 		cyclical: true,
 		renderFunctionName: "renderCellsWithPop"
 	});
- 
+
 	shoveler1.render();
   </pre>
   </p>
@@ -93,13 +93,13 @@
 					<a href="http://www.amazon.com/Essential-Toto/dp/B0000CF30I/ref=pd_ys_home_shvl_48">
 						<img width="130" height="130" border="0" id="" alt="" src="https://images-na.ssl-images-amazon.com/images/I/51xKsJbem0L._SL500_SS130_.jpg">
 						 The Essential Toto
-					</a> (Audio CD) ~ Toto 
+					</a> (Audio CD) ~ Toto
 				</li>
 				<li class="yui-shoveler-cell">
 					<a href="http://www.amazon.com/Synchronicity-Digipak-Police/dp/B00008BRB5/ref=pd_ys_home_shvl_47">
 						<img width="130" height="130" border="0" id="" alt="" src="https://images-na.ssl-images-amazon.com/images/I/51XhIp-RhhL._SL500_SS130_.jpg">
 						Synchronicity [Digipak]
-					</a> (Audio CD) ~ The Police 
+					</a> (Audio CD) ~ The Police
 				</li>
 
 				<li class="yui-shoveler-cell">
@@ -126,8 +126,8 @@
 	 </div>
 <hr>
 <p> This shoveler has dynamic content.  By setting dynamic to true and setting numberOfCells to 20 I'm telling it
-to load cells dynamic but only to expect 20 cells.  This one has 4 visible cells is cyclical and renders with a 
-pop like the one above.  In order for the call to be dynamic I need to has a function to create a url to do the 
+to load cells dynamic but only to expect 20 cells.  This one has 4 visible cells is cyclical and renders with a
+pop like the one above.  In order for the call to be dynamic I need to has a function to create a url to do the
 data fetching.  In this example I just have a yql query that will fetch my most recent flicker photos.  I also
 have a function to handle the data when it returns.  This one just shows the image and title and replaces it
 in the shoveler.  Lastly prefetch is set to true.  This means the shoveler will try to prefetch data to show.
@@ -148,7 +148,7 @@ Prefetch occurs as soon as you scroll, so try it out.  Scroll once(a normal load
 				")%20where%20user_id%20%3D%20%2217004938%40N00%22&format=json&callback=shoveler2.handleDataRetrieval";
 			return url;
 		},
-		
+
 		handleData: function(data) {
 			var photos = data.query.results.photo, imageUrl, photo, i, len;
 			for(i = 0, len = photos.length; i < len; i++) {
@@ -157,17 +157,17 @@ Prefetch occurs as soon as you scroll, so try it out.  Scroll once(a normal load
 				imageUrl = "http://farm"+photo.farm+
 					".static.flickr.com/"+photo.server+
 					"/"+photo.id+"_"+photo.secret+"_t.jpg";
-				
+
 				this.replaceCell("&lt;img src='"+imageUrl+"'/&gt;"+photo.title, this.get("fetchStart")+i);
-				
+
 			}
 		}
     });
- 
+
     shoveler2.render();
   </pre>
   </p>
-	 
+
 	 <div id="shoveler2" style="width: 700px;">
 		<div class="yui-shoveler-header">
 			<span class="yui-shoveler-page-text"></span>
@@ -188,22 +188,22 @@ Prefetch occurs as soon as you scroll, so try it out.  Scroll once(a normal load
 		numberOfVisibleCells: 3,
 		cyclical: true
     });
- 
+
     shoveler3.render();
-	
+
 	Y.get("#shoveler3AddCell").on("click", function() {
 		shoveler3.addCell(shoveler3.get("numberOfCells"));
 	});
-	
+
 	Y.get("#shoveler3RemoveCell").on("click", function() {
 		shoveler3.removeCell(shoveler3.get("numberOfCells")-1);
 	});
-	
+
 	Y.get("#shoveler3AddCell5").on("click", function() {
 		shoveler3.addCell(shoveler3.get("numberOfCells"), 5);
 	});
   </pre>
-  </p>	 
+  </p>
 	 <input id="shoveler3AddCell" type="button" value="Add Cell" />
 	 <input id="shoveler3RemoveCell" type="button" value="Remove Cell" />
 	 <input id="shoveler3AddCell5" type="button" value="Add Cell to index 5" />
@@ -231,7 +231,7 @@ Prefetch occurs as soon as you scroll, so try it out.  Scroll once(a normal load
 			<div class="yui-shoveler-button-right"></div>
 		</div>
 	 </div>
-	 
+
 	 <hr>
 <div class="netflix">
 <p> Very basic shoveler is set up to look like a Netflix shoveler.  This one is not cyclical so you can notice
@@ -241,10 +241,10 @@ of the buttons change when a user reaches the end.
         contentBox: "#shoveler4",
 		numberOfVisibleCells: 3
     });
- 
+
     shoveler4.render();
   </pre>
-  </p>	
+  </p>
 	<div id="shoveler4" style="width: 700px;">
 		<div class="yui-shoveler-header">
 			<span class="yui-shoveler-page-text"></span>
@@ -305,7 +305,7 @@ shoveler is infinite.  The shoveler will continue to grab data according to the 
 				")%20where%20tags%20%3D%20%22monkey%22&format=json&callback=shoveler5.handleDataRetrieval";
 			return url;
 		},
-		
+
 		handleData: function(data) {
 			var photos = data.query.results.photo, imageUrl, photo, i, len;
 			for(i = 0, len = photos.length; i < len; i++) {
@@ -314,16 +314,16 @@ shoveler is infinite.  The shoveler will continue to grab data according to the 
 				imageUrl = "http://farm"+photo.farm+
 					".static.flickr.com/"+photo.server+
 					"/"+photo.id+"_"+photo.secret+"_t.jpg";
-				
+
 				this.replaceCell("&lt;img src='"+imageUrl+"'/&gt;"+photo.title, this.get("fetchStart")+i);
-				
+
 			}
 		}
     });
- 
+
     shoveler5.render();
   </pre>
-  </p>	
+  </p>
 	 <div id="shoveler5" style="width: 700px;">
 		<div class="yui-shoveler-header">
 			<span class="yui-shoveler-page-text"></span>

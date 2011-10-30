@@ -1,15 +1,15 @@
 /**
 * <p>
-* Smart List will allow you to display a list of elements (not necessarily using UL/LI), and filtering 
-* which element should be displayed based on a selector. This component will be the base component for 
+* Smart List will allow you to display a list of elements (not necessarily using UL/LI), and filtering
+* which element should be displayed based on a selector. This component will be the base component for
 * quicksand as well.</p>
-* 
+*
 * <p>The general idea comes from few javascript components:</p>
 * <ul>
 * <li>
 *   Smart Lists - Prototype Extension (by Benjamin Keen) <br/>
 *   http://www.benjaminkeen.com/software/smartlists/prototype/
-* </li>   
+* </li>
 * <li>
 *   Quicksand - jQuery Plugin (by @razorjack) <br/>
 *   http://razorjack.net/quicksand/
@@ -18,10 +18,10 @@
 *   Few more mosaic components to organize elements using animations.</li>
 * </li>
 * </ul>
-* 
-* <p>The plugin was designed as a very basic plugin to handle listing, and on top of it, 
+*
+* <p>The plugin was designed as a very basic plugin to handle listing, and on top of it,
 * you can add more features, like Quicksand effects based on YUI Anim, etc.</p>
-* 
+*
 * <p>
 * <code>
 * &#60;script type="text/javascript"&#62; <br>
@@ -50,9 +50,9 @@
 * 			Y.one ('#displayutils').on('click', function (e) {<br>
 * 				mylist.set ('filter', 'li[class=util]');<br>
 * 			});<br>
-* <br>		
+* <br>
 * 		}); <br>
-* <br>	
+* <br>
 * 	&#60;/script&#62; <br>
 * </code>
 * </p>
@@ -64,7 +64,7 @@
 //	Util shortcuts
 
 var UA = Y.UA,
-    
+
 	//	Frequently used strings
     WIDTH 	  = "width",
 	HEIGHT 	  = "height",
@@ -79,7 +79,7 @@ var UA = Y.UA,
 	ATTR_SORT		 = 'sort',
 	ATTR_SELECTOR	 = 'selector',
 	ATTRS			 = [ATTR_SORT, ATTR_FILTER, ATTR_ADJUSTMENT, ATTR_SELECTOR],
-	
+
 	// Aria Attributes
 	ARIA_ROLE 	= 'role',
 	ARIA_HIDDEN = 'aria-hidden',
@@ -88,19 +88,19 @@ var UA = Y.UA,
 	// shorthands
     L = Y.Lang,
     isString = L.isString,
-    
+
     //	Utility functions
 	/**
-	* The NodeAccordion class is a plugin for a Node instance.  The class is used via  
-	* the <a href="Node.html#method_plug"><code>plug</code></a> method of Node and 
+	* The NodeAccordion class is a plugin for a Node instance.  The class is used via
+	* the <a href="Node.html#method_plug"><code>plug</code></a> method of Node and
 	* should not be instantiated directly.
 	* @namespace plugin
 	* @class NodeAccordion
 	*/
 	SmartList = function () {
-	
+
 	SmartList.superclass.constructor.apply(this, arguments);
-	
+
 	};
 
 SmartList.NAME = "SmartList";
@@ -119,7 +119,7 @@ SmartList.ATTRS = {
 			return this._all;
 		}
 	},
-	
+
 	/**
 	* Nodes representing the list of visible items.
 	*
@@ -132,11 +132,11 @@ SmartList.ATTRS = {
 			return this._root.all(this.get (ATTR_SELECTOR));
 		}
 	},
-	
+
 	/**
-	* Adjusts the height of container. You can use dynamic, auto or a dimension in px, % or em. 
+	* Adjusts the height of container. You can use dynamic, auto or a dimension in px, % or em.
 	* 'auto' -> for automatically adjusting before or after the animation (determined automatically)
-	* '120px' -> for a fixed height 
+	* '120px' -> for a fixed height
 	* '' for keeping the height constant.
 	*
 	* @attribute adjustHeight
@@ -164,7 +164,7 @@ SmartList.ATTRS = {
             return ((v=='asc') || (v=='desc') || (Y.Lang.isFunction(v)));
         }
 	}
-	
+
 };
 
 
@@ -172,7 +172,7 @@ Y.extend(SmartList, Y.Plugin.Base, {
 
 	//	Protected properties
 
-	/** 
+	/**
 	* @property _root
 	* @description Node instance representing the root node in the accordion.
 	* @default null
@@ -190,19 +190,19 @@ Y.extend(SmartList, Y.Plugin.Base, {
 		if (_root) {
 
 			this._root = _root;
-			
+
 			Y.Array.each (ATTRS, function (v) {
 				if (config[ATTR_SORT]) {
 					that.set (ATTR_SORT, config[ATTR_SORT]);
 				}
 	    	});
-			
+
 			this.sync()._compute();
-			
+
 			this.after(ATTR_FILTER+"Change", function(event) {
 			    that.refresh();
 			});
-			
+
 		}
     },
 
@@ -211,7 +211,7 @@ Y.extend(SmartList, Y.Plugin.Base, {
     	this._bench = null;
     	this._root = null;
     },
-    
+
   	//	Protected methods
 
     _setToFloat: function (n) {
@@ -222,8 +222,8 @@ Y.extend(SmartList, Y.Plugin.Base, {
     	});
     	n.setStyles ({top: r.top-r.borderTopWidth-r.marginTop, left: r.left-r.borderLeftWidth-r.marginLeft, position: 'absolute'});
     	return r;
-    },	
-    
+    },
+
 	/**
 	* @method _compute
 	* @description Applying filter and sort to produce a new list.
@@ -237,9 +237,9 @@ Y.extend(SmartList, Y.Plugin.Base, {
     		sort = this.get (ATTR_SORT),
     		query = this.get (ATTR_FILTER),
     		that = this;
-    	
+
     	nodes = nodes || [];
-    	
+
     	// applying filter
     	this.get(ATTR_ITEMS).each (function(n, i) {
     		if (nodes.indexOf(n) < 0) {
@@ -253,11 +253,11 @@ Y.extend(SmartList, Y.Plugin.Base, {
     	});
 
 		// applying sort ...
-    	
+
     	// setting all the visible items to absolute position
     	regulars._nodes.reverse();
     	regulars.each (this._setToFloat, this);
-    	
+
     	// setting the bench and removing the elements from current view
     	(this._bench._nodes = Y.all(bench)).each (this._disappear, this); // fade out
     	// displaying new elements
@@ -278,7 +278,7 @@ Y.extend(SmartList, Y.Plugin.Base, {
     			n.set(ARIA_HIDDEN, 'true').set(TAB_INDEX, -1);
     		}
     	});
-    	
+
 	},
 
 	/**
@@ -290,16 +290,16 @@ Y.extend(SmartList, Y.Plugin.Base, {
 	*/
 	_isHidden: function (n) {
 		var r = this._root;
-		return (!n || !n.ancestor(function(el) { return (r === el); }) || 
-				(n.getStyle('display').toLowerCase() == 'none') || 
-				(n.getStyle('visibility').toLowerCase() == 'hidden') || 
+		return (!n || !n.ancestor(function(el) { return (r === el); }) ||
+				(n.getStyle('display').toLowerCase() == 'none') ||
+				(n.getStyle('visibility').toLowerCase() == 'hidden') ||
 				(parseInt(n.getStyle('opacity'), 10) === 0));
 	},
 
 	_getXY: function (p) {
 		return {top: 0, left: 0};
-	}, 
-	
+	},
+
 	/**
 	* @method _disappear
 	* @description Removing an item from the sight.
@@ -312,7 +312,7 @@ Y.extend(SmartList, Y.Plugin.Base, {
 		};
 		// for performance, we should hide only those that are visible
 		if (!this._isHidden(n)) {
-			// fade-out 
+			// fade-out
 			this._animate (n, {
 				opacity: 0
 			}, fn);
@@ -330,7 +330,7 @@ Y.extend(SmartList, Y.Plugin.Base, {
 	_appear: function (n, i) {
 		// setting the surge position
 		n.setStyles (this._getXY(i));
-		// fade-in 
+		// fade-in
 		this._animate (n, {
 			opacity: 1
 		}, function () {
@@ -365,7 +365,7 @@ Y.extend(SmartList, Y.Plugin.Base, {
 		n.setStyles (conf);
 		fn.call();
 	},
-	
+
 	//	Generic DOM Event handlers
 	/**
 	* @method clear
@@ -377,8 +377,8 @@ Y.extend(SmartList, Y.Plugin.Base, {
 		Y.log(("Hiding all items (this action does not reset order or filter): " + this._root), "info", "SmartList");
 		this._compute (this.get(ATTR_ITEMS));
 		return this;
-	},	
-	
+	},
+
 	/**
 	* @method sync
 	* @description Recollecting a new set of elements from the DOM, and setting the corresponding visibility properties for each item.
@@ -392,10 +392,10 @@ Y.extend(SmartList, Y.Plugin.Base, {
 		// just in case you want to use markup ul>li as a simple markup structure
 		this._all = this.get (ATTR_ACTIVE);
 		// setting area role & computing current visible list
-		this._all.set(ARIA_ROLE, 'presentation').set(TAB_INDEX, 0).toFrag(); 
+		this._all.set(ARIA_ROLE, 'presentation').set(TAB_INDEX, 0).toFrag();
 		return this;
 	},
-	
+
 	/**
 	* @method refresh
 	* @description Re-apply filter and sort, and refresh the list.
@@ -406,8 +406,8 @@ Y.extend(SmartList, Y.Plugin.Base, {
 	refresh: function () {
 		this._compute ();
 		return this;
-	},	
-	
+	},
+
 	/**
 	* @method displayItem
 	* @description Add a new item to the list. This action will trigger the "filter" action to display the new item if needed.
@@ -418,7 +418,7 @@ Y.extend(SmartList, Y.Plugin.Base, {
 	addItem: function ( n ) {
 	    return this.addItems([n]);
 	},
-	
+
 	/**
 	* @method removeItem
 	* @description Remove a certain item from the list. This action will trigger the "filter" action to reorganize the items if needed.
@@ -432,7 +432,7 @@ Y.extend(SmartList, Y.Plugin.Base, {
 	    }
 	    return this;
 	},
-	
+
 	/**
 	* @method addItems
 	* @description Add a new set of items to the list. This action will trigger the "filter" action to display the items if needed.

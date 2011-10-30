@@ -318,7 +318,7 @@ Y.extend(Paginator, Y.Widget,
      * @protected
      */
     _selfSubscribe : function () {
-        // Listen for changes to totalRecords and alwaysVisible 
+        // Listen for changes to totalRecords and alwaysVisible
         this.after('totalRecordsChange',this.updateVisibility,this);
         this.after('alwaysVisibleChange',this.updateVisibility,this);
 
@@ -798,7 +798,7 @@ Y.extend(Paginator, Y.Widget,
             }
 
             this._batch = false;
-            
+
             if (this._pageChanged) {
                 this._pageChanged = false;
 

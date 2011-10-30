@@ -64,7 +64,7 @@ Y.ACWidget = Y.extend(
             insertAfter(this.get("boundingBox"), input);
             return this.setSize();
         },
-        setSize : function () {            
+        setSize : function () {
             return this.set("width", this.get("ac").get("host").getComputedStyle("width"));
         },
         bindUI : function () {
@@ -177,28 +177,28 @@ Y.ACWidget = Y.extend(
                         selClass = this.getClassName("selected");
                     if (isNaN(current)) current = -1;
                     if (!d || !l) return;
-                    
+
                     // first normalize them both to a number between
                     // (-1)..(d.length - 1) where -1 means "what the user typed"
                     while (si < -1) si += l + 1;
                     si = (si + 1) % (l + 1) - 1;
                     current = (current + 1) % (l + 1) - 1;
-                                        
+
                     // actually set it, the rest is just monkey business.
                     this._selectedIndex = si;
-                    
+
                     // hang onto this, we'll need it later.
                     if (current === -1) {
                         this._originalValue = ac.get("queryValue");
                     }
-                    
+
                     // nothing changing!
                     if (current === si) return;
-                    
+
                     // undo the current one, but only if it's not -1
                     var curItem = this.get("contentBox").one("."+selClass);
                     if (curItem) curItem.removeClass(selClass);
-                    
+
                     // handle the new thing
                     if (si === -1) {
                         // back to the start
@@ -212,7 +212,7 @@ Y.ACWidget = Y.extend(
                     }
                     return si;
                 }
-            } // selectedIndex    
+            } // selectedIndex
         } // ATTRS
     } // statics
 );

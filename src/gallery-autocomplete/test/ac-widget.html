@@ -86,7 +86,7 @@ YUI({
     base : "../../../build/",
     filter : "raw"
 }).use('gallery-autocomplete', 'datasource', function (Y) {
-    
+
     new Y.ACWidget({
         ac : Y.get("#input").plug(Y.Plugin.ACPlugin, {
             queryTemplate : function (q) { return "q=" + encodeURIComponent(

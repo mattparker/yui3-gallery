@@ -47,7 +47,7 @@
     PortBase = function(attrs) {
         this._lazyAddAttrs = false;
         this._portAttrs = attrs;
-        PortBase.superclass.constructor.apply(this, arguments);    
+        PortBase.superclass.constructor.apply(this, arguments);
     };
 
     PortBase.NAME = 'PortBase';
@@ -79,8 +79,8 @@
             'keyup': true,
             'mousedown': true,
             'mousemove': true,
-            'mouseout': true, 
-            'mouseover': true, 
+            'mouseout': true,
+            'mouseover': true,
             'mouseup': true,
             'focus': true,
             'blur': true,

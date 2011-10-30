@@ -10,7 +10,7 @@ var Direction =
  * <p>Base class for enforcing constraints on groups of checkboxes.</p>
  *
  * <p>Derived classes must override <code>enforceConstraints()</code>.</p>
- * 
+ *
  * @module gallery-checkboxgroups
  * @class CheckboxGroup
  * @constructor
@@ -53,7 +53,7 @@ CheckboxGroup.prototype =
 	/**
 	 * Same functionality as <code>Array.splice()</code>.  Operates on the
 	 * list of managed checkboxes.
-	 * 
+	 *
 	 * @param start {Int} Insertion index
 	 * @param delete_count {Int} Number of items to remove, starting from <code>start</code>
 	 * @param cb_list {String|Object|Array} The list of checkboxes to insert at <code>start</code>
@@ -118,7 +118,7 @@ CheckboxGroup.prototype =
 
 	/**
 	 * Derived classes must override this function to implement the desired behavior.
-	 * 
+	 *
 	 * @param cb_list {String|Object|Array} The list of checkboxes
 	 * @param index {Int} The index of the checkbox that changed
 	 */

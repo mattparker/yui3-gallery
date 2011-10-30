@@ -39,7 +39,7 @@ YUI({
     });
 
     Y.extend( UndoableActionMerge, Y.UndoableAction, {
-        
+
 
         undo : function(){
             var number = this.get( "number" );

@@ -27,39 +27,39 @@ var nativeEvents = [
  */
 Y.Event.defineOutside = function (event, name) {
     name = name || event + 'outside';
-    
+
     Y.Event.define(name, {
-        
+
         publishConfig: { emitFacade: false },
-        
+
         detach: function (node, sub, evt) {
             if (this.subscriberCount(evt) === 1) {
                 evt.handle.detach();
             }
         },
-        
+
         init: function (node, sub, evt) {
             var doc = Y.one('doc');
-            
+
             function outside(el) {
                 return el !== doc && el !== node && !el.ancestor(function (p) {
                         return p === node;
                     });
             }
-            
+
             evt.handle = doc.on(event, function (e) {
                 if (outside(e.target)) {
                     evt.fire(e);
                 }
             });
         },
-        
+
         on: function (node, sub, evt) {
             if (this.subscriberCount(evt) === 1) {
                 this.init(node, sub, evt);
             }
         },
-        
+
         subscriberCount: function (evt) {
             return Y.Object.keys(evt.getSubs()[0]).length;
         }

@@ -147,7 +147,7 @@ JSONPRequest.prototype = {
         return null;
     },
 
-    /** 
+    /**
      * Issues the JSONP request.
      *
      * @method send

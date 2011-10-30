@@ -1,9 +1,9 @@
 YUI.add('gallery-yui2', function(Y) {
 
 /**
-* <p>The YUI 2 wrapper makes it easy to transform existing YUI 2 code into YUI 3 compatible code, 
+* <p>The YUI 2 wrapper makes it easy to transform existing YUI 2 code into YUI 3 compatible code,
 * using lazy load to include the required yui2 modules, Leveraging YUI Loader Utility.</p>
-* 
+*
 * <p>
 * <code>
 * &#60;script type="text/javascript"&#62; <br>
@@ -18,17 +18,17 @@ YUI.add('gallery-yui2', function(Y) {
 * 			Y.yui2().use("tabview", function () { <br>
 * <br>
 * 				//	The scope of the callback will be a reference to Y <br>
-* <br>			
+* <br>
 * 				var myTabs = new YAHOO.widget.TabView("demo"); <br>
 * <br>
 * 			}); <br>
-* <br>		
+* <br>
 * 		}); <br>
-* <br>	
+* <br>
 * 	&#60;/script&#62; <br>
 * </code>
 * </p>
-* 
+*
 * @module gallery-yui2
 */
 
@@ -86,7 +86,7 @@ function _initLoader (l) {
 }
 
 /**
- * Add a module to the queue. When the loader become available, the module will be added to the loader list automatically, 
+ * Add a module to the queue. When the loader become available, the module will be added to the loader list automatically,
  * this method also normalize the module information before include it
  * @method _register
  * @private
@@ -96,7 +96,7 @@ function _initLoader (l) {
  * @return void
  */
 function _register (name, m) {
-	// adding a module to the queue 
+	// adding a module to the queue
 	if (Y.Lang.isObject(m)) {
 		m.name = m.name || name;
 		m.type = m.type || ((m.fullpath || m.path).indexOf('.css')>=0?'css':'js');
@@ -108,10 +108,10 @@ function _register (name, m) {
 			autoContinue: true
 		});
 	}
-} 
+}
 
 /**
- * Verify if the current configuration object just defines new modules. If that's the case, 
+ * Verify if the current configuration object just defines new modules. If that's the case,
  * we will use "_config" as the computed configuration, and "o" as the list of modules to add.
  * @method _filterConf
  * @param o {object} currrent configuration object
@@ -178,7 +178,7 @@ Y.yui2 = function (o) {
 	     * Load a set of modules and notify thru the callback method.
 	     * @method use
 	     * @param modules* {string} 1-n modules to bind (uses arguments array)
-	     * @param *callback {function} callback function executed when 
+	     * @param *callback {function} callback function executed when
 	     * the instance has the required functionality.  If included, it
 	     * must be the last parameter.
 	     *
@@ -213,7 +213,7 @@ Y.yui2 = function (o) {
 				},
 				autoContinue: false
 			});
-			// verifying if the loader is ready in the page, if not, it will be 
+			// verifying if the loader is ready in the page, if not, it will be
 			// included automatically and then the process will continue.
 			if (!_queue.isRunning() && _queue.size()===1) {
 				_queue.run ();

@@ -7,7 +7,7 @@ YUI.add('gallery-yql', function(Y) {
     /**
      * This class adds a sugar class to allow access to YQL (http://developer.yahoo.com/yql/).
      * @module yql
-     */     
+     */
     /**
      * This class adds a sugar class to allow access to YQL (http://developer.yahoo.com/yql/).
      * @class yql
@@ -29,13 +29,13 @@ YUI.add('gallery-yql', function(Y) {
         * @private
         * @property _cb
         * @description The callback method
-        */ 
+        */
         _cb: null,
         /**
         * @private
         * @property _stamp
         * @description The method name on the Global YUI object we use as the callback.
-        */ 
+        */
         _stamp: null,
         /**
         * @private
@@ -71,7 +71,7 @@ YUI.add('gallery-yql', function(Y) {
             st = st.replace(/-/g, '_');
 
             this._stamp = st;
-            
+
             this._cb = callback;
 
             YUI.yql[st] = Y.bind(this._receiver, this);
@@ -89,7 +89,7 @@ YUI.add('gallery-yql', function(Y) {
             Y.each(params, function(v, k) {
                 qs += k + '=' + encodeURIComponent(v) + '&';
             });
-            
+
             if (!opts) {
                 opts = {};
             }
@@ -124,15 +124,15 @@ YUI.add('gallery-yql', function(Y) {
     * @description Fires when an error occurs.
     * @type {Event.Custom}
     */
-    
+
     /**
      * @event timeout
      * @description Fires when the request has timed-out.
      * @type {Event.Custom}
      */
-	
+
 	Y.yql = yql;
-	
+
 
 
 }, 'gallery-2010.01.27-20' ,{requires:['get', 'event-custom']});

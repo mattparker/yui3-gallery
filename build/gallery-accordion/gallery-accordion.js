@@ -19,7 +19,7 @@ var Lang = Y.Lang,
     IEQuirksMode = QuirksMode && Y.UA.ie > 0,
     COLLAPSE_HEIGHT = IEQuirksMode ? 1 : 0,
     getCN = Y.ClassNameManager.getClassName,
-    
+
     C_ITEM = "yui3-accordion-item",
     C_PROXY_VISIBLE = getCN( AccName, "proxyel", "visible" ),
     DRAGGROUP = getCN( AccName, "graggroup" ),
@@ -39,7 +39,7 @@ var Lang = Y.Lang,
     BEFOREITEMREORDER = "beforeItemReorder",
     BEFOREENDITEMREORDER = "beforeEndItemReorder",
     ITEMREORDERED = "itemReordered",
-    
+
     DEFAULT = "default",
     ANIMATION = "animation",
     ALWAYSVISIBLE = "alwaysVisible",
@@ -1802,7 +1802,7 @@ var Lang = Y.Lang,
     WidgetStdMod = Y.WidgetStdMod,
     AccItemName = "accordion-item",
     getCN = Y.ClassNameManager.getClassName,
-    
+
     C_ICONEXPANDED_EXPANDING = getCN( AccItemName, "iconexpanded", "expanding" ),
     C_ICONEXPANDED_COLLAPSING = getCN( AccItemName, "iconexpanded", "collapsing" ),
 

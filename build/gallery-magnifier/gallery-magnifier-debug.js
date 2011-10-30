@@ -1,6 +1,6 @@
 YUI.add('gallery-magnifier', function(Y) {
 
-var _C = function(conf) { 
+var _C = function(conf) {
 	this._image = {};
 	_C.superclass.constructor.apply(this, arguments);
    },
@@ -12,7 +12,7 @@ var _C = function(conf) {
 
 _C.NAME = MAGNIFIER;
 _C.NS = MAGNIFIER;
-_C.ATTRS = 
+_C.ATTRS =
 	{
 		host: {
 			validator:function(node) {
@@ -62,7 +62,7 @@ Y.extend(_C, Y.Plugin.Base, {
 		image.top = host.getY();
 		image.right = image.left + image.width;
 		image.bottom = image.top + image.height;
-	
+
 		this._renderDisplay();
 		this._bindEvents();
 	},
@@ -79,13 +79,13 @@ Y.extend(_C, Y.Plugin.Base, {
 			this._MO = host.on('mouseout', function() {
 				display.addClass(HIDECLASS);
 			}, this);
-			this._ME = host.on('mouseover', function() { 
+			this._ME = host.on('mouseover', function() {
     		display.removeClass(HIDECLASS);
     	}, this);
 		} else {
-			this._ME = host.on('mouseover', function() { 
+			this._ME = host.on('mouseover', function() {
     		display.removeClass(HIDECLASS);
-    		this._MM = Y.one('body').on('mousemove', this._moveViewport, this);	
+    		this._MM = Y.one('body').on('mousemove', this._moveViewport, this);
     	}, this);
 		}
 	},
@@ -130,7 +130,7 @@ Y.extend(_C, Y.Plugin.Base, {
 
 		img.set('src', host.get('src'));
 		img.setStyles({height: this._image.height * magnificationFactor,
-                   width: this._image.width * magnificationFactor}); 
+                   width: this._image.width * magnificationFactor});
 	},
 	_moveViewport: function(e) {
 		var imageData = this._image,
@@ -143,7 +143,7 @@ Y.extend(_C, Y.Plugin.Base, {
 		    widthMod = this.get('width')/2,
 		    newX = -x * magnificationFactor + heightMod,
 		    newY = -y * magnificationFactor + widthMod;
-		
+
 		if(e.pageX >= imageData.left && e.pageX <= imageData.right && e.pageY >= imageData.top && e.pageY <= imageData.bottom) {
 			if (this.get('follow')) {
 				display.setXY([e.pageX - widthMod, e.pageY - heightMod]);

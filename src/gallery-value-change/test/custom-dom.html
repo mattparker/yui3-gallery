@@ -88,9 +88,9 @@ var eventName = "customDom",
 			return (handle.length === 1) ? handle[0] : handle;
 		}
 	};
-	
+
 domEvents[eventName] = plugins[eventName] = eventConfig;
-			
+
 }, '@VERSION@' ,{requires:['node-base']});
 </script>
 
@@ -101,18 +101,18 @@ YUI({
     base : "../../../build/",
     filter : "raw"
 }).use('custom-dom', function (Y) {
-	
+
 	window.Y=Y;
-	
+
 	console.info("Y.all('.input').on('customDom', logger)");
 	console.log(Y.all(".input").on("customDom", logThis));
 
 	console.info("Y.one('.input').on('customDom', logger)");
 	console.log(Y.one(".input").on("customDom", logThis));
-	
+
 	console.info("Y.on('customDom', logger, '.input')");
 	console.log(Y.on("customDom", logThis, ".input"));
-	
+
 	console.info("Y.on('customDom', logger, Y.all('.input'))");
 	console.log(Y.on('customDom', logThis, Y.all('.input')));
 
@@ -126,7 +126,7 @@ YUI({
 		});
 		logger("fired");
 	});
-	
+
 });
 </script>
 </body>

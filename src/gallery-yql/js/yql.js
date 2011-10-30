@@ -5,7 +5,7 @@
     /**
      * This class adds a sugar class to allow access to YQL (http://developer.yahoo.com/yql/).
      * @module yql
-     */     
+     */
     /**
      * This class adds a sugar class to allow access to YQL (http://developer.yahoo.com/yql/).
      * @class yql
@@ -27,13 +27,13 @@
         * @private
         * @property _cb
         * @description The callback method
-        */ 
+        */
         _cb: null,
         /**
         * @private
         * @property _stamp
         * @description The method name on the Global YUI object we use as the callback.
-        */ 
+        */
         _stamp: null,
         /**
         * @private
@@ -69,7 +69,7 @@
             st = st.replace(/-/g, '_');
 
             this._stamp = st;
-            
+
             this._cb = callback;
 
             YUI.yql[st] = Y.bind(this._receiver, this);
@@ -87,7 +87,7 @@
             Y.each(params, function(v, k) {
                 qs += k + '=' + encodeURIComponent(v) + '&';
             });
-            
+
             if (!opts) {
                 opts = {};
             }
@@ -122,12 +122,12 @@
     * @description Fires when an error occurs.
     * @type {Event.Custom}
     */
-    
+
     /**
      * @event timeout
      * @description Fires when the request has timed-out.
      * @type {Event.Custom}
      */
-	
+
 	Y.yql = yql;
-	
+

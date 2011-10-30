@@ -1,10 +1,10 @@
 YUI.add('gallery-shoveler', function(Y) {
 
 (function(){
- 
+
 /**
 * Shoveler creates an widget.
-* 
+*
 * @param config {Object} Object literal specifying Shoveler configuration properties.
 *
 * @class Shoveler
@@ -44,9 +44,9 @@ var ShovName = "shoveler",
 Shoveler.NAME = ShovName;
 
 /**
- * Static property used to define the default attribute 
+ * Static property used to define the default attribute
  * configuration for the Shoveler.
- * 
+ *
  * @property Shoveler.ATTRS
  * @type Object
  * @static
@@ -76,7 +76,7 @@ Shoveler.ATTRS = {
 		value: false,
 		validator: Lang.isBoolean
 	},
-	
+
 	/**
      * @description Should the shoveler go on infinitely.  If infinite is true then cyclical will be false.
      *
@@ -88,7 +88,7 @@ Shoveler.ATTRS = {
 		value: false,
 		validator: Lang.isBoolean
 	},
-	
+
 	/**
      * @description Number of cells to be display in the main contents of the shoveler
      *
@@ -100,7 +100,7 @@ Shoveler.ATTRS = {
 		value: 1,
 		validator: Lang.isNumber
 	},
-	
+
 	/**
      * @description Is the shoveler cyclical.
 	 * If cyclical is true going foward from the last page will bring you back to the first page
@@ -129,7 +129,7 @@ Shoveler.ATTRS = {
 	loadingCell: {
 		value: "<div class='yui-shoveler-loading'></div>"
 	},
-	
+
 	/**
      * @description Class name for the buttons
      *
@@ -141,7 +141,7 @@ Shoveler.ATTRS = {
 		value: 'button',
 		validator: Lang.isString
 	},
-	
+
 	/**
      * @description Class name for the button mouse down state
      *
@@ -153,7 +153,7 @@ Shoveler.ATTRS = {
 		value: 'on',
 		validator: Lang.isString
 	},
-	
+
 	/**
      * @description Class name for the buttons when disabled
      *
@@ -165,7 +165,7 @@ Shoveler.ATTRS = {
 		value: 'disabled',
 		validator: Lang.isString
 	},
-	
+
 	/**
      * @description Tells if the shoveler should prefetch dynamic content that is not currently being rendered.
      *
@@ -177,7 +177,7 @@ Shoveler.ATTRS = {
 		value: false,
 		validator: Lang.isBoolean
 	},
-	
+
 	/**
      * @description delay in milliseconds for the some animation transitions
      *
@@ -189,7 +189,7 @@ Shoveler.ATTRS = {
 		value: 35,
 		validator: Lang.isNumber
 	},
-	
+
 	/**
      * @description The page the shoveler is on.  Setting this will change the starting page.
      *
@@ -212,7 +212,7 @@ Shoveler.ATTRS = {
 			}
 		}
 	},
-	
+
 	/**
      * @description Number Of Pages in the shoveler.
 	 * This value should not be alter for it gets set by the number of cells and number of visible cells
@@ -225,7 +225,7 @@ Shoveler.ATTRS = {
 		value: 0,
 		validator: Lang.isNumber
 	},
-	
+
 	/**
      * @description Index of the first visible cell
      *
@@ -237,7 +237,7 @@ Shoveler.ATTRS = {
 		value: 0,
 		validator: Lang.isNumber
 	},
-	
+
 	/**
      * @description Index of the last visible cell
      *
@@ -252,7 +252,7 @@ Shoveler.ATTRS = {
 			return Math.min(val, this.get("numberOfCells")-1);
 		}
 	},
-	
+
 	/**
      * @description An array of cells the shoveler is storing
      *
@@ -264,7 +264,7 @@ Shoveler.ATTRS = {
 		value: [],
 		validator: Lang.isArray
 	},
-	
+
 	/**
      * @description Class name for the shoveler cell
      *
@@ -276,7 +276,7 @@ Shoveler.ATTRS = {
 		value: 'cell',
 		validator: Lang.isString
 	},
-	
+
 	/**
      * @description Class name for the html element to place the text to show the current page
      *
@@ -288,7 +288,7 @@ Shoveler.ATTRS = {
 		value: 'page-text',
 		validator: Lang.isString
 	},
-	
+
 	/**
      * @description Class name for the UL to render the cells
      *
@@ -300,7 +300,7 @@ Shoveler.ATTRS = {
 		value: 'cells',
 		validator: Lang.isString
 	},
-	
+
 	/**
      * @description Strings for the shoveler.
      *
@@ -313,7 +313,7 @@ Shoveler.ATTRS = {
 			NumberOfPagesStart: "start over"
 		}
 	},
-	
+
 	/**
      * @description This is the name of the function to render the transitions between pages
      *
@@ -324,7 +324,7 @@ Shoveler.ATTRS = {
 	renderFunctionName: {
 		value: "renderCells"
 	},
-	
+
 	/**
      * @description Key/Value for the index(key) of the cell that is loading with the node(value) being rendered
      *
@@ -335,7 +335,7 @@ Shoveler.ATTRS = {
 	listOfLoadingCells: {
 		value: {}
 	},
-	
+
 	/**
      * @description a stylesheet we can use to alter certain styles on the page
      *
@@ -346,7 +346,7 @@ Shoveler.ATTRS = {
 	stylesheet: {
 		value: undefined
 	},
-	
+
 	/**
      * @description Function to create data src for an ajax request to get dynammic content.
      *
@@ -358,7 +358,7 @@ Shoveler.ATTRS = {
 		value: function(start, numberOfVisibleCells) {},
 		validator: Lang.isFunction
 	},
-	
+
 	/**
      * @description Function to handle the data retrieved by the dynamic call
      *
@@ -370,7 +370,7 @@ Shoveler.ATTRS = {
 		value: function(data) {},
 		validator: Lang.isFunction
 	},
-	
+
 	/**
      * @description Reference to the left button
      *
@@ -381,7 +381,7 @@ Shoveler.ATTRS = {
 	leftButton: {
 		value: undefined
 	},
-	
+
 	/**
      * @description Reference to the right button
      *
@@ -403,7 +403,7 @@ Y.extend( Shoveler, Y.Widget, {
      */
 	initializer: function( config ) {
 		this.renderFunction = this[this.get("renderFunctionName")];
-		
+
 		/**
          * Signals begaining to add a cell
          *
@@ -471,7 +471,7 @@ Y.extend( Shoveler, Y.Widget, {
          */
 		this.publish( AFTERDATARETRIEVAL );
     },
-	
+
 	/**
      * Destructor for the shoveler.
      *
@@ -479,7 +479,7 @@ Y.extend( Shoveler, Y.Widget, {
      */
 	destructor: function() {
 	},
-	
+
 	/**
      * Render UI componants.  Add the stylesheet to the page
      *
@@ -488,7 +488,7 @@ Y.extend( Shoveler, Y.Widget, {
 	renderUI: function(){
 		this.set("stylesheet", Y.StyleSheet());
 	},
-	
+
 	/**
      * Bind event listeners to the different UI componants
 	 * Bind for attributes and button changes
@@ -496,7 +496,7 @@ Y.extend( Shoveler, Y.Widget, {
      * @method bindUI
      */
 	bindUI: function(){
-	
+
 		this.after("pageChange", Y.bind( this.onPageChange, this ));
 		this.after("cellsChange", Y.bind( this.onCellsChange, this ));
 		this.after("numberOfVisibleCellsChange", Y.bind( this.onNumberOfCellsChange, this ));
@@ -504,23 +504,23 @@ Y.extend( Shoveler, Y.Widget, {
 		this.after("numberOfVisibleCellsChange", Y.bind( this.onNumberOfVisibleCellsChange, this ));
 		this.after("numberOfCellsChange", Y.bind( this.calculateNumberOfPages, this ));
 		this.after("numberOfPagesChange", Y.bind( this.onNumberOfPagesChange, this ));
-		
+
 		this.get("contentBox").delegate('click', Y.bind( this.startOver, this ), "."+this.getClassName("start"));
-		var left = this.get("contentBox").one("."+this.getClassName(this.get("button"), "left")), 
+		var left = this.get("contentBox").one("."+this.getClassName(this.get("button"), "left")),
 		right = this.get("contentBox").one("."+this.getClassName(this.get("button"), "right"));
-		
+
 		this.set("leftButton", left);
 		this.set("rightButton", right);
-		
+
 		left.on("click", Y.bind(this.scrollBackwards, this));
 		right.on("click", Y.bind(this.scrollForward, this));
 		left.on("mousedown", Y.bind(this.mouseDownOnButton, this));
 		right.on("mousedown", Y.bind(this.mouseDownOnButton, this));
 		left.on("mouseup", Y.bind(this.mouseUpOnButton, this));
 		right.on("mouseup", Y.bind(this.mouseUpOnButton, this));
-		
+
 	},
-	
+
 	/**
      * Gather data already in the HTML.  Store it and clear the shoveler.
      *
@@ -530,22 +530,22 @@ Y.extend( Shoveler, Y.Widget, {
 		var ul, cells, cellList = [];
 		this.adjustCellWidth();
 		this.calculateNumberOfPages();
-		
+
 		ul = this.get("contentBox").one("ul."+this.getClassName(this.get("ulClass")));
 		this.set("ul", ul);
-		
+
 		cells = ul.all("li."+this.getClassName(this.get("cellClass")));
 		cells.each(function(node, index, list){
 			cellList.push(node.cloneNode(true));
 		});
-		
+
 		this.clearCells();
-		
+
 		this.set("cells", cellList);
-		
+
 		this.initRender();
 	},
-	
+
 	/**
      * Render the shoveler for the first time.
 	 * Set page text, first and last indexes, render the inital cells, and check the button styling
@@ -558,7 +558,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.renderCells(this.getVisibleCells());
 		this.disableButtons();
 	},
-	
+
 	/**
      * Set the firstVisibleCell and the LastVisibleCell for the current page view
      *
@@ -568,7 +568,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.set("firstVisibleCell", this.get("page")*this.get("numberOfVisibleCells"));
 		this.set("lastVisibleCell", this.get("firstVisibleCell")+this.get("numberOfVisibleCells")-1);
 	},
-	
+
 	/**
      * If the page changes update the text and buttons
      *
@@ -578,7 +578,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.setPageText();
 		this.disableButtons();
 	},
-	
+
 	/**
      * Make sure buttons are enabled/disabled visually.
      *
@@ -598,7 +598,7 @@ Y.extend( Shoveler, Y.Widget, {
 			}
 		}
 	},
-	
+
 	/**
      * Construct the string for the page information header, and set it as content in the dom
 	 * If the shoveler has infinite page just write the current page
@@ -622,7 +622,7 @@ Y.extend( Shoveler, Y.Widget, {
 			header.setContent(text);
 		}
 	},
-	
+
 	/**
      * When the mouse is down on a button, add a class so it can be rendered properly.
      *
@@ -632,7 +632,7 @@ Y.extend( Shoveler, Y.Widget, {
 	mouseDownOnButton: function(event) {
 		event.target.addClass(this.getClassName(this.get("button"), this.get("buttonOn")));
 	},
-	
+
 	/**
      * When the mouse is up on a button, remove a class so it can be rendered properly.
      *
@@ -642,7 +642,7 @@ Y.extend( Shoveler, Y.Widget, {
 	mouseUpOnButton: function(event) {
 		event.target.removeClass(this.getClassName(this.get("button"), this.get("buttonOn")));
 	},
-	
+
 	/**
      * Add a cell to the shoveler
      *
@@ -655,7 +655,7 @@ Y.extend( Shoveler, Y.Widget, {
 		var newCell = this.insertIntoCells(content, index, ADDCELL);
 		this.fire( AFTERADDCELL, { cell: newCell} );
 	},
-	
+
 	/**
      * Add multiple cells to the shoveler
      *
@@ -667,7 +667,7 @@ Y.extend( Shoveler, Y.Widget, {
 			this.addCell(cells[i]);
 		}
 	},
-	
+
 	/**
      * adjust the width of the cells, by altering the stylesheet
      *
@@ -680,7 +680,7 @@ Y.extend( Shoveler, Y.Widget, {
 		});
 
 	},
-	
+
 	/**
      * Converts the content of a cell to an actual cell
      *
@@ -694,12 +694,12 @@ Y.extend( Shoveler, Y.Widget, {
 		}
 		var newCell = Y.Node.create("<li>"+content+"</li>");
 		newCell.addClass(this.getClassName(this.get("cellClass")));
-		
+
 		this.fire( AFTERCREATECELL , { cell: newCell } );
-		
+
 		return newCell;
 	},
-	
+
 	/**
      * builds a loading cell
      *
@@ -709,7 +709,7 @@ Y.extend( Shoveler, Y.Widget, {
 	createLoadingCell: function() {
 		return this.createCell(this.get("loadingCell"));
 	},
-	
+
 	/**
      * Helper function to insert into cells.
 	 * Builds a cell and adds it the the cell list.
@@ -719,7 +719,7 @@ Y.extend( Shoveler, Y.Widget, {
 	 * @param content {string} the content of the cell. Defaults to empty string
 	 * @param index {number} (optional) the index to add the cell to.  Default will add to the end of cells
 	 * @param replace {ADD|REPLACE} (optional) should I replace a cell or add one.  Defaults to add.
-	 * @return {Node} the newly created cell 
+	 * @return {Node} the newly created cell
      */
 	insertIntoCells: function(content, index, replace) {
 		var newCell = this.createCell(content),
@@ -736,16 +736,16 @@ Y.extend( Shoveler, Y.Widget, {
 				cells.push(undefined);
 			}
 		}
-		
+
 		cells.splice(index, replace, newCell);
 		this.set("cells", cells);
-		
+
 		if(this.get("dynamic")) {
 			this.checkIfLoading(newCell, index);
 		}
 		return newCell;
 	},
-	
+
 	/**
      * Check if the cell is waited to be loaded.
 	 * If so render it on the page, and delete reference in our list of loading cells
@@ -761,7 +761,7 @@ Y.extend( Shoveler, Y.Widget, {
 			delete loadingCells[index];
 		}
 	},
-	
+
 	/**
      * Remove a cell from the list
      *
@@ -776,7 +776,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.set("cells", cells);
 		this.fire( AFTERREMOVECELL, { cell: oldCell} );
 	},
-	
+
 	/**
      * replace a cell in the shoveler
      *
@@ -789,7 +789,7 @@ Y.extend( Shoveler, Y.Widget, {
 		var newCell = this.insertIntoCells(content, index, REPLACECELL);
 		this.fire( AFTERREPLACECELL, { cell: newCell} );
 	},
-	
+
 	/**
      * replace cells in the shoveler
      *
@@ -801,7 +801,7 @@ Y.extend( Shoveler, Y.Widget, {
 			this.replaceCell(newCells[i].content, newCells[i].index);
 		}
 	},
-	
+
 	/**
      * when the list of cells changes updated the number of cells and re render if at the end
      *
@@ -820,7 +820,7 @@ Y.extend( Shoveler, Y.Widget, {
 			this.renderCells(this.getVisibleCells());
 		}
 	},
-	
+
 	/**
      * Calculate the number of pages for the shoveler
      *
@@ -829,7 +829,7 @@ Y.extend( Shoveler, Y.Widget, {
 	calculateNumberOfPages: function() {
 		this.set("numberOfPages", Math.ceil(this.get("numberOfCells")/this.get("numberOfVisibleCells")));
 	},
-	
+
 	/**
      * Given an index, what page is it on
      *
@@ -839,7 +839,7 @@ Y.extend( Shoveler, Y.Widget, {
 	getPageForIndex: function(index) {
 		return Math.floor(index/this.get("numberOfVisibleCells"));
 	},
-	
+
 	/**
      * When the number of visible cells change change the last visible cell index and render more/less cells
      *
@@ -850,7 +850,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.set("lastVisibleCell", this.get("firstVisibleCell")+event.newVal);
 		this.renderCells(this.getVisibleCells());
 	},
-	
+
 	/**
      * If the page changes set the text.
      *
@@ -859,7 +859,7 @@ Y.extend( Shoveler, Y.Widget, {
 	onNumberOfPagesChange: function() {
 		this.setPageText();
 	},
-	
+
 	/**
      * Empty the shoveler and remove the cells
      *
@@ -869,7 +869,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.clearCells();
 		this.set("cells", []);
 	},
-	
+
 	/**
      * Remove the cells from the dom
      *
@@ -878,7 +878,7 @@ Y.extend( Shoveler, Y.Widget, {
 	clearCells: function() {
 		this.get("ul").all("li."+this.getClassName(this.get("cellClass"))).remove();
 	},
-	
+
 	/**
      * Retrieve a cell from the list
      *
@@ -889,7 +889,7 @@ Y.extend( Shoveler, Y.Widget, {
 	getCell: function(index) {
 		return this.get("cells")[index];
 	},
-	
+
 	/**
      * Retrieve all cells from the list
      *
@@ -899,7 +899,7 @@ Y.extend( Shoveler, Y.Widget, {
 	getAllCells: function() {
 		return this.get("cells");
 	},
-	
+
 	/**
      * Retrieve the first visible cell
      *
@@ -909,7 +909,7 @@ Y.extend( Shoveler, Y.Widget, {
 	getFirstVisibleCell: function() {
 		return this.get("cells")[this.get("firstVisibleCell")];
 	},
-	
+
 	/**
      * First retrieves the cells stored to be rendered
 	 * If there is dynamic content create and prepare loading cells
@@ -923,34 +923,34 @@ Y.extend( Shoveler, Y.Widget, {
 		var cells = this.get("cells").slice(this.get("firstVisibleCell"), this.get("lastVisibleCell")+1),
 		i, hasLoading = false, loadingCell, emptyCell,
 		loadList = this.get("listOfLoadingCells");
-		
+
 		for(i = 0; i < this.get("numberOfVisibleCells") && (this.get("infinite") || this.get("firstVisibleCell")+i < this.get("numberOfCells")); i++) {
-			
+
 			if(cells[i] === undefined) {
 				loadingCell = this.createLoadingCell();
 				cells[i] = loadingCell;
-			
+
 				loadList[this.get("firstVisibleCell")+i] = loadingCell;
 				hasLoading = true;
 			}
 		}
-		
+
 		for(i = cells.length; i < this.get("numberOfVisibleCells"); i++) {
 			emptyCell = this.createCell();
 			cells.push(emptyCell);
 			loadList[this.get("firstVisibleCell")+i] = emptyCell;
 		}
-		
+
 		this.set("listOfLoadingCells", loadList);
 		if(hasLoading) {
 			this.fetchNextCells(this.get("firstVisibleCell"));
 		} else {
 			this.fire( AFTERDATARETRIEVAL );
 		}
-		
+
 		return cells;
 	},
-	
+
 	/**
      * Scroll one page forward
 	 * Set scroll direction
@@ -961,7 +961,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.set("direction", FORWARD);
 		this.scrollTo(this.get("page")+1);
 	},
-	
+
 	/**
      * Scroll one page backwards
 	 * Set scroll direction
@@ -972,7 +972,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.set("direction", BACKWARD);
 		this.scrollTo(this.get("page")-1);
 	},
-	
+
 	/**
      * Scroll to the first page
 	 * Set scroll direction
@@ -984,7 +984,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.scrollTo(0);
 		event.preventDefault();
 	},
-	
+
 	/**
      * Scroll to page and render the content
 	 * if prefetching add event listener to know when to fetch data
@@ -1001,14 +1001,14 @@ Y.extend( Shoveler, Y.Widget, {
 			var retrievalHandle = this.on( AFTERDATARETRIEVAL, Y.bind(this.prefetchCells, this));
 			this.set("retrievalHandle", retrievalHandle);
 		}
-		
+
 		this.set("page", page);
 		this.setFirstAndLast();
 		this.renderFunction(this.getVisibleCells());
-		
+
 		this.fire( ENDSCROLL );
 	},
-	
+
 	/**
      * simple render method.  Clear the cells and put in new ones
      *
@@ -1021,10 +1021,10 @@ Y.extend( Shoveler, Y.Widget, {
 		for(i = 0; i < this.get("numberOfVisibleCells"); i++) {
 			ul.append(cells[i]);
 		}
-		
+
 		this.fire( RENDERFINISHED );
 	},
-	
+
 	/**
      * render cells with an animated pop.
 	 * Each cell will replace the cell it will be replacing visually but with a timeout
@@ -1041,13 +1041,13 @@ Y.extend( Shoveler, Y.Widget, {
 		currentCells,
 		oldCell,
 		newCell;
-		
+
 		for(i = 0, len = cells.length; i < len; i++) {
 			if(ul.contains(cells[i])) {
 				ul.replaceChild(cells[i].cloneNode(true), cells[i]);
 			}
 		}
-		
+
 		currentCells = ul.all("li."+this.getClassName(this.get("cellClass")));
 		for(i = 0; i < this.get("numberOfVisibleCells"); i++) {
 			newCell = cells[i];
@@ -1055,12 +1055,12 @@ Y.extend( Shoveler, Y.Widget, {
 			if( i < currentCells.size() ) {
 				oldCell = currentCells.item(i);
 			}
-			
+
 			window.setTimeout(this.popTimeoutFunction(ul, newCell, oldCell), this.get("delay")*indexTransform(i));
 		}
 		window.setTimeout(Y.bind(function(){this.fire( RENDERFINISHED );}, this), this.get("delay")*i);
 	},
-	
+
 	/**
      * Append or replace a cell in the ul
      *
@@ -1078,7 +1078,7 @@ Y.extend( Shoveler, Y.Widget, {
 			}
 		};
 	},
-	
+
 	/**
      * Popping happends in the direction of scrolling.
 	 * If scrolling Backwards grab index
@@ -1103,7 +1103,7 @@ Y.extend( Shoveler, Y.Widget, {
 			};
 		}
 	},
-	
+
 	/**
      * Build url and fetch data with a new script tag.  Make sure to call handleDataRetrieval
      *
@@ -1119,7 +1119,7 @@ Y.extend( Shoveler, Y.Widget, {
 		script = Y.Node.create("<script type='text/javascript' src='"+url+"'></script>");
 		Y.get("body").append(script);
 	},
-	
+
 	/**
      * Prefetch new cells in direction of scrolling. Only prefetch once each scroll
      *
@@ -1130,15 +1130,15 @@ Y.extend( Shoveler, Y.Widget, {
 		var start;
 		if(this.get("direction") == BACKWARD) {
 			start = this.get("firstVisibleCell")-this.get("numberOfVisibleCells");
-		} else { 
+		} else {
 			start = this.get("lastVisibleCell")+1;
 		}
-		
+
 		if(this.get('cells')[start] === undefined && start < this.get("numberOfCells")) {
 			this.fetchNextCells(start);
 		}
 	},
-	
+
 	/**
      * Call handle data as defined by user
      *
@@ -1149,7 +1149,7 @@ Y.extend( Shoveler, Y.Widget, {
 		this.get("handleData").call(this, data);
 		this.fire( AFTERDATARETRIEVAL );
 	}
-	
+
 });
 
 Y.Shoveler = Shoveler;

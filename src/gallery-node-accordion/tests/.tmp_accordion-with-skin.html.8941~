@@ -31,7 +31,7 @@
 				<div id="myaccordion" class="yui-accordion">
 
 				    <div class="yui-module yui-accordion-item yui-accordion-item-active first-of-type">
-				    	
+
 			            <div class="yui-hd yui-accordion-item-hd">
 			            	<a href="#" class="yui-accordion-item-trigger">item 1</a>
 						</div>
@@ -40,10 +40,10 @@
 								item 1 content here...
 					        </p>
 					    </div>
-						
+
 					</div>
 				    <div class="yui-module yui-accordion-item">
-				    	
+
 			            <div class="yui-hd yui-accordion-item-hd">
 			            	<a href="#" class="yui-accordion-item-trigger">item 2</a>
 						</div>
@@ -52,10 +52,10 @@
 								item 2 content here...
 					        </p>
 					    </div>
-			
+
 					</div>
 					<div class="yui-module yui-accordion-item">
-						
+
 			            <div class="yui-hd yui-accordion-item-hd">
 			            	<a href="#" class="yui-accordion-item-trigger">item 3</a>
 						</div>
@@ -64,12 +64,12 @@
 								item 3 content here...
 					        </p>
 					    </div>
-			
+
 					</div>
-			
+
 				</div>
 
-					
+
 			</div>
 		</div>
 
@@ -81,11 +81,11 @@
 		    filter: 'debug',
 		    combine: false
 		}).use('anim', 'node-accordion', function (Y) {
-			
-		    Y.get("#myaccordion").plug(Y.Plugin.NodeAccordion, { 
+
+		    Y.get("#myaccordion").plug(Y.Plugin.NodeAccordion, {
 				anim: Y.Easing.backIn
 			});
-			
+
 		});
 	</script>
 </body>

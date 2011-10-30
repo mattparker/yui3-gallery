@@ -23,22 +23,22 @@
     Timer = function(config) {
         Timer.superclass.constructor.apply(this,arguments);
     };
-    
+
     /**
      * Timer extends Base
      */
     Y.extend(Timer, Y.Base,{
         /**
          * Local Date object for internal time measurement
-         * 
+         *
          * @property
          * @protected
          */
         _date : new Date(),
-        
+
         /**
          * Initializer lifecycle implementation for the Timer class.
-         * Publishes events and subscribes 
+         * Publishes events and subscribes
          * to update after the status is changed.
          *
          * @method initializer
@@ -53,10 +53,10 @@
             this.publish(EVENTS.PAUSE ,  { defaultFn : this._pauseEvent });
             this.publish(EVENTS.RESUME , { defaultFn : this._resumeEvent });
         },
-        
+
         /**
          * Interface method to start the Timer. Fires timer:start
-         * 
+         *
          * @method start
          * @public
          */
@@ -67,10 +67,10 @@
             }
             return this;
         },
-        
+
         /**
          * Interface method to stop the Timer. Fires timer:stop
-         * 
+         *
          * @method stop
          * @public
          */
@@ -81,10 +81,10 @@
             }
             return this;
         },
-        
+
         /**
          * Interface method to pause the Timer. Fires timer:pause
-         * 
+         *
          * @method pause
          * @public
          */
@@ -95,10 +95,10 @@
             }
             return this;
         },
-        
+
         /**
          * Interface method to resume the Timer. Fires timer:resume
-         * 
+         *
          * @method resume
          * @public
          */
@@ -109,13 +109,13 @@
             }
             return this;
         },
-        
+
         /**
          * Checks to see if a new Timer is to be created. If so, calls
-         * _timer() after a the schedule number of milliseconds. Sets 
-         * Timer pointer to the new Timer id. Sets start to the current 
+         * _timer() after a the schedule number of milliseconds. Sets
+         * Timer pointer to the new Timer id. Sets start to the current
          * timestamp.
-         * 
+         *
          * @method _makeTimer
          * @protected
          */
@@ -128,10 +128,10 @@
             this.set('timer',id);
             this.set('start', this._date.getTime());
         },
-        
+
         /**
          * Resets the Timer.
-         * 
+         *
          * @method _destroyTimer
          * @protected
          */
@@ -140,11 +140,11 @@
             this.set('stop', this._date.getTime());
             this.set('step', 0);
         },
-        
+
         /**
-         * Increments the step and either stops or starts a new Timer 
+         * Increments the step and either stops or starts a new Timer
          * interval. Fires the timer callback method.
-         * 
+         *
          * @method _timer
          * @protected
          */
@@ -161,11 +161,11 @@
             }
             (this.get('callback'))();
         },
-        
+
         /**
          * Internal status change event callback. Allows status changes
          * to fire start(), pause(), resume(), and stop() automatically.
-         * 
+         *
          * @method _statusChanged
          * @protcted
          */
@@ -180,41 +180,41 @@
                     break;
             }
         },
-        
+
         /**
          * Default function for start event.
-         * 
+         *
          * @method _startEvent
          * @protected
          */
         _startEvent : function(e) {
             this.set('status',STATUS.RUNNING);
         },
-        
+
         /**
          * Default function for stop event.
-         * 
+         *
          * @method _stopEvent
          * @protected
          */
         _stopEvent : function(e) {
             this.set('status',STATUS.STOPPED);
         },
-        
+
         /**
          * Default function for pause event.
-         * 
+         *
          * @method _pauseEvent
          * @protected
          */
         _pauseEvent : function(e) {
             this.set('status',STATUS.PAUSED);
         },
-        
+
         /**
-         * Default function for resume event. Starts timer with 
+         * Default function for resume event. Starts timer with
          * remaining time left after Timer was paused.
-         * 
+         *
          * @method _resumeEvent
          * @protected
          */
@@ -222,12 +222,12 @@
             var remaining = this.get('length') - (this.get('stop') - this.get('start'));
             Y.later(remaining,this,function(){this.set('status',STATUS.RUNNING);});
          }
-        
-        
+
+
     },{
         /**
          * Static property provides a string to identify the class.
-         * 
+         *
          * @property Timer.NAME
          * @type String
          * @static
@@ -236,7 +236,7 @@
 
         /**
          * Static property provides a string to identify the class namespace.
-         * 
+         *
          * @property Timer.NS
          * @type String
          * @static
@@ -246,17 +246,17 @@
         /**
          * Static property used to define the default attribute
          * configuration for the Timer.
-         * 
+         *
          * @property ATTRS
          * @type Object
          * @static
          */
         ATTRS : {
-        
+
             /**
-             * @description The callback method that fires when the 
+             * @description The callback method that fires when the
              * timer interval is reached.
-             * 
+             *
              * @attribute callback
              * @type function
              */
@@ -264,10 +264,10 @@
                 value : null,
                 validator : Y.Lang.isFunction
             },
-            
+
             /**
              * Time in milliseconds between intervals
-             * 
+             *
              * @attribute length
              * @type Number
              */
@@ -277,10 +277,10 @@
                     return parseInt(val,10);
                 }
             },
-            
+
             /**
              * Number of times the Timer should fire before it stops
-             * 
+             *
              * @attribute repeatCount
              * @type Number
              */
@@ -293,10 +293,10 @@
                 },
                 value : 0
             },
-            
+
             /**
              * Timestamp Timer was started
-             * 
+             *
              * @attribute start
              * @type Boolean
              */
@@ -306,7 +306,7 @@
 
             /**
              * Timer status
-             * 
+             *
              * @attribute stop
              * @default STATUS.STOPPED
              * @type String
@@ -315,10 +315,10 @@
                 value : STATUS.STOPPED,
                 readonly : true
             },
-            
+
             /**
              * Number of times the Timer has looped
-             * 
+             *
              * @attribute step
              * @type Boolean
              */
@@ -326,20 +326,20 @@
                 value : 0,
                 readonly : true
             },
-            
+
             /**
              * Timestamp Timer was stoped or paused
-             * 
+             *
              * @attribute stop
              * @type Boolean
              */
             stop : {
                 readonly : true
             },
-            
+
             /**
              * Timer id to used during stop()
-             * 
+             *
              * @attribute timer
              * @type Number
              */
@@ -347,27 +347,27 @@
                 readonly : true
             }
         },
-        
+
         /**
          * Static property provides public access to registered timer
          * status strings
-         * 
+         *
          * @property Timer.STATUS
          * @type Object
          * @static
          */
         STATUS : STATUS,
-        
+
         /**
          * Static property provides public access to registered timer
          * event strings
-         * 
+         *
          * @property Timer.EVENTS
          * @type Object
          * @static
          */
         EVENTS : EVENTS
     });
-    
+
     Y.Timer = Timer;
 

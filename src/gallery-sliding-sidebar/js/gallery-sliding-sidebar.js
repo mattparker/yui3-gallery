@@ -134,7 +134,7 @@ Y.mix(SlidingSideBar, {
 			key:'content',
 			value:''
 		},
-		
+
 		/**		 * @attribute position		 * @description the position you wish to display your sidbar. Valid options are: 'left', 'right', 'top', 'bottom'		 *		 * @default left		 * @type String		 */
 		'position':{
 			key:'position',
@@ -257,7 +257,7 @@ Y.extend(SlidingSideBar, Y.Overlay, {
 			this.expand();
 		}
 	},
-	
+
 	/**
 	 * Returns if the side bar is currently expanded
 	 *
@@ -268,7 +268,7 @@ Y.extend(SlidingSideBar, Y.Overlay, {
 	_isExpanded:function(){
 		return this.get('contentBox').hasClass(this.getClassName('expanded'));
 	},
-	
+
 	/**
 	 * Expands the sidebar to the open position
 	 *
@@ -279,7 +279,7 @@ Y.extend(SlidingSideBar, Y.Overlay, {
 		this._showContent();
 		this.get('contentBox').addClass(this.getClassName('expanded'));
 	},
-	
+
 	/**
 	 * Collapses the sidebar to the closed position
 	 *
@@ -321,7 +321,7 @@ Y.extend(SlidingSideBar, Y.Overlay, {
 				}
 				break;
 		}
-			
+
 		
 		animSet = this.get('animation');
 		if(this.sizeAnim){
@@ -393,7 +393,7 @@ Y.extend(SlidingSideBar, Y.Overlay, {
 			this.opacityAnim.run();
 		}
 	},
-	
+
 	/**
 	 * Sets the panel to focus by modifying the zIndex
 	 *

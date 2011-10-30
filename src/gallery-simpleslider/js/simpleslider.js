@@ -14,10 +14,10 @@ var NS = Y.namespace('apm'),
 
         thumb.plug(Y.apm.Center);
 
-        this.dd = new Y.DD.Drag({ 
-            node: thumb 
-        }).plug(Y.Plugin.DDConstrained, { 
-            constrain2node: contentbox 
+        this.dd = new Y.DD.Drag({
+            node: thumb
+        }).plug(Y.Plugin.DDConstrained, {
+            constrain2node: contentbox
         });
 
     };
@@ -90,10 +90,10 @@ Y.extend(SimpleSlider, Y.Base, {
             diffX = current[0] - value[0] - offset[0],
             diffY = current[1] - value[1] - offset[0];
 
-        return this.center({ 
-            pageX: region.left - diffX, 
-            pageY: region.top - diffY, 
-            halt: function(){} 
+        return this.center({
+            pageX: region.left - diffX,
+            pageY: region.top - diffY,
+            halt: function(){}
         }, true);
     }
 

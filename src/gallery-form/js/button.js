@@ -4,9 +4,9 @@ function Button () {
 
 Y.mix(Button, {
     NAME : 'button',
-    
+
     HTML_PARSER : {
-        
+
     },
 
     ATTRS : {
@@ -40,7 +40,7 @@ Y.mix(Button, {
 Y.extend(Button, Y.FormField, {
     _renderButtonNode : function () {
         var contentBox = this.get('contentBox'), bn;
-        
+
         bn = Y.Node.create(Button.NODE_TEMPLATE);
         contentBox.appendChild(bn);
         this._fieldNode = bn;
@@ -53,7 +53,7 @@ Y.extend(Button, Y.FormField, {
             innerHTML : this.get('label'),
             id : this.get('id')
         });
-        
+
         this.get('contentBox').addClass('first-child');
 	},
 

@@ -19,7 +19,7 @@
         }
     };
     */
-    
+
     var getButton = function(id) {
         var button = id;
         if (Y.Lang.isString(id)) {
@@ -49,7 +49,7 @@
         this._configuredButtons = [];
 
         Toolbar.superclass.constructor.apply(this, arguments);
-         
+
     };
 
     Toolbar.NAME = 'Toolbar';
@@ -105,7 +105,7 @@
         * </pre></code>
         * @type Array
         */
-        
+
         buttons: {
             value: []
         },
@@ -167,7 +167,7 @@
                 delete args.target;
             }
             this.fire(type, args);
-        },        
+        },
         _handleCollapse: function() {
             var collapse = this.get('collapse');
 
@@ -247,7 +247,7 @@
         * @description This method is called from Menu's renderEvent to add a few more classes to the menu items
         * @param {String} ev The event that fired.
         * @param {Array} na Array of event information.
-        * @param {Object} o Button config object. 
+        * @param {Object} o Button config object.
         */
         _addMenuClasses: function(ev, na, o) {
             Dom.addClass(this.element, 'yui-toolbar-' + o.get('value') + '-menu');
@@ -260,19 +260,19 @@
                 Dom.addClass(items[i].element, 'yui-toolbar-' + o.get('value') + '-' + ((items[i].value) ? items[i].value.replace(/ /g, '-') : items[i]._oText.nodeValue.replace(/ /g, '-')));
             }
         },
-        /** 
+        /**
         * @property buttonType
         * @description The default button to use
         * @type Object
         */
         buttonType: Y.Toolbar.Button,
-        /** 
+        /**
         * @property dd
         * @description The DragDrop instance associated with the Toolbar
         * @type Object
         */
         dd: null,
-        /** 
+        /**
         * @property _colorData
         * @description Object reference containing colors hex and text values.
         * @type Object
@@ -425,49 +425,49 @@
     '#FDEEE0': 'Marble'
 /* }}} */
         },
-        /** 
+        /**
         * @property _colorPicker
         * @description The HTML Element containing the colorPicker
         * @type HTMLElement
         */
         _colorPicker: null,
-        /** 
+        /**
         * @property STR_COLLAPSE
         * @description String for Toolbar Collapse Button
         * @type String
         */
         STR_COLLAPSE: 'Collapse Toolbar',
-        /** 
+        /**
         * @property STR_EXPAND
         * @description String for Toolbar Collapse Button - Expand
         * @type String
         */
         STR_EXPAND: 'Expand Toolbar',
-        /** 
+        /**
         * @property STR_SPIN_LABEL
         * @description String for spinbutton dynamic label. Note the {VALUE} will be replaced with YAHOO.lang.substitute
         * @type String
         */
         STR_SPIN_LABEL: 'Spin Button with value {VALUE}. Use Control Shift Up Arrow and Control Shift Down arrow keys to increase or decrease the value.',
-        /** 
+        /**
         * @property STR_SPIN_UP
         * @description String for spinbutton up
         * @type String
         */
         STR_SPIN_UP: 'Click to increase the value of this input',
-        /** 
+        /**
         * @property STR_SPIN_DOWN
         * @description String for spinbutton down
         * @type String
         */
         STR_SPIN_DOWN: 'Click to decrease the value of this input',
-        /** 
+        /**
         * @property _titlebar
         * @description Object reference to the titlebar
         * @type HTMLElement
         */
         _titlebar: null,
-        /** 
+        /**
         * @property browser
         * @description Standard browser detection
         * @type Object
@@ -550,7 +550,7 @@
         * @type String
         */
         CLASS_PREFIX: 'yui-toolbar',
-        /** 
+        /**
         * @method init
         * @description The Toolbar class's initialization method
         */
@@ -596,9 +596,9 @@
         },
         /**
         * @method initAttributes
-        * @description Initializes all of the configuration attributes used to create 
+        * @description Initializes all of the configuration attributes used to create
         * the toolbar.
-        * @param {Object} attr Object literal specifying a set of 
+        * @param {Object} attr Object literal specifying a set of
         * configuration attributes used to create the toolbar.
         */
         initAttributes: function(attr) {
@@ -635,7 +635,7 @@
 
             /**
             * @attribute draggable
-            * @description Boolean indicating if the toolbar should be draggable.  
+            * @description Boolean indicating if the toolbar should be draggable.
             * @default false
             * @type Boolean
             */
@@ -658,7 +658,7 @@
                             }
                             this.dd = new YAHOO.util.DD(this.get('id'));
                             this.dd.setHandleElId(this._dragHandle.id);
-                            
+
                         }
                     } else {
                         YAHOO.log('Dragging disabled', 'info', 'Toolbar');
@@ -698,7 +698,7 @@
         * @param {Object} oGroup Object literal reference to the Groups Config (contains an array of button configs as well as the group label)
         */
         addButtonGroup: function(oGroup) {
-            
+
             if (!this.get('node').hasClass(this.CLASS_PREFIX + '-grouped')) {
                 this.get('node').addClass(this.CLASS_PREFIX + '-grouped');
             }
@@ -720,15 +720,15 @@
             if (!this._buttonGroupList) {
                 this._buttonGroupList = {};
             }
-            
+
             this._buttonGroupList[oGroup.group] = ul;
 
-            
+
             //An array of the button ids added to this group
             //This is used for destruction later...
             var addedButtons = [],
                 button;
-            
+
             Y.each(oGroup.buttons, function(i) {
                 var li = Y.Node.create('<li class="' + this.CLASS_PREFIX + '-groupitem"></a>');
                 ul.appendChild(li);
@@ -846,7 +846,7 @@
                     _oButton.id = tmp.get('id');
                 }
                 //tmp._selected = true;
-                
+
                 if (this.get('disabled')) {
                     //Toolbar is disabled, disable the new button too!
                     tmp.set('disabled', true);
@@ -925,7 +925,7 @@
                         };
                         tmp.get('node').on('mousedown', Y.bind(showPicker, this));
                         tmp.get('node').on('keydown', Y.bind(showPicker, this));
-                        
+
                     } else if ((oButton.type != 'menu') && (oButton.type != 'select')) {
                         tmp.get('node').on('keypress', Y.bind(this._buttonClick, this));
                         tmp.get('node').on('mousedown', Y.bind(function(ev) {
@@ -936,7 +936,7 @@
                             ev.halt();
                         });
                     } else {
-                    
+
                         //Stop the mousedown event so we can trap the selection in the editor!
                         tmp.on('mousedown', function(ev) {
                             ev.halt();
@@ -955,7 +955,7 @@
                         /*
                         var self = this;
                         //Hijack the mousedown event in the menu and make it fire a button click..
-                        
+
                         tmp.on('appendTo', function() {
                             var tmp = this;
                             if (tmp.getMenu() && tmp.getMenu().mouseDownEvent) {
@@ -997,12 +997,12 @@
                     //Add a couple of new events for IE
                     tmp.DOM_EVENTS.focusin = true;
                     tmp.DOM_EVENTS.focusout = true;
-                    
+
                     //Stop them so we don't loose focus in the Editor
                     tmp.on('focusin', function(ev) {
                         YAHOO.util.Event.stopEvent(ev);
                     }, oButton, this);
-                    
+
                     tmp.on('focusout', function(ev) {
                         YAHOO.util.Event.stopEvent(ev);
                     }, oButton, this);
@@ -1125,9 +1125,9 @@
                     var info = {
                         color: data,
                         colorName: this._colorData['#' + data],
-                        value: this._colorPicker._button 
+                        value: this._colorPicker._button
                     };
-                
+
                     this.fire('buttonClick', { type: 'buttonClick', button: info });
                     this.getButtonByValue(this._colorPicker._button).getMenu().hide();
                     this._colorPicker.setStyle('display', 'none');
@@ -1152,7 +1152,7 @@
         * @param {Object} _oButton <a href="YAHOO.widget.ToolbarButton.html">YAHOO.widget.ToolbarButton</a> reference
         */
         _makeColorButton: function(_oButton) {
-            if (!this._colorPicker) {   
+            if (!this._colorPicker) {
                 this._createColorPicker(this.get('id'));
             }
             _oButton.type = 'color';
@@ -1205,7 +1205,7 @@
             _par.appendChild(_b1);
             _par.appendChild(_b2);
 
-            
+
             var label = Y.Lang.substitute(this.STR_SPIN_LABEL, { VALUE: _button.get('label') });
             _button.set('title', label);
 
@@ -1222,7 +1222,7 @@
             if (this._titlebar && this._titlebar.get('firstChild')) {
                 tbar = this._titlebar.get('firstChild');
             }
-            
+
             var _intUp = function(ev) {
                 ev.halt();
                 if (!_button.get('disabled') && (ev.keyCode != 9)) {
@@ -1281,7 +1281,7 @@
         */
         _buttonClick: function(ev, info) {
             var doEvent = true;
-            
+
             if (ev && ev.type == 'keypress') {
                 if (ev.keyCode == 9) {
                     doEvent = false;
@@ -1294,7 +1294,7 @@
             if (doEvent) {
                 var fireNextEvent = true,
                     retValue = false;
-                    
+
                 info.isSelected = this.isSelected(info.id);
 
                 if (info.value) {
@@ -1304,7 +1304,7 @@
                         fireNextEvent = false;
                     }
                 }
-                
+
                 if (info.menucmd && fireNextEvent) {
                     Y.log('fireEvent::' + info.menucmd + 'Click');
                     retValue = this.fire(info.menucmd + 'Click', { type: info.menucmd + 'Click', target: this.get('element'), button: info });
@@ -1664,7 +1664,7 @@
                     len = this._buttonList.length;
 
                 button.destroy();
-                
+
                 for (i = 0; i < len; i++) {
                     if (this._buttonList[i].get('id') != thisID) {
                         new_list[new_list.length]= this._buttonList[i];
@@ -1688,7 +1688,7 @@
             }
 
             this._configuredButtons = null;
-        
+
             this.get('element').innerHTML = '';
             this.get('element').className = '';
             //Brutal Object Destroy

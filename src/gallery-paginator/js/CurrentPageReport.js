@@ -136,7 +136,7 @@ Paginator.ui.CurrentPageReport.prototype = {
 
         return this.span;
     },
-    
+
     /**
      * Regenerate the content of the span if appropriate. Calls
      * CurrentPageReport.sprintf with the value of the pageReportTemplate

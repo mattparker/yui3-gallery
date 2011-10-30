@@ -4,7 +4,7 @@
             config.node = config.host;
             B.superclass.constructor.call(this, config);
         };
-        
+
         B.NAME = "gallery-badge";
 
         B.NS = "badge";
@@ -106,7 +106,7 @@
             },
             updateUI: function(e) {
                 var sql = this.getSQL(), q;
-                
+
                 q = new Y.yql(sql, Y.bind(function(r) {
                     if (r.query && r.query.results && r.query.results.json) {
                         this.fire('dataReturned', { data: r.query.results.json });

@@ -16,7 +16,7 @@
  * @param fn {Function} the callback function
  * @param id {String|Node|etc} the element to bind (typically document)
  * @param o {Object} optional context object
- * @param args 0..n additional arguments that should be provided 
+ * @param args 0..n additional arguments that should be provided
  * to the listener.
  * @return {Event.Handle} the detach handle
  */

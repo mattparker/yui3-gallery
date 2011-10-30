@@ -27,7 +27,7 @@ Y.mix(Form, {
 	 * @static
 	 */
 	NAME : 'form',
-	
+
 	/**
 	 * @property Form.ATTRS
 	 * @type Object
@@ -76,7 +76,7 @@ Y.mix(Form, {
 			setter : function (val) {
 				return this._setFields(val);
 			}
-			
+
 		},
 
 		/**
@@ -94,7 +94,7 @@ Y.mix(Form, {
 		/**
 		 * @attribute resetAfterSubmit
 		 * @type Boolean
-		 * @description If true, the form is reset following a successful submit event 
+		 * @description If true, the form is reset following a successful submit event
 		 * @default true
 		 */
 		resetAfterSubmit : {
@@ -112,7 +112,7 @@ Y.mix(Form, {
 			value : Form.URL_ENCODED,
 			validator : Y.Lang.isNumber
 		},
-		
+
 		/**
 		 * @attribute skipValidationBeforeSubmit
 		 * @type Boolean
@@ -123,7 +123,7 @@ Y.mix(Form, {
 			value : false,
 			validator : Y.Lang.isBoolean
 		},
-		
+
 		submitViaIO : {
 			value : true,
 			validator : Y.Lang.isBoolean
@@ -178,7 +178,7 @@ Y.extend(Form, Y.Widget, {
 	 * @description The Y.Node representing the form element
 	 */
 	_formNode : null,
-	
+
 	/**
 	 * @property _ioIds
 	 * @type Object
@@ -186,7 +186,7 @@ Y.extend(Form, Y.Widget, {
 	 * @description An object who's keys represent the IO request ids sent by this Y.Form instance
 	 */
 	_ioIds : null,
-	
+
 	/**
 	 * @method _validateAction
 	 * @private
@@ -200,9 +200,9 @@ Y.extend(Form, Y.Widget, {
 		if (val.toLowerCase() != 'get' && val.toLowerCase() != 'post') {
 			return false;
 		}
-		return true;	
+		return true;
 	},
-	
+
 	/**
 	 * @method _validateFields
 	 * @private
@@ -227,7 +227,7 @@ Y.extend(Form, Y.Widget, {
 	 * @method _setFields
 	 * @private
 	 * @param {Array} fields
-	 * @description Transforms the values passed to the 'fields' attribute into an array of 
+	 * @description Transforms the values passed to the 'fields' attribute into an array of
 	 *				Y.FormField objects
 	 */
 	_setFields : function (fields) {
@@ -273,7 +273,7 @@ Y.extend(Form, Y.Widget, {
 						fieldType = Y.TextField;
 					}
 				}
-				
+
 				fields[i] = new fieldType(f);
 			}
 		}, this);
@@ -305,7 +305,7 @@ Y.extend(Form, Y.Widget, {
 			return form.get('method');
 		}
 	},
-	
+
 	/**
 	 * @method _parseFields
 	 * @private
@@ -316,9 +316,9 @@ Y.extend(Form, Y.Widget, {
 		var children = contentBox.all('*'),
 			labels = contentBox.all('label'),
 			fields = [];
-		
+
 		children.each(function(node, index, nodeList) {
-			var nodeName = node.get('nodeName'), 
+			var nodeName = node.get('nodeName'),
 				nodeId = node.get('id'),
 				o, c = [];
 			if (nodeName == 'INPUT') {
@@ -356,8 +356,8 @@ Y.extend(Form, Y.Widget, {
 					name : node.get('name'),
 					value : node.get('innerHTML')
 				};
-			}		
-			
+			}
+
 			if (o) {
 				if (nodeId) {
 					o.id = nodeId;
@@ -374,7 +374,7 @@ Y.extend(Form, Y.Widget, {
 
 		return fields;
 	},
-	
+
 	/**
 	 * @method _renderFormNode
 	 * @protected
@@ -388,10 +388,10 @@ Y.extend(Form, Y.Widget, {
 			form = Y.Node.create(Form.FORM_TEMPLATE);
 			contentBox.appendChild(form);
 		}
-		
+
 		this._formNode = form;
 	},
-	
+
 	/**
 	 * @method _renderFormFields
 	 * @protected
@@ -420,7 +420,7 @@ Y.extend(Form, Y.Widget, {
 			this._formNode.setAttribute('enctype', 'multipart/form-data');
 		}
 	},
-	
+
 	/**
 	 * @method _runValidation
 	 * @protected
@@ -429,14 +429,14 @@ Y.extend(Form, Y.Widget, {
 	_runValidation : function () {
 		var fields = this.get('fields'),
 			isValid = true;
-		
+
 		Y.Array.each(fields, function (f, i, a) {
 			f.set('error',null);
 			if (f.validateField() === false) {
 				isValid = false;
 			}
 		});
-			   
+
 		return isValid;
 	},
 
@@ -467,10 +467,10 @@ Y.extend(Form, Y.Widget, {
 			this.fire(eventName, {response : ioResponse});
 		}
 	},
-	
+
 	/**
 	 * @method reset
-	 * @description Resets all form fields to their initial value 
+	 * @description Resets all form fields to their initial value
 	 */
 	reset : function () {
 		this._formNode.reset();
@@ -480,7 +480,7 @@ Y.extend(Form, Y.Widget, {
 			f.set('error', null);
 		});
 	},
-	
+
 	/**
 	 * @method submit
 	 * @description Submits the form using the defined method to the URL defined in the action
@@ -500,7 +500,7 @@ Y.extend(Form, Y.Widget, {
 						upload : (this.get('encodingType') === Form.MULTIPART_ENCODED)
 					}
 				};
-	
+
 				transaction = Y.io(formAction, cfg);
 				this._ioIds[transaction.id] = transaction;
 			} else {
@@ -508,7 +508,7 @@ Y.extend(Form, Y.Widget, {
 			}
 		}
 	},
-	
+
 	/**
 	 * @method getField
 	 * @param {String|Number} selector
@@ -529,7 +529,7 @@ Y.extend(Form, Y.Widget, {
 			return sel;
 		}
 	},
-	
+
 	initializer : function (config) {
 		this._ioIds = {};
 
@@ -541,16 +541,16 @@ Y.extend(Form, Y.Widget, {
 		this.publish('complete');
 		this.publish('xdr');
 	},
-	
+
 	destructor : function () {
 		this._formNode = null;
 	},
-	
+
 	renderUI : function () {
 		this._renderFormNode();
 		this._renderFormFields();
 	},
-	
+
 	bindUI : function () {
 		this._formNode.on('submit', Y.bind(function (e) {
 			e.halt();
@@ -576,7 +576,7 @@ Y.extend(Form, Y.Widget, {
 		Y.on('io:success', Y.bind(this._handleIOEvent, this, 'success'));
 		Y.on('io:failure', Y.bind(this._handleIOEvent, this, 'failure'));
 	},
-	
+
 	syncUI : function () {
 		this._syncFormAttributes();
 		if (this.get('inlineValidation') === true) {
@@ -598,26 +598,26 @@ function FormField () {
 }
 
 Y.mix(FormField, {
-	
+
 	/**
 	 * @property FormField.NAME
 	 * @type String
 	 * @static
 	 */
 	NAME : 'form-field',
-	
+
 	/**
 	 * @property FormField.ATTRS
 	 * @type Object
 	 * @protected
 	 * @static
-	 */    
+	 */
 	ATTRS : {
 		/**
 		 * @attribute id
 		 * @type String
 		 * @default Either a user defined ID or a randomly generated by Y.guid()
-		 * @description A randomly generated ID that will be assigned to the field and used 
+		 * @description A randomly generated ID that will be assigned to the field and used
 		 * in the label's for attribute
 		 */
 		id : {
@@ -625,19 +625,19 @@ Y.mix(FormField, {
 			validator : Y.Lang.isString,
 			writeOnce : true
 		},
-				
+
 		/**
 		 * @attribute name
 		 * @type String
 		 * @default ""
 		 * @writeOnce
 		 * @description The name attribute to use on the field
-		 */		   
+		 */
 		name : {
 			validator : Y.Lang.isString,
 			writeOnce : true
 		},
-		
+
 		/**
 		 * @attribute value
 		 * @type String
@@ -648,7 +648,7 @@ Y.mix(FormField, {
 			value : '',
 			validator : Y.Lang.isString
 		},
-		
+
 		/**
 		 * @attribute label
 		 * @type String
@@ -659,7 +659,7 @@ Y.mix(FormField, {
 			value : '',
 			validator : Y.Lang.isString
 		},
-		
+
 		/**
 		 * @attribute validator
 		 * @type Function
@@ -690,7 +690,7 @@ Y.mix(FormField, {
 				return this._validateError(val);
 			}
 		 },
-		
+
 		/**
 		 * @attribute required
 		 * @type Boolean
@@ -712,7 +712,7 @@ Y.mix(FormField, {
 			value : false,
 			validator : Y.Lang.isBoolean
 		},
-		
+
 		/**
 		 * @attribute disabled
 		 * @type Boolean
@@ -731,7 +731,7 @@ Y.mix(FormField, {
 	 * @description The current tab index of all FormField instances
 	 */
 	tabIndex : 1,
-	
+
 	/**
 	 * @method FormField.VALIDATE_EMAIL_ADDRESS
 	 * @static
@@ -743,7 +743,7 @@ Y.mix(FormField, {
 			field.set('error', FormField.INVALID_EMAIL_MESSAGE);
 			return false;
 		}
-		
+
 		return true;
 	},
 
@@ -787,7 +787,7 @@ Y.mix(FormField, {
 		if (filter.test(val) === false) {
 			valid = false;
 		}
-		
+
 		arr = val.split(".");
 		Y.Array.each(arr, function (v, i, a) {
 			var n = parseInt(v, 10);
@@ -910,7 +910,7 @@ Y.mix(FormField, {
 	 * @description Template used to draw an input node
 	 */
 	INPUT_TEMPLATE : '<input />',
-	
+
 	/**
 	 * @property FormField.LABEL_TEMPLATE
 	 * @type String
@@ -924,7 +924,7 @@ Y.mix(FormField, {
 	 * @description Error text to display for a required field
 	 */
 	REQUIRED_ERROR_TEXT : 'This field is required',
-	
+
 	/**
 	 * @property FormField.FIELD_ID_SUFFIX
 	 * @type String
@@ -946,7 +946,7 @@ Y.extend(FormField, Y.Widget, {
 	 * @protected
 	 * @type Object
 	 * @description The form field itself
-	 */    
+	 */
 	_fieldNode : null,
 
 	/**
@@ -954,9 +954,9 @@ Y.extend(FormField, Y.Widget, {
 	 * @protected
 	 * @type Object
 	 * @description If a validation error occurs, it will be displayed in this node
-	 */    
+	 */
 	_errorNode : null,
-	
+
 	/**
 	 * @property _nodeType
 	 * @protected
@@ -964,7 +964,7 @@ Y.extend(FormField, Y.Widget, {
 	 * @description The type of form field to draw
 	 */
 	_nodeType : 'text',
-	
+
 	/**
 	 * @property _initialValue
 	 * @private
@@ -1015,7 +1015,7 @@ Y.extend(FormField, Y.Widget, {
 	 * @method _setValidator
 	 * @protected
 	 * @param {val} {String|Function}
-	 * @description Sets the validator to the supplied method or if one of the 
+	 * @description Sets the validator to the supplied method or if one of the
 	 *				convenience strings is passed, the corresponding utility
 	 *				validator
 	 * @return {Function}
@@ -1049,15 +1049,15 @@ Y.extend(FormField, Y.Widget, {
 	_renderLabelNode : function () {
 		var contentBox = this.get('contentBox'),
 			labelNode = contentBox.query('label');
-		
+
 		if (!labelNode || labelNode.get('for') != this.get('id')) {
 			labelNode = Y.Node.create(FormField.LABEL_TEMPLATE);
 			contentBox.appendChild(labelNode);
 		}
-		
-		this._labelNode = labelNode;	 
+
+		this._labelNode = labelNode;
 	},
-	
+
 	/**
 	 * @method _renderFieldNode
 	 * @protected
@@ -1066,7 +1066,7 @@ Y.extend(FormField, Y.Widget, {
 	_renderFieldNode : function () {
 		var contentBox = this.get('contentBox'),
 			field = contentBox.query('#' + this.get('id'));
-				
+
 		if (!field) {
 			field = Y.Node.create(FormField.INPUT_TEMPLATE);
 			contentBox.appendChild(field);
@@ -1096,12 +1096,12 @@ Y.extend(FormField, Y.Widget, {
 	 */
 	_syncFieldNode : function () {
 		this._fieldNode.setAttrs({
-			name : this.get('name'), 
+			name : this.get('name'),
 			type : this._nodeType,
 			id : this.get('id') + FormField.FIELD_ID_SUFFIX,
 			value : this.get('value')
 		});
-		
+
 		this._fieldNode.setAttribute('tabindex', FormField.tabIndex);
 		FormField.tabIndex++;
 	},
@@ -1117,7 +1117,7 @@ Y.extend(FormField, Y.Widget, {
 			this._showError(err);
 		}
 	},
-	
+
 	_syncDisabled : function (e) {
 	    var dis = this.get('disabled');
 	    if (dis === true) {
@@ -1126,7 +1126,7 @@ Y.extend(FormField, Y.Widget, {
 	        this._fieldNode.removeAttribute('disabled');
 	    }
 	},
-	
+
 	/**
 	 * @method _checkRequired
 	 * @private
@@ -1139,7 +1139,7 @@ Y.extend(FormField, Y.Widget, {
 		}
 		return true;
 	},
-	
+
 	/**
 	 * @method _showError
 	 * @param {String} errMsg
@@ -1149,13 +1149,13 @@ Y.extend(FormField, Y.Widget, {
 	_showError : function (errMsg) {
 		var contentBox = this.get('contentBox'),
 			errorNode = Y.Node.create('<span>' + errMsg + '</span>');
-		
+
 		errorNode.addClass('error');
 		contentBox.insertBefore(errorNode,this._labelNode);
-		
+
 		this._errorNode = errorNode;
 	},
-	
+
 	/**
 	 * @method _clearError
 	 * @private
@@ -1176,7 +1176,7 @@ Y.extend(FormField, Y.Widget, {
 	_disableInlineValidation : function () {
 		this.detach('valueChange', this.validateField, this);
 	},
-	
+
 	/**
 	 * @method validateField
 	 * @description Runs the validation functions of this form field
@@ -1198,7 +1198,7 @@ Y.extend(FormField, Y.Widget, {
 		} else if (!value) {
 			return true;
 		}
-							
+
 		return validator.call(this, value, this);
 	},
 
@@ -1225,12 +1225,12 @@ Y.extend(FormField, Y.Widget, {
 		this.publish('focus');
 		this.publish('clear');
 		this.publish('nodeReset');
-		
+
 		this._initialValue = this.get('value');
 	},
 
 	destructor : function (config) {
-	
+
 	},
 
 	renderUI : function () {
@@ -1243,11 +1243,11 @@ Y.extend(FormField, Y.Widget, {
 			this.set('value', this._fieldNode.get('value'), {src : 'ui'});
 			this.fire('change', e);
 		}, this));
-		
+
 		this.on('valueChange', Y.bind(function (e) {
 			if (e.src != 'ui') {
 				this._fieldNode.set('value', e.newVal);
-			}			
+			}
 		}, this));
 
 		this._fieldNode.on('blur', Y.bind(function (e) {
@@ -1258,7 +1258,7 @@ Y.extend(FormField, Y.Widget, {
 		this._fieldNode.on('focus', Y.bind(function(e) {
 			this.fire('focus', e);
 		}, this));
-		
+
 		this.on('errorChange', Y.bind(function (e) {
 			if (e.newVal) {
 				this._showError(e.newVal);
@@ -1274,7 +1274,7 @@ Y.extend(FormField, Y.Widget, {
 				this._disableInlineValidation();
 			}
 		}, this));
-		
+
 		this.on('disabledChange', Y.bind(function (e) {
 		    this._syncDisabled();
 		}, this));
@@ -1507,7 +1507,7 @@ function TextareaField () {
 Y.mix(TextareaField, {
     NAME : 'textarea-field',
 
-    /** 
+    /**
      * @property TextareaField.NODE_TEMPLATE
      * @type String
      * @description Template used to draw a textarea node
@@ -1519,10 +1519,10 @@ Y.extend(TextareaField, Y.FormField, {
     _renderFieldNode : function () {
         var contentBox = this.get('contentBox'),
             field = contentBox.query('#' + this.get('id'));
-                
+
         if (!field) {
             field = Y.Node.create(Y.substitute(TextareaField.NODE_TEMPLATE, {
-                name : this.get('name'), 
+                name : this.get('name'),
                 type : 'text',
                 id : this.get('id'),
                 value : this.get('value')
@@ -1532,7 +1532,7 @@ Y.extend(TextareaField, Y.FormField, {
 
 		field.setAttribute('tabindex', Y.FormField.tabIndex);
 		Y.FormField.tabIndex++;
-        
+
         this._fieldNode = field;
     }
 });
@@ -1543,7 +1543,7 @@ Y.TextareaField = TextareaField;
  * @extends FormField
  * @param config {Object} Configuration object
  * @constructor
- * @description A form field which allows one or multiple values from a 
+ * @description A form field which allows one or multiple values from a
  * selection of choices
  */
 function ChoiceField() {
@@ -1552,30 +1552,30 @@ function ChoiceField() {
 
 Y.mix(ChoiceField, {
     NAME : 'choice-field',
-    
-	ATTRS : { 
-        /** 
+
+	ATTRS : {
+        /**
          * @attribute choices
          * @type Array
          * @description The choices to render into this field
          */
-        choices : { 
+        choices : {
             validator : function (val) {
                 return this._validateChoices(val);
             }
-        },  
+        },
 
-        /** 
+        /**
          * @attribute multiple
          * @type Boolean
          * @default false
          * @description Set to true to allow multiple values to be selected
          */
-        multiple : { 
+        multiple : {
             validator : Y.Lang.isBoolean,
             value : false
-        }   
-    }  
+        }
+    }
 });
 
 Y.extend(ChoiceField, Y.FormField, {
@@ -1590,9 +1590,9 @@ Y.extend(ChoiceField, Y.FormField, {
 			Y.log('Choice values must be in an array');
             return false;
         }
-		
+
 		var i = 0, len = val.length;
-		
+
 		for (; i < len; i++) {
             if (!Y.Lang.isObject(val[i])) {
 				Y.log('Choice that is not an object cannot be used');
@@ -1608,7 +1608,7 @@ Y.extend(ChoiceField, Y.FormField, {
 					continue;
             }
         }
-		
+
 		if (val.length === 0) {
 			return false;
 		}
@@ -1619,16 +1619,16 @@ Y.extend(ChoiceField, Y.FormField, {
     _renderLabelNode : function () {
         var contentBox = this.get('contentBox'),
             titleNode = Y.Node.create('<span>' + this.get('label') + '</span>');
-        
+
         contentBox.appendChild(titleNode);
-        
+
         this._labelNode = titleNode;
     },
-    
+
     _renderFieldNode : function () {
         var contentBox = this.get('contentBox'),
             choices = this.get('choices');
-       
+
 		Y.Array.each(choices, function(c, i, a) {
 			var cfg = {
 					value : c.value,
@@ -1638,7 +1638,7 @@ Y.extend(ChoiceField, Y.FormField, {
 				},
 				fieldType = (this.get('multiple') === true ? Y.CheckboxField : Y.RadioField),
 				field = new fieldType(cfg);
-			
+
 			field.render(contentBox);
         }, this);
 
@@ -1651,7 +1651,7 @@ Y.extend(ChoiceField, Y.FormField, {
         this._fieldNode.each(function (node, index, list) {
             node.setAttribute('checked', false);
         }, this);
-        
+
         this.set('value', '');
     },
 
@@ -1702,7 +1702,7 @@ Y.mix(SelectField, {
 	 * @description The display title of the default choice in the select box
 	 */
 	DEFAULT_OPTION_TEXT : 'Choose one',
-	
+
 	ATTRS : {
 	    /**
 	     * @attribute useDefaultOption
@@ -1727,17 +1727,17 @@ Y.extend(SelectField, Y.ChoiceField, {
     _renderFieldNode : function () {
         var contentBox = this.get('contentBox'),
             field = contentBox.query('#' + this.get('id'));
-                
+
         if (!field) {
             field = Y.Node.create(SelectField.NODE_TEMPLATE);
             contentBox.appendChild(field);
         }
-        
+
         this._fieldNode = field;
 
         this._renderOptionNodes();
     },
-    
+
 	/**
 	 * @method _renderOptionNodes
 	 * @protected
@@ -1746,7 +1746,7 @@ Y.extend(SelectField, Y.ChoiceField, {
     _renderOptionNodes : function () {
         var choices = this.get('choices'),
             elOption;
-       
+
 		// Create the "Choose one" option
 		if (this.get('useDefaultOption') === true) {
     		elOption = Y.Node.create(SelectField.OPTION_TEMPLATE);
@@ -1808,7 +1808,7 @@ Y.extend(SelectField, Y.ChoiceField, {
 			}
 		}, this);
 	},
-    
+
 	/**
 	 * @method clear
 	 * @description Restores the selected option to the default
@@ -1834,9 +1834,9 @@ function Button () {
 
 Y.mix(Button, {
     NAME : 'button',
-    
+
     HTML_PARSER : {
-        
+
     },
 
     ATTRS : {
@@ -1870,7 +1870,7 @@ Y.mix(Button, {
 Y.extend(Button, Y.FormField, {
     _renderButtonNode : function () {
         var contentBox = this.get('contentBox'), bn;
-        
+
         bn = Y.Node.create(Button.NODE_TEMPLATE);
         contentBox.appendChild(bn);
         this._fieldNode = bn;
@@ -1883,7 +1883,7 @@ Y.extend(Button, Y.FormField, {
             innerHTML : this.get('label'),
             id : this.get('id')
         });
-        
+
         this.get('contentBox').addClass('first-child');
 	},
 
@@ -1918,20 +1918,20 @@ Y.Button = Button;
 function FileField () {
     FileField.superclass.constructor.apply(this,arguments);
 }
- 
+
 Y.mix(FileField, {
     NAME : 'file-field',
 
 	FILE_INPUT_TEMPLATE : '<input type="file" />'
 });
- 
+
 Y.extend(FileField, Y.FormField, {
     _nodeType : 'file',
 
 	_renderFieldNode : function () {
 		var contentBox = this.get('contentBox'),
 			field = contentBox.query('#' + this.get('id'));
-				
+
 		if (!field) {
 			field = Y.Node.create(FileField.FILE_INPUT_TEMPLATE);
 			contentBox.appendChild(field);
@@ -1940,7 +1940,7 @@ Y.extend(FileField, Y.FormField, {
 		this._fieldNode = field;
 	}
 });
- 
+
 Y.FileField = FileField;
 
 

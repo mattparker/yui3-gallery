@@ -6,13 +6,13 @@
 		<script src="../../../build/gallery-slideshow/gallery-slideshow-debug.js"></script>
 		<link rel="stylesheet" type="text/css" href="../../../build/gallery-slideshow/assets/gallery-slideshow-core.css"></link>
 		<style type="text/css">
-		</style>	
+		</style>
 	</head>
 	<body>
 		<div id="ss"></div>
 		<script type="text/javascript">
 			YUI().use('gallery-slideshow', 'anim', function(Y) {
-				var images =  
+				var images =
 					[
 						{
 							'src': "3449422636_602e4a5520_t.jpg",
@@ -44,13 +44,13 @@
 		<script src="../../../build/gallery-slideshow/gallery-slideshow-debug.js"></script>
 		<link rel="stylesheet" type="text/css" href="../../../build/gallery-slideshow/assets/gallery-slideshow-core.css"></link>
 		<style type="text/css">
-		</style>	
+		</style>
 	</head>
 	<body>
 		<div id="ss"></div>
 		<script type="text/javascript">
 			YUI({filter: 'RAW'}).use('gallery-slideshow', 'anim', function(Y) {
-				var images =  
+				var images =
 					[
 						{
 							'src': "3449422636_602e4a5520_t.jpg",
@@ -72,7 +72,7 @@
 				slideshow.render();
 				Y.later(10000, this, function() {
 					Y.log('Later fired.');
-					slideshow.addImages(images.splice(0,1));	
+					slideshow.addImages(images.splice(0,1));
 				}, null, false);
 			});
 		</script>

@@ -47,7 +47,7 @@
                 }
                 return n;
             }
-        },    
+        },
         /**
         * @config container
         * @description Used when dynamically creating the Editor from Javascript with no default textarea.
@@ -114,7 +114,7 @@
         * @attribute toolbar
         * @description The default toolbar config.
         * @type Object
-        */            
+        */
         'toolbar': {
             value: null
         },
@@ -137,7 +137,7 @@
         * @description The width of the editor container.
         * @default Best guessed size of the textarea, for best results use CSS to style the width of the textarea or pass it in as an argument
         * @type String
-        */            
+        */
         'width': {
             value: null,
             setter: function(width) {
@@ -152,7 +152,7 @@
         * @description The URL for the image placeholder to put in when inserting an image.
         * @default The yahooapis.com address for the current release + 'assets/blankimage.png'
         * @type String
-        */            
+        */
         'blankimage': {
             value: null
         },
@@ -186,7 +186,7 @@
         }
         </pre></code>
         * @type String
-        */            
+        */
         'css': {
             value: null,
             writeOnce: true
@@ -220,7 +220,7 @@
             </pre>
             </code>
         * @type String
-        */            
+        */
         'html': {
             value: null,
             writeOnce: true
@@ -230,7 +230,7 @@
         * @description Extra user defined css to load after the default SimpleEditor CSS
         * @default ''
         * @type String
-        */            
+        */
         'extracss': {
             value: '',
             writeOnce: true
@@ -258,7 +258,7 @@
         * @description Toggle the display of the current Dom path below the editor
         * @default false
         * @type Boolean
-        */            
+        */
         dompath: {
             value: false
         },
@@ -267,7 +267,7 @@
         * @description Should we try to adjust the markup for the following types: semantic, css, default or xhtml
         * @default "semantic"
         * @type String
-        */            
+        */
         markup: {
             value: 'semantic',
             validator: function(markup) {
@@ -327,7 +327,7 @@
         * @description The number of seconds that need to be in between nodeChange processing
         * @default 3
         * @type Number
-        */            
+        */
         nodeChangeThreshold: {
             value: 3,
             validator: Y.Lang.isNumber
@@ -338,7 +338,7 @@
         * Such as highlighting an element below and above the content and hitting a toolbar button or a shortcut key.
         * @default false
         * @type Boolean
-        */            
+        */
         allowNoEdit: {
             value: false,
             validator: Y.Lang.isBoolean
@@ -348,7 +348,7 @@
         * @description Should the Editor limit the allowed execCommands to the ones available in the toolbar. If true, then execCommand and keyboard shortcuts will fail if they are not defined in the toolbar.
         * @default false
         * @type Boolean
-        */            
+        */
         limitCommands: {
             value: false,
             validator: Y.Lang.isBoolean
@@ -358,7 +358,7 @@
         * @description Should we remove linebreaks and extra spaces on cleanup
         * @default false
         * @type Boolean
-        */            
+        */
         removeLineBreaks: {
             value: false,
             validator: Y.Lang.isBoolean
@@ -419,7 +419,7 @@
         * @description Should we focus the window when the content is ready?
         * @default false
         * @type Boolean
-        */            
+        */
         focusAtStart: {
             value: false,
             writeOnce: true
@@ -431,7 +431,7 @@
         Then it will trigger the editors save handler and place the new content back into the text area before the form is submitted.
         * @default false
         * @type Boolean
-        */            
+        */
         handleSubmit: {
             value: false
         }
@@ -545,7 +545,7 @@
         /**
         * @private
         * @property _keyMap
-        * @description Named key maps for various actions in the Editor. Example: <code>CLOSE_WINDOW: { key: 87, mods: ['shift', 'ctrl'] }</code>. 
+        * @description Named key maps for various actions in the Editor. Example: <code>CLOSE_WINDOW: { key: 87, mods: ['shift', 'ctrl'] }</code>.
         * This entry shows that when key 87 (W) is found with the modifiers of shift and control, the window will close. You can customize this object to tweak keyboard shortcuts.
         * @type {Object/Mixed}
         */
@@ -960,7 +960,7 @@
             if (!el || !el.parentNode) {
                 return false;
             }
-            
+
             while (el.parentNode) {
                 if (this._isElement(el, tag)) {
                     return el;
@@ -1244,7 +1244,7 @@
             Y.Event.nativeAdd(doc, 'keypress', Y.bind(this._handleKeyPress, this));
             Y.Event.nativeAdd(doc, 'keyup', Y.bind(this._handleKeyUp, this));
             Y.Event.nativeAdd(doc, 'keydown', Y.bind(this._handleKeyDown, this));
- 
+
             //Focus and blur..
             Y.Event.nativeAdd(win, 'focus', Y.bind(this._handleFocus, this));
             Y.Event.nativeAdd(win, 'blur', Y.bind(this._handleBlur, this));
@@ -1302,7 +1302,7 @@
                 this._checkLoaded();
                 return false;
             }
-            
+
             YAHOO.log('editorLoaded', 'info', 'SimpleEditor');
             if (!raw) {
                 this.toolbar.on('buttonClick', Y.bind(this._handleToolbarClick, this));
@@ -1447,7 +1447,7 @@
             this.get('iframe').setStyle('visibility', '');
             if (check) {
                 this._checkLoaded(raw);
-            }            
+            }
         },
         /**
         * @private
@@ -1542,7 +1542,7 @@
                         }
                     }
                 }
-                
+
                 if (check) {
                     if (sel.anchorNode && (sel.anchorNode.nodeType == 3)) {
                         if (sel.anchorNode.parentNode) { //next check parentNode
@@ -1569,7 +1569,7 @@
                     }
                }
             }
-            
+
             if (this.currentEvent !== null) {
                 try {
                     switch (this.currentEvent.type) {
@@ -1666,7 +1666,7 @@
         * @method _writeDomPath
         * @description Write the current DOM path out to the dompath container below the editor.
         */
-        _writeDomPath: function() { 
+        _writeDomPath: function() {
             var path = this._getDomPath(),
                 pathArr = [],
                 classPath = '',
@@ -2210,7 +2210,7 @@
                             } else {
                                 this._getDoc().execCommand('indent', null, '');
                             }
-                            
+
                         } else if (!this._hasSelection()) {
                             this.execCommand('inserthtml', '&nbsp;&nbsp;&nbsp;&nbsp;');
                         }
@@ -2320,8 +2320,8 @@
         * @private
         * @method _fixListDupIds
         * @description Some browsers will duplicate the id of an LI when created in designMode.
-        * This method will fix the duplicate id issue. However it will only preserve the first element 
-        * in the document list with the unique id. 
+        * This method will fix the duplicate id issue. However it will only preserve the first element
+        * in the document list with the unique id.
         */
         _fixListDupIds: function() {
             if (this._fixListRunning) {
@@ -2489,7 +2489,7 @@
             if (force === true) {
                 this._lastNodeChange = 0;
             }
-            
+
             if ((this._lastNodeChange + threshold) < thisNodeChange) {
                 if (this._fixNodesTimer === null) {
                     this._fixNodesTimer = window.setTimeout(function() {
@@ -2658,7 +2658,7 @@
         * @method _updateMenuChecked
         * @param {Object} button The command identifier of the button you want to check
         * @param {String} value The value of the menu item you want to check
-        * @param {<a href="YAHOO.widget.Toolbar.html">YAHOO.widget.Toolbar</a>} The Toolbar instance the button belongs to (defaults to this.toolbar) 
+        * @param {<a href="YAHOO.widget.Toolbar.html">YAHOO.widget.Toolbar</a>} The Toolbar instance the button belongs to (defaults to this.toolbar)
         * @description Gets the menu from a button instance, if the menu is not rendered it will render it. It will then search the menu for the specified value, unchecking all other items and checking the specified on.
         */
         _updateMenuChecked: function(button, value, tbar) {
@@ -2755,7 +2755,7 @@
                 this._orgIframe.setStyle('left', '-99999px');
                 this.set('iframe', iframe);
                 this._setInitialContent(true);
-                
+
                 if (!this._mask) {
                     this._mask = Y.Node.create('<div class="yui-editor-masked"></div>');
                     if (this.browser.ie) {
@@ -2825,7 +2825,7 @@
         * @description The label string for Image URL
         * @type String
         */
-        STR_IMAGE_URL: 'Image URL',        
+        STR_IMAGE_URL: 'Image URL',
         /**
         * @property STR_LINK_URL
         * @description The label string for the Link URL.
@@ -2881,7 +2881,7 @@
         * @type String
         */
         CLASS_PREFIX: 'yui-editor',
-        /** 
+        /**
         * @property browser
         * @description Standard browser detection
         * @type Object
@@ -2907,7 +2907,7 @@
 
             return br;
         }(),
-        /** 
+        /**
         * @method init
         * @description The Editor class' initialization method
         */
@@ -2948,7 +2948,7 @@
                                 { type: 'separator' },
                                 { type: 'color', label: 'Font Color', value: 'forecolor', disabled: true },
                                 { type: 'color', label: 'Background Color', value: 'backcolor', disabled: true }
-                                
+
                             ]
                         },
                         { type: 'separator' },
@@ -2968,11 +2968,11 @@
                     ]
                 };
             }
-            
+
             Y.Editor.Info._instances[this.get('node').get('id')] = this;
 
             this.currentElement = [];
-            
+
             this._handleDOMPath();
             this.on('dompathChange', Y.bind(this._handleDOMPath, this));
             this.set('blankimage', this._getBlankImage());
@@ -3011,7 +3011,7 @@
                     img = Dom.getStyle(div, 'backgroundImage');
                     img = img.replace('url(', '').replace(')', '').replace(/"/g, '');
                     //Adobe AIR Code
-                    img = img.replace('app:/', '');             
+                    img = img.replace('app:/', '');
                     this.set('blankimage', img);
                     this._blankImageLoaded = true;
                     div.parentNode.removeChild(div);
@@ -3040,7 +3040,7 @@
             if (newHeight < parseInt(this.get('height'), 10)) {
                 newHeight = parseInt(this.get('height'), 10);
             }
-            if ((height != newHeight) && (newHeight >= parseInt(this.get('height'), 10))) {   
+            if ((height != newHeight) && (newHeight >= parseInt(this.get('height'), 10))) {
                 var anim = this.get('animate');
                 this.set('animate', false);
                 this.set('height', newHeight + 'px');
@@ -3188,7 +3188,7 @@
                 if (Dom.getStyle(elm, 'fontFamily')) {
                     family = Dom.getStyle(elm, 'fontFamily');
                     //Adobe AIR Code
-                    family = family.replace(/'/g, '');                    
+                    family = family.replace(/'/g, '');
                 }
 
                 if (tag.substring(0, 1) == 'h') {
@@ -3231,7 +3231,7 @@
                 }
                 fs_button.set('label', ''+fontsize);
             }
-            
+
             if (!this._isElement(elm, 'body') && !this._isElement(elm, 'img')) {
                 this.toolbar.enableButton(fn_button);
                 this.toolbar.enableButton(fs_button);
@@ -3252,7 +3252,7 @@
                 this.toolbar.disableButton('indent');
             }
             this._lastButton = null;
-            
+
         },
         /**
         * @private
@@ -3266,7 +3266,7 @@
                     return false;
                 }
             }
-        
+
             this.toolbar.set('disabled', true); //Disable the toolbar when the prompt is showing
             var _handleAEC = function() {
                 var el = this.currentElement[0],
@@ -3335,7 +3335,7 @@
                     return false;
                 }
             }
-        
+
             this.toolbar.set('disabled', true); //Disable the toolbar when the prompt is showing
 
             var _handleAEC = function() {
@@ -3417,9 +3417,9 @@
 
             this.get('element_cont').setStyle('display', 'none');
             this.get('element_cont').addClass(this.CLASS_CONTAINER);
-            
+
             this.set('iframe', this._createIframe());
-            
+
             Y.later(10, this, this._setInitialContent, false);
 
             this.get('editor_wrapper').appendChild(this.get('iframe'));
@@ -3447,7 +3447,7 @@
             YAHOO.log('fireEvent::toolbarLoaded', 'info', 'SimpleEditor');
             this.fire('toolbarLoaded', { type: 'toolbarLoaded' });
 
-            
+
             this.toolbar.on('toolbarCollapsed', function() {
                 if (this.currentWindow) {
                     this.moveWindow();
@@ -3459,7 +3459,7 @@
                 }
             }, this, true);
             this.toolbar.on('fontsizeClick', this._handleFontSize, this, true);
-            
+
             this.toolbar.on('colorPickerClicked', function(o) {
                 this._handleColorPicker(o);
                 this.STOP_EXEC_COMMAND = true;
@@ -3471,11 +3471,11 @@
             this.on('windowinsertimageClose', this._handleInsertImageWindowClose, this, true);
             this.toolbar.on('createlinkClick', this._handleCreateLinkClick, this, true);
             this.on('windowcreatelinkClose', this._handleCreateLinkWindowClose, this, true);
-            
+
 
             //Replace Textarea with editable area
             this.get('node').get('parentNode').replaceChild(this.get('element_cont'), this.get('node'));
-            
+
             this.get('node').setStyle('visibility', 'hidden');
             this.get('node').setStyle('position', 'absolute');
             this.get('node').setStyle('top', '-9999px');
@@ -3515,7 +3515,7 @@
                 this._getWindow().focus();
             }
             var exec = true;
-            
+
             if (this.get('limitCommands')) {
                 if (!this.toolbar.getButtonByValue(action)) {
                     YAHOO.log('Toolbar Button for (' + action + ') was not found, skipping exec.', 'info', 'SimpleEditor');
@@ -3524,7 +3524,7 @@
             }
 
             this.editorDirty = true;
-            
+
             if ((typeof this['cmd_' + action.toLowerCase()] == 'function') && exec) {
                 YAHOO.log('Found execCommand override method: (cmd_' + action.toLowerCase() + ')', 'info', 'SimpleEditor');
                 var retValue = this['cmd_' + action.toLowerCase()](value);
@@ -3551,7 +3551,7 @@
                 this.nodeChange();
             }, this, true);
             this.fireEvent('afterExecCommand', { type: 'afterExecCommand', target: this });
-            
+
         },
     /* {{{  Command Overrides */
 
@@ -3656,7 +3656,7 @@
         cmd_forecolor: function(value) {
             var exec = true,
                 el = this._getSelectedElement();
-                
+
                 if (!this._isElement(el, 'body') && !this._hasSelection()) {
                     Dom.setStyle(el, 'color', value);
                     this._selectNode(el);
@@ -3726,7 +3726,7 @@
             * @description The issue here is that we have no way of knowing where the cursor position is
             * inside of the iframe, so we have to place the newly inserted data in the best place that we can.
             */
-            
+
             YAHOO.log('InsertImage: ' + el.tagName, 'info', 'SimpleEditor');
             if (this._isElement(el, 'img')) {
                 this.currentElement[0] = el;
@@ -3788,7 +3788,7 @@
                 } else {
                     _range.pasteHTML(value);
                 }
-                exec = false;                    
+                exec = false;
             }
             return [exec];
         },
@@ -3838,7 +3838,7 @@
                             this.currentElement[li].parentNode.removeChild(this.currentElement[li]);
                         }
                     }
-                    
+
                     var items = list.firstChild.innerHTML.split('<br>');
                     if (items.length > 0) {
                         list.innerHTML = '';
@@ -3918,7 +3918,7 @@
                         var range = this._getDoc().body.createTextRange();
                         range.moveToElementText(new_item);
                         range.collapse(false);
-                        range.select();                       
+                        range.select();
                         new_item.id = '';
                     }
                     exec = false;
@@ -3935,7 +3935,7 @@
             return [this.cmd_list('ol')];
         },
         /**
-        * @method cmd_insertunorderedlist 
+        * @method cmd_insertunorderedlist
         * @param value Value passed from the execCommand method
         * @description This is an execCommand override method. It is called from execCommand when the execCommand('insertunorderedlist') is used.
         */
@@ -4042,7 +4042,7 @@
                 //Little Safari Hackery here..
                 el.innerHTML = '<span class="yui-non">&nbsp;</span>';
                 el = el.firstChild;
-                this._getSelection().setBaseAndExtent(el, 1, el, el.innerText.length);                    
+                this._getSelection().setBaseAndExtent(el, 1, el, el.innerText.length);
             } else if (this.browser.ie || this.browser.opera) {
                 el.innerHTML = '&nbsp;';
             }
@@ -4056,7 +4056,7 @@
         * @param {String} tagName (optional defaults to a) The tagname of the element that you wish to create
         * @param {Object} tagStyle (optional) Object literal containing styles to apply to the new element.
         * @description This is a work around for the various browser issues with execCommand. This method will run <code>execCommand('fontname', false, 'yui-tmp')</code> on the given selection.
-        * It will then search the document for an element with the font-family set to <strong>yui-tmp</strong> and replace that with another span that has other information in it, then assign the new span to the 
+        * It will then search the document for an element with the font-family set to <strong>yui-tmp</strong> and replace that with another span that has other information in it, then assign the new span to the
         * <code>this.currentElement</code> array, so we now have element references to the elements that were just modified. At this point we can use standard DOM manipulation to change them as we see fit.
         */
         _createCurrentElement: function(tagName, tagStyle) {
@@ -4064,7 +4064,7 @@
             var tar = null,
                 el = [],
                 _doc = this._getDoc();
-            
+
             if (this.currentFont) {
                 if (!tagStyle) {
                     tagStyle = {};
@@ -4121,7 +4121,7 @@
                         tar = Event.getTarget(this.currentEvent);
                     } else {
                         //For Safari..
-                        tar = this._getDoc().body;                        
+                        tar = this._getDoc().body;
                     }
                 }
                 if (tar) {
@@ -4172,7 +4172,7 @@
                     }
                 }
 
-                
+
                 for (var i = 0; i < _tmp.length; i++) {
                     if ((Dom.getStyle(_tmp[i], 'fontFamily') == 'yui-tmp') || (_tmp[i].face && (_tmp[i].face == 'yui-tmp'))) {
                         if (tagName !== 'span') {
@@ -4338,7 +4338,7 @@
             html = html.replace(/}/gi, 'LEFT_BRACKET');
 
             html = html.replace(/<strong([^>]*)>/gi, '<b$1>');
-            html = html.replace(/<\/strong>/gi, '</b>');   
+            html = html.replace(/<\/strong>/gi, '</b>');
 
             //replace embed before em check
             html = html.replace(/<embed([^>]*)>/gi, '<YUI_EMBED$1>');
@@ -4347,7 +4347,7 @@
             html = html.replace(/<em([^>]*)>/gi, '<i$1>');
             html = html.replace(/<\/em>/gi, '</i>');
             html = html.replace(/_moz_dirty=""/gi, '');
-            
+
             //Put embed tags back in..
             html = html.replace(/<YUI_EMBED([^>]*)>/gi, '<embed$1>');
             html = html.replace(/<\/YUI_EMBED>/gi, '</embed>');
@@ -4364,7 +4364,7 @@
             html = html.replace(/&lt;\/script([^>]*)&gt;/gi, '</bad>');
             //Replace the line feeds
             html = html.replace(/\r\n/g, '<YUI_LF>').replace(/\n/g, '<YUI_LF>').replace(/\r/g, '<YUI_LF>');
-            
+
             //Remove Bad HTML elements (used to be script nodes)
             html = html.replace(new RegExp('<bad([^>]*)>(.*?)<\/bad>', 'gi'), '');
             //Replace the lines feeds
@@ -4380,7 +4380,7 @@
         cleanHTML: function(html) {
             //Start Filtering Output
             //Begin RegExs..
-            if (!html) { 
+            if (!html) {
                 html = this.getEditorHTML();
             }
             var markup = this.get('markup');
@@ -4417,8 +4417,8 @@
             //normalize strikethrough
             html = html.replace(/<strike/gi, '<span style="text-decoration: line-through;"');
             html = html.replace(/\/strike>/gi, '/span>');
-            
-            
+
+
             //Case Changing
             if (this.browser.ie) {
                 html = html.replace(/text-decoration/gi, 'text-decoration');
@@ -4487,7 +4487,7 @@
 
 		    html = html.replace(/<YUI_EMBED([^>]*)>/g, '<embed$1>');
 		    html = html.replace(/<\/YUI_EMBED>/g, '<\/embed>');
-            
+
             //This should fix &amp;'s in URL's
             html = html.replace(/ &amp; /gi, ' YUI_AMP ');
             html = html.replace(/ &amp;/gi, ' YUI_AMP_F ');
@@ -4504,7 +4504,7 @@
                 html = html.replace(/\n/g, '').replace(/\r/g, '');
                 html = html.replace(/  /gi, ' '); //Replace all double spaces and replace with a single
             }
-            
+
             for (var v in this.invalidHTML) {
                 if (YAHOO.lang.hasOwnProperty(this.invalidHTML, v)) {
                     if (Lang.isObject(v) && v.keepContents) {
@@ -4525,9 +4525,9 @@
             for (var i = 0; i < len; i++) {
                 var ps2 = ps[i].getElementsByTagName('p');
                 if (ps2.length) {
-                    
+
                 }
-                
+
             }
             html = frag.innerHTML;
             console.log(html);
@@ -4578,7 +4578,7 @@
             //Remove onmouseover and onmouseout events (from MS Word comments effect)
             html = html.replace( /<(\w[^>]*) onmouseover="([^\"]*)"([^>]*)/gi, "<$1$3");
             html = html.replace( /<(\w[^>]*) onmouseout="([^\"]*)"([^>]*)/gi, "<$1$3");
-            
+
             return html;
         },
         /**
@@ -4664,7 +4664,7 @@
 		        html = html.replace(/ class= /gi, '');
 		        html = html.replace(/ class= >/gi, '');
             }
-            
+
             return html;
         },
         /**
@@ -4682,7 +4682,7 @@
                     str = str.replace(arr[i].toString(), color);
                 }
             }
-            
+
             return str;
         },
         /**
@@ -4695,7 +4695,7 @@
             if (css.toLowerCase().indexOf('rgb') != -1) {
                 var exp = new RegExp("(.*?)rgb\\s*?\\(\\s*?([0-9]+).*?,\\s*?([0-9]+).*?,\\s*?([0-9]+).*?\\)(.*?)", "gi");
                 var rgb = css.replace(exp, "$1,$2,$3,$4,$5").split(',');
-            
+
                 if (rgb.length == 5) {
                     var r = parseInt(rgb[1], 10).toString(16);
                     var g = parseInt(rgb[2], 10).toString(16);
@@ -4727,7 +4727,7 @@
 		    html = html.replace(/<br\/>/gi, '<YUI_BR>');
 		    html = html.replace(/<br \/>/gi, '<YUI_BR>');
 		    html = html.replace(/<div><YUI_BR><\/div>/gi, '<YUI_BR>');
-		    html = html.replace(/<p>(&nbsp;|&#160;)<\/p>/g, '<YUI_BR>');            
+		    html = html.replace(/<p>(&nbsp;|&#160;)<\/p>/g, '<YUI_BR>');
 		    html = html.replace(/<p><br>&nbsp;<\/p>/gi, '<YUI_BR>');
 		    html = html.replace(/<p>&nbsp;<\/p>/gi, '<YUI_BR>');
             //Fix last BR
@@ -4787,7 +4787,7 @@
         closeWindow: function() {
             //this.unsubscribeAll('afterExecCommand');
             this.toolbar.resetAllButtons();
-            this.focus();        
+            this.focus();
         },
         /**
         * @method destroy
@@ -4799,7 +4799,7 @@
                 clearTimeout(this._nodeChangeDelayTimer);
             }
             this.hide();
-        
+
             YAHOO.log('Destroying Editor', 'warn', 'SimpleEditor');
             if (this.resize) {
                 YAHOO.log('Destroying Resize', 'warn', 'SimpleEditor');
@@ -4825,7 +4825,7 @@
             this.get('element_cont').get('element').innerHTML = '';
             this.set('handleSubmit', false); //Remove the submit handler
             return true;
-        },        
+        },
         /**
         * @method toString
         * @description Returns a string representing the editor.
@@ -4994,7 +4994,7 @@ Y.Editor.Info = {
     * @private
     * @property blankImage
     * @description A reference to the blankImage url
-    * @type String 
+    * @type String
     */
     blankImage: '',
     /**

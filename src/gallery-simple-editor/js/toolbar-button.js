@@ -5,8 +5,8 @@
      * @namespace YAHOO.widget
      * @requires yahoo, dom, element, event
      * @extends YAHOO.util.Element
-     * 
-     * 
+     *
+     *
      * @constructor
      * @param {String/HTMLElement} el The element to turn into a button.
      * @param {Object} attrs Object liternal containing configuration parameters.
@@ -37,14 +37,14 @@
         * @attribute value
         * @description The value of the button
         * @type String
-        */            
+        */
         value: {
         },
         /**
         * @attribute menu
         * @description The menu attribute, see YAHOO.widget.Button
         * @type Object
-        */            
+        */
         menu: {
             value: false
         },
@@ -52,7 +52,7 @@
         * @attribute type
         * @description The type of button to create: push, menu, color, select, spin
         * @type String
-        */            
+        */
         type: {
             value: 'push',
             writeOnce: true
@@ -61,7 +61,7 @@
         * @attribute disabled
         * @description Set the button into a disabled state
         * @type String
-        */            
+        */
         disabled: {
             value: false,
             setter: function(disabled) {
@@ -82,7 +82,7 @@
         * @attribute label
         * @description The text label for the button
         * @type String
-        */            
+        */
         label: {
             value: 'LABEL',
             setter: function(label) {
@@ -95,7 +95,7 @@
         * @attribute title
         * @description The title of the button
         * @type String
-        */            
+        */
         title: {
             value: 'TITLE',
             setter: function(title) {
@@ -107,7 +107,7 @@
         * @config container
         * @description The container that the button is rendered to, handled by Toolbar
         * @type String
-        */            
+        */
         container: {
             value: null,
             writeOnce: true,
@@ -165,10 +165,10 @@
                 }, this);
             }
         },
-        /** 
+        /**
         * @method initializer
         * @description The ToolbarButton class's initialization method
-        */        
+        */
         initializer: function() {
             var id, i, el, menu, opt, html;
             switch (this.get('type')) {
@@ -208,19 +208,19 @@
                 e.halt();
             }, this));
         },
-        /** 
+        /**
         * @private
         * @method _handleSelect
         * @description The event fired when a change event gets fired on a select element
         * @param {Event} ev The change event.
-        */        
+        */
         _handleSelect: function(e) {
             this.fire('change', {type: 'change', value: e.target.get('value'), target: this.get('node') });
         },
-        /** 
+        /**
         * @method getMenu
         * @description A stub function to mimic YAHOO.widget.Button's getMenu method
-        */        
+        */
         getMenu: function() {
             return this.get('menu');
         },
@@ -230,11 +230,11 @@
         * @method toString
         * @description Returns a string representing the toolbar.
         * @return {String}
-        */        
+        */
         toString: function() {
             return 'Toolbar.Button (' + this.get('node').get('id') + ')';
         }
-        
+
     });
 
     Y.namespace('Toolbar');

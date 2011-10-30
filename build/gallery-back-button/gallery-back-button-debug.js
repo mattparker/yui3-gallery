@@ -31,10 +31,10 @@ YUI.add('gallery-back-button', function(Y) {
 var JSON       = Y.JSON,
     Lang       = Y.Lang,
     Obj        = Y.Object,
-    
+
     EVT_RETURN = 'return',
     NAME       = 'backButton',
-    
+
 BackButton = function (config) {
   this._init.apply(this, arguments);
 };
@@ -51,7 +51,7 @@ BackButton.NAME = NAME;
 
 Y.mix(BackButton.prototype, {
   // -- Initialization ---------------------------------------------------------
-  
+
   /**
    * Initializes this BackButton instance.
    *
@@ -78,16 +78,16 @@ Y.mix(BackButton.prototype, {
       fireOnce : true,
       defaultFn: Y.bind(this._defReturnFn, this)
     });
-    
+
     this._storage = Y.one(config.storageNode);
-    
+
     if (this._detectData()) {
       this._fireReturnEvent();
     }
   },
-  
+
   // -- Public Instance Methods ------------------------------------------------
-  
+
   /**
    * Stores an item for the specified key or keys. If a key already exists in
    * the data store, it will be replaced.
@@ -101,18 +101,18 @@ Y.mix(BackButton.prototype, {
    */
   add: function (item, value) {
     var key;
-    
+
     if (Lang.isString(item)) {
       key       = item;
       item      = {};
       item[key] = value;
     }
-    
+
     this._storeData(Y.mix(this._data || {}, item, true));
-    
+
     return this;
   },
-  
+
   /**
    * Removes all items from the data store.
    *
@@ -121,10 +121,10 @@ Y.mix(BackButton.prototype, {
    */
   clear: function () {
     this._storeData(null);
-    
+
     return this;
   },
-  
+
   /**
    * Returns the value for the specified <i>key</i>, or an object containing
    * key/value pairs for all stored data if no key is specified.
@@ -136,16 +136,16 @@ Y.mix(BackButton.prototype, {
    */
   get: function (key) {
     var data = this._data;
-    
+
     if (key) {
       return Obj.owns(data, key) ? data[key] : undefined;
     } else {
       return Y.mix({}, data, true);
     }
   },
-  
+
   // -- Protected Event Handlers -----------------------------------------------
-  
+
   /**
    * Default return event handler.
    *
@@ -156,9 +156,9 @@ Y.mix(BackButton.prototype, {
   _defReturnFn: function (e) {
     this.clear();
   },
-  
+
   // -- Protected Instance Methods ---------------------------------------------
-  
+
   /**
    * Called by _init() to detect previously stored data.
    *
@@ -174,12 +174,12 @@ Y.mix(BackButton.prototype, {
         data = JSON.parse(data);
       } catch (e) {}
     }
-    
+
     this._data = data || null;
-    
+
     return !!this._data;
   },
-  
+
   /**
    * Fires the "return" event. Called by _init() when data is detected on the
    * page.
@@ -190,7 +190,7 @@ Y.mix(BackButton.prototype, {
   _fireReturnEvent: function () {
     this.fire(EVT_RETURN, {data: this._data});
   },
-  
+
   /**
    * Stores the given object.
    *

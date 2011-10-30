@@ -36,7 +36,7 @@
                     range = document.selection.createRange();
                     //Only insert a tab when nothing is selected.
                     if (range.text === '') {
-                        range.text = this.charCode; 
+                        range.text = this.charCode;
 					    range.collapse(false);
 					    range.select();
                     }

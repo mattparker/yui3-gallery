@@ -42,7 +42,7 @@ YUI.add('gallery-event-drag', function(Y) {
  *   <li>drag:addInvalid</li>
  *   <li>drag:align</li>
  * </ul>
- * 
+ *
  * <p>Additionally, the default callback context is overridden to the
  * subscribing Node unless otherwise specified during the subscription.
  * So &quot;this&quot; in the callback will refer to the node.  On the
@@ -84,7 +84,7 @@ eventDef = {
     on: function (type, fn, el, conf, ctx) {
         var nodes    = eventPlugin.drag._getNodes(el),
             args     = Y.Array(arguments, 4, true);
-            
+
         args.unshift(fn);
 
         type = type.indexOf(':') > -1 ? type : 'drag:' + type;

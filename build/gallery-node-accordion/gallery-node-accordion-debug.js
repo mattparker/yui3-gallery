@@ -1,14 +1,14 @@
 YUI.add('gallery-node-accordion', function(Y) {
 
 /**
-* <p>The Accordion Node Plugin makes it easy to transform existing 
-* markup into an accordion element with expandable and collapsable elements, 
+* <p>The Accordion Node Plugin makes it easy to transform existing
+* markup into an accordion element with expandable and collapsable elements,
 * elements are  easy to customize, and only require a small set of dependencies.</p>
-* 
-* 
-* <p>To use the Accordion Node Plugin, simply pass a reference to the plugin to a 
+*
+*
+* <p>To use the Accordion Node Plugin, simply pass a reference to the plugin to a
 * Node instance's <code>plug</code> method.</p>
-* 
+*
 * <p>
 * <code>
 * &#60;script type="text/javascript"&#62; <br>
@@ -34,15 +34,15 @@ YUI.add('gallery-node-accordion', function(Y) {
 * 				this.plug(Y.Plugin.NodeAccordion); <br>
 * <br>
 * 			}, "#accordion-1"); <br>
-* <br>		
+* <br>
 * 		}); <br>
-* <br>	
+* <br>
 * 	&#60;/script&#62; <br>
 * </code>
 * </p>
 *
-* <p>The Accordion Node Plugin has several configuration properties that can be 
-* set via an object literal that is passed as a second argument to a Node 
+* <p>The Accordion Node Plugin has several configuration properties that can be
+* set via an object literal that is passed as a second argument to a Node
 * instance's <code>plug</code> method.
 * </p>
 *
@@ -71,13 +71,13 @@ YUI.add('gallery-node-accordion', function(Y) {
 * 				this.plug(Y.Plugin.NodeAccordion, { anim: true, effect: Y.Easing.backIn });
 * <br><br>
 * 			}, "#accordion-1"); <br>
-* <br>		
+* <br>
 * 		}); <br>
-* <br>	
+* <br>
 * 	&#60;/script&#62; <br>
 * </code>
 * </p>
-* 
+*
 * @module gallery-node-accordion
 */
 
@@ -107,7 +107,7 @@ var UA = Y.UA,
 	ATTR_SPEED  	 = 'speed',
 	ATTR_ANIM		 = 'anim',
 	ATTR_ITEMS		 = 'items',
-	
+
 	//	CSS class names
 	CLASS_ACCORDION 			 = getClassName(ACCORDION),
 	CLASS_ACCORDION_HIDDEN 		 = getClassName(ACCORDION, 'hidden'),
@@ -118,11 +118,11 @@ var UA = Y.UA,
 	CLASS_ACCORDION_ITEM_BD 	 = getClassName(ACCORDION, ACCORDIONITEM, "bd"),
 	CLASS_ACCORDION_ITEM_FT 	 = getClassName(ACCORDION, ACCORDIONITEM, "ft"),
 	CLASS_ACCORDION_ITEM_TRIGGER = getClassName(ACCORDION, ACCORDIONITEM, "trigger"),
-   	
+
 	//	CSS selectors
 	SELECTOR_ACCORDION_ITEM = PERIOD + CLASS_ACCORDION_ITEM,
 	SELECTOR_ACCORDION_ITEM_BD = PERIOD + CLASS_ACCORDION_ITEM_BD,
-	
+
 	FC = '>.',
 	ITEM_QUERY 			= FC + CLASS_ACCORDION_ITEM,
 	ITEM_TRIGGER_QUERY 	= ITEM_QUERY + PERIOD + CLASS_ACCORDION_ITEM_TRIGGER + ', ' +
@@ -132,8 +132,8 @@ var UA = Y.UA,
 							ITEM_QUERY + FC + CLASS_ACCORDION_ITEM_FT + FC + CLASS_ACCORDION_ITEM_TRIGGER;
 
 /**
-* The NodeAccordion class is a plugin for a Node instance.  The class is used via  
-* the <a href="Node.html#method_plug"><code>plug</code></a> method of Node and 
+* The NodeAccordion class is a plugin for a Node instance.  The class is used via
+* the <a href="Node.html#method_plug"><code>plug</code></a> method of Node and
 * should not be instantiated directly.
 * @namespace Y.Plugin
 * @class NodeAccordion
@@ -143,7 +143,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 
 	// Prototype Properties for NodeAccordion
 
-	/** 
+	/**
 	* @property _root
 	* @description Node instance representing the root node in the accordion.
 	* @default null
@@ -151,12 +151,12 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	* @type Node
 	*/
 	_root: null,
-	
+
 	_eventHandler: null,
 
     initializer: function (config) {
 		if ((this._root = this.get(HOST))) {
-			
+
 			//	close all items and open the actived ones
 			this.get(ATTR_ITEMS).each(function(item) {
 				if (item.hasClass(CLASS_ACTIVE)) {
@@ -173,7 +173,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 				e.target.blur();
 				e.halt();
 			}, ITEM_TRIGGER_QUERY, this);
-			
+
 			// removing this class if exists, in case the accordion is hidden by default.
 			this._root.removeClass(CLASS_ACCORDION_HIDDEN);
 		}
@@ -187,7 +187,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
     },
 
 	//	Protected methods
-	
+
 	/**
 	 * @method _getItem
 	 * @description Searching for an item based on a node reference or an index order.
@@ -197,17 +197,17 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	 */
 	_getItem: function(node) {
 		if (Y.Lang.isNumber(node)) {
-			node = this.get(ATTR_ITEMS).item(node);	
+			node = this.get(ATTR_ITEMS).item(node);
 		}
-		var fn = function(n) { 
-			return n.hasClass(CLASS_ACCORDION_ITEM); 
+		var fn = function(n) {
+			return n.hasClass(CLASS_ACCORDION_ITEM);
 		};
 		if (node && !node.hasClass(CLASS_ACCORDION_ITEM)) {
 			return node.ancestor( fn );
 		}
 		return node;
-	},	
-	
+	},
+
 	/**
 	 * @method _animate
 	 * @description Using Y.Anim to expand or collapse an item.
@@ -233,7 +233,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	    anims[id] = anim;
 	    return anim;
 	},
-		
+
 	/**
 	* @method _openItem
 	* @description Open an item.
@@ -241,9 +241,9 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	* @param {Node} item Node instance representing an item.
 	*/
 	_openItem: function (item) {
-		var bd, 
-			id, 
-			fn, 
+		var bd,
+			id,
+			fn,
 			fs,
 			i,
 			list = this.get(ATTR_ITEMS),
@@ -263,7 +263,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 				mirror = this._root.one(FC+CLASS_ACTIVE);
             }
             // opening the selected element, based on the orientation, timer and anim attributes...
-    	    conf.to[o] = (o==WIDTH?bd.get(SCROLL_WIDTH):bd.get(SCROLL_HEIGHT)); 
+    	    conf.to[o] = (o==WIDTH?bd.get(SCROLL_WIDTH):bd.get(SCROLL_HEIGHT));
     	    conf.node = bd;
     	    item.addClass(CLASS_SLIDING);
         	fn = function() {
@@ -296,7 +296,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
     			// scrolling effect
 	          	conf.to.scroll = [0,0];
 	            // appliying fadeIn
-	            if (this.get(ATTR_FADE)) { 
+	            if (this.get(ATTR_FADE)) {
 	              conf.to.opacity = 1;
 	            }
 	            if (Y.Lang.isObject(mirror)) {
@@ -308,22 +308,22 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	},
 
 	/**
-	* @method _closeItem 
+	* @method _closeItem
 	* @description Closes the specified item.
 	* @protected
 	* @param {Node} item Node instance representing an item.
 	*/
 	_closeItem: function (item) {
 
-		var bd, 
-			id, 
-			fn, 
+		var bd,
+			id,
+			fn,
 			fs,
 			i,
 			list = this.get(ATTR_ITEMS),
 			o = this.get (ATTR_ORIENTATION),
 			conf = {
-				duration: this.get(ATTR_SPEED), 
+				duration: this.get(ATTR_SPEED),
 				to: {
 					scroll: []
 				}
@@ -350,13 +350,13 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	            // scrolling effect
 	          	conf.to.scroll = (o==WIDTH?[bd.get(SCROLL_WIDTH),0]:[0,bd.get(SCROLL_HEIGHT)]);
 	          	// appliying fadeIn
-	          	if (this.get(ATTR_FADE)) { 
+	          	if (this.get(ATTR_FADE)) {
               		conf.to.opacity = 0;
               	}
 		        this._animate(id, conf, fn);
     		}
         }
-        
+
 	},
 
 	//	Public methods
@@ -377,7 +377,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 		}
 		return this;
 	},
-	
+
 	/**
 	* @method collapseAllItems
 	* @description Collapsing all items.
@@ -393,7 +393,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 		}
 		return this;
 	},
-	
+
 	/**
 	* @method expandItem
 	* @description Expand a certain item.
@@ -409,7 +409,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	    }
 		return this;
 	},
-	
+
 	/**
 	* @method collapseItem
 	* @description Collapse a certain item.
@@ -425,7 +425,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	    }
 		return this;
 	},
-	
+
 	/**
 	* @method toggleItem
 	* @description toggle a certain item.
@@ -447,16 +447,16 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 }, {
 
 	// Static Properties for NodeAccordion
-	
+
 	NS: ACCORDION,
-	
+
 	/**
 	 * @property DynamicForm.ATTRS
 	 * @type Object
 	 * @static
 	 */
 	ATTRS : {
-	
+
 		/**
 		* Nodes representing the list of active items.
 		*
@@ -470,7 +470,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 				return this._root.all(FC+CLASS_ACTIVE);
 			}
 		},
-	
+
 		/**
 		* Nodes representing the list of items.
 		*
@@ -484,7 +484,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 				return this._root.all(ITEM_QUERY);
 			}
 		},
-		
+
 		/**
 		* orientation defines if the accordion will use width or height to expand and collapse items.
 		*
@@ -497,18 +497,18 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 			value: HEIGHT,
 			writeOnce: true
 		},
-	
+
 		/**
 		* Boolean indicating that animation should include opacity to fade in/out the content of the item.
 		*
 		* @attribute fade
 		* @default false
 		* @type boolean
-		*/	
+		*/
 		fade: {
 			value: false
 		},
-	
+
 		/**
 		* Boolean indicating that Y.Anim should be used to expand and collapse items.
 		* It also supports a function with an specific effect.
@@ -523,23 +523,23 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 		* 			Y.one("#myaccordion").plug(Y.Plugin.NodeAccordion, {<br>
 		* 				anim: Y.Easing.backIn<br>
 		* 			}); <br>
-		* <br>	
+		* <br>
 		* 	&#60;/script&#62; <br>
 		* </code>
 		* </p>
-		* 
+		*
 		* @attribute anim
 		* @default false
 		* @type {boolean|function}
 		*/
-	
+
 		anim: {
 			value: false,
 			validator : function (v) {
 	            return !Y.Lang.isUndefined(Y.Anim);
 	        }
 		},
-	
+
 		/**
 		* Boolean indicating that more than one item can be opened at the same time.
 		*
@@ -550,18 +550,18 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 		multiple: {
 			value: true
 		},
-	
+
 		/**
 		* Boolean indicating that one of the items should be open at any given time.
 		*
 		* @attribute persistent
 		* @default false
 		* @type boolean
-		*/	
+		*/
 		persistent: {
 			value: false
 		},
-	
+
 		/**
 		* Numeric value indicating the speed in mili-seconds for the animation process.
 		* Also support three predefined strings in lowercase:
@@ -570,11 +570,11 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 		* <li>normal = 0.4</li>
 		* <li>slow = 0.6</li>
 		* </ol>
-		* 
+		*
 		* @attribute speed
 		* @default 0.4
 		* @type numeric
-		*/	
+		*/
 		speed: {
 			value: 0.4,
 			validator : function (v) {
@@ -584,7 +584,7 @@ Y.namespace('Plugin').NodeAccordion = Y.Base.create("NodeAccordion", Y.Plugin.Ba
 	            return (WHEELS.hasOwnProperty(v)?WHEELS[v]:v);
 	        }
 		}
-	
+
 	}
 
 });

@@ -25,7 +25,7 @@ Y.mix(Form, {
 	 * @static
 	 */
 	NAME : 'form',
-	
+
 	/**
 	 * @property Form.ATTRS
 	 * @type Object
@@ -74,7 +74,7 @@ Y.mix(Form, {
 			setter : function (val) {
 				return this._setFields(val);
 			}
-			
+
 		},
 
 		/**
@@ -92,7 +92,7 @@ Y.mix(Form, {
 		/**
 		 * @attribute resetAfterSubmit
 		 * @type Boolean
-		 * @description If true, the form is reset following a successful submit event 
+		 * @description If true, the form is reset following a successful submit event
 		 * @default true
 		 */
 		resetAfterSubmit : {
@@ -110,7 +110,7 @@ Y.mix(Form, {
 			value : Form.URL_ENCODED,
 			validator : Y.Lang.isNumber
 		},
-		
+
 		/**
 		 * @attribute skipValidationBeforeSubmit
 		 * @type Boolean
@@ -121,7 +121,7 @@ Y.mix(Form, {
 			value : false,
 			validator : Y.Lang.isBoolean
 		},
-		
+
 		submitViaIO : {
 			value : true,
 			validator : Y.Lang.isBoolean
@@ -176,7 +176,7 @@ Y.extend(Form, Y.Widget, {
 	 * @description The Y.Node representing the form element
 	 */
 	_formNode : null,
-	
+
 	/**
 	 * @property _ioIds
 	 * @type Object
@@ -184,7 +184,7 @@ Y.extend(Form, Y.Widget, {
 	 * @description An object who's keys represent the IO request ids sent by this Y.Form instance
 	 */
 	_ioIds : null,
-	
+
 	/**
 	 * @method _validateAction
 	 * @private
@@ -198,9 +198,9 @@ Y.extend(Form, Y.Widget, {
 		if (val.toLowerCase() != 'get' && val.toLowerCase() != 'post') {
 			return false;
 		}
-		return true;	
+		return true;
 	},
-	
+
 	/**
 	 * @method _validateFields
 	 * @private
@@ -225,7 +225,7 @@ Y.extend(Form, Y.Widget, {
 	 * @method _setFields
 	 * @private
 	 * @param {Array} fields
-	 * @description Transforms the values passed to the 'fields' attribute into an array of 
+	 * @description Transforms the values passed to the 'fields' attribute into an array of
 	 *				Y.FormField objects
 	 */
 	_setFields : function (fields) {
@@ -271,7 +271,7 @@ Y.extend(Form, Y.Widget, {
 						fieldType = Y.TextField;
 					}
 				}
-				
+
 				fields[i] = new fieldType(f);
 			}
 		}, this);
@@ -303,7 +303,7 @@ Y.extend(Form, Y.Widget, {
 			return form.get('method');
 		}
 	},
-	
+
 	/**
 	 * @method _parseFields
 	 * @private
@@ -314,9 +314,9 @@ Y.extend(Form, Y.Widget, {
 		var children = contentBox.all('*'),
 			labels = contentBox.all('label'),
 			fields = [];
-		
+
 		children.each(function(node, index, nodeList) {
-			var nodeName = node.get('nodeName'), 
+			var nodeName = node.get('nodeName'),
 				nodeId = node.get('id'),
 				o, c = [];
 			if (nodeName == 'INPUT') {
@@ -354,8 +354,8 @@ Y.extend(Form, Y.Widget, {
 					name : node.get('name'),
 					value : node.get('innerHTML')
 				};
-			}		
-			
+			}
+
 			if (o) {
 				if (nodeId) {
 					o.id = nodeId;
@@ -372,7 +372,7 @@ Y.extend(Form, Y.Widget, {
 
 		return fields;
 	},
-	
+
 	/**
 	 * @method _renderFormNode
 	 * @protected
@@ -386,10 +386,10 @@ Y.extend(Form, Y.Widget, {
 			form = Y.Node.create(Form.FORM_TEMPLATE);
 			contentBox.appendChild(form);
 		}
-		
+
 		this._formNode = form;
 	},
-	
+
 	/**
 	 * @method _renderFormFields
 	 * @protected
@@ -418,7 +418,7 @@ Y.extend(Form, Y.Widget, {
 			this._formNode.setAttribute('enctype', 'multipart/form-data');
 		}
 	},
-	
+
 	/**
 	 * @method _runValidation
 	 * @protected
@@ -427,14 +427,14 @@ Y.extend(Form, Y.Widget, {
 	_runValidation : function () {
 		var fields = this.get('fields'),
 			isValid = true;
-		
+
 		Y.Array.each(fields, function (f, i, a) {
 			f.set('error',null);
 			if (f.validateField() === false) {
 				isValid = false;
 			}
 		});
-			   
+
 		return isValid;
 	},
 
@@ -465,10 +465,10 @@ Y.extend(Form, Y.Widget, {
 			this.fire(eventName, {response : ioResponse});
 		}
 	},
-	
+
 	/**
 	 * @method reset
-	 * @description Resets all form fields to their initial value 
+	 * @description Resets all form fields to their initial value
 	 */
 	reset : function () {
 		this._formNode.reset();
@@ -478,7 +478,7 @@ Y.extend(Form, Y.Widget, {
 			f.set('error', null);
 		});
 	},
-	
+
 	/**
 	 * @method submit
 	 * @description Submits the form using the defined method to the URL defined in the action
@@ -498,7 +498,7 @@ Y.extend(Form, Y.Widget, {
 						upload : (this.get('encodingType') === Form.MULTIPART_ENCODED)
 					}
 				};
-	
+
 				transaction = Y.io(formAction, cfg);
 				this._ioIds[transaction.id] = transaction;
 			} else {
@@ -506,7 +506,7 @@ Y.extend(Form, Y.Widget, {
 			}
 		}
 	},
-	
+
 	/**
 	 * @method getField
 	 * @param {String|Number} selector
@@ -527,7 +527,7 @@ Y.extend(Form, Y.Widget, {
 			return sel;
 		}
 	},
-	
+
 	initializer : function (config) {
 		this._ioIds = {};
 
@@ -539,16 +539,16 @@ Y.extend(Form, Y.Widget, {
 		this.publish('complete');
 		this.publish('xdr');
 	},
-	
+
 	destructor : function () {
 		this._formNode = null;
 	},
-	
+
 	renderUI : function () {
 		this._renderFormNode();
 		this._renderFormFields();
 	},
-	
+
 	bindUI : function () {
 		this._formNode.on('submit', Y.bind(function (e) {
 			e.halt();
@@ -574,7 +574,7 @@ Y.extend(Form, Y.Widget, {
 		Y.on('io:success', Y.bind(this._handleIOEvent, this, 'success'));
 		Y.on('io:failure', Y.bind(this._handleIOEvent, this, 'failure'));
 	},
-	
+
 	syncUI : function () {
 		this._syncFormAttributes();
 		if (this.get('inlineValidation') === true) {

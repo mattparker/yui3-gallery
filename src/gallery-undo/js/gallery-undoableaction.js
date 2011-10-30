@@ -58,7 +58,7 @@ Y.mix( UndoableAction, {
             validator: Lang.isString
         },
 
-        
+
         /**
          * Boolean, indicates if action must be processed asynchronously.
          * If true, <code>undo</code> method must fire <code>undoFinished</code> event.
@@ -77,7 +77,7 @@ Y.mix( UndoableAction, {
 
 
 Y.extend( UndoableAction, Y.Base, {
-    
+
     /**
      * Container for child actions of this action
      *
@@ -106,7 +106,7 @@ Y.extend( UndoableAction, Y.Base, {
     destructor : function() {
     },
 
-    
+
     /**
      * Publishes UndoableAction's events
      *
@@ -114,41 +114,41 @@ Y.extend( UndoableAction, Y.Base, {
      * @protected
      */
     _initEvents : function(){
-        
+
         /**
          * Signals the beginning of action undo.
-         * 
+         *
          * @event beforeUndo
          * @param event {Event.Facade} An Event Facade object
          */
         this.publish( BEFOREUNDO );
-        
+
         /**
          * Signals the end of action undo.
-         * 
+         *
          * @event undoFinished
          * @param event {Event.Facade} An Event Facade object
          */
         this.publish( UNDOFINISHED );
-        
+
         /**
          * Signals the beginning of action redo.
-         * 
+         *
          * @event beforeRedo
          * @param event {Event.Facade} An Event Facade object
          */
         this.publish( BEFOREREDO );
-        
+
         /**
          * Signals the end of action redo.
-         * 
+         *
          * @event redoFinished
          * @param event {Event.Facade} An Event Facade object
          */
         this.publish( REDOFINISHED );
     },
 
-    
+
     /**
      * The default implemetation undoes all child actions in reverse order.
      *
@@ -158,7 +158,7 @@ Y.extend( UndoableAction, Y.Base, {
         var childActions, action, i;
 
         this.fire( BEFOREUNDO );
-        
+
         childActions = this._childActions;
 
         for( i = childActions.length - 1; i > 0; i-- ){
@@ -168,8 +168,8 @@ Y.extend( UndoableAction, Y.Base, {
 
         this.fire( UNDOFINISHED );
     },
-    
-    
+
+
     /**
      * The default implemetation redoes all child actions.
      *
@@ -182,7 +182,7 @@ Y.extend( UndoableAction, Y.Base, {
 
         childActions = this._childActions;
         length = childActions.length;
-        
+
         for( i = 0; i < length; i++ ){
             action = childActions[i];
             action.redo();
@@ -190,8 +190,8 @@ Y.extend( UndoableAction, Y.Base, {
 
         this.fire( REDOFINISHED );
     },
-        
-    
+
+
     /**
      * Depending on the application, an UndoableAction may merge with another action. If merge was successfull, merge must return true; otherwise returns false.
      * The default implemetation returns false.
@@ -204,7 +204,7 @@ Y.extend( UndoableAction, Y.Base, {
         return false;
     },
 
-    
+
     /**
      * UndoManager invokes <code>cancel</code> method of action before removing it from the list.<br>
      * The default implemetation does nothing.
@@ -213,12 +213,12 @@ Y.extend( UndoableAction, Y.Base, {
      */
     cancel : function(){
     },
-    
-    
+
+
     /**
      * Overrides <code>toString()</code> method.<br>
      * The default implementation returns the value of <code>label</code> property.
-     * 
+     *
      */
     toString : function(){
         return this.get( LABEL );

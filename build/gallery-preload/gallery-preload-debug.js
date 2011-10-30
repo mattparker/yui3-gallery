@@ -5,7 +5,7 @@ YUI.add('gallery-preload', function(Y) {
  * Preload images, CSS and JavaScript files without executing them
  * Port of Stoyan Stefanov's Script ??? http://www.phpied.com/preload-cssjavascript-without-execution/
  * Note that since this script relies on YUI Loader, the preloading process will not start until YUI has finished loading.
- * 
+ *
  * @module gallery-preload
  */
 
@@ -21,13 +21,13 @@ var _idleQueue = [];
  */
 Y.preload = function(files) {
 	var o, ie = Y.UA.ie, doc = Y.config.doc;
-	
+
 	// If the first argument is not an array, we can assume the user is trying to load one
 	// single file or a list of files like: Y.preload ('file1.js', 'file2.css');
 	files = (Y.Lang.isArray(files)?files:Y.Array(arguments, 0, true));
-	
+
 	Y.log("Preloading files: " + files.join(', '), "info", "Y.preload");
-	
+
 	Y.Array.each(files, function (f) {
 		if (ie) {
             (new Image()).src = f;
@@ -38,12 +38,12 @@ Y.preload = function(files) {
 	        doc.body.appendChild(o);
         }
     });
-	
+
 	return Y;
 };
 
 /**
- * Wait until the user become idle to preload files without executing them. It uses 
+ * Wait until the user become idle to preload files without executing them. It uses
  * Idle Timer Module (by Nicholas) to monitor user actions.
  * @namespace Y
  * @class preloadOnIdle
@@ -55,14 +55,14 @@ Y.preload = function(files) {
 Y.preloadOnIdle = function(files, t) {
 	// Loading Idle Timer Module (by Nicholas) on-demand to avoid setting it
 	// as a dependency when most of the users will not use it...
-	
+
 	Y.log("Loading Idle Timer on-demand to preloading files on idle.", "info", "Y.preloadOnIdle");
-	
+
 	// adding the set of files into the queue
 	_idleQueue.push (files);
-	
+
 	Y.use('gallery-idletimer', function(Y) {
-	
+
 	    Y.IdleTimer.subscribe("idle", function(){
 	    	// collecting the first file from the list
 	    	var fs = files.shift();
@@ -74,13 +74,13 @@ Y.preloadOnIdle = function(files, t) {
 	    		Y.IdleTimer.stop();
 	    	}
 	    });
-	
+
 	    //start the timer with a default timeout of 30s
 	    Y.log("Starting the timer: "+t, "info", "Y.preloadOnIdle");
 	    Y.IdleTimer.start(t);
-	
+
 	});
-	
+
 	return Y;
 };
 

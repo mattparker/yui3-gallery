@@ -15,14 +15,14 @@
 		this.dateline = dateline;
 		this.link = link;
 	};
-	
+
 	/**
 	 * @class Notifications
 	 * Notifications component. This is meant to be instantiated, so it is provided as a function-constructor and is
 	 * later extended with the additional functions. The user will most likely call
 	 *		new Y.Notifications(), to create a new component with no notifications, or
 	 *		new Y.Notifications(id), to create a new component based off existing markup
-	 * 
+	 *
 	 * @param {String|DomElement} domElement	The domElement to use as existing markup
 	 */
 	Y.Notifications = function (sourceNode) {
@@ -32,12 +32,12 @@
 				Y.log(sourceNode + ' could not be found, notifications will be an empty object');
 			}
 		}
-	
+
 	    this.sourceNode = sourceNode;		// may be undefined
 	    this.parseNotifications();
 	    this.render();
 	}; // Y.Notifications
-	
+
 	/*
 	 * Declaration of constants used inside the component
 	 */
@@ -56,21 +56,21 @@
 	Y.Notifications.prototype.unreadNode = null;			// a stored reference to the <div> that holds the unread text
 	Y.Notifications.prototype.notifications = [];
 	Y.Notifications.prototype.unread = 0;
-	
+
 	/**
 	 * This function will parse all notifications found in the node. This is called by the constructor to parse the contained notifications and
 	 * add the to the internal state. This method would iterate over whatever element is already configured in the class (inside the sourceNode attribute)
-	 * and add each child as a notification 
+	 * and add each child as a notification
 	 */
 	Y.Notifications.prototype.parseNotifications = function() {
 		if (!this.sourceNode) {		// undefined, nothing to parse
 			return;
 		}
-		
+
 		var regexpDate = new RegExp("notification:([0-9]+)");
 		var dateline = 0;
 		var totalChildren = this.sourceNode.children.length;
-		
+
 		for (var i = 0; i < totalChildren; i++) {
 			var n = this.sourceNode.children[i];
 			if (n.tagName.toUpperCase() !== 'LI') {
@@ -84,40 +84,40 @@
 		}
 		this.unread = this.notifications.length;
 	};
-	
+
 	/**
 	 * Special method used to parse time. It receives the time from the notification configuration in a unix timestamp, and from the current time calculates
 	 * the difference in hours, minutes and seconds.
 	 */
 	Y.Notifications.prototype.parseTime = function(present) {
-	
+
 		var future = new Date().getTime();
 		if (present < 1E12) {		// adjust if only seconds and not millis
 			present *= 1000;
 		}
-		
+
 		var diff = Math.floor(Math.abs(future - present) / 1000);
 		var days = Math.floor(diff / 86400);
 		var hours = Math.floor(diff % 86400 / 3600);
 		var minutes = Math.floor(diff % 3600 / 60);
 		var seconds = Math.floor(diff % 3600 % 60);
-		
+
 		if (days > 0)
 		{
 			return days == 1 ?
-				this.DAY_LABEL.replace('%1', days) : 
-				this.DAYS_LABEL.replace('%1', days); 
+				this.DAY_LABEL.replace('%1', days) :
+				this.DAYS_LABEL.replace('%1', days);
 		}
 		if (hours > 0)
 		{
 			return hours == 1 ?
 				this.HOUR_LABEL.replace('%1', hours) :
-				this.HOURS_LABEL.replace('%1', hours); 
+				this.HOURS_LABEL.replace('%1', hours);
 		}
 		if (minutes > 0)
 		{
-			return minutes == 1 ? 
-				this.MINUTE_LABEL.replace('%1', minutes) : 
+			return minutes == 1 ?
+				this.MINUTE_LABEL.replace('%1', minutes) :
 				this.MINUTES_LABEL.replace('%1', minutes);
 		}
 		if (seconds > 0)
@@ -128,13 +128,13 @@
 		}
 		return '';
 	};
-	
+
 	/**
 	 * Create the row that will be used to display a single notification. This method checks if the notification should be
 	 * linked to something, if it should be added the time detail, and takes care of the format of the notification row
 	 * @param {object} n		The details of the notification. This object must at least have a content attribute. Optional attributes are dateline and link. See definition of Notification
 	 * @return					A DomElement of type li with the notification content
-	 */	
+	 */
 	Y.Notifications.prototype.getNotificationBit = function(n) {
 		var li = document.createElement("li");
 		var html = '';
@@ -144,13 +144,13 @@
 		html += n.content;
 		if (n.link) {
 			html += '</a>';
-		}		
-		
+		}
+
 		html += "<div class=\"time\">" + this.parseTime(n.dateline) + "</div>";
 		li.innerHTML = html;
 		return li;
 	};
-	
+
 	/**
 	 * The widget displays a message to the user with the amount of notifications that are unread. Since we can add
 	 * new notifications programatically, this method can be used to update the "unread" messages part of the UI
@@ -166,60 +166,60 @@
 			this.unreadNode.innerHTML = this.LABEL_NOTIFICATIONS.replace('%1', this.unread);
 		}
 	};
-	
+
 	/**
 	 * Render the notification bar. This method will append to the body of the document a fixed element on the bottom, that holds the notifications
 	 * on clicking that element the notifications would be shown
 	 */
 	Y.Notifications.prototype.render = function() {
-	
+
 		var container = document.createElement("div");
 		Y.DOM.addClass(container, 'yui3-notifications');
-		
+
 		var tab = document.createElement("div");
 		Y.DOM.addClass(tab, 'yui3-notifications-tab');
 		Y.DOM.addClass(tab, 'closed');
 		container.appendChild(tab);
-	
+
 		var pop = document.createElement("div");
 		Y.DOM.addClass(pop, 'yui3-notifications-pop');
 		Y.DOM.setStyle(pop, 'visibility', 'hidden');
 		container.appendChild(pop);
-	
+
 		var notificationsObj = this;
 		tab.onclick = function() { notificationsObj.switchStatus(tab, pop); };
-		
+
 		/*
 		var border = document.createElement("div");
 		Y.DOM.addClass(border, 'border');
 		pop.appendChild(border);
 		*/
-		
+
 		var ul = document.createElement("ul");
 		pop.appendChild(ul);
-		
+
 		var totalNotifications = this.notifications.length;
 		for (var i = 0; i < totalNotifications; i++) {
 			var n = this.notifications[i];
 			var li = this.getNotificationBit(n);
 			ul.appendChild(li);
 		}
-		
+
 		// append the notifications to the DOM, and remove the source node
 		this.container = container;
 		this.notificationsNode = ul;
 		this.unreadNode = tab;
-		
+
 		// update notification status
 		this.updateUnread();
-		
+
 		// finally append the child
 		document.body.appendChild(this.container);
 		if (this.sourceNode) {
 			this.sourceNode.parentNode.removeChild(this.sourceNode);
 		}
 	};
-	
+
 	/**
 	 * This method is called when the user clicks on the tab for notifications,
 	 * it shows or hides the notifications depending on the current status
@@ -227,7 +227,7 @@
 	Y.Notifications.prototype.switchStatus = function(tab, pop) {
 		var tabNode = Y.get(tab);
 		var popNode = Y.get(pop);
-	
+
 		if (popNode.getStyle('visibility') === 'hidden')	 // opening
 		{
 			tabNode.addClass('open');
@@ -236,9 +236,9 @@
 			var oldHeight = pop.offsetHeight;
 			popNode.setStyle('visibility', 'visible');
 			//popNode.setStyle('height', '0px');
-			
+
 			//popNode.setStyle('overflow-y', 'hidden');
-			
+
 			/*
 			var anim = new Y.Anim({
 		        node: popNode,
@@ -247,7 +247,7 @@
 		        }});
 			anim.set('duration', 0.2);
 			anim.on('end', function() {
-				//popNode.setStyle('overflow-y', 'auto');			
+				//popNode.setStyle('overflow-y', 'auto');
 				});
 			anim.run();
 			*/
@@ -257,10 +257,10 @@
 			popNode.setStyle('visibility', 'hidden');
 			tabNode.removeClass('open');
 			tabNode.addClass('closed');
-		}	
+		}
 	};
 
-	
+
 	/**
 	 * Programatically add a new notification. This method is called to insert a new notification into the notifications window. The notification will be added
 	 * to the list, and displayed the next time that the user clicks on the tab. We need to send this method an object, containing the properties:
@@ -284,39 +284,39 @@
 			Y.log('The notification should have a \'dateline\' property with the unix timestamp of the notification');
 			return;
 		}
-	
+
 		var n = new Notification(notification.content, notification.dateline, notification.link);
 		this.notifications.push(n);
-			
-		var notificationBit = this.getNotificationBit(n);			
+
+		var notificationBit = this.getNotificationBit(n);
 		this.notificationsNode.appendChild(notificationBit);
-		
+
 		// update the unread status
 		this.unread++;
 		this.updateUnread();
 	};
-	
-	
+
+
 	/*
 	 * This method is used to add notifications to the component after an AJAX callback. If the AJAX response is a
 	 * notifications object or array, the component is updated with the new notifications. If the response is invalid
 	 * in any way no update is made
-	 * 
+	 *
 	 * Usually this method is called after you call registerSource() on any notifications object
 	 * See the registerSource method for details
 	 *
-	 * @param {int} transactionId	Unused, the identifier of the AJAX transaction	 
+	 * @param {int} transactionId	Unused, the identifier of the AJAX transaction
 	 * @param {object} response		The AJAX response, with the JSON information
 	 */
 	Y.Notifications.prototype.addNotificationsFromCallback = function(transactionId, response) {
-	
+
 		var obj = null;
 		try {
 			obj = Y.JSON.parse(response.responseText);
 		} catch (ex) {
 			Y.log('Error while parsing JSON response, notifications not valid');
 		}
-		
+
 		if (obj.length) {
 			for (var i = 0; i < obj.length; i++) {
 				this.addNotification(obj[i]);
@@ -326,7 +326,7 @@
 			this.addNotification(obj);
 		}
 	};
-	
+
 	/**
 	 * Call this method to register a source for updates for the notification. If you need to dynamically update the notifications
 	 * area with new content, that comes from the server side, call this method with either a function or a string. The component
@@ -338,7 +338,7 @@
 	 * as needed
 	 *
 	 * The url called MUST return a JSON object, in the following format
-	 * { content: <content>, dateline: <unix_timestamp>, link: link } 
+	 * { content: <content>, dateline: <unix_timestamp>, link: link }
 	 *
 	 * If several notifications are included in the same requests, they MUST come in the following format
 	 * {[
@@ -348,11 +348,11 @@
 	 *
 	 * The optional periodicity parameter is the time, in minutes, between requests. If not provided, the default is 1
 	 *
-	 * @param {string|function} source	The url used for the requests	
+	 * @param {string|function} source	The url used for the requests
 	 * @param {int} periodicity			Periodicity for request updates, in minutes
 	 */
 	Y.Notifications.prototype.registerSource = function(source, periodicity) {
-	
+
 		// setup the source for the callback
 		var fnSource = null;
 		if (typeof(source) === 'string') {
@@ -361,7 +361,7 @@
 		if (typeof(source) === 'function') {
 			fnSource = source;
 		}
-		
+
 		// do an asynchronous callback
 		var thisObj = this;
 		var callbackFn = function() {
@@ -370,9 +370,9 @@
 						complete: thisObj.addNotificationsFromCallback
 					},
 					context: thisObj
-				});			
+				});
 			};
-			
+
 		// register the timeout and do a first call
 		this.timeoutId = setInterval(callbackFn, (periodicity || 1) * 60 * 1000);
 		callbackFn();

@@ -83,14 +83,14 @@ function toNodeList (el) {
 function EventProxy (o) {
 	// if it's already been built, then return the one that's already there.
 	if (o.name in Y.Env.evt.plugins) return Y.Env.evt.plugins[o.name];
-	
+
 	// switch into ctor mode.
 	if (!(this instanceof EventProxy)) return new EventProxy(o);
-	
+
 	o.trigger = Y.Lang.isArray(o.trigger) ? o.trigger : [o.trigger];
-	
+
 	for (var i in o) this[i] = o[i];
-	
+
 	// make it real.
 	EventProxy[this.name] = Y.Node.DOM_EVENTS[this.name] = Y.Env.evt.plugins[this.name] = this;
 };
@@ -118,10 +118,10 @@ EventProxy.prototype.getPromise = function (key) {
 };
 
 EventProxy.prototype.on = function (ev, fn, el, o) {
-	
+
 	// first, normalize the element to a nodelist.
 	var target = toNodeList(el);
-	
+
 	// handle empty selector lists using onAvailable.
 	if (Y.Lang.isString(el)) {
 		if (target.size() === 0) return this.promise(
@@ -131,21 +131,21 @@ EventProxy.prototype.on = function (ev, fn, el, o) {
 		if (p) {
 			// fulfill the promise, by changing the handle's detach method to the right detacher
 			// and then disavow all knowledge of it.  This way, collisions are highly unlikely.
-			
+
 			// this.promises[el].detach = detacher(this, target, fn);
 			Y.after("detach", detacher(this, target, fn), p);
 			// no second arg clears it out.
 			this.promise(el);
 		}
 	}
-	
+
 	// attach to each node in the list.
 	var attach = attacher(EventProxy[ev], arguments),
 		handles = [];
 	target.each(function (node) {
 		handles.push(attach(node));
 	}, this);
-	
+
 	// now we need to return the thing that can be detached.
 	return new Y.EventHandle(handles);
 };
@@ -164,11 +164,11 @@ function attacher (self, args) {
 		el = args.shift(),
 		o = args.shift();
 		// now args is JUST the extra bits and bobs.
-	
+
 	return function (node) {
 		// create the proxy event name
 		var proxyName = self.proxyName(node);
-		
+
 		// if this node hasn't already been set up, then attach the appropriate triggers.
 		// Listen to a DOM event, and have the listener fire the CE.
 		// If all the DOM event handlers are removed, remove the CE handler.
@@ -180,16 +180,16 @@ function attacher (self, args) {
 			console.log("setting up triggers", self.trigger, self);
 			Y.Array.each(self.trigger, attachTrigger(node, self));
 		}
-		
+
 		// attach the fn to the proxyName event
 		// append the rest of the args to the three that matter most.
 		var proxyHandle = node.on.apply(node, [proxyName, fn, o || node].concat(args));
-		
+
 		// When the CE handlers are all removed, remove the DOM event handlers.
 		Y.after("detach", Y.bind(removeTriggers, self, node), proxyHandle);
-		
+
 		self.saveProxyHandle(Y.stamp(node)+Y.stamp(fn), proxyHandle);
-		
+
 		return proxyHandle;
 	};
 };
@@ -260,14 +260,14 @@ function removeTriggers (node) {
 
 <script>
 YUI.add("value-change", function (Y) {
-	
+
 	var getListener = (function () {
 		var listeners = {};
 		return function (key) {
 			return listeners[key] = listeners[key] || { value : null, timeout : null };
 		};
 	})();
-	
+
 	Y.EventProxy({
 		name : "valueChange",
 		trigger : [ "change", "keypress", "paste", "keydown", "keyup" ],
@@ -280,7 +280,7 @@ YUI.add("value-change", function (Y) {
 				// if the value is different, then execute!
 				var currentValue = target.get("value"),
 					oldValue = listener.value;
-				listener.value = currentValue;				
+				listener.value = currentValue;
 				// console.log("in the valueChange timeout", listener.value, target.get("value"), currentValue);
 				if (currentValue !== oldValue) fire({
 					oldValue : oldValue,
@@ -289,7 +289,7 @@ YUI.add("value-change", function (Y) {
 			});
 		}
 	});
-	
+
 }, '@VERSION@', {requires:['event-proxy']});
 
 
@@ -299,26 +299,26 @@ YUI({
     base : "../../../build/",
     filter : "raw"
 }).use('value-change', function (Y) {
-	
+
 	window.Y=Y;
-	
+
 	Y.one(".input").on("valueChange", function (e) {
 		console.log(e, this);
 	});
-	
-	
+
+
 	// console.info("Y.all('.input').on('customDom', logger)");
 	// console.log(Y.all(".input").on("customDom", logThis));
-	// 
+	//
 	// console.info("Y.one('.input').on('customDom', logger)");
 	// console.log(Y.one(".input").on("customDom", logThis));
-	// 
+	//
 	// console.info("Y.on('customDom', logger, '.input')");
 	// console.log(Y.on("customDom", logThis, ".input"));
-	// 
+	//
 	// console.info("Y.on('customDom', logger, Y.all('.input'))");
 	// console.log(Y.on('customDom', logThis, Y.all('.input')));
-	// 
+	//
 	// Y.one("#doit").on("click", function () {
 	// 	logger("clicky!");
 	// 	var i = Y.one(".input");
@@ -329,7 +329,7 @@ YUI({
 	// 	});
 	// 	logger("fired");
 	// });
-	
+
 });
 </script>
 </body>

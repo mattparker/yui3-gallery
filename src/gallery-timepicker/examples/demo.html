@@ -6,20 +6,20 @@
     <title>YUI 3 Timepicker</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.0.0/build/cssreset/reset-min.css&3.0.0/build/cssfonts/fonts-min.css">
     <style type="text/css" media="screen">
-    
+
         h1, h2, h3, h4 p{
-            margin: 0px 0 1em 0;  
+            margin: 0px 0 1em 0;
         }
         h1{
             font-size: 140%;
             font-weight: bold;
             color: #885;
         }
-        
+
         #main{
             margin: 20px;
         }
-        
+
         #main .sec{
             margin: 20px;
         }
@@ -28,28 +28,28 @@
             font-weight: bold;
             color: #885;
         }
-        
+
         h2{
             font-size: 120%;
         }
-        
+
         h3, h4{
             font-size: 110%;
         }
-        
+
         h4{
             font-style: italic;
         }
     </style>
-    
-    
+
+
     <link rel="stylesheet" href="timepicker.css" type="text/css" charset="utf-8" />
 </head>
 <body>
     <div id="main">
         <div id="demo" class="sec">
-            
-        
+
+
         <h2>Demo</h2>
         <form action="demo.html" method="post">
 
@@ -58,7 +58,7 @@
             </div>
 
             <p><input type="submit" value="Continue &rarr;" /></p>
-                        
+
         </form>
         </div>
         <div id="about" class="sec">
@@ -68,21 +68,21 @@
             <h4>YUI instance</h4>
             <p>Add the YUI seed file &amp; and the widget sources to your page:</p>
             <pre>
-&lt;!-- css --&gt;       
+&lt;!-- css --&gt;
 &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://yui.yahooapis.com/combo?3.0.0/build/cssreset/reset-min.css&amp;3.0.0/build/cssfonts/fonts-min.css&quot;&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;timepicker.css&quot; type=&quot;text/css&quot; /&gt;  
+&lt;link rel=&quot;stylesheet&quot; href=&quot;timepicker.css&quot; type=&quot;text/css&quot; /&gt;
 
-    
+
 &lt;!-- YUI Seed --&gt;
-&lt;script src=&quot;http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;  
+&lt;script src=&quot;http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
 
 &lt;!-- Widget Source--&gt;
-&lt;script src=&quot;timepickerwidget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;      
+&lt;script src=&quot;timepickerwidget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
             </pre>
             <p>Then create a YUI instance:</p>
             <pre>
 YUI().use('timepicker', function(Y){
-    
+
 });
             </pre>
             <h4>Using the widget</h4>
@@ -104,30 +104,30 @@ YUI().use('timepicker', function(Y){
                 //instantiate and identify the contentBox
                 var picker = new Y.Saw.Timepicker({contentBox: '#cb'});
                 picker.render();
-                
+
                 //hide
                 picker.hide();
-                
+
                 //show
                 picker.show();
-                
+
                 //set am or pm with class constants
                 picker.set('time.ampm', picker.AM);
-                
+
                 //subscribe to events to do cool stuff:
                 picker.subscribe('timechange', function(data){
                     //fires when the time changes
-                    
+
                     //put the 12 hour string into the input. s24hour is also available
                     Y.get('#time').set('value' ,data.s12hour);
-                    
+
                     //the data object also has members for hour, minute, ampm. Ampm is
                     //an int identified by picker.AM or picker.PM
                 });
 
                 picker.subscribe('cellclick', function(e){
                     //fires when a cell is clicked.
-                   this.hide(); 
+                   this.hide();
                 },picker);
             });
             </pre>
@@ -138,7 +138,7 @@ YUI().use('timepicker', function(Y){
                     delay:{
                         value:15
                     },
-                    
+
                     time:{
                         value:{
                             hour:0,
@@ -158,36 +158,36 @@ YUI().use('timepicker', function(Y){
             </pre>
         </div>
     </div>
-    
+
 </body>
 <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js">
-    
+
 </script><script type="text/javascript" src="gallery-timepicker-debug.js"></script>
 
 <script type="text/javascript" charset="utf-8">
     YUI().use('gallery-timepicker', function(Y){
-        
+
         var picker = new Y.Saw.Timepicker({contentBox: 'div.foo', time:{hour:0, minute:0}, strings:{am:'AM', pm:'PM', seperator:':'}, delay:50});
-        
+
         picker.set('time.ampm', picker.AM);
         picker.render();
         picker.hide();
         picker.subscribe('timechange', function(e){
             Y.get('#time').set('value',e.s24hour);
         });
-        
+
         picker.subscribe('cellclick', function(e){
-           this.hide(); 
+           this.hide();
         },picker);
 
-        
+
         function handleClick(e){
             var target =e.target;
             if(target.test('#time')){
                 picker.toggle();
             }
         }
-        
+
         Y.get('#main').on('click', handleClick);
     });
 </script>

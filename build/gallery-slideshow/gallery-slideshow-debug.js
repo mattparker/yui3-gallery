@@ -14,11 +14,11 @@ var _S = function() {
 		body: getClassName(SLIDESHOW_LC, "body"),
 		footer: getClassName(SLIDESHOW_LC, "footer")
 	};
-					
+
 _S.NAME = SLIDESHOW;
 _S.NS = SLIDESHOW;
 
-_S.HTML_PARSER = 
+_S.HTML_PARSER =
 	{
 		title: function(contentBox) {
 			var node = contentBox.one(CLASSNAMES.header);
@@ -45,9 +45,9 @@ _S.HTML_PARSER =
 			}, this);
 		}
 	};
-_S.ATTRS = 
+_S.ATTRS =
 	{
-		delay: { 
+		delay: {
 				value: 5000,
 				validator: ISNUMBER
 			},
@@ -113,7 +113,7 @@ _S.ATTRS =
 		}
 	};
 
-Y.extend(_S, Y.Widget, 
+Y.extend(_S, Y.Widget,
 	{
 		TEMPLATES: {
 			header: "<div class='" + CLASSNAMES.header + "'></div>",
@@ -122,9 +122,9 @@ Y.extend(_S, Y.Widget,
 		},
 		_renderImages: function() {
 			var zIndex = 1, bodyNode = this.get('bodyNode');
-			bodyNode.all('li').each(function(node) { 
-				var z = +node.getStyle(ZINDEX) || 2; 
-				zIndex = zIndex > z ? z : zIndex; 
+			bodyNode.all('li').each(function(node) {
+				var z = +node.getStyle(ZINDEX) || 2;
+				zIndex = zIndex > z ? z : zIndex;
 			});
 			Y.Array.each(this._imageList, function(value, index) {
 				if (!Y.Lang.isValue(value._node)) {
@@ -136,7 +136,7 @@ Y.extend(_S, Y.Widget,
 		},
 		_createImage: function(img, z) {
 			var cb = this.get('bodyNode'),
-			    div = Y.Node.create("<li><img /></li>"), 
+			    div = Y.Node.create("<li><img /></li>"),
 			    div_img = div.one('img');
 			div_img.set('src', img.src);
 			div.setStyle(ZINDEX, z);
@@ -192,7 +192,7 @@ Y.extend(_S, Y.Widget,
 			var bodyNode = this.get('bodyNode'), title = this.get('title'), image_height = this.get('image_height'), image_width = this.get('image_width');
 
 			if (title.length > 0) { this._setHeaderContents(title);
-			if (!Y.Lang.isValue(bodyNode)) { 
+			if (!Y.Lang.isValue(bodyNode)) {
 				bodyNode = this._addTemplate(this.TEMPLATES.body);
 				this.set('bodyNode', bodyNode);
 			}}
@@ -205,7 +205,7 @@ Y.extend(_S, Y.Widget,
 		},
 		beginTransition: function() {
 			var anim = this.get('animation');
-			
+
 			if (anim) {
 				anim.set('node', this.currentImage);
 				anim.run();
@@ -216,15 +216,15 @@ Y.extend(_S, Y.Widget,
 		endTransition: function() {
 			var images = this.get('bodyNode').all('li'),
 					anim = this.get('animation');
-			
+
 			images.each(function(img, index, array) {
-				var z = +img.getStyle(ZINDEX), 
+				var z = +img.getStyle(ZINDEX),
 				    l = -1 * array.size();
 				if (z === -1) { this.currentImage = img; }
 				img.setStyle(ZINDEX, z === 0 ? l + 1 : z + 1);
 			}, this);
 			images.setStyles(anim.get('from'));
-			
+
 			Y.later(this.get('delay'), this, "beginTransition");
 		}
 	});
