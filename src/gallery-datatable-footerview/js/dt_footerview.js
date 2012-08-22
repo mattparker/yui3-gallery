@@ -548,7 +548,8 @@
           if ( Y.Lang.isFunction(foot_col.content) ) {
               return rval;
           } else {
-              var ctag = foot_col.content.match(/{.*}/)[0] || null,
+              var ctagMatch = foot_col.content.match(/{.*}/) || null,
+                  ctag = Y.Lang.isArray(ctagMatch) && ctagMatch.length > 0 ? ctagMatch[0] : null,
                   srtn = foot_col.content;
               if ( ctag && Y.Lang.isString(ctag) )
                   srtn = srtn.replace(ctag,rval);
