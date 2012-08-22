@@ -306,6 +306,9 @@
 
               // save this for later ... used by refreshFooter
               this.node_cols.push(th_item);
+          } else {
+               // no 'header' - want to start footer cells from 0:
+               cspan = 0;
           }
 
           //
