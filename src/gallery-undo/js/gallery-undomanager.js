@@ -137,7 +137,7 @@
          */
         initializer : function( cfg ) {
             this._initEvents();
-        
+
             this.after( "limitChange", Y.bind( this._afterLimit, this ) );
         },
 
@@ -162,7 +162,7 @@
         _initEvents : function(){
             /**
              * Signals an <code>Y.UndoableAction</code> has been added to list
-             * 
+             *
              * @event actionAdded
              * @param event {Event.Facade} An Event Facade object with the following attribute specific properties added:
              *  <dl>
@@ -185,18 +185,18 @@
              *  </dl>
              */
             this.publish( ACTIONMERGED );
-            
+
             /**
              * Signals the beginning of a process in which one or more actions will be canceled.
-             * 
+             *
              * @event beforeCanceling
              * @param event {Event.Facade} An Event Facade object
              */
              this.publish( BEFORECANCELING );
-            
+
             /**
              * Signals an action has been canceled.
-             * 
+             *
              * @event actionCanceled
              * @param event {Event.Facade} An Event Facade object with the following attribute specific properties added:
              *  <dl>
@@ -207,16 +207,16 @@
              *  </dl>
              */
             this.publish( ACTIONCANCELED );
-            
-            
+
+
             /**
              * Signals a canceling actions process has been finished.
-             * 
+             *
              * @event cancelingFinished
              * @param event {Event.Facade} An Event Facade object
              */
             this.publish( CANCELINGFINISHED );
-            
+
             /**
              * Signals the beginning of a process in which one or more actions will be purged from the list.
              *
@@ -236,16 +236,16 @@
 
             /**
              * Signals the beginning of a process in which one or more actions will be undone.
-             * 
+             *
              * @event beforeUndo
              * @param event {Event.Facade} An Event Facade object
              */
             this.publish( BEFOREUNDO );
-            
-            
+
+
             /**
              * Signals an action has been undone.
-             * 
+             *
              * @event actionUndone
              * @param event {Event.Facade} An Event Facade object with the following attribute specific properties added:
              *  <dl>
@@ -256,29 +256,29 @@
              *  </dl>
              */
             this.publish( ACTIONUNDONE );
-            
+
 
             /**
              * Signals the end of undo process.
-             * 
+             *
              * @event undoFinished
              * @param event {Event.Facade} An Event Facade object
              */
             this.publish( UNDOFINISHED );
 
-            
+
             /**
              * Signals the beginning of a process in which one or more actions will be redone.
-             * 
+             *
              * @event beforeRedo
              * @param event {Event.Facade} An Event Facade object
              */
             this.publish( BEFOREREDO );
-            
-            
+
+
             /**
              * Signals an action has been redone.
-             * 
+             *
              * @event actionRedone
              * @param event {Event.Facade} An Event Facade object with the following attribute specific properties added:
              *  <dl>
@@ -289,17 +289,17 @@
              *  </dl>
              */
             this.publish( ACTIONREDONE );
-            
-            
+
+
             /**
              * Signals the end of redo process.
-             * 
+             *
              * @event redoFinished
              * @param event {Event.Facade} An Event Facade object
              */
             this.publish( REDOFINISHED );
         },
-    
+
 
         /**
          * Adds an UndoableAction to UndoManager.<br>
@@ -312,7 +312,7 @@
          */
         add : function( newAction ){
             var curAction = null, actions, undoIndex, tmp, merged  = false;
-        
+
             if( this._processing ){
                 return false;
             }
@@ -339,7 +339,7 @@
 
                 this.fire( CANCELINGFINISHED );
             }
-        
+
             if( curAction ){
                 merged = curAction.merge( newAction );
 
@@ -349,7 +349,7 @@
             } else {
                 actions.push( newAction );
             }
-        
+
             if( !merged ){
                 this._undoIndex++;
                 this._limitActions();
@@ -362,14 +362,14 @@
                     'mergedAction' : newAction
                 });
             }
-            
+
             return true;
         },
-    
+
 
         /**
          * Removes actions from the list if their number exceedes the <code>limit</code>
-         * 
+         *
          * @method _limitActions
          * @param {Number} limit The max number of actions in the list
          * @protected
@@ -386,13 +386,13 @@
             if( limit === UNLIMITED ){
                 return;
             }
-        
+
             actions = this._actions;
 
             if( actions.length <= limit ){
                 return;
             }
-        
+
             index = this._undoIndex;
 
             halfLimit = parseInt( limit / 2, 10 );
@@ -435,10 +435,10 @@
                 this.fire( CANCELINGFINISHED );
             }
         },
-    
+
         /**
          * Invokes <code>_limitActions</code> in order to keep the number of actions in the list according to the <code>limit</code>.
-         * 
+         *
          * @method _afterLimit
          * @param params {Event} limitChange custom event
          * @protected
@@ -446,13 +446,13 @@
         _afterLimit : function( params ){
             this._limitActions( params.newVal );
         },
-    
-        
+
+
         /**
          * Undoes the action before current index by calling its <code>undo</code> method.
          * If <code>asyncProcessing</code> property of the action is true, UndoManager waits until action fires <code>undoFinished</code> event.
          * During this time undoing/redoing and adding new actions will be suspended.
-         * 
+         *
          * @method undo
          */
         undo : function(){
@@ -460,12 +460,12 @@
                 this._undoTo( this._undoIndex - 1 );
             }
         },
-    
+
         /**
          * Redoes the action at current index by calling its <code>redo</code> method.
          * If <code>asyncProcessing</code> property of the action is true, UndoManager waits until action fires <code>redoFinished</code> event.
          * During this time undoing/redoing and adding new actions will be suspended.
-         * 
+         *
          * @method redo
          */
         redo : function(){
@@ -473,35 +473,35 @@
                 this._redoTo( this._undoIndex + 1 );
             }
         },
-    
-        
+
+
         /**
          * Checks if undo can be done. The function will return false if there are no actions in the list,
          * the current index is 0 or UndoManager is waiting for another asynchronous action to complete.
-         * 
+         *
          * @method canUndo
          * @return {Boolean} true if undo is possible, false otherwise
          */
         canUndo : function(){
             return !this._processing && this._undoIndex > 0;
         },
-    
-        
+
+
         /**
          * Checks if redo can be done. The function will return false if there are no actions in the list,
          * current index is equal to the length of the list or UndoManager is waiting for another asynchronous action to complete.
-         * 
+         *
          * @method canRedo
          * @return {Boolean} true if redo is possible, false otherwise
          */
         canRedo : function(){
             return !this._processing && this._undoIndex < this._actions.length;
         },
-    
-        
+
+
         /**
          * If undo is posible, returns the value of <code>label</code> property of the action to be undone.
-         * 
+         *
          * @method getUndoLabel
          * @return {String} The value of label property
          */
@@ -512,14 +512,14 @@
                 action = this._actions[ this._undoIndex - 1 ];
                 return action.get( "label" );
             }
-        
+
             return null;
         },
-    
-        
+
+
         /**
          * If redo is posible, returns the value of <code>label</code> property of the action to be redone.
-         * 
+         *
          * @method getRedoLabel
          * @return {String} The value of label property
          */
@@ -530,14 +530,14 @@
                 action = this._actions[ this._undoIndex ];
                 return action.get( "label" );
             }
-        
+
             return null;
         },
-    
-    
+
+
         /**
          * Cancels and removes all actions from the list
-         * 
+         *
          * @method purgeAll
          */
         purgeAll : function(){
@@ -547,7 +547,7 @@
 
         /**
          * Cancels and removes actions from the end of the list (the most recent actions) to the index, passed as parameter.
-         * 
+         *
          * @method purgeTo
          * @param {Number} index The index in the list to which actions should be be removed
          */
@@ -577,10 +577,10 @@
             }
         },
 
-        
+
         /**
          * Calls undo or redo methods of the actions registered while current index is less or greater than the <code>newIndex</code> passed.
-         * 
+         *
          * @method processTo
          * @param newIndex The new value of <code>undoIndex</code>
          */
@@ -594,8 +594,8 @@
                 }
             }
         },
-        
-        
+
+
         /**
          * Redoes all actions from current index to <code>newIndex</code>. In case of asynchronous action, waits until action fires <code>redoFinished</code> event.
          *
@@ -631,8 +631,8 @@
                 action.redo();
             }
         },
-        
-        
+
+
         /**
          * Undoes all actions from current index to <code>newIndex</code>. In case of asynchronous action, waits until action fires <code>undoFinished</code> event.
          *
@@ -668,12 +668,12 @@
                 action.undo();
             }
         },
-        
-        
+
+
         /**
          * Handles the completion of undo method of asynchronous action.
          * Fires <code>actionUndone</code> event. Checks if <code>newIndex</code> is less than current index. If true, invokes _undoTo again, or fires <code>undoFinished</code> event otherwise.
-         * 
+         *
          * @method _onAsyncUndoFinished
          * @protected
          * @param {Y.UndoableAction} action The asynchronous action which undo method has been completed.
@@ -687,7 +687,7 @@
                 'action': action,
                 index : this._undoIndex
             });
-            
+
             if( this._undoIndex > newIndex ){
                 this._undoTo( newIndex );
             } else {
@@ -700,9 +700,9 @@
 
 
         /**
-         * Handles the completion of redo method of asynchronous action. 
+         * Handles the completion of redo method of asynchronous action.
          * Fires <code>actionRedone</code> event. Checks if <code>newIndex</code> is bigger than current index. If true, invokes _redoTo again, or fires <code>redoFinished</code> event otherwise.
-         * 
+         *
          * @method _onAsyncRedoFinished
          * @protected
          * @param {Y.UndoableAction} action The asynchronous action which redo method has been completed.
@@ -711,7 +711,7 @@
         _onAsyncRedoFinished : function( action, newIndex ){
             this._actionHandle.detach();
             this._actionHandle = null;
-            
+
             this.fire( ACTIONREDONE, {
                 'action': action,
                 index : this._undoIndex - 1

@@ -19,7 +19,7 @@
             META         : 224,
             NUM_LOCK     : 144,
             PAGE_DOWN    : 34,
-            PAGE_UP      : 33, 
+            PAGE_UP      : 33,
             PAUSE        : 19,
             PRINTSCREEN  : 44,
             RIGHT        : 39,
@@ -33,7 +33,7 @@
 YAHOO.widget = YAHOO.widget || {};
 
 var Widget = YAHOO.widget;
-        
+
 /**
  * The treeview widget is a generic tree building tool.
  * @module treeview
@@ -49,10 +49,10 @@ var Widget = YAHOO.widget;
  * @class TreeView
  * @uses YAHOO.util.EventProvider
  * @constructor
- * @param {string|HTMLElement} id The id of the element, or the element itself that the tree will be inserted into.  
+ * @param {string|HTMLElement} id The id of the element, or the element itself that the tree will be inserted into.
  *        Existing markup in this element, if valid, will be used to build the tree
  * @param {Array|Object|String}  oConfig (optional)  If present, it will be used to build the tree via method <a href="#method_buildTreeFromObject">buildTreeFromObject</a>
- * 
+ *
  */
 var TV = function(id, oConfig) {
 
@@ -145,7 +145,7 @@ Y.extend(TV, Y.PortBase, {
      * @private
      */
     _hasDblClickSubscriber: false,
-    
+
     /**
      * Stores the timer used to check for double clicks
      * @property _dblClickTimer
@@ -160,16 +160,16 @@ Y.extend(TV, Y.PortBase, {
      * @type YAHOO.widget.Node
      */
     currentFocus: null,
-    
+
     /**
     * If true, only one Node can be highlighted at a time
     * @property singleNodeHighlight
     * @type boolean
     * @default false
     */
-    
+
     singleNodeHighlight: false,
-    
+
     /**
     * A reference to the Node that is currently highlighted.
     * It is only meaningful if singleNodeHighlight is enabled
@@ -178,13 +178,13 @@ Y.extend(TV, Y.PortBase, {
     * @default null
     * @private
     */
-    
+
     _currentlyHighlighted: null,
 
     /**
      * Sets up the animation for expanding children
      * @method setExpandAnim
-     * @param {string} type the type of animation (acceptable values defined 
+     * @param {string} type the type of animation (acceptable values defined
      * in YAHOO.widget.TVAnim)
      */
     setExpandAnim: function(type) {
@@ -194,7 +194,7 @@ Y.extend(TV, Y.PortBase, {
     /**
      * Sets up the animation for collapsing children
      * @method setCollapseAnim
-     * @param {string} type of animation (acceptable values defined in 
+     * @param {string} type of animation (acceptable values defined in
      * YAHOO.widget.TVAnim)
      */
     setCollapseAnim: function(type) {
@@ -215,12 +215,12 @@ Y.extend(TV, Y.PortBase, {
         if (this._expandAnim && this._animCount < this.maxAnim) {
             // this.locked = true;
             var tree = this;
-            var a = Widget.TVAnim.getAnim(this._expandAnim, el, 
+            var a = Widget.TVAnim.getAnim(this._expandAnim, el,
                             function() { tree.expandComplete(node); });
-            if (a) { 
+            if (a) {
                 ++this._animCount;
                 this.fire("animStart", {
-                        "node": node, 
+                        "node": node,
                         "type": "expand"
                     });
                 a.animate();
@@ -246,12 +246,12 @@ Y.extend(TV, Y.PortBase, {
         if (this._collapseAnim && this._animCount < this.maxAnim) {
             // this.locked = true;
             var tree = this;
-            var a = Widget.TVAnim.getAnim(this._collapseAnim, el, 
+            var a = Widget.TVAnim.getAnim(this._collapseAnim, el,
                             function() { tree.collapseComplete(node); });
-            if (a) { 
+            if (a) {
                 ++this._animCount;
                 this.fire("animStart", {
-                        "node": node, 
+                        "node": node,
                         "type": "collapse"
                     });
                 a.animate();
@@ -271,7 +271,7 @@ Y.extend(TV, Y.PortBase, {
         Y.log("expand complete: " + this.id);
         --this._animCount;
         this.fire("animComplete", {
-                "node": node, 
+                "node": node,
                 "type": "expand"
             });
         // this.locked = false;
@@ -285,7 +285,7 @@ Y.extend(TV, Y.PortBase, {
         Y.log("collapse complete: " + this.id);
         --this._animCount;
         this.fire("animComplete", {
-                "node": node, 
+                "node": node,
                 "type": "collapse"
             });
         // this.locked = false;
@@ -364,7 +364,7 @@ Y.extend(TV, Y.PortBase, {
          * @param {YAHOO.widget.Node} node the node that has the focus
          */
         this.publish("enterKeyPressed", this);
-        
+
     /**
          * Fires when the label in a TextNode or MenuNode or content in an HTMLNode receives a Click.
     * The listener may return false to cancel toggling and focusing on the node.
@@ -374,16 +374,16 @@ Y.extend(TV, Y.PortBase, {
          * @param oArgs.node {YAHOO.widget.Node} node the node that was clicked
          */
         this.publish("clickEvent", this);
-        
+
     /**
-         * Fires when the focus receives the focus, when it changes from a Node 
+         * Fires when the focus receives the focus, when it changes from a Node
     * to another Node or when it is completely lost (blurred)
          * @event focusChanged
          * @type CustomEvent
          * @param oArgs.oldNode  {YAHOO.widget.Node} Node that had the focus or null if none
          * @param oArgs.newNode {YAHOO.widget.Node} Node that receives the focus or null if none
          */
-        
+
         this.publish('focusChanged',this);
 
     /**
@@ -399,9 +399,9 @@ Y.extend(TV, Y.PortBase, {
                 self._hasDblClickSubscriber = true;
             }
         });
-        
+
     /**
-         * Custom event that is fired when the text node label is clicked. 
+         * Custom event that is fired when the text node label is clicked.
          *  The node clicked is  provided as an argument
          *
          * @event labelClick
@@ -410,11 +410,11 @@ Y.extend(TV, Y.PortBase, {
     * @deprecated use clickEvent or dblClickEvent
          */
         this.publish("labelClick", this);
-        
+
     /**
      * Custom event fired when the highlight of a node changes.
      * The node that triggered the change is provided as an argument:
-     * The status of the highlight can be checked in 
+     * The status of the highlight can be checked in
      * <a href="YAHOO.widget.Node.html#property_highlightState">nodeRef.highlightState</a>.
      * Depending on <a href="YAHOO.widget.Node.html#property_propagateHighlight">nodeRef.propagateHighlight</a>, other nodes might have changed
      * @event highlightEvent
@@ -422,7 +422,7 @@ Y.extend(TV, Y.PortBase, {
      * @param node {YAHOO.widget.Node} the node that started the change in highlighting state
     */
         this.publish("highlightEvent",this);
-     
+
 
 
         this._nodes = [];
@@ -434,15 +434,15 @@ Y.extend(TV, Y.PortBase, {
         this.root = new Widget.RootNode(this);
 
         Y.log("tree init: " + this.id);
-        
+
         if (this._initEditor) {
             this._initEditor();
         }
-        
+
     },
 
  /**
-     * Builds the TreeView from an object.  
+     * Builds the TreeView from an object.
      * This is the method called by the constructor to build the tree when it has a second argument.
      *  A tree can be described by an array of objects, each object corresponding to a node.
      *  Node descriptions may contain values for any property of a node plus the following extra properties: <ul>
@@ -456,7 +456,7 @@ Y.extend(TV, Y.PortBase, {
      * @method buildTreeFromObject
      * @param  oConfig {Array|Object|String}  array containing a full description of the tree.
      *        An object or a string will be turned into an array with the given object or string as its only element.
-     * 
+     *
      */
     buildTreeFromObject: function (oConfig) {
         var logger = Y;
@@ -511,11 +511,11 @@ Y.extend(TV, Y.PortBase, {
             oConfig = [oConfig];
         }
 
-                    
+
         build(this.root,oConfig);
     },
 /**
-     * Builds the TreeView from existing markup.   Markup should consist of &lt;UL&gt; or &lt;OL&gt; elements containing &lt;LI&gt; elements.  
+     * Builds the TreeView from existing markup.   Markup should consist of &lt;UL&gt; or &lt;OL&gt; elements containing &lt;LI&gt; elements.
      * Each &lt;LI&gt; can have one element used as label and a second optional element which is to be a &lt;UL&gt; or &lt;OL&gt;
      * containing nested nodes.
      * Depending on what the first element of the &lt;LI&gt; element is, the following Nodes will be created: <ul>
@@ -580,7 +580,7 @@ Y.extend(TV, Y.PortBase, {
                                 break;
                         }
                         // if there are further elements or text, it will be ignored.
-                        
+
                         if (YAHOO.lang.JSON) {
                             yuiConfig = el.getAttribute('yuiConfig');
                             if (yuiConfig) {
@@ -588,7 +588,7 @@ Y.extend(TV, Y.PortBase, {
                                 config = YAHOO.lang.merge(config,yuiConfig);
                             }
                         }
-                        
+
                         branch.push(config);
                         break;
                     case 'UL':
@@ -606,13 +606,13 @@ Y.extend(TV, Y.PortBase, {
             return branch;
         };
 
-        // var markup = Dom.getChildrenBy(Dom.get(id),function (el) { 
+        // var markup = Dom.getChildrenBy(Dom.get(id),function (el) {
         //     var tag = el.tagName.toUpperCase();
         //     return  tag == 'UL' || tag == 'OL';
         // });
 
         var markup = Y.Selector.query('#' + this.id + '> ul,ol');
-        
+
         if (markup.length) {
             this.buildTreeFromObject(build(markup[0]));
         } else {
@@ -634,14 +634,14 @@ Y.extend(TV, Y.PortBase, {
             pnode = target && target.get('parentNode');
         }
 
-        if (!target) { 
-            return null; 
+        if (!target) {
+            return null;
         }
 
         targetEl = target._node || target;
-        
+
         // If it is a spacer cell, do nothing
-        if (/\bygtv(blank)?depthcell/.test(targetEl.className)) { 
+        if (/\bygtv(blank)?depthcell/.test(targetEl.className)) {
             return null;
         }
 
@@ -687,28 +687,28 @@ Y.extend(TV, Y.PortBase, {
             };
 
         if (!td) {
-            return; 
+            return;
         }
 
         node = this.getNodeByElement(td);
-        if (!node) { 
-            return; 
+        if (!node) {
+            return;
         }
-        
+
         // exception to handle deprecated event labelClick
         // @TODO take another look at this deprecation.  It is common for people to
         // only be interested in the label click, so why make them have to test
         // the node type to figure out whether the click was on the label?
-        
+
         // target = Event.getTarget(ev);
         target = ev.target;
-        
+
         // if (Dom.hasClass(target, node.labelStyle) || Dom.getAncestorByClassName(target,node.labelStyle)) {
         if (target.hasClass(node.labelStyle) || target.ancestor(node.labelStyle)) {
             Y.log("onLabelClick " + node.label);
             this.fire('labelClick', node);
         }
-        
+
         //  If it is a toggle cell, toggle
         if (/\bygtv[tl][mp]h?h?/.test(td.className)) {
             toggle(true);
@@ -720,12 +720,12 @@ Y.extend(TV, Y.PortBase, {
                 if (this._hasDblClickSubscriber) {
                     this._dblClickTimer = window.setTimeout(function () {
                         self._dblClickTimer = null;
-                        if (self.fire('clickEvent', {event:ev,node:node}) !== false) { 
+                        if (self.fire('clickEvent', {event:ev,node:node}) !== false) {
                             toggle();
                         }
                     }, 200);
                 } else {
-                    if (self.fire('clickEvent', {event:ev,node:node}) !== false) { 
+                    if (self.fire('clickEvent', {event:ev,node:node}) !== false) {
                         toggle();
                     }
                 }
@@ -739,8 +739,8 @@ Y.extend(TV, Y.PortBase, {
      * @private
      */
     _onDblClickEvent: function (ev) {
-        if (!this._hasDblClickSubscriber) { 
-            return; 
+        if (!this._hasDblClickSubscriber) {
+            return;
         }
 
         var td = this._getEventTargetTdEl(ev);
@@ -749,11 +749,11 @@ Y.extend(TV, Y.PortBase, {
         }
 
         if (!(/\bygtv[tl][mp]h?h?/.test(td.className))) {
-            
+
             this.fire('dblClickEvent', {
-                event: ev, 
+                event: ev,
                 node: this.getNodeByElement(td)
-            }); 
+            });
 
             if (this._dblClickTimer) {
                 window.clearTimeout(this._dblClickTimer);
@@ -858,7 +858,7 @@ Y.extend(TV, Y.PortBase, {
                     } while (newNode && !newNode._canHaveFocus());
                     if (newNode) { newNode.focus();}
                 };
-                    
+
                 moveFocusRight(newNode);
                 ev.preventDefault();
                 break;
@@ -935,7 +935,7 @@ Y.extend(TV, Y.PortBase, {
         }
         this._hasEvents = true;
     },
-    
+
   /**
      * Returns the tree's host element
      * @method getEl
@@ -974,11 +974,11 @@ Y.extend(TV, Y.PortBase, {
      * @method setDynamicLoad
      * @param {function} fnDataLoader the function that will be called to get the data
      * @param iconMode {int} configures the icon that is displayed when a dynamic
-     * load node is expanded the first time without children.  By default, the 
+     * load node is expanded the first time without children.  By default, the
      * "collapse" icon will be used.  If set to 1, the leaf node icon will be
      * displayed.
      */
-    setDynamicLoad: function(fnDataLoader, iconMode) { 
+    setDynamicLoad: function(fnDataLoader, iconMode) {
         this.root.setDynamicLoad(fnDataLoader, iconMode);
     },
 
@@ -989,9 +989,9 @@ Y.extend(TV, Y.PortBase, {
      * will be expanded.
      * @method expandAll
      */
-    expandAll: function() { 
+    expandAll: function() {
         if (!this.locked) {
-            this.root.expandAll(); 
+            this.root.expandAll();
         }
     },
 
@@ -999,9 +999,9 @@ Y.extend(TV, Y.PortBase, {
      * Collapses all expanded child nodes in the entire tree.
      * @method collapseAll
      */
-    collapseAll: function() { 
+    collapseAll: function() {
         if (!this.locked) {
-            this.root.collapseAll(); 
+            this.root.collapseAll();
         }
     },
 
@@ -1040,8 +1040,8 @@ Y.extend(TV, Y.PortBase, {
     },
 
     /**
-     * Returns a collection of nodes that have a matching property 
-     * and value in the data object that was passed into its constructor.  
+     * Returns a collection of nodes that have a matching property
+     * and value in the data object that was passed into its constructor.
      * @method getNodesByProperty
      * @param {object} property the property to search (usually a string)
      * @param {object} value the value we want to find (usuall an int or string)
@@ -1064,8 +1064,8 @@ Y.extend(TV, Y.PortBase, {
 
     /**
      * Returns a collection of nodes that have passed the test function
-     * passed as its only argument.  
-     * The function will receive a reference to each node to be tested.  
+     * passed as its only argument.
+     * The function will receive a reference to each node to be tested.
      * @method getNodesBy
      * @param {function} a boolean function that receives a Node instance and returns true to add the node to the results list
      * @return {Array} the matching collection of nodes, null if no match
@@ -1109,12 +1109,12 @@ Y.extend(TV, Y.PortBase, {
                 break;
             }
 
-        } 
+        }
         while (p.id !== this.id && p.tagName.toLowerCase() !== "body");
 
         return null;
     },
-    
+
     /**
      * When in singleNodeHighlight it returns the node highlighted
      * or null if none.  Returns null if singleNodeHighlight is false.
@@ -1127,14 +1127,14 @@ Y.extend(TV, Y.PortBase, {
 
 
     /**
-     * Removes the node and its children, and optionally refreshes the 
+     * Removes the node and its children, and optionally refreshes the
      * branch of the tree that was affected.
      * @method removeNode
      * @param {Node} node to remove
      * @param {boolean} autoRefresh automatically refreshes branch if true
      * @return {boolean} False is there was a problem, true otherwise.
      */
-    removeNode: function(node, autoRefresh) { 
+    removeNode: function(node, autoRefresh) {
 
         // Don't delete the root node
         if (node.isRoot()) {
@@ -1159,7 +1159,7 @@ Y.extend(TV, Y.PortBase, {
     },
 
     /**
-     * wait until the animation is complete before deleting 
+     * wait until the animation is complete before deleting
      * to avoid javascript errors
      * @method _removeChildren_animComplete
      * @param o the custom event payload
@@ -1178,13 +1178,13 @@ Y.extend(TV, Y.PortBase, {
      * @method removeChildren
      * @param {Node} node the node to purge
      */
-    removeChildren: function(node) { 
+    removeChildren: function(node) {
 
         if (node.expanded) {
             // wait until the animation is complete before deleting to
             // avoid javascript errors
             if (this._collapseAnim) {
-                this.subscribe("animComplete", 
+                this.subscribe("animComplete",
                         this._removeChildren_animComplete, this, true);
                 Widget.Node.prototype.collapse.call(node);
                 return;
@@ -1213,7 +1213,7 @@ Y.extend(TV, Y.PortBase, {
      * @method _deleteNode
      * @private
      */
-    _deleteNode: function(node) { 
+    _deleteNode: function(node) {
         // Remove all the child nodes first
         this.removeChildren(node);
 
@@ -1222,13 +1222,13 @@ Y.extend(TV, Y.PortBase, {
     },
 
     /**
-     * Removes the node from the tree, preserving the child collection 
-     * to make it possible to insert the branch into another part of the 
+     * Removes the node from the tree, preserving the child collection
+     * to make it possible to insert the branch into another part of the
      * tree, or another tree.
      * @method popNode
      * @param {Node} node to remove
      */
-    popNode: function(node) { 
+    popNode: function(node) {
         var p = node.parent;
 
         // Update the parent's collection of children
@@ -1266,7 +1266,7 @@ Y.extend(TV, Y.PortBase, {
         node.nextSibling = null;
         node.tree = null;
 
-        // Update the tree's node collection 
+        // Update the tree's node collection
         delete this._nodes[node.index];
     },
 
@@ -1295,7 +1295,7 @@ Y.extend(TV, Y.PortBase, {
         el.innerHTML = '';
         this._hasEvents = false;
     },
-        
+
 
     /**
      * TreeView instance toString
@@ -1341,7 +1341,7 @@ Y.extend(TV, Y.PortBase, {
      * @deprecated use treeobj.subscribe("collapse") instead
      */
     onCollapse: function(node) { },
-    
+
     /**
     * Sets the value of a property for all loaded nodes in the tree.
     * @method setNodesProperty
@@ -1375,7 +1375,7 @@ Y.extend(TV, Y.PortBase, {
         node.toggleHighlight();
         return false;
     }
-        
+
 
 });
 
@@ -1393,7 +1393,7 @@ PROT.draw = PROT.render;
 
 
 /**
- * Running count of all nodes created in all trees.  This is 
+ * Running count of all nodes created in all trees.  This is
  * used to provide unique identifies for all nodes.  Deleting
  * nodes does not change the nodeCount.
  * @property YAHOO.widget.TreeView.nodeCount
@@ -1449,7 +1449,7 @@ TV.getNode = function(treeId, nodeIndex) {
      * @final
      * @default "ygtvfocus"
 
-    */ 
+    */
 TV.FOCUS_CLASS_NAME = 'ygtvfocus';
 
 

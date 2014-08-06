@@ -1,7 +1,7 @@
 YUI.add("gallery-markout",function(Y){
 /*
  * MarkoutJS - An API for creating DOM nodes in JavaScript
- * 
+ *
  * Oddnut Software - http://oddnut.com/markout/
  * Copyright (c) 2009-2010 Eric Ferraiuolo and David Fogel
  * YUI BSD - http://developer.yahoo.com/yui/license.html

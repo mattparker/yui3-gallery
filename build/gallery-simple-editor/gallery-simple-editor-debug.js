@@ -7,8 +7,8 @@ YUI.add('gallery-simple-editor', function(Y) {
      * @namespace YAHOO.widget
      * @requires yahoo, dom, element, event
      * @extends YAHOO.util.Element
-     * 
-     * 
+     *
+     *
      * @constructor
      * @param {String/HTMLElement} el The element to turn into a button.
      * @param {Object} attrs Object liternal containing configuration parameters.
@@ -39,14 +39,14 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @attribute value
         * @description The value of the button
         * @type String
-        */            
+        */
         value: {
         },
         /**
         * @attribute menu
         * @description The menu attribute, see YAHOO.widget.Button
         * @type Object
-        */            
+        */
         menu: {
             value: false
         },
@@ -54,7 +54,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @attribute type
         * @description The type of button to create: push, menu, color, select, spin
         * @type String
-        */            
+        */
         type: {
             value: 'push',
             writeOnce: true
@@ -63,7 +63,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @attribute disabled
         * @description Set the button into a disabled state
         * @type String
-        */            
+        */
         disabled: {
             value: false,
             setter: function(disabled) {
@@ -84,7 +84,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @attribute label
         * @description The text label for the button
         * @type String
-        */            
+        */
         label: {
             value: 'LABEL',
             setter: function(label) {
@@ -97,7 +97,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @attribute title
         * @description The title of the button
         * @type String
-        */            
+        */
         title: {
             value: 'TITLE',
             setter: function(title) {
@@ -109,7 +109,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @config container
         * @description The container that the button is rendered to, handled by Toolbar
         * @type String
-        */            
+        */
         container: {
             value: null,
             writeOnce: true,
@@ -167,10 +167,10 @@ YUI.add('gallery-simple-editor', function(Y) {
                 }, this);
             }
         },
-        /** 
+        /**
         * @method initializer
         * @description The ToolbarButton class's initialization method
-        */        
+        */
         initializer: function() {
             var id, i, el, menu, opt, html;
             switch (this.get('type')) {
@@ -210,19 +210,19 @@ YUI.add('gallery-simple-editor', function(Y) {
                 e.halt();
             }, this));
         },
-        /** 
+        /**
         * @private
         * @method _handleSelect
         * @description The event fired when a change event gets fired on a select element
         * @param {Event} ev The change event.
-        */        
+        */
         _handleSelect: function(e) {
             this.fire('change', {type: 'change', value: e.target.get('value'), target: this.get('node') });
         },
-        /** 
+        /**
         * @method getMenu
         * @description A stub function to mimic YAHOO.widget.Button's getMenu method
-        */        
+        */
         getMenu: function() {
             return this.get('menu');
         },
@@ -232,11 +232,11 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @method toString
         * @description Returns a string representing the toolbar.
         * @return {String}
-        */        
+        */
         toString: function() {
             return 'Toolbar.Button (' + this.get('node').get('id') + ')';
         }
-        
+
     });
 
     Y.namespace('Toolbar');
@@ -263,7 +263,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         }
     };
     */
-    
+
     var getButton = function(id) {
         var button = id;
         if (Y.Lang.isString(id)) {
@@ -293,7 +293,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         this._configuredButtons = [];
 
         Toolbar.superclass.constructor.apply(this, arguments);
-         
+
     };
 
     Toolbar.NAME = 'Toolbar';
@@ -349,7 +349,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * </pre></code>
         * @type Array
         */
-        
+
         buttons: {
             value: []
         },
@@ -411,7 +411,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 delete args.target;
             }
             this.fire(type, args);
-        },        
+        },
         _handleCollapse: function() {
             var collapse = this.get('collapse');
 
@@ -491,7 +491,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description This method is called from Menu's renderEvent to add a few more classes to the menu items
         * @param {String} ev The event that fired.
         * @param {Array} na Array of event information.
-        * @param {Object} o Button config object. 
+        * @param {Object} o Button config object.
         */
         _addMenuClasses: function(ev, na, o) {
             Dom.addClass(this.element, 'yui-toolbar-' + o.get('value') + '-menu');
@@ -504,19 +504,19 @@ YUI.add('gallery-simple-editor', function(Y) {
                 Dom.addClass(items[i].element, 'yui-toolbar-' + o.get('value') + '-' + ((items[i].value) ? items[i].value.replace(/ /g, '-') : items[i]._oText.nodeValue.replace(/ /g, '-')));
             }
         },
-        /** 
+        /**
         * @property buttonType
         * @description The default button to use
         * @type Object
         */
         buttonType: Y.Toolbar.Button,
-        /** 
+        /**
         * @property dd
         * @description The DragDrop instance associated with the Toolbar
         * @type Object
         */
         dd: null,
-        /** 
+        /**
         * @property _colorData
         * @description Object reference containing colors hex and text values.
         * @type Object
@@ -669,49 +669,49 @@ YUI.add('gallery-simple-editor', function(Y) {
     '#FDEEE0': 'Marble'
 /* }}} */
         },
-        /** 
+        /**
         * @property _colorPicker
         * @description The HTML Element containing the colorPicker
         * @type HTMLElement
         */
         _colorPicker: null,
-        /** 
+        /**
         * @property STR_COLLAPSE
         * @description String for Toolbar Collapse Button
         * @type String
         */
         STR_COLLAPSE: 'Collapse Toolbar',
-        /** 
+        /**
         * @property STR_EXPAND
         * @description String for Toolbar Collapse Button - Expand
         * @type String
         */
         STR_EXPAND: 'Expand Toolbar',
-        /** 
+        /**
         * @property STR_SPIN_LABEL
         * @description String for spinbutton dynamic label. Note the {VALUE} will be replaced with YAHOO.lang.substitute
         * @type String
         */
         STR_SPIN_LABEL: 'Spin Button with value {VALUE}. Use Control Shift Up Arrow and Control Shift Down arrow keys to increase or decrease the value.',
-        /** 
+        /**
         * @property STR_SPIN_UP
         * @description String for spinbutton up
         * @type String
         */
         STR_SPIN_UP: 'Click to increase the value of this input',
-        /** 
+        /**
         * @property STR_SPIN_DOWN
         * @description String for spinbutton down
         * @type String
         */
         STR_SPIN_DOWN: 'Click to decrease the value of this input',
-        /** 
+        /**
         * @property _titlebar
         * @description Object reference to the titlebar
         * @type HTMLElement
         */
         _titlebar: null,
-        /** 
+        /**
         * @property browser
         * @description Standard browser detection
         * @type Object
@@ -794,7 +794,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @type String
         */
         CLASS_PREFIX: 'yui-toolbar',
-        /** 
+        /**
         * @method init
         * @description The Toolbar class's initialization method
         */
@@ -840,9 +840,9 @@ YUI.add('gallery-simple-editor', function(Y) {
         },
         /**
         * @method initAttributes
-        * @description Initializes all of the configuration attributes used to create 
+        * @description Initializes all of the configuration attributes used to create
         * the toolbar.
-        * @param {Object} attr Object literal specifying a set of 
+        * @param {Object} attr Object literal specifying a set of
         * configuration attributes used to create the toolbar.
         */
         initAttributes: function(attr) {
@@ -879,7 +879,7 @@ YUI.add('gallery-simple-editor', function(Y) {
 
             /**
             * @attribute draggable
-            * @description Boolean indicating if the toolbar should be draggable.  
+            * @description Boolean indicating if the toolbar should be draggable.
             * @default false
             * @type Boolean
             */
@@ -902,7 +902,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                             }
                             this.dd = new YAHOO.util.DD(this.get('id'));
                             this.dd.setHandleElId(this._dragHandle.id);
-                            
+
                         }
                     } else {
                         YAHOO.log('Dragging disabled', 'info', 'Toolbar');
@@ -942,7 +942,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @param {Object} oGroup Object literal reference to the Groups Config (contains an array of button configs as well as the group label)
         */
         addButtonGroup: function(oGroup) {
-            
+
             if (!this.get('node').hasClass(this.CLASS_PREFIX + '-grouped')) {
                 this.get('node').addClass(this.CLASS_PREFIX + '-grouped');
             }
@@ -964,15 +964,15 @@ YUI.add('gallery-simple-editor', function(Y) {
             if (!this._buttonGroupList) {
                 this._buttonGroupList = {};
             }
-            
+
             this._buttonGroupList[oGroup.group] = ul;
 
-            
+
             //An array of the button ids added to this group
             //This is used for destruction later...
             var addedButtons = [],
                 button;
-            
+
             Y.each(oGroup.buttons, function(i) {
                 var li = Y.Node.create('<li class="' + this.CLASS_PREFIX + '-groupitem"></a>');
                 ul.appendChild(li);
@@ -1090,7 +1090,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                     _oButton.id = tmp.get('id');
                 }
                 //tmp._selected = true;
-                
+
                 if (this.get('disabled')) {
                     //Toolbar is disabled, disable the new button too!
                     tmp.set('disabled', true);
@@ -1169,7 +1169,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                         };
                         tmp.get('node').on('mousedown', Y.bind(showPicker, this));
                         tmp.get('node').on('keydown', Y.bind(showPicker, this));
-                        
+
                     } else if ((oButton.type != 'menu') && (oButton.type != 'select')) {
                         tmp.get('node').on('keypress', Y.bind(this._buttonClick, this));
                         tmp.get('node').on('mousedown', Y.bind(function(ev) {
@@ -1180,7 +1180,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                             ev.halt();
                         });
                     } else {
-                    
+
                         //Stop the mousedown event so we can trap the selection in the editor!
                         tmp.on('mousedown', function(ev) {
                             ev.halt();
@@ -1199,7 +1199,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                         /*
                         var self = this;
                         //Hijack the mousedown event in the menu and make it fire a button click..
-                        
+
                         tmp.on('appendTo', function() {
                             var tmp = this;
                             if (tmp.getMenu() && tmp.getMenu().mouseDownEvent) {
@@ -1241,12 +1241,12 @@ YUI.add('gallery-simple-editor', function(Y) {
                     //Add a couple of new events for IE
                     tmp.DOM_EVENTS.focusin = true;
                     tmp.DOM_EVENTS.focusout = true;
-                    
+
                     //Stop them so we don't loose focus in the Editor
                     tmp.on('focusin', function(ev) {
                         YAHOO.util.Event.stopEvent(ev);
                     }, oButton, this);
-                    
+
                     tmp.on('focusout', function(ev) {
                         YAHOO.util.Event.stopEvent(ev);
                     }, oButton, this);
@@ -1369,9 +1369,9 @@ YUI.add('gallery-simple-editor', function(Y) {
                     var info = {
                         color: data,
                         colorName: this._colorData['#' + data],
-                        value: this._colorPicker._button 
+                        value: this._colorPicker._button
                     };
-                
+
                     this.fire('buttonClick', { type: 'buttonClick', button: info });
                     this.getButtonByValue(this._colorPicker._button).getMenu().hide();
                     this._colorPicker.setStyle('display', 'none');
@@ -1396,7 +1396,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @param {Object} _oButton <a href="YAHOO.widget.ToolbarButton.html">YAHOO.widget.ToolbarButton</a> reference
         */
         _makeColorButton: function(_oButton) {
-            if (!this._colorPicker) {   
+            if (!this._colorPicker) {
                 this._createColorPicker(this.get('id'));
             }
             _oButton.type = 'color';
@@ -1449,7 +1449,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             _par.appendChild(_b1);
             _par.appendChild(_b2);
 
-            
+
             var label = Y.Lang.substitute(this.STR_SPIN_LABEL, { VALUE: _button.get('label') });
             _button.set('title', label);
 
@@ -1466,7 +1466,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             if (this._titlebar && this._titlebar.get('firstChild')) {
                 tbar = this._titlebar.get('firstChild');
             }
-            
+
             var _intUp = function(ev) {
                 ev.halt();
                 if (!_button.get('disabled') && (ev.keyCode != 9)) {
@@ -1525,7 +1525,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         */
         _buttonClick: function(ev, info) {
             var doEvent = true;
-            
+
             if (ev && ev.type == 'keypress') {
                 if (ev.keyCode == 9) {
                     doEvent = false;
@@ -1538,7 +1538,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             if (doEvent) {
                 var fireNextEvent = true,
                     retValue = false;
-                    
+
                 info.isSelected = this.isSelected(info.id);
 
                 if (info.value) {
@@ -1548,7 +1548,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                         fireNextEvent = false;
                     }
                 }
-                
+
                 if (info.menucmd && fireNextEvent) {
                     Y.log('fireEvent::' + info.menucmd + 'Click');
                     retValue = this.fire(info.menucmd + 'Click', { type: info.menucmd + 'Click', target: this.get('element'), button: info });
@@ -1908,7 +1908,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                     len = this._buttonList.length;
 
                 button.destroy();
-                
+
                 for (i = 0; i < len; i++) {
                     if (this._buttonList[i].get('id') != thisID) {
                         new_list[new_list.length]= this._buttonList[i];
@@ -1932,7 +1932,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             }
 
             this._configuredButtons = null;
-        
+
             this.get('element').innerHTML = '';
             this.get('element').className = '';
             //Brutal Object Destroy
@@ -2028,7 +2028,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 }
                 return n;
             }
-        },    
+        },
         /**
         * @config container
         * @description Used when dynamically creating the Editor from Javascript with no default textarea.
@@ -2095,7 +2095,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @attribute toolbar
         * @description The default toolbar config.
         * @type Object
-        */            
+        */
         'toolbar': {
             value: null
         },
@@ -2118,7 +2118,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description The width of the editor container.
         * @default Best guessed size of the textarea, for best results use CSS to style the width of the textarea or pass it in as an argument
         * @type String
-        */            
+        */
         'width': {
             value: null,
             setter: function(width) {
@@ -2133,7 +2133,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description The URL for the image placeholder to put in when inserting an image.
         * @default The yahooapis.com address for the current release + 'assets/blankimage.png'
         * @type String
-        */            
+        */
         'blankimage': {
             value: null
         },
@@ -2167,7 +2167,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         }
         </pre></code>
         * @type String
-        */            
+        */
         'css': {
             value: null,
             writeOnce: true
@@ -2201,7 +2201,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             </pre>
             </code>
         * @type String
-        */            
+        */
         'html': {
             value: null,
             writeOnce: true
@@ -2211,7 +2211,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description Extra user defined css to load after the default SimpleEditor CSS
         * @default ''
         * @type String
-        */            
+        */
         'extracss': {
             value: '',
             writeOnce: true
@@ -2239,7 +2239,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description Toggle the display of the current Dom path below the editor
         * @default false
         * @type Boolean
-        */            
+        */
         dompath: {
             value: false
         },
@@ -2248,7 +2248,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description Should we try to adjust the markup for the following types: semantic, css, default or xhtml
         * @default "semantic"
         * @type String
-        */            
+        */
         markup: {
             value: 'semantic',
             validator: function(markup) {
@@ -2308,7 +2308,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description The number of seconds that need to be in between nodeChange processing
         * @default 3
         * @type Number
-        */            
+        */
         nodeChangeThreshold: {
             value: 3,
             validator: Y.Lang.isNumber
@@ -2319,7 +2319,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * Such as highlighting an element below and above the content and hitting a toolbar button or a shortcut key.
         * @default false
         * @type Boolean
-        */            
+        */
         allowNoEdit: {
             value: false,
             validator: Y.Lang.isBoolean
@@ -2329,7 +2329,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description Should the Editor limit the allowed execCommands to the ones available in the toolbar. If true, then execCommand and keyboard shortcuts will fail if they are not defined in the toolbar.
         * @default false
         * @type Boolean
-        */            
+        */
         limitCommands: {
             value: false,
             validator: Y.Lang.isBoolean
@@ -2339,7 +2339,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description Should we remove linebreaks and extra spaces on cleanup
         * @default false
         * @type Boolean
-        */            
+        */
         removeLineBreaks: {
             value: false,
             validator: Y.Lang.isBoolean
@@ -2400,7 +2400,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description Should we focus the window when the content is ready?
         * @default false
         * @type Boolean
-        */            
+        */
         focusAtStart: {
             value: false,
             writeOnce: true
@@ -2412,7 +2412,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         Then it will trigger the editors save handler and place the new content back into the text area before the form is submitted.
         * @default false
         * @type Boolean
-        */            
+        */
         handleSubmit: {
             value: false
         }
@@ -2526,7 +2526,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         /**
         * @private
         * @property _keyMap
-        * @description Named key maps for various actions in the Editor. Example: <code>CLOSE_WINDOW: { key: 87, mods: ['shift', 'ctrl'] }</code>. 
+        * @description Named key maps for various actions in the Editor. Example: <code>CLOSE_WINDOW: { key: 87, mods: ['shift', 'ctrl'] }</code>.
         * This entry shows that when key 87 (W) is found with the modifiers of shift and control, the window will close. You can customize this object to tweak keyboard shortcuts.
         * @type {Object/Mixed}
         */
@@ -2941,7 +2941,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             if (!el || !el.parentNode) {
                 return false;
             }
-            
+
             while (el.parentNode) {
                 if (this._isElement(el, tag)) {
                     return el;
@@ -3225,7 +3225,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             Y.Event.nativeAdd(doc, 'keypress', Y.bind(this._handleKeyPress, this));
             Y.Event.nativeAdd(doc, 'keyup', Y.bind(this._handleKeyUp, this));
             Y.Event.nativeAdd(doc, 'keydown', Y.bind(this._handleKeyDown, this));
- 
+
             //Focus and blur..
             Y.Event.nativeAdd(win, 'focus', Y.bind(this._handleFocus, this));
             Y.Event.nativeAdd(win, 'blur', Y.bind(this._handleBlur, this));
@@ -3283,7 +3283,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 this._checkLoaded();
                 return false;
             }
-            
+
             YAHOO.log('editorLoaded', 'info', 'SimpleEditor');
             if (!raw) {
                 this.toolbar.on('buttonClick', Y.bind(this._handleToolbarClick, this));
@@ -3428,7 +3428,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             this.get('iframe').setStyle('visibility', '');
             if (check) {
                 this._checkLoaded(raw);
-            }            
+            }
         },
         /**
         * @private
@@ -3523,7 +3523,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                         }
                     }
                 }
-                
+
                 if (check) {
                     if (sel.anchorNode && (sel.anchorNode.nodeType == 3)) {
                         if (sel.anchorNode.parentNode) { //next check parentNode
@@ -3550,7 +3550,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                     }
                }
             }
-            
+
             if (this.currentEvent !== null) {
                 try {
                     switch (this.currentEvent.type) {
@@ -3647,7 +3647,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @method _writeDomPath
         * @description Write the current DOM path out to the dompath container below the editor.
         */
-        _writeDomPath: function() { 
+        _writeDomPath: function() {
             var path = this._getDomPath(),
                 pathArr = [],
                 classPath = '',
@@ -4191,7 +4191,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                             } else {
                                 this._getDoc().execCommand('indent', null, '');
                             }
-                            
+
                         } else if (!this._hasSelection()) {
                             this.execCommand('inserthtml', '&nbsp;&nbsp;&nbsp;&nbsp;');
                         }
@@ -4301,8 +4301,8 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @private
         * @method _fixListDupIds
         * @description Some browsers will duplicate the id of an LI when created in designMode.
-        * This method will fix the duplicate id issue. However it will only preserve the first element 
-        * in the document list with the unique id. 
+        * This method will fix the duplicate id issue. However it will only preserve the first element
+        * in the document list with the unique id.
         */
         _fixListDupIds: function() {
             if (this._fixListRunning) {
@@ -4470,7 +4470,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             if (force === true) {
                 this._lastNodeChange = 0;
             }
-            
+
             if ((this._lastNodeChange + threshold) < thisNodeChange) {
                 if (this._fixNodesTimer === null) {
                     this._fixNodesTimer = window.setTimeout(function() {
@@ -4639,7 +4639,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @method _updateMenuChecked
         * @param {Object} button The command identifier of the button you want to check
         * @param {String} value The value of the menu item you want to check
-        * @param {<a href="YAHOO.widget.Toolbar.html">YAHOO.widget.Toolbar</a>} The Toolbar instance the button belongs to (defaults to this.toolbar) 
+        * @param {<a href="YAHOO.widget.Toolbar.html">YAHOO.widget.Toolbar</a>} The Toolbar instance the button belongs to (defaults to this.toolbar)
         * @description Gets the menu from a button instance, if the menu is not rendered it will render it. It will then search the menu for the specified value, unchecking all other items and checking the specified on.
         */
         _updateMenuChecked: function(button, value, tbar) {
@@ -4736,7 +4736,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 this._orgIframe.setStyle('left', '-99999px');
                 this.set('iframe', iframe);
                 this._setInitialContent(true);
-                
+
                 if (!this._mask) {
                     this._mask = Y.Node.create('<div class="yui-editor-masked"></div>');
                     if (this.browser.ie) {
@@ -4806,7 +4806,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @description The label string for Image URL
         * @type String
         */
-        STR_IMAGE_URL: 'Image URL',        
+        STR_IMAGE_URL: 'Image URL',
         /**
         * @property STR_LINK_URL
         * @description The label string for the Link URL.
@@ -4862,7 +4862,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @type String
         */
         CLASS_PREFIX: 'yui-editor',
-        /** 
+        /**
         * @property browser
         * @description Standard browser detection
         * @type Object
@@ -4888,7 +4888,7 @@ YUI.add('gallery-simple-editor', function(Y) {
 
             return br;
         }(),
-        /** 
+        /**
         * @method init
         * @description The Editor class' initialization method
         */
@@ -4929,7 +4929,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                                 { type: 'separator' },
                                 { type: 'color', label: 'Font Color', value: 'forecolor', disabled: true },
                                 { type: 'color', label: 'Background Color', value: 'backcolor', disabled: true }
-                                
+
                             ]
                         },
                         { type: 'separator' },
@@ -4949,11 +4949,11 @@ YUI.add('gallery-simple-editor', function(Y) {
                     ]
                 };
             }
-            
+
             Y.Editor.Info._instances[this.get('node').get('id')] = this;
 
             this.currentElement = [];
-            
+
             this._handleDOMPath();
             this.on('dompathChange', Y.bind(this._handleDOMPath, this));
             this.set('blankimage', this._getBlankImage());
@@ -4992,7 +4992,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                     img = Dom.getStyle(div, 'backgroundImage');
                     img = img.replace('url(', '').replace(')', '').replace(/"/g, '');
                     //Adobe AIR Code
-                    img = img.replace('app:/', '');             
+                    img = img.replace('app:/', '');
                     this.set('blankimage', img);
                     this._blankImageLoaded = true;
                     div.parentNode.removeChild(div);
@@ -5021,7 +5021,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             if (newHeight < parseInt(this.get('height'), 10)) {
                 newHeight = parseInt(this.get('height'), 10);
             }
-            if ((height != newHeight) && (newHeight >= parseInt(this.get('height'), 10))) {   
+            if ((height != newHeight) && (newHeight >= parseInt(this.get('height'), 10))) {
                 var anim = this.get('animate');
                 this.set('animate', false);
                 this.set('height', newHeight + 'px');
@@ -5169,7 +5169,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 if (Dom.getStyle(elm, 'fontFamily')) {
                     family = Dom.getStyle(elm, 'fontFamily');
                     //Adobe AIR Code
-                    family = family.replace(/'/g, '');                    
+                    family = family.replace(/'/g, '');
                 }
 
                 if (tag.substring(0, 1) == 'h') {
@@ -5212,7 +5212,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 }
                 fs_button.set('label', ''+fontsize);
             }
-            
+
             if (!this._isElement(elm, 'body') && !this._isElement(elm, 'img')) {
                 this.toolbar.enableButton(fn_button);
                 this.toolbar.enableButton(fs_button);
@@ -5233,7 +5233,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 this.toolbar.disableButton('indent');
             }
             this._lastButton = null;
-            
+
         },
         /**
         * @private
@@ -5247,7 +5247,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                     return false;
                 }
             }
-        
+
             this.toolbar.set('disabled', true); //Disable the toolbar when the prompt is showing
             var _handleAEC = function() {
                 var el = this.currentElement[0],
@@ -5316,7 +5316,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                     return false;
                 }
             }
-        
+
             this.toolbar.set('disabled', true); //Disable the toolbar when the prompt is showing
 
             var _handleAEC = function() {
@@ -5398,9 +5398,9 @@ YUI.add('gallery-simple-editor', function(Y) {
 
             this.get('element_cont').setStyle('display', 'none');
             this.get('element_cont').addClass(this.CLASS_CONTAINER);
-            
+
             this.set('iframe', this._createIframe());
-            
+
             Y.later(10, this, this._setInitialContent, false);
 
             this.get('editor_wrapper').appendChild(this.get('iframe'));
@@ -5428,7 +5428,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             YAHOO.log('fireEvent::toolbarLoaded', 'info', 'SimpleEditor');
             this.fire('toolbarLoaded', { type: 'toolbarLoaded' });
 
-            
+
             this.toolbar.on('toolbarCollapsed', function() {
                 if (this.currentWindow) {
                     this.moveWindow();
@@ -5440,7 +5440,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 }
             }, this, true);
             this.toolbar.on('fontsizeClick', this._handleFontSize, this, true);
-            
+
             this.toolbar.on('colorPickerClicked', function(o) {
                 this._handleColorPicker(o);
                 this.STOP_EXEC_COMMAND = true;
@@ -5452,11 +5452,11 @@ YUI.add('gallery-simple-editor', function(Y) {
             this.on('windowinsertimageClose', this._handleInsertImageWindowClose, this, true);
             this.toolbar.on('createlinkClick', this._handleCreateLinkClick, this, true);
             this.on('windowcreatelinkClose', this._handleCreateLinkWindowClose, this, true);
-            
+
 
             //Replace Textarea with editable area
             this.get('node').get('parentNode').replaceChild(this.get('element_cont'), this.get('node'));
-            
+
             this.get('node').setStyle('visibility', 'hidden');
             this.get('node').setStyle('position', 'absolute');
             this.get('node').setStyle('top', '-9999px');
@@ -5496,7 +5496,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 this._getWindow().focus();
             }
             var exec = true;
-            
+
             if (this.get('limitCommands')) {
                 if (!this.toolbar.getButtonByValue(action)) {
                     YAHOO.log('Toolbar Button for (' + action + ') was not found, skipping exec.', 'info', 'SimpleEditor');
@@ -5505,7 +5505,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             }
 
             this.editorDirty = true;
-            
+
             if ((typeof this['cmd_' + action.toLowerCase()] == 'function') && exec) {
                 YAHOO.log('Found execCommand override method: (cmd_' + action.toLowerCase() + ')', 'info', 'SimpleEditor');
                 var retValue = this['cmd_' + action.toLowerCase()](value);
@@ -5532,7 +5532,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 this.nodeChange();
             }, this, true);
             this.fireEvent('afterExecCommand', { type: 'afterExecCommand', target: this });
-            
+
         },
     /* {{{  Command Overrides */
 
@@ -5637,7 +5637,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         cmd_forecolor: function(value) {
             var exec = true,
                 el = this._getSelectedElement();
-                
+
                 if (!this._isElement(el, 'body') && !this._hasSelection()) {
                     Dom.setStyle(el, 'color', value);
                     this._selectNode(el);
@@ -5707,7 +5707,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             * @description The issue here is that we have no way of knowing where the cursor position is
             * inside of the iframe, so we have to place the newly inserted data in the best place that we can.
             */
-            
+
             YAHOO.log('InsertImage: ' + el.tagName, 'info', 'SimpleEditor');
             if (this._isElement(el, 'img')) {
                 this.currentElement[0] = el;
@@ -5769,7 +5769,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 } else {
                     _range.pasteHTML(value);
                 }
-                exec = false;                    
+                exec = false;
             }
             return [exec];
         },
@@ -5819,7 +5819,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                             this.currentElement[li].parentNode.removeChild(this.currentElement[li]);
                         }
                     }
-                    
+
                     var items = list.firstChild.innerHTML.split('<br>');
                     if (items.length > 0) {
                         list.innerHTML = '';
@@ -5899,7 +5899,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                         var range = this._getDoc().body.createTextRange();
                         range.moveToElementText(new_item);
                         range.collapse(false);
-                        range.select();                       
+                        range.select();
                         new_item.id = '';
                     }
                     exec = false;
@@ -5916,7 +5916,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             return [this.cmd_list('ol')];
         },
         /**
-        * @method cmd_insertunorderedlist 
+        * @method cmd_insertunorderedlist
         * @param value Value passed from the execCommand method
         * @description This is an execCommand override method. It is called from execCommand when the execCommand('insertunorderedlist') is used.
         */
@@ -6023,7 +6023,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 //Little Safari Hackery here..
                 el.innerHTML = '<span class="yui-non">&nbsp;</span>';
                 el = el.firstChild;
-                this._getSelection().setBaseAndExtent(el, 1, el, el.innerText.length);                    
+                this._getSelection().setBaseAndExtent(el, 1, el, el.innerText.length);
             } else if (this.browser.ie || this.browser.opera) {
                 el.innerHTML = '&nbsp;';
             }
@@ -6037,7 +6037,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         * @param {String} tagName (optional defaults to a) The tagname of the element that you wish to create
         * @param {Object} tagStyle (optional) Object literal containing styles to apply to the new element.
         * @description This is a work around for the various browser issues with execCommand. This method will run <code>execCommand('fontname', false, 'yui-tmp')</code> on the given selection.
-        * It will then search the document for an element with the font-family set to <strong>yui-tmp</strong> and replace that with another span that has other information in it, then assign the new span to the 
+        * It will then search the document for an element with the font-family set to <strong>yui-tmp</strong> and replace that with another span that has other information in it, then assign the new span to the
         * <code>this.currentElement</code> array, so we now have element references to the elements that were just modified. At this point we can use standard DOM manipulation to change them as we see fit.
         */
         _createCurrentElement: function(tagName, tagStyle) {
@@ -6045,7 +6045,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             var tar = null,
                 el = [],
                 _doc = this._getDoc();
-            
+
             if (this.currentFont) {
                 if (!tagStyle) {
                     tagStyle = {};
@@ -6102,7 +6102,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                         tar = Event.getTarget(this.currentEvent);
                     } else {
                         //For Safari..
-                        tar = this._getDoc().body;                        
+                        tar = this._getDoc().body;
                     }
                 }
                 if (tar) {
@@ -6153,7 +6153,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                     }
                 }
 
-                
+
                 for (var i = 0; i < _tmp.length; i++) {
                     if ((Dom.getStyle(_tmp[i], 'fontFamily') == 'yui-tmp') || (_tmp[i].face && (_tmp[i].face == 'yui-tmp'))) {
                         if (tagName !== 'span') {
@@ -6319,7 +6319,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             html = html.replace(/}/gi, 'LEFT_BRACKET');
 
             html = html.replace(/<strong([^>]*)>/gi, '<b$1>');
-            html = html.replace(/<\/strong>/gi, '</b>');   
+            html = html.replace(/<\/strong>/gi, '</b>');
 
             //replace embed before em check
             html = html.replace(/<embed([^>]*)>/gi, '<YUI_EMBED$1>');
@@ -6328,7 +6328,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             html = html.replace(/<em([^>]*)>/gi, '<i$1>');
             html = html.replace(/<\/em>/gi, '</i>');
             html = html.replace(/_moz_dirty=""/gi, '');
-            
+
             //Put embed tags back in..
             html = html.replace(/<YUI_EMBED([^>]*)>/gi, '<embed$1>');
             html = html.replace(/<\/YUI_EMBED>/gi, '</embed>');
@@ -6345,7 +6345,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             html = html.replace(/&lt;\/script([^>]*)&gt;/gi, '</bad>');
             //Replace the line feeds
             html = html.replace(/\r\n/g, '<YUI_LF>').replace(/\n/g, '<YUI_LF>').replace(/\r/g, '<YUI_LF>');
-            
+
             //Remove Bad HTML elements (used to be script nodes)
             html = html.replace(new RegExp('<bad([^>]*)>(.*?)<\/bad>', 'gi'), '');
             //Replace the lines feeds
@@ -6361,7 +6361,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         cleanHTML: function(html) {
             //Start Filtering Output
             //Begin RegExs..
-            if (!html) { 
+            if (!html) {
                 html = this.getEditorHTML();
             }
             var markup = this.get('markup');
@@ -6398,8 +6398,8 @@ YUI.add('gallery-simple-editor', function(Y) {
             //normalize strikethrough
             html = html.replace(/<strike/gi, '<span style="text-decoration: line-through;"');
             html = html.replace(/\/strike>/gi, '/span>');
-            
-            
+
+
             //Case Changing
             if (this.browser.ie) {
                 html = html.replace(/text-decoration/gi, 'text-decoration');
@@ -6468,7 +6468,7 @@ YUI.add('gallery-simple-editor', function(Y) {
 
 		    html = html.replace(/<YUI_EMBED([^>]*)>/g, '<embed$1>');
 		    html = html.replace(/<\/YUI_EMBED>/g, '<\/embed>');
-            
+
             //This should fix &amp;'s in URL's
             html = html.replace(/ &amp; /gi, ' YUI_AMP ');
             html = html.replace(/ &amp;/gi, ' YUI_AMP_F ');
@@ -6485,7 +6485,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 html = html.replace(/\n/g, '').replace(/\r/g, '');
                 html = html.replace(/  /gi, ' '); //Replace all double spaces and replace with a single
             }
-            
+
             for (var v in this.invalidHTML) {
                 if (YAHOO.lang.hasOwnProperty(this.invalidHTML, v)) {
                     if (Lang.isObject(v) && v.keepContents) {
@@ -6506,9 +6506,9 @@ YUI.add('gallery-simple-editor', function(Y) {
             for (var i = 0; i < len; i++) {
                 var ps2 = ps[i].getElementsByTagName('p');
                 if (ps2.length) {
-                    
+
                 }
-                
+
             }
             html = frag.innerHTML;
             console.log(html);
@@ -6559,7 +6559,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             //Remove onmouseover and onmouseout events (from MS Word comments effect)
             html = html.replace( /<(\w[^>]*) onmouseover="([^\"]*)"([^>]*)/gi, "<$1$3");
             html = html.replace( /<(\w[^>]*) onmouseout="([^\"]*)"([^>]*)/gi, "<$1$3");
-            
+
             return html;
         },
         /**
@@ -6645,7 +6645,7 @@ YUI.add('gallery-simple-editor', function(Y) {
 		        html = html.replace(/ class= /gi, '');
 		        html = html.replace(/ class= >/gi, '');
             }
-            
+
             return html;
         },
         /**
@@ -6663,7 +6663,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                     str = str.replace(arr[i].toString(), color);
                 }
             }
-            
+
             return str;
         },
         /**
@@ -6676,7 +6676,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             if (css.toLowerCase().indexOf('rgb') != -1) {
                 var exp = new RegExp("(.*?)rgb\\s*?\\(\\s*?([0-9]+).*?,\\s*?([0-9]+).*?,\\s*?([0-9]+).*?\\)(.*?)", "gi");
                 var rgb = css.replace(exp, "$1,$2,$3,$4,$5").split(',');
-            
+
                 if (rgb.length == 5) {
                     var r = parseInt(rgb[1], 10).toString(16);
                     var g = parseInt(rgb[2], 10).toString(16);
@@ -6708,7 +6708,7 @@ YUI.add('gallery-simple-editor', function(Y) {
 		    html = html.replace(/<br\/>/gi, '<YUI_BR>');
 		    html = html.replace(/<br \/>/gi, '<YUI_BR>');
 		    html = html.replace(/<div><YUI_BR><\/div>/gi, '<YUI_BR>');
-		    html = html.replace(/<p>(&nbsp;|&#160;)<\/p>/g, '<YUI_BR>');            
+		    html = html.replace(/<p>(&nbsp;|&#160;)<\/p>/g, '<YUI_BR>');
 		    html = html.replace(/<p><br>&nbsp;<\/p>/gi, '<YUI_BR>');
 		    html = html.replace(/<p>&nbsp;<\/p>/gi, '<YUI_BR>');
             //Fix last BR
@@ -6768,7 +6768,7 @@ YUI.add('gallery-simple-editor', function(Y) {
         closeWindow: function() {
             //this.unsubscribeAll('afterExecCommand');
             this.toolbar.resetAllButtons();
-            this.focus();        
+            this.focus();
         },
         /**
         * @method destroy
@@ -6780,7 +6780,7 @@ YUI.add('gallery-simple-editor', function(Y) {
                 clearTimeout(this._nodeChangeDelayTimer);
             }
             this.hide();
-        
+
             YAHOO.log('Destroying Editor', 'warn', 'SimpleEditor');
             if (this.resize) {
                 YAHOO.log('Destroying Resize', 'warn', 'SimpleEditor');
@@ -6806,7 +6806,7 @@ YUI.add('gallery-simple-editor', function(Y) {
             this.get('element_cont').get('element').innerHTML = '';
             this.set('handleSubmit', false); //Remove the submit handler
             return true;
-        },        
+        },
         /**
         * @method toString
         * @description Returns a string representing the editor.
@@ -6975,7 +6975,7 @@ Y.Editor.Info = {
     * @private
     * @property blankImage
     * @description A reference to the blankImage url
-    * @type String 
+    * @type String
     */
     blankImage: '',
     /**

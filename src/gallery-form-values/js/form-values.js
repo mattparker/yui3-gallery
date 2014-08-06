@@ -5,29 +5,29 @@
 Values = function(config) {
 	Values.superclass.constructor.apply(this,arguments);
 };
- 
+
 Y.extend(Values, Y.Plugin.Base, {
-	
+
     _values : null,
-		
+
     initializer : function () {
 		this.update();
 	},
-	
+
 	update : function() {
 		this._setFormValues();
 	},
-	
+
 	getValues : function(){
 		this.update();
 		return this.get('values');
 	},
-	
+
 	_setFormValues : function(){
 		var _values = {},
 		    f = this.get('host');
-		
-		
+
+
 		if(f !== null) {
 			f.get('elements').each(function(field){
 				var type = field.get('nodeName') + ':' + (field.get('type') || ''),
@@ -53,7 +53,7 @@ Y.extend(Values, Y.Plugin.Base, {
 						value = field.get('checked') ? field.get('value') : undefined;
 						break;
 				}
-				
+
 				if(value !== undefined) {
 					if (name in _values) {
 						if(!Y.Lang.isArray(_values[name])) {
@@ -66,7 +66,7 @@ Y.extend(Values, Y.Plugin.Base, {
 				}
 			});
 		}
-		
+
 		this.set('values',_values);
 	}
 },{
@@ -78,5 +78,5 @@ Y.extend(Values, Y.Plugin.Base, {
 		}
 	}
 });
-	
+
 Y.namespace('Form').Values = Values;

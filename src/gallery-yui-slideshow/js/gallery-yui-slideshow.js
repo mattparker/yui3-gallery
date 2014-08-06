@@ -1,5 +1,5 @@
 	// Transitions:
-	
+
 	Y.Transitions = {
 
 		none: {},
@@ -141,94 +141,94 @@
 		}
 
 	}; // Y.Transitions
-	
+
 	Y.Slideshow = function(pTarget, pConfig){
-		
+
 		// Target:
-		
+
 		switch(typeof(pTarget)){
-			
+
 			case 'string':
-			
+
 				this.id = (pTarget.indexOf('#') === 0) ? pTarget : '#' + pTarget;
 				this.container = Y.one(this.id);
 				break;
-				
+
 			case 'object':
-			
+
 				if(Y.Lang.isArray(pTarget)){
-					
+
 					var oSlideshows = [];
 					for(var i=0; i<pTarget.length; i++){
 						oSlideshows.push(new Y.Slideshow(pTarget[i], pConfig));
 					}
 					return oSlideshows;
-					
+
 				} else if(!Y.Lang.isUndefined(pTarget._node)){
-					
+
 					this.id = (pTarget.get('id') === '') ? Y.guid(): pTarget.get('id');
 					pTarget.set('id', this.id);
 					this.id = (this.id.indexOf('#') === 0) ? this.id : '#' + this.id;
 					this.container = pTarget;
 					break;
-					
+
 				} else if(!Y.Lang.isUndefined(pTarget.nodeName)){
-					
+
 					this.id = (pTarget.id === '') ? Y.guid(): pTarget.id;
 					this.id = (this.id.indexOf('#') === 0) ? this.id : '#' + this.id;
 					this.container = Y.one(this.id);
 					break;
-					
+
 				}
-				
+
 			default:
-			
+
 				return false;
-				
+
 		}
-		
+
 		// Lazy load?
-		
+
 		if(Y.Lang.isObject(pConfig)){
 			if(!Y.Lang.isUndefined(pConfig.lazyLoad)){
 				this.container.append(pConfig.lazyLoad);
 			}
 		}
-		
+
 		// Properties:
-		
+
 		this.slides = this.container.get('children');
-		
+
 		this.zIndex = {
 			container: 1,
 			slides: 2,
 			nextSlide: 3,
 			currentSlide: 4
 		};
-		
+
 		this.transIn = Y.Transitions.fadeIn;
 		this.transOut = Y.Transitions.fadeOut;
-		
+
 		this.easingIn = Y.Easing.easeOut;
 		this.easingOut = Y.Easing.easeOut;
-		
+
 		this.currentSlide = 0;
 		this.interval = 4000;
 		this.duration = 0.5;
-		
+
 		this.autoplay = true;
 		this.debug = false; // Changes autoplay timer from setInterval to setTimeout.
-		
+
 		this.loop = false;
-		
+
 		this.previousButton = false;
 		this.nextButton = false;
 		this.playButton = false;
 		this.pauseButton = false;
 		this.stopOnUser = true;
-		
+
 		// Config:
-		
+
 		if(Y.Lang.isObject(pConfig)){
 			for(var i in pConfig){
 				if(pConfig.hasOwnProperty(i)){
@@ -236,15 +236,15 @@
 				}
 			}
 		}
-		
+
 		var that = this;
-		
+
 		// Methods:
-				
+
 		this.slideChange = function(pWhich){
-			
+
 			var oOutAnimObject = { node: this.slides.item(this.currentSlide) };
-			
+
 			switch(pWhich){
 				case 'next':
 					if(this.currentSlide + 1 < this.slides.size()){
@@ -263,11 +263,11 @@
 				default:
 					this.currentSlide = parseInt(pWhich, 10);
 			}
-			
+
 			var oInAnimObject = { node: this.slides.item(this.currentSlide) };
-			
+
 			oInAnimObject.node.setStyle('zIndex', this.zIndex.nextSlide);
-			
+
 			for(var i in this.transOut){
 				if(this.transOut.hasOwnProperty(i)){
 					oOutAnimObject[i] = this.transOut[i];
@@ -278,10 +278,10 @@
 					oInAnimObject[i] = this.transIn[i];
 				}
 			}
-			
+
 			var oOutAnim = new Y.Anim(oOutAnimObject);
 			var oInAnim = new Y.Anim(oInAnimObject);
-			
+
 			if(Y.Lang.isUndefined(oOutAnimObject.duration)){
 				oOutAnim.set('duration', this.duration);
 			}
@@ -294,19 +294,19 @@
 			if(Y.Lang.isUndefined(oInAnimObject.easing)){
 				oInAnim.set('easing', this.easingIn);
 			}
-			
+
 			oOutAnim.on('end', function(){
 				oOutAnimObject.node.setStyle('zIndex', this.zIndex.slides);
 			}, this);
 			oInAnim.on('end', function(){
 				oInAnimObject.node.setStyle('zIndex', this.zIndex.currentSlide);
 			}, this);
-			
+
 			oOutAnim.run();
 			oInAnim.run();
-			
+
 		}; // slideChange()
-		
+
 		this.startLoop = function(){
 			if(this.autoplay === true){
 				if(this.debug === false){
@@ -316,9 +316,9 @@
 				}
 			}
 		}; // startLoop()
-		
+
 		// Init - Set positioning and z-indexes:
-				
+
 		this.container.setStyles({
 			position: 'relative',
 			zIndex: this.zIndex.container
@@ -329,9 +329,9 @@
 		});
 		this.slides.item(this.currentSlide).setStyle('zIndex', this.zIndex.currentSlide);
 		this.slides.item(this.currentSlide + 1).setStyle('zIndex', this.zIndex.nextSlide);
-		
+
 		// Init - Controls:
-		
+
 		if(this.previousButton !== false){
 			Y.on('click', function(){
 				if(this.loop !== false && this.stopOnUser === true){
@@ -364,9 +364,9 @@
 				}
 			}, this.pauseButton, this);
 		}
-		
+
 		// Init - Start loop:
-		
+
 		this.startLoop();
-		
+
 	}; // Y.Slideshow()

@@ -3,7 +3,7 @@ YUI.add('gallery-datasource-wrapper', function(Y) {
 /**
  * @module datasource-wrapper
  */
- 
+
 /**
  * @class Y.DataSourceWrapper
  * @extends Y.Base
@@ -46,7 +46,7 @@ Y.extend(DSW, Y.Base, {
 		}
 		return false;
 	},
-	
+
 	/**
 	 * @method sendRequest
 	 * @param req {String} A request to send the DataSource
@@ -59,17 +59,17 @@ Y.extend(DSW, Y.Base, {
 	sendRequest : function (req, cb) {
 		var ds = this.get('source');
 		req = req || '';
-		
+
 		if (!ds) {
 			Y.log("You must provide a valid DataSource instance", "error");
 			return;
 		}
-		
+
 		if (Y.Lang.isObject(cb) === false) {
 			Y.log("Please provide a valid callback", "error");
 			return;
 		}
-		
+
 		ds.sendRequest({
 			request : req,
 			callback : {

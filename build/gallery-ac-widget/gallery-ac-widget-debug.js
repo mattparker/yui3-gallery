@@ -58,7 +58,7 @@ Y.ACWidget = Y.extend(
          * @public
          * @for ACWidget
          **/
-        setSize : function () {            
+        setSize : function () {
             return this.set("width", this.get("ac").get("host").getComputedStyle("width"));
         },
         /**
@@ -73,14 +73,14 @@ Y.ACWidget = Y.extend(
                 cb = widget.get("contentBox"), //INHERITED
                 currentAC = widget.get("ac"),
                 category = Y.stamp(widget)+"|";
-            
+
             if (ac && currentAC !== ac && widget[BOUND]) {
                 // supplied something, it's new, and we're bound to something else.
                 Y.detach(category);
                 widget[BOUND] = 0; // small and falsey
             }
             ac = ac || currentAC;
-            
+
             // if we have an ac, and we're not bound right now, then bind.
             if (ac && !widget[BOUND]) {
                 widget[BOUND] = 1;
@@ -161,9 +161,9 @@ Y.ACWidget = Y.extend(
                 replRegexp = self.get("hiliteTpl")
                     .replace(/\$/g, '\\$')
                     .replace(/\{term\}/g, '$1');
-            
+
             return out.replace(findRegexp, replRegexp);
-            
+
             // YArrayeach(queryTerms, function (term) {
             //     if (!term) return;
             //     term = regexpEscape(term);
@@ -179,7 +179,7 @@ Y.ACWidget = Y.extend(
          **/
         next : function () {
             var self = this;
-            
+
             return (
                 self.get("visible") ? self.selectNext()
                 : self.get("data") ? self.show()
@@ -281,7 +281,7 @@ Y.ACWidget = Y.extend(
 /**
  * The item that is selected, for example when the user presses the down arrow to cycle
  * through the available results.
- * 
+ *
  * Changing this value causes the ACPlugin to set its queryValue to the new setting.
  * Setting it to -1 makes it go back to what the user had entered.
  * Setting it to less than -1 or greater than the number of items will cause it to wrap around.
@@ -290,7 +290,7 @@ Y.ACWidget = Y.extend(
  * @for ACWidget
  **/
 // don't define this one inline, so that we can compress the key
-// 
+//
 ACWidget.ATTRS[selectedIndex] = {
     value : -1,
     // validator should be the name to of an instance method
@@ -308,7 +308,7 @@ ACWidget.ATTRS[selectedIndex] = {
             selClass = this.getClassName("selected"); //INHERITED
         if (isNaN(current)) current = -1;
         if (!d || !l) return;
-        
+
         // first normalize them both to a number between
         // (-1)..(d.length - 1) where -1 means "what the user typed"
         // this should probably be a function, rather than copy pasta.
@@ -317,22 +317,22 @@ ACWidget.ATTRS[selectedIndex] = {
         while (si < -1) si += l + 1;
         si = (si + 1) % (l + 1) - 1;
         current = (current + 1) % (l + 1) - 1;
-                            
+
         // actually set it, the rest is just monkey business.
         self[_selectedIndex] = si;
-        
+
         // hang onto this, we'll need it later.
         if (current === -1) {
             self[_originalValue] = ac.get(queryValue);
         }
-        
+
         // nothing changing!
         if (current === si) return;
-        
+
         // undo the current one, but only if it's not -1
         var curItem = self.get("contentBox").one("."+selClass);
         if (curItem) curItem.removeClass(selClass);
-        
+
         // handle the new thing
         if (si === -1) {
             // back to the start

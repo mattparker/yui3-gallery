@@ -3,7 +3,7 @@ YUI.add('gallery-node-reset', function(Y) {
 
         var NR = function(config) {
             config.node = (
-                (Y.Widget && config.host instanceof Y.Widget) ? config.host.get('boundingBox') : 
+                (Y.Widget && config.host instanceof Y.Widget) ? config.host.get('boundingBox') :
                     ((config.host) ? config.host : config.node)
             );
 
@@ -20,7 +20,7 @@ YUI.add('gallery-node-reset', function(Y) {
         resetCSS += 'ID abbr, acronym { border: 0; font-variant: normal; }';
         resetCSS += 'ID sup { vertical-align: baseline; }';
         resetCSS += 'ID sub { vertical-align: baseline; }';
-        
+
         NR.NAME = "gallery-node-reset";
 
         NR.NS = "reset";
@@ -55,7 +55,7 @@ YUI.add('gallery-node-reset', function(Y) {
         Y.namespace('Plugin');
         Y.Plugin.NodeReset = NR;
 
-    
+
 
 
 }, 'gallery-2009.12.08-22' ,{requires:['node', 'stylesheet', 'base']});

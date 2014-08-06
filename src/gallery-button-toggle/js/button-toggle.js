@@ -3,17 +3,17 @@
         CLASSES = {
     		ACTIVE : '-active'
     	};
-    
+
     Button = function() {
         Button.superclass.constructor.apply(this, arguments);
     };
-    
+
     Y.extend(Button,Y.Button, {
-    	
+
         initializer : function(config) {
             this.after('activeChange',this._activeChanged, this);
         },
-        
+
         _toggle : function() {
         	var bb = this.get('boundingBox'),
     	    activeClass = this.className + CLASSES.ACTIVE;
@@ -32,11 +32,11 @@
         		this.set('active', !this.get('active'));
         	},this);
         },
-        
+
         _deactivateCallbackChange : function(e) {
             this._bindClick();
         },
-              
+
         _activeChanged : function(e) {
         	var bb = this.get('boundingBox'),
     	    activeClass = this.className + CLASSES.ACTIVE;
@@ -52,7 +52,7 @@
         		}
         	}
         }
-        
+
     }, {
         NAME : 'button',
         ATTRS : {
@@ -65,5 +65,5 @@
             }
         }
     });
-    
+
     Y.ButtonToggle = Button;

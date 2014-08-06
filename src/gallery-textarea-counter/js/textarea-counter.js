@@ -13,7 +13,7 @@
             config.node = config.host;
             TC.superclass.constructor.call(this, config);
         };
-        
+
         TC.NAME = "gallery-textarea-counter";
 
         TC.NS = "counter";
@@ -70,7 +70,7 @@
                 this._handles.push(n.on('keypress', fn));
                 this._handles.push(n.on('mouseup', fn));
                 this._handles.push(n.on('focus', fn));
-                
+
             },
             count: function() {
                 var node = this.get('node'),
@@ -100,9 +100,9 @@
                         start = stored_range.text.length - range.text.length;
                         end = start + range.text.length;
                     }
-                    
+
                 }
-                
+
                 rowList = text.split(/\n/);
                 rowCount = ((rowList) ? rowList.length : 1);
 
@@ -126,7 +126,7 @@
                     rows = 0;
                     cols = 0;
                 }
-                
+
                 if (defWordCount !== wordCount) {
                     this.set('wordCount', wordCount);
                 }
@@ -139,7 +139,7 @@
                 if (defColCount !== cols) {
                     this.set('colCount', cols);
                 }
-            
+
             },
             destructor: function() {
                 if (this._handles) {

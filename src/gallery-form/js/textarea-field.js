@@ -12,7 +12,7 @@ function TextareaField () {
 Y.mix(TextareaField, {
     NAME : 'textarea-field',
 
-    /** 
+    /**
      * @property TextareaField.NODE_TEMPLATE
      * @type String
      * @description Template used to draw a textarea node
@@ -24,10 +24,10 @@ Y.extend(TextareaField, Y.FormField, {
     _renderFieldNode : function () {
         var contentBox = this.get('contentBox'),
             field = contentBox.query('#' + this.get('id'));
-                
+
         if (!field) {
             field = Y.Node.create(Y.substitute(TextareaField.NODE_TEMPLATE, {
-                name : this.get('name'), 
+                name : this.get('name'),
                 type : 'text',
                 id : this.get('id'),
                 value : this.get('value')
@@ -37,7 +37,7 @@ Y.extend(TextareaField, Y.FormField, {
 
 		field.setAttribute('tabindex', Y.FormField.tabIndex);
 		Y.FormField.tabIndex++;
-        
+
         this._fieldNode = field;
     }
 });

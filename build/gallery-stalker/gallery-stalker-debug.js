@@ -1,14 +1,14 @@
 YUI.add('gallery-stalker', function(Y) {
 
 /**
-* <p>Stalker plugin will allow you to keep elements at a fixed position "floating" but at 
-* the same time, keeping those elements embeded to the layout of the page. The general idea 
-* is that an element can control it's own position within the layout in order to keep its 
+* <p>Stalker plugin will allow you to keep elements at a fixed position "floating" but at
+* the same time, keeping those elements embeded to the layout of the page. The general idea
+* is that an element can control it's own position within the layout in order to keep its
 * area within the viewport boundaries.
-* 
-* <p>To use the Stalker Plugin, simply pass a reference to the plugin to a 
+*
+* <p>To use the Stalker Plugin, simply pass a reference to the plugin to a
 * Node instance's <code>plug</code> method.</p>
-* 
+*
 * <p>
 * <code>
 * &#60;script type="text/javascript"&#62; <br>
@@ -22,7 +22,7 @@ YUI.add('gallery-stalker', function(Y) {
 *			Y.one('#mytarget').plug(Y.Plugin.Stalker); <br>
 * <br>
 *		}); <br>
-* <br>	
+* <br>
 *	&#60;/script&#62; <br>
 * </code>
 * </p>
@@ -44,8 +44,8 @@ CLASS_STALKER = getClassName(STALKER),
 
 //	Utility functions
 /**
-	* The NodeStalker class is a plugin for a Node instance.The class is used via  
-	* the <a href="Node.html#method_plug"><code>plug</code></a> method of Node and 
+	* The NodeStalker class is a plugin for a Node instance.The class is used via
+	* the <a href="Node.html#method_plug"><code>plug</code></a> method of Node and
 	* should not be instantiated directly.
 	* @namespace Y.Plugin
 	* @class NodeStalker
@@ -64,7 +64,7 @@ NodeStalker.ATTRS = {};
 Y.extend(NodeStalker, Y.Plugin.Base, {
 
 	//	Protected properties
-	/** 
+	/**
 	* @property _root
 	* @description Node instance representing the target node to follow.
 	* @default null
@@ -84,7 +84,7 @@ Y.extend(NodeStalker, Y.Plugin.Base, {
 			// Wire up all event handlers
 			this._eventHandlers.push(Y.on('scroll', fn));
 			this._eventHandlers.push(Y.on('windowresize', fn));
-			
+
 		}
 	},
 
@@ -105,7 +105,7 @@ Y.extend(NodeStalker, Y.Plugin.Base, {
 	*/
 	refresh: function() {
 		Y.log ('Refreshing the target', 'info', STALKER);
-		
+
 		var top = Y.DOM.docScrollY(),
 			left = Y.DOM.docScrollX(),
 			n = this._root,

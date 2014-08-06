@@ -10,7 +10,7 @@ YUI.add('value-change', function(Y) {
  * <p>This does not replace the DOM onchange event, but rather augments it to do onchange-like
  * logic as a result of key presses, even in multi-stroke character sets.</p>
  *
- * <p>Known issue: If attaching to elements that are not yet available, then only the first 
+ * <p>Known issue: If attaching to elements that are not yet available, then only the first
  * node will be guaranteed to have the event handler attached.</p>
  *
  * @event valueChange
@@ -19,13 +19,13 @@ YUI.add('value-change', function(Y) {
  * @param fn {Function} the callback function
  * @param el {String|Node|etc} the element(s) to bind
  * @param o {Object} optional context object
- * @param args 0..n additional arguments that should be provided 
+ * @param args 0..n additional arguments that should be provided
  * to the listener.
  * @return {Event.Handle} the detach handle
  **/
 
 function toNodeList (el) { return (
-    
+
     (Lang.isString(el) || Lang.isArray(el))
         ? Y.all(el)
     : (el instanceof Y.Node)
@@ -33,7 +33,7 @@ function toNodeList (el) { return (
     : (el instanceof Y.NodeList)
         ? el
     : Y.all([el])
-    
+
 )};
 
 function onAvail (el, args) {
@@ -51,7 +51,7 @@ function attachProxy (node, args) {
 
     var registry = attachTriggers(node),
         proxyHandle = node.on.apply(node, args);
-    
+
     return proxyHandle;
 };
 
@@ -103,9 +103,9 @@ var registry = {},
             var args = Y.Array(arguments, 0, true),
                 nodeList = toNodeList(el);
             if (nodeList.size() === 0) return onAvail(el, args);
-            
+
             args[3] = o = o || ((nodeList.size() === 1) ? nodeList.item(0) : nodeList);
-            
+
             var handles = [];
             nodeList.each(function (node) {
                 var proxyHandle = attachProxy(node, args);
@@ -119,13 +119,13 @@ var registry = {},
             }};
         }
     },
-    
-    
+
+
     // IMPLEMENTATION SPECIFIC
     eventName = "valueChange",
     domEventHandlers = (function () {
         var valueHistory = {}, intervals = {}, timeouts = {};
-            
+
         function startPolling (node, e) {
             var key = ceName(node);
             // avoid duplicates
@@ -150,12 +150,12 @@ var registry = {},
                 target : node,
                 currentTarget : node
             })
-            
+
             valueHistory[key] = node.get("value");
             startPolling(node, e);
-            
+
         };
-        
+
         function keyUpHandler (e) {
             // indications that an IME has started.
             // poll for 10 seconds.
@@ -169,7 +169,7 @@ var registry = {},
         function keyDownHandler (e) {
             startPolling(e.currentTarget, e);
         };
-        
+
         return {
             keyup : keyUpHandler,
             blur : blurHandler,
@@ -177,7 +177,7 @@ var registry = {},
         };
     })();
     // /IMPLEMENTATION SPECIFIC
-    
+
 
 
 Y.Env.evt.plugins[eventName] = event;

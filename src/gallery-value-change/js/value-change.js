@@ -8,7 +8,7 @@
  * <p>This does not replace the DOM onchange event, but rather augments it to do onchange-like
  * logic as a result of key presses, even in multi-stroke character sets.</p>
  *
- * <p>Known issue: If attaching to elements that are not yet available, then only the first 
+ * <p>Known issue: If attaching to elements that are not yet available, then only the first
  * node will be guaranteed to have the event handler attached.</p>
  *
  * @event valueChange
@@ -17,7 +17,7 @@
  * @param fn {Function} the callback function
  * @param el {String|Node|etc} the element(s) to bind
  * @param o {Object} optional context object
- * @param args 0..n additional arguments that should be provided 
+ * @param args 0..n additional arguments that should be provided
  * to the listener.
  * @return {Event.Handle} the detach handle
  **/
@@ -34,7 +34,7 @@ function attachProxy (node, args, category) {
     // node.on(type, fn, o, ...);
     args[0] = category + ceName(node);
     args.splice(2,1);
-    
+
     // if event-custom is loaded, then this is gonna do something.
     // otherwise, it's basically just a no-op.
     node.publish(args[0], {
@@ -68,9 +68,9 @@ var registry = {},
                         ? el : [el]
                 );
             if (nodeList.size() === 0) return onAvail(el, args);
-            
+
             args[3] = o = o || ((nodeList.size() === 1) ? nodeList.item(0) : nodeList);
-            
+
             var handles = [],
                 category,
                 categories = [];
@@ -92,13 +92,13 @@ var registry = {},
             };
         }
     },
-    
-    
+
+
     // IMPLEMENTATION SPECIFIC
     eventName = "valueChange",
     domEventHandlers = (function () {
         var valueHistory = {}, intervals = {}, timeouts = {};
-        
+
         function startPolling (node, e) {
             var key = ceName(node);
             // avoid duplicates
@@ -124,12 +124,12 @@ var registry = {},
                 target : node,
                 currentTarget : node
             });
-            
+
             valueHistory[key] = node.get("value");
             startPolling(node, e);
-            
+
         };
-        
+
         function keyUpHandler (e) {
             // indications that an IME has started.
             // poll for 10 seconds.
@@ -143,7 +143,7 @@ var registry = {},
         function keyDownHandler (e) {
             startPolling(e.currentTarget, e);
         };
-        
+
         return {
             keyup : keyUpHandler,
             blur : blurHandler,
@@ -151,7 +151,7 @@ var registry = {},
         };
     })();
     // /IMPLEMENTATION SPECIFIC
-    
+
 
 
 Y.Env.evt.plugins[eventName] = event;

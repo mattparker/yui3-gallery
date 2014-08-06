@@ -8,7 +8,7 @@ yuidoc_home=../../../yuidoc
 #     parser_in="%HOME/www/yui/src %HOME/www/event/src"
 parser_in="js"
 
-# The location to output the parser data.  This output is a file containing a 
+# The location to output the parser data.  This output is a file containing a
 # json string, and copies of the parsed files.
 parser_out=../../build/gallery-accordion/apidocs/parser_out
 

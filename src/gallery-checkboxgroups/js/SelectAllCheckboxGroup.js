@@ -2,7 +2,7 @@
  * All checkboxes can be selected and a select-all checkbox is available
  * to check all. This check-all box is automatically changed if any other
  * checkbox changes state.
- * 
+ *
  * @module gallery-checkboxgroups
  * @class SelectAllCheckboxGroup
  * @constructor

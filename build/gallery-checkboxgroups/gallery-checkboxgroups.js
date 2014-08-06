@@ -12,7 +12,7 @@ var Direction =
  * <p>Base class for enforcing constraints on groups of checkboxes.</p>
  *
  * <p>Derived classes must override <code>enforceConstraints()</code>.</p>
- * 
+ *
  * @module gallery-checkboxgroups
  * @class CheckboxGroup
  * @constructor
@@ -55,7 +55,7 @@ CheckboxGroup.prototype =
 	/**
 	 * Same functionality as <code>Array.splice()</code>.  Operates on the
 	 * list of managed checkboxes.
-	 * 
+	 *
 	 * @param start {Int} Insertion index
 	 * @param delete_count {Int} Number of items to remove, starting from <code>start</code>
 	 * @param cb_list {String|Object|Array} The list of checkboxes to insert at <code>start</code>
@@ -120,7 +120,7 @@ CheckboxGroup.prototype =
 
 	/**
 	 * Derived classes must override this function to implement the desired behavior.
-	 * 
+	 *
 	 * @param cb_list {String|Object|Array} The list of checkboxes
 	 * @param index {Int} The index of the checkbox that changed
 	 */
@@ -188,7 +188,7 @@ Y.CheckboxGroup = CheckboxGroup;
  * the active, adjacent one is turned on.  The exact algorithm is explained
  * in "Tog on Interface".  The checkboxes are assumed to be ordered in the
  * order they were added.
- * 
+ *
  * @module gallery-checkboxgroups
  * @class AtLeastOneCheckboxGroup
  * @constructor
@@ -268,7 +268,7 @@ Y.AtLeastOneCheckboxGroup = AtLeastOneCheckboxGroup;
 /**********************************************************************
  * At most one checkbox can be selected.  If one is turned on, the active
  * one is turned off.
- * 
+ *
  * @module gallery-checkboxgroups
  * @class AtMostOneCheckboxGroup
  * @constructor
@@ -308,7 +308,7 @@ Y.AtMostOneCheckboxGroup = AtMostOneCheckboxGroup;
  * All checkboxes can be selected and a select-all checkbox is available
  * to check all. This check-all box is automatically changed if any other
  * checkbox changes state.
- * 
+ *
  * @module gallery-checkboxgroups
  * @class SelectAllCheckboxGroup
  * @constructor

@@ -1,10 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
-<html> 
-<head> 
-<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
-<title>Resize Node Plugin</title> 
- 
-<style type="text/css"> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Resize Node Plugin</title>
+
+<style type="text/css">
 /*margin and padding on body element
   can introduce errors in determining
   element position and are not recommended;
@@ -14,7 +14,7 @@ body {
 	margin:0;
 	padding:0;
 }
-</style> 
+</style>
 
 
 
@@ -26,13 +26,13 @@ body {
 -->
 <!-- Utility Dependencies -->
 <!--
-<script src="http://yui.yahooapis.com/2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
-<script src="http://yui.yahooapis.com/2.8.0r4/build/dragdrop/dragdrop-min.js"></script> 
-<script src="http://yui.yahooapis.com/2.8.0r4/build/element/element-min.js"></script> 
+<script src="http://yui.yahooapis.com/2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script src="http://yui.yahooapis.com/2.8.0r4/build/dragdrop/dragdrop-min.js"></script>
+<script src="http://yui.yahooapis.com/2.8.0r4/build/element/element-min.js"></script>
 -->
-<!-- Optional Animation --> 
+<!-- Optional Animation -->
 <!--
-<script src="http://yui.yahooapis.com/2.8.0r4/build/animation/animation-min.js"></script> 
+<script src="http://yui.yahooapis.com/2.8.0r4/build/animation/animation-min.js"></script>
 -->
 <!-- Source file for the Resize Utility -->
 <!--
@@ -41,20 +41,20 @@ body {
 
 
 
-<!-- 3.1.0pr1 --> 
-<link type="text/css" rel="stylesheet" href="file://C:\Documents and Settings\Matt_2\My Documents\Downloads\yui_3.1.0pr1\yui/build/cssfonts/fonts-min.css" /> 
-<script type="text/javascript" src="http://yui.yahooapis.com/3.1.0pr1/build/yui/yui-min.js"></script> 
+<!-- 3.1.0pr1 -->
+<link type="text/css" rel="stylesheet" href="file://C:\Documents and Settings\Matt_2\My Documents\Downloads\yui_3.1.0pr1\yui/build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="http://yui.yahooapis.com/3.1.0pr1/build/yui/yui-min.js"></script>
 <script type="text/javascript" src="file://C:\Documents and Settings\Matt_2\My Documents\Downloads\yui_3.1.0pr1\yui\build\yui\yui-min.js"></script>
 
-<script type="text/javascript" src="../../../build/gallery-resize/plugin-resize.js"></script> 
-<link type="text/css" rel="stylesheet" href="../css/resize.css" /> 
+<script type="text/javascript" src="../../../build/gallery-resize/plugin-resize.js"></script>
+<link type="text/css" rel="stylesheet" href="../css/resize.css" />
 
 
 
 
-<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== --> 
- 
-<style> 
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<style>
     #demo , #demo28{
         height: 100px;
         width: 100px;
@@ -78,31 +78,31 @@ body {
     #demo28{
       left: 400px;
       background-color: green;
-    } 
-    
+    }
+
     code{
      display: block;
      white-space: pre;
     }
 
 
-</style> 
+</style>
 
 
- 
-</head> 
- 
-<body class=" yui-skin-sam"> 
- 
-<h1>Resize Node Plugin - wrapping elements</h1> 
- 
-<div class="exampleIntro"> 
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>Resize Node Plugin - wrapping elements</h1>
+
+<div class="exampleIntro">
  <h2>Introduction</h2>
 	<p>Resize adds some handles inside the html element you are making resizeable.
 	Which is fine most of the time, unless the element doesn't allow child nodes:
    images, textareas, inputs, iframes, and selects.
-   
-   In YUI2.x, these elements would be wrapped by a div, which would then hold 
+
+   In YUI2.x, these elements would be wrapped by a div, which would then hold
   the handles and the element itself.  All good.
   </p>
   <p>However, in writing the resize as a plugin for YUI3, this gives us a problem.
@@ -113,12 +113,12 @@ body {
    code like this:
   <code>
      var myNode = Y.get( '#myElement' );
-     
+
      myNode.plug( Y.Plugin.Resize );
   </code>
   would end up a bit misleading: it says (to me) <em>Add some fancy resize behaviour
   to the node with id "myElement".</em>  But what it does is different:
-  <em>Add some fancy resize behaviour to a magically newly created Node that 
+  <em>Add some fancy resize behaviour to a magically newly created Node that
   wraps up your image with id "myElement".</em>
   </p>
   <p>
@@ -137,61 +137,61 @@ body {
    the resize plugin to the wrapper.  The example below gives some details.
   </p>
 	<p>
-   There is one advantage to this: you could wrap several elements with one 
+   There is one advantage to this: you could wrap several elements with one
    resize plugin, and they'll all be resized proportionally to the wrapper.
    Or put some text around the image and have it move with the image resize.
-  </p>		
-</div> 
- 
+  </p>
+</div>
+
 <div class="example">
  <h2>Wrapping example</h2>
- 
+
  <div id="wrapper">
    <img src="" />
  </div>
  <script type="text/javascript">
    YUI( {base:"../../../../My Documents/Downloads/yui_3.1.0pr1/yui/build/"} ).use(  "*", function(Y) {
-   
-     // the wrappedEls config is a selector string for elements to resize when the 
+
+     // the wrappedEls config is a selector string for elements to resize when the
      // wrapper is resized.  It will only find children of the wrapper element.
-     
+
      // hugWrappedEl makes the wrapper Node 'hug' the wrapped element.  It only
      // works if there's one wrapped element.
-     
+
      Y.get("#wrapper").plug( Y.Plugin.Resize , {wrappedEls: "img", hugWrappedEl: true });
-   
+
    } );
  </script>
- 
- 
+
+
  <p>
  So as a simple example, we'll wrap our image in a div in the html, and add the
  resize to this wrapper:
  <code>
   &lt;div id="wrapper"&gt;
      &lt;img src="" /&gt;
-  &lt/div&gt; 
+  &lt/div&gt;
  </code>
  Javascript:
  <code>
    YUI().use( "*" , function( Y ) {
-   
-     // the wrappedEls config is a selector string for elements to resize when the 
+
+     // the wrappedEls config is a selector string for elements to resize when the
      // wrapper is resized.  It will only find children of the wrapper element.
-     
+
      // hugWrappedEl makes the wrapper Node 'hug' the wrapped element.  It only
      // works if there's one wrapped element.
-     
+
      Y.get("#wrapper").plug( Y.Plugin.Resize , {wrappedEls: "img", hugWrappedEl: true });
-   
-   
+
+
    } );
  </code>
-   
+
  </p>
- 
- 
+
+
 </div>
 
 </body>
-</html> 
+</html>

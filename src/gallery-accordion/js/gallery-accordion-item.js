@@ -13,7 +13,7 @@ var Lang = Y.Lang,
     WidgetStdMod = Y.WidgetStdMod,
     AccItemName = "accordion-item",
     getCN = Y.ClassNameManager.getClassName,
-    
+
     C_ICONEXPANDED_EXPANDING = getCN( AccItemName, "iconexpanded", "expanding" ),
     C_ICONEXPANDED_COLLAPSING = getCN( AccItemName, "iconexpanded", "collapsing" ),
 

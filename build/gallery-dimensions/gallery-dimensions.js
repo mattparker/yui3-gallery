@@ -24,7 +24,7 @@ var em_div = null,
 
 /**********************************************************************
  * <p>Returns the size of one em in pixels.</p>
- * 
+ *
  * @method emToPx
  */
 
@@ -47,7 +47,7 @@ Y.emToPx = function(
 
 /**********************************************************************
  * <p>Computes the size of everything surrounding the element's content.</p>
- * 
+ *
  * @method horizMarginBorderPadding
  */
 
@@ -66,7 +66,7 @@ Y.Node.prototype.horizMarginBorderPadding = function()
 
 /**********************************************************************
  * <p>Computes the size of everything surrounding the element's content.</p>
- * 
+ *
  * @method vertMarginBorderPadding
  */
 
@@ -85,7 +85,7 @@ Y.Node.prototype.vertMarginBorderPadding = function()
 
 /**********************************************************************
  * <p>Returns the size of the style in pixels.</p>
- * 
+ *
  * @method parseDimensionStyle
  */
 

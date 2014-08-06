@@ -3,7 +3,7 @@ YUI.add('gallery-bitly', function(Y) {
 
 
     var B = function(config) {
-        B.superclass.constructor.call(this, config);        
+        B.superclass.constructor.call(this, config);
     };
 
     B.NAME = 'bitly';
@@ -53,7 +53,7 @@ YUI.add('gallery-bitly', function(Y) {
                 }
                 delete YUI[stamp];
             }, this);
-            
+
             Y.Get.script(url + '&callback=YUI.' + stamp);
         },
         shorten: function(url, cb) {
@@ -65,7 +65,7 @@ YUI.add('gallery-bitly', function(Y) {
                 api = this._buildURL('expand', path);
 
             this._handleAPI('expand', api, cb);
-            
+
         },
         expandByURL: function(v, cb) {
             return this.expand({ url: v }, cb);
@@ -78,7 +78,7 @@ YUI.add('gallery-bitly', function(Y) {
                 api = this._buildURL('info', path);
 
             this._handleAPI('info', api, cb);
-            
+
         },
         infoByURL: function(v, cb) {
             return this.info({ url: v }, cb);
@@ -91,7 +91,7 @@ YUI.add('gallery-bitly', function(Y) {
                 api = this._buildURL('stats', path);
 
             this._handleAPI('stats', api, cb);
-            
+
         },
         statsByURL: function(v, cb) {
             return this.stats({ url: v }, cb);

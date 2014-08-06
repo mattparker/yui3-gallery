@@ -2,15 +2,15 @@
     * Functionality to add animation to the slideshow
     *
     ***********************************/
-    function SlideshowAnimated(config) { 
+    function SlideshowAnimated(config) {
         SlideshowAnimated.superclass.constructor.apply(this, arguments);
     }
 
     SlideshowAnimated.NAME = 'slideshowanimated';
     SlideshowAnimated.ANIMATION_DURATION = 0.5;
     SlideshowAnimated.EASING = Y.Easing.easeNone;
-    SlideshowAnimated.ATTRS = { 
-        animation_out: { 
+    SlideshowAnimated.ATTRS = {
+        animation_out: {
             value: {
                 from: { opacity: 1},
                 to: { opacity: 0 },
@@ -18,7 +18,7 @@
                 easing: SlideshowAnimated.EASING
             }
         },
-        animation_in: { 
+        animation_in: {
             value: {
                 from: {opacity: 0},
                 to: { opacity: 1 },
@@ -91,13 +91,13 @@
         },
 
         _anim_running: function() {
-            if (this.anim_in.get('running') || this.anim_out.get('running')) {  
-                return true; 
+            if (this.anim_in.get('running') || this.anim_out.get('running')) {
+                return true;
             } else {
                 return false;
             }
         },
-        
+
         _display_slide: function(slide_number) {
             var slide = this.get('slides').item(slide_number);
             this._before_display();
@@ -105,7 +105,7 @@
             this.anim_in.set('node', slide);
             this.anim_in.run();
         },
-        
+
         _hide_slide: function(slide_number) {
             this._before_hide();
             this.anim_out.set('node', this.get('slides').item(slide_number));
@@ -142,7 +142,7 @@
     *
     *
     **/
-    function SlideshowPanned(config) { 
+    function SlideshowPanned(config) {
         SlideshowPanned.superclass.constructor.apply(this, arguments);
     }
 
@@ -175,18 +175,18 @@
                 });
             }, this);
         },
-        
+
         _prep_slides: function() {
             // Nothing currently needed
         },
-        
+
         _container_location: function() {
             var con = this.get('container'),
                 x = con.getX(),
                 y = con.getY();
             return {x: x, y: y};
         },
-        
+
         _display_slide: function(slide_number) {
             var slide_pos = this.slide_start_positions[slide_number],
                 prev_pos = this.slide_start_positions[this.hide_slide],
@@ -198,7 +198,7 @@
             if (slide_pos.y != prev_pos.y) {
                 // Not at the current location so have to move
                 if (slide_pos.y < prev_pos.y) {
-                    // Move the container down (+), 
+                    // Move the container down (+),
                     // so items on the top are visible
                     top = (Math.abs(prev_pos.y) - Math.abs(slide_pos.y)) + current_loc.y - this.top_corner.y;
                 } else {
@@ -209,11 +209,11 @@
             if (top !== false) {
                 move_to.top = top;
             }
-                        
+
             if (slide_pos.x != prev_pos.x) {
                 // Not at the current location so have to move
                 if (slide_pos.x < prev_pos.x) {
-                    // Move the container to the right (+), 
+                    // Move the container to the right (+),
                     // so items on the left are visible
                     left = (Math.abs(prev_pos.x) - Math.abs(slide_pos.x)) + current_loc.x - this.top_corner.x;
                     //left = left + current_loc.x - slide_pos.x;
@@ -228,7 +228,7 @@
 
             this._before_display();
             this.anim_in.set('to', move_to);
-            
+
             this._before_hide();
             this.anim_in.run();
             this.get('slides').item(slide_number).addClass(Y.Slideshow.CURRENT_CLASS);
@@ -236,18 +236,18 @@
         },
         _hide_slide: function(slide_number) {
             // Do nothing for the panning slideshow
-            // as the slide is hidden as part of the 
-            // show slide 
+            // as the slide is hidden as part of the
+            // show slide
         }
     });
 //    SlideshowPanned = Y.Base.build("SlideshowPanned", SlideshowAnimated, [Panned]);
-    
+
     /**
     * Auto Generation of slideshows
     *
     *
     **/
-    
+
     SlideshowAnimated.AUTO_HORIZONTAL_CLASS = 'horizontalSlideshow';
     SlideshowAnimated.AUTO_CROSS_HORIZONTAL_CLASS = 'horizontalCrossSlideshow';
     SlideshowAnimated.AUTO_VERTICAL_CLASS = 'verticalSlideshow';
@@ -260,10 +260,10 @@
             slide = show_node.one('.slide');
             slide.addClass(Y.Slideshow.CURRENT_CLASS);
         }
-        return slide;  
+        return slide;
     };
     SlideshowAnimated._auto_merge_attrs = function(new_attrs, user_attrs) {
-        var attrs = new_attrs, 
+        var attrs = new_attrs,
             duration = SlideshowAnimated.ANIMATION_DURATION,
             easing = SlideshowAnimated.EASING;
         if (user_attrs) {
@@ -294,10 +294,10 @@
         return attrs;
     };
     SlideshowAnimated._auto_horizontal = function(show_node, show_class, user_attrs) {
-        var slide = SlideshowAnimated._auto_get_slide(show_node), 
-            width = parseInt(slide.getComputedStyle('width'), 10), 
+        var slide = SlideshowAnimated._auto_get_slide(show_node),
+            width = parseInt(slide.getComputedStyle('width'), 10),
             x, right_x, show_attrs;
-            
+
         if (! width) {
             if(slide.getStyle('display').toLowerCase() == 'none') {
                 slide.setStyle('display', 'block');
@@ -306,12 +306,12 @@
         }
         x = parseInt(slide.getComputedStyle('left'), 10) || 0;
         right_x = x + width;
-        
+
         if (show_class === SlideshowAnimated.AUTO_CROSS_HORIZONTAL_CLASS) {
             show_attrs = {
                 animation_out: { from: { left: x }, to: {left: right_x} },
                 animation_in: { from: {left: right_x }, to: {left: x} }
-            };       
+            };
         } else {
             show_attrs = {
                 animation_out: { from: { left: x }, to: {left: (-1 * right_x)} },
@@ -323,7 +323,7 @@
         return new SlideshowAnimated(SlideshowAnimated._auto_merge_attrs(show_attrs, user_attrs));
     };
     SlideshowAnimated._auto_vertical = function(show_node, show_class, user_attrs) {
-        var slide = SlideshowAnimated._auto_get_slide(show_node), 
+        var slide = SlideshowAnimated._auto_get_slide(show_node),
             height = parseInt(slide.getComputedStyle('height'), 10),
             show_attrs;
         if (! height) {
@@ -337,7 +337,7 @@
             show_attrs = {
                 animation_out: { from: { top: 0 }, to: {top: (-1 * height)} },
                 animation_in: { from: {top: (-1 * height) }, to: {top: 0} }
-            };       
+            };
         } else {
             show_attrs = {
                 animation_out: { from: { top: 0 }, to: {top: height} },
@@ -347,7 +347,7 @@
         show_attrs.contentBox = show_node;
         show_attrs.reverse_animation = { value: true };
         return new SlideshowAnimated(SlideshowAnimated._auto_merge_attrs(show_attrs, user_attrs));
-    };    
+    };
     SlideshowAnimated.auto_shows[SlideshowAnimated.AUTO_HORIZONTAL_CLASS] = function(show_node, user_attrs) {
         return SlideshowAnimated._auto_horizontal(show_node, SlideshowAnimated.AUTO_HORIZONTAL_CLASS, user_attrs);
     };

@@ -19,7 +19,7 @@ Y.extend(ImagePadding, Y.Plugin.Base, {
 			    img_width = parseInt(imageNode.one('img').getStyle('width'), 10),
 			    padding_width = (width - img_width)/2,
 			    padding_height = (height - img_height)/2;
-			imageNode.setStyle('padding', padding_height + ' ' + padding_width); 
+			imageNode.setStyle('padding', padding_height + ' ' + padding_width);
 		}, [img._node, this._ss.get('bodyNode')]);
 	}
 });

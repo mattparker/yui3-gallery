@@ -1,6 +1,6 @@
 YUI 3 Gallery Source
 
-This is the source tree for the YUI 3 Gallery.  The Gallery is a collection of modules that have been developed by the YUI community to enhance the capabilities of YUI 3. 
+This is the source tree for the YUI 3 Gallery.  The Gallery is a collection of modules that have been developed by the YUI community to enhance the capabilities of YUI 3.
 
 Gallery modules in this source tree are not part of the official YUI 3 library distribution. They are submissions that have been written and tested by developers in the YUI community, and have been reviewed by members of the YUI Team before they are accepted into the Gallery.  The modules in this source tree are licensed for use under the same BSD license used by YUI.  To facilitate the use() of these modules, the Gallery content in this source tree is hosted on the Yahoo! CDN.
 
@@ -22,22 +22,22 @@ The source tree for the YUI 3 Gallery includes the following directories:
          commented form (suitable for debugging) and in minified form
          (suitable for deployment and use).
 
-* sandbox: The sandbox directory contains works-in-progress which may 
-         include unreleased module updates under construction, as well as 
+* sandbox: The sandbox directory contains works-in-progress which may
+         include unreleased module updates under construction, as well as
          experimental and/or demonstration code created by module authors.
 
-* src: This directory contains the source code for each module. src may 
-         also contain all module-specific tests.  All modifications to the 
+* src: This directory contains the source code for each module. src may
+         also contain all module-specific tests.  All modifications to the
          module should take place in this directory.
 
-         The src directory also contains build.xml and build.properties files,  
+         The src directory also contains build.xml and build.properties files,
          which can be used to build individual modules using the YUI component
-         build tool. The YUI component build tool is part of the YUI "builder" 
+         build tool. The YUI component build tool is part of the YUI "builder"
          project, also available on GitHub:
 
          http://github.com/yui/builder
 
          The README in the componentbuild directory of the builder project
          covers installation and use of the build tool.
-  
+
 

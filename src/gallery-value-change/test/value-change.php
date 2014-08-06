@@ -66,7 +66,7 @@ YUI({
     filter : "raw"
 }).use('gallery-value-change', function (Y) {
 	window.Y = Y;
-	
+
 	console.log("attach Y.all",
 		Y.all(".input").on("YALL|valueChange", function (e) {
 			console.log("from Y.all", e, this);
@@ -75,20 +75,20 @@ YUI({
 	console.log("attach Y.on with ID", Y.on("YON|valueChange", function (e) {
 		console.log("from Y.on with ID", e, this, e.currentTarget);
 	}, "#input"));
-	
+
 	console.log("attach Y.one with ID", Y.one("#textarea").on("YONE|valueChange", function (e) {
 		console.log("from Y.one with ID", e, this);
 	}));
-	
+
 	var handle;
 	console.log("attach Y.on with className", handle = Y.on("YONE|valueChange", function (e) {
 		console.log("from Y.on with className", e, this);
 	}, ".input"));
-	
+
 	console.log("k, now remove one");
 	// handle.detach();
 	// Y.detach("YALL|");
-	
+
 });
 </script>
 

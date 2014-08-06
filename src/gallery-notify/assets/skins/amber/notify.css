@@ -46,14 +46,14 @@
 	display:block;
 }
 
-.yui3-skin-amber .yui3-notify .yui3-notify-content li.yui3-notify-message-flag-notice, 
+.yui3-skin-amber .yui3-notify .yui3-notify-content li.yui3-notify-message-flag-notice,
 .yui3-skin-amber .yui3-notify .yui3-notify-content li.yui3-notify-message-flag-alert,
 .yui3-skin-amber .yui3-notify .yui3-notify-content li.yui3-notify-message-flag-error {
 	padding-left: 30px;
 	background-position: 4px 50%;
 	background-repeat: no-repeat;
 }
-.yui3-skin-amber .yui3-notify .yui3-notify-content li.yui3-notify-message-flag-notice:hover, 
+.yui3-skin-amber .yui3-notify .yui3-notify-content li.yui3-notify-message-flag-notice:hover,
 .yui3-skin-amber .yui3-notify .yui3-notify-content li.yui3-notify-message-flag-alert:hover,
 .yui3-skin-amber .yui3-notify .yui3-notify-content li.yui3-notify-message-flag-error:hover {
 	padding-left: 29px;

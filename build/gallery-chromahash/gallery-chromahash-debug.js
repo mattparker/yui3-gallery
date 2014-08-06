@@ -6,7 +6,7 @@ YUI.add('gallery-chromahash', function(Y) {
  */
 
 var LBL_TMPL = '<label for="{id}" class="{color} chroma-hash"></label>',
-		_C = function(conf) { 
+		_C = function(conf) {
 			this._animations = [];
 			_C.superclass.constructor.apply(this, arguments);
 			this.renderUI();
@@ -14,7 +14,7 @@ var LBL_TMPL = '<label for="{id}" class="{color} chroma-hash"></label>',
 		};
 _C.NAME = "ChromaHash";
 _C.NS = "ChromaHash";
-_C.ATTRS = 
+_C.ATTRS =
 	{
 		bars: {
 			value: 3,

@@ -30,7 +30,7 @@ var ZERO     = "0",
          * @return {[int, int, int]} the red, green, blue values in
          *          decimal.
          */
-        hsv2rgb: function(h, s, v) { 
+        hsv2rgb: function(h, s, v) {
 
             if (isArray(h)) {
                 return ColorX.hsv2rgb.call(ColorX, h[0], h[1], h[2]);
@@ -85,7 +85,7 @@ var ZERO     = "0",
 
             switch (max) {
                 case min: h=0; break;
-                case r:   h=60*(g-b)/delta; 
+                case r:   h=60*(g-b)/delta;
                           if (g<b) {
                               h+=360;
                           }
@@ -93,7 +93,7 @@ var ZERO     = "0",
                 case g:   h=(60*(b-r)/delta)+120; break;
                 case b:   h=(60*(r-g)/delta)+240; break;
             }
-            
+
             s = (max === 0) ? 0 : 1-(min/max);
 
             hsv = [Math.round(h), s, max];
@@ -119,7 +119,7 @@ var ZERO     = "0",
             var f = ColorX.dec2hex;
             return f(r) + f(g) + f(b);
         },
-     
+
         /**
          * Converts an int 0...255 to hex pair 00...FF
          * @method dec2hex
@@ -134,7 +134,7 @@ var ZERO     = "0",
         },
 
         /**
-         * Converts a hex pair 00...FF to an int 0...255 
+         * Converts a hex pair 00...FF to an int 0...255
          * @method hex2dec
          * @param str {string} the hex pair to convert
          * @return {int} the decimal
@@ -149,7 +149,7 @@ var ZERO     = "0",
          * @param str {string} the hex string
          * @return {[int, int, int]} an array containing the rgb values
          */
-        hex2rgb: function(s) { 
+        hex2rgb: function(s) {
             var f = ColorX.hex2dec;
             return [f(s.slice(0, 2)), f(s.slice(2, 4)), f(s.slice(4, 6))];
         },

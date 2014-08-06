@@ -32,7 +32,7 @@ Y.mix(SelectField, {
 	 * @description The display title of the default choice in the select box
 	 */
 	DEFAULT_OPTION_TEXT : 'Choose one',
-	
+
 	ATTRS : {
 	    /**
 	     * @attribute useDefaultOption
@@ -57,17 +57,17 @@ Y.extend(SelectField, Y.ChoiceField, {
     _renderFieldNode : function () {
         var contentBox = this.get('contentBox'),
             field = contentBox.query('#' + this.get('id'));
-                
+
         if (!field) {
             field = Y.Node.create(SelectField.NODE_TEMPLATE);
             contentBox.appendChild(field);
         }
-        
+
         this._fieldNode = field;
 
         this._renderOptionNodes();
     },
-    
+
 	/**
 	 * @method _renderOptionNodes
 	 * @protected
@@ -76,7 +76,7 @@ Y.extend(SelectField, Y.ChoiceField, {
     _renderOptionNodes : function () {
         var choices = this.get('choices'),
             elOption;
-       
+
 		// Create the "Choose one" option
 		if (this.get('useDefaultOption') === true) {
     		elOption = Y.Node.create(SelectField.OPTION_TEMPLATE);
@@ -138,7 +138,7 @@ Y.extend(SelectField, Y.ChoiceField, {
 			}
 		}, this);
 	},
-    
+
 	/**
 	 * @method clear
 	 * @description Restores the selected option to the default

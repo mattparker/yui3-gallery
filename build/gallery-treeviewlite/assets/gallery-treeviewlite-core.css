@@ -2,12 +2,12 @@
  ol.yui3-treeviewlite,
  ul.yui3-treeviewlite,
  ol.yui3-treeviewlite ol,
- ul.yui3-treeviewlite ol, 
+ ul.yui3-treeviewlite ol,
  ol.yui3-treeviewlite ul,
  ul.yui3-treeviewlite ul {
     list-style-image:none;
     list-style-position:inside;
-    list-style-type:none;  
+    list-style-type:none;
     padding-left:12px;
     *padding-left:0;
     padding-top:0;
@@ -21,17 +21,17 @@
   *padding-left:20px;
     list-style-image:none;
     list-style-position:inside;
-    list-style-type:none;  
-	}	
+    list-style-type:none;
+	}
 
   ol.yui3-treeviewlite li.yui3-treeviewlite-collapsed ol,
   ol.yui3-treeviewlite li.yui3-treeviewlite-collapsed ul,
-  ul.yui3-treeviewlite li.yui3-treeviewlite-collapsed ol, 
+  ul.yui3-treeviewlite li.yui3-treeviewlite-collapsed ol,
   ul.yui3-treeviewlite li.yui3-treeviewlite-collapsed ul {
     display: none;
   }
-  
-	
+
+
 	ol.yui3-treeviewlite li span,
   ul.yui3-treeviewlite li span{
 	 margin-left: -30px;
@@ -45,5 +45,5 @@
 ol.yui3-treeviewlite li.yui3-treeviewlite-haschild>span,
 ul.yui3-treeviewlite li.yui3-treeviewlite-haschild>span{
  cursor:pointer;
-}	
+}
 

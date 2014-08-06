@@ -62,7 +62,7 @@
 								item 1 content here...
 					        </p>
 					    </div>
-						
+
 					</div>
 				    <div class="yui-module yui-accordion-item">
 			            <div class="yui-hd yui-accordion-item-hd">
@@ -79,12 +79,12 @@
 								item 2 content here...
 					        </p>
 					    </div>
-			
+
 					</div>
-			
+
 				</div>
 
-					
+
 			</div>
 		</div>
 
@@ -96,15 +96,15 @@
 		    filter: 'debug',
 		    combine: false
 		}).use('anim', 'event', 'node', 'node-accordion', function (Y) {
-			
-		    Y.get("#myaccordion").plug(Y.Plugin.NodeAccordion, { 
+
+		    Y.get("#myaccordion").plug(Y.Plugin.NodeAccordion, {
 				anim: true,
 				speed: 'slow',
 				fade: true,
 				multiple: false,
 				persistent: true
 			});
-			
+
 		});
 	</script>
 </body>

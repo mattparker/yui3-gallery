@@ -1,7 +1,7 @@
 /**
  * ACPlugin - A plugin that exposes the proper events to make AutoComplete work
  * on a form element (input or textarea, typically).
- * 
+ *
  * This utility is not intended to be used in isolation, but rather as a glue
  * layer to work with ACWidget or some other display mechanism.
  **/
@@ -63,7 +63,7 @@ Y.Plugin.ACPlugin = Y.extend(
             }) }, self);
 
             // manage the browser's autocomplete, since that'll interefere,
-            // but we need to make sure that we don't prevent pre-filling 
+            // but we need to make sure that we don't prevent pre-filling
             // when the user navs back to the page, unless the developer has
             // specifically disabled that feature in the markup.
             manageBrowserAC(host);
@@ -82,17 +82,17 @@ Y.Plugin.ACPlugin = Y.extend(
         ATTRS : {
             /**
              * The value that will be queried.
-             * 
+             *
              * By default, this is just a proxy to the host's value attr, which in
              * Node objects passes through to the underlying DOM node.
-             * 
+             *
              * However, in some use cases, it may be useful to override the queryValue
              * getters and setters, for example, in the delimited case.
              *
              * Setting caches the value so that we only make new requests for user-entered
              * data, and not for programmatically-set values.  (For example, when a user
              * is scrolling through the items displayed in an  ACWidget.)
-             * 
+             *
              * @for ACPlugin
              * @type {String}
              * @public
@@ -118,12 +118,12 @@ Y.Plugin.ACPlugin = Y.extend(
              * It is not required that it be a DataSource object per se, but it
              * must provide a "sendRequest" function that takes the same sort of
              * argument as the DataSource classes.
-             * 
+             *
              * It is not required to use this, as the implementor can listen to
              * ac:query events and handle them in any ad-hoc way desired.  However,
              * for the 99% use case, it's simpler to just provide a data source
              * and do things in the normal way.
-             * 
+             *
              * @for ACPlugin
              * @type Object
              **/
@@ -145,7 +145,7 @@ Y.Plugin.ACPlugin = Y.extend(
                 value : 3,
                 validator : YLang.isNumber
             },
-            
+
             /**
              * Attribute used to convert a value into a request for the
              * DataSource.  Can be a string containing "{query}" somewhere,
@@ -186,7 +186,7 @@ Y.Plugin.ACPlugin = Y.extend(
 
 /**
  * Attach the required event handles to the host node.
- * 
+ *
  * @param self {Object} The ACPlugin instance
  * @param host {Object} The host object
  * @return {Array} A list of handles
@@ -235,11 +235,11 @@ function browserACFixer (domnode) { return function () {
 /**
  * Manage the browser's builtin AutoComplete behavior, so that form values
  * will be tracked in browsers that do that.
- * 
+ *
  * First, disable the browser's autocomplete, since that'll cause issues.
  * If the element is not set up to disable the browser's builtin autocomplete,
  * then set an unload listener to re-enable it.
- * 
+ *
  * @private
  * @param host {Object} The node to manage
  * @see {browserACFixer}
@@ -271,7 +271,7 @@ function manageBrowserAC (host) {
  **/
 function handleQueryResponse (e) {
     var res = (e && e.response && e.response.results) ? e.response.results : e;
-    
+
     // if there is a result, and it's not an empty array
     if (res && !(res && ("length" in res) && res.length === 0)) this.fire("ac:load", {
         results : res,

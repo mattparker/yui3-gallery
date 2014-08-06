@@ -3,7 +3,7 @@
  * @extends FormField
  * @param config {Object} Configuration object
  * @constructor
- * @description A form field which allows one or multiple values from a 
+ * @description A form field which allows one or multiple values from a
  * selection of choices
  */
 function ChoiceField() {
@@ -12,30 +12,30 @@ function ChoiceField() {
 
 Y.mix(ChoiceField, {
     NAME : 'choice-field',
-    
-	ATTRS : { 
-        /** 
+
+	ATTRS : {
+        /**
          * @attribute choices
          * @type Array
          * @description The choices to render into this field
          */
-        choices : { 
+        choices : {
             validator : function (val) {
                 return this._validateChoices(val);
             }
-        },  
+        },
 
-        /** 
+        /**
          * @attribute multiple
          * @type Boolean
          * @default false
          * @description Set to true to allow multiple values to be selected
          */
-        multiple : { 
+        multiple : {
             validator : Y.Lang.isBoolean,
             value : false
-        }   
-    }  
+        }
+    }
 });
 
 Y.extend(ChoiceField, Y.FormField, {
@@ -50,9 +50,9 @@ Y.extend(ChoiceField, Y.FormField, {
 			Y.log('Choice values must be in an array');
             return false;
         }
-		
+
 		var i = 0, len = val.length;
-		
+
 		for (; i < len; i++) {
             if (!Y.Lang.isObject(val[i])) {
 				Y.log('Choice that is not an object cannot be used');
@@ -68,7 +68,7 @@ Y.extend(ChoiceField, Y.FormField, {
 					continue;
             }
         }
-		
+
 		if (val.length === 0) {
 			return false;
 		}
@@ -79,16 +79,16 @@ Y.extend(ChoiceField, Y.FormField, {
     _renderLabelNode : function () {
         var contentBox = this.get('contentBox'),
             titleNode = Y.Node.create('<span>' + this.get('label') + '</span>');
-        
+
         contentBox.appendChild(titleNode);
-        
+
         this._labelNode = titleNode;
     },
-    
+
     _renderFieldNode : function () {
         var contentBox = this.get('contentBox'),
             choices = this.get('choices');
-       
+
 		Y.Array.each(choices, function(c, i, a) {
 			var cfg = {
 					value : c.value,
@@ -98,7 +98,7 @@ Y.extend(ChoiceField, Y.FormField, {
 				},
 				fieldType = (this.get('multiple') === true ? Y.CheckboxField : Y.RadioField),
 				field = new fieldType(cfg);
-			
+
 			field.render(contentBox);
         }, this);
 
@@ -111,7 +111,7 @@ Y.extend(ChoiceField, Y.FormField, {
         this._fieldNode.each(function (node, index, list) {
             node.setAttribute('checked', false);
         }, this);
-        
+
         this.set('value', '');
     },
 

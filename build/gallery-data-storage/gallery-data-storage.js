@@ -11,7 +11,7 @@ YUI.add('gallery-data-storage', function(Y) {
 
 	var expando = "yui" + (new Date()).getTime(),
 		uuid = 0,
-	
+
 	Data = {
 		/**
 	     * This is the main caching mechanism.  The cache is keyed by the
@@ -23,7 +23,7 @@ YUI.add('gallery-data-storage', function(Y) {
 	     * @public
 	     */
 		cache: {},
-		
+
 		/**
 	     * This key is used on Y.Node instances to store the cache key and on used
 	     * on all other objects to store the data directly.
@@ -34,7 +34,7 @@ YUI.add('gallery-data-storage', function(Y) {
 	     * @public
 	     */
 		expando: expando,
-		
+
 		/**
          * This method handles both getting and setting data against an object.
          * It can be invoked in one of four ways:
@@ -44,7 +44,7 @@ YUI.add('gallery-data-storage', function(Y) {
          * 		<li>data(elem, name { Object }) - set data associated with elem</li>
          * 		<li>data(elem, name, data) - set data keyed by "name" assoicated with elem</li>
          * </ul>
-         * 
+         *
          * Depending on which way it is invoked, it will perform one of those four operations.
          *
          * @method data
@@ -61,41 +61,41 @@ YUI.add('gallery-data-storage', function(Y) {
 				cache = Data.cache,
 				thisCache,
 				isNode = elem instanceof Y.Node;
-			
+
 			// If we haven't initialized this element and we're trying to get data,
 			// then there isn't any, so just return.
 			if (!id && typeof name === "string" && data === undefined) {
 				return;
 			}
-			
+
 			// Get the data from the object directly
 			if (!isNode) {
 				cache = elem;
 				id = Data.expando;
-							
+
 			// Compute a unique ID for the element
 			} else if (!id) {
 				elem[expando] = id = ++uuid;
 			}
-			
+
 			// Avoid generating a new cache unless none exists and we want to manipulate it.
 			if (typeof name === "object") {
 				cache[id] = Y.aggregate({}, name);
-			
+
 			} else if (!cache[id]) {
 				cache[id] = {};
 			}
-			
+
 			thisCache = cache[id];
-			
+
 			// Prevent overriding the named cache with undefined values.
 			if (data !== undefined) {
 				thisCache[name] = data;
 			}
-			
+
 			return typeof name === "string" ? thisCache[name] : thisCache;
 		},
-		
+
 		/**
          * This method handles removing the data associated with an object, either by
          * removing it from the cache or removing it from the store on the object itself.
@@ -104,7 +104,7 @@ YUI.add('gallery-data-storage', function(Y) {
          * 		<li>removeData(elem) - remove all associated with elem</li>
          * 		<li>removeData(elem, name) - remove data keyed by "name" associated with elem</li>
          * </ul>
-         * 
+         *
          * Depending on which way it is invoked, it will perform one of those operations.
          *
          * @method removeData
@@ -119,23 +119,23 @@ YUI.add('gallery-data-storage', function(Y) {
 				cache = Data.cache,
 				isNode = elem instanceof Y.Node,
 				thisCache = isNode ? cache[id] : id;
-			
+
 			// If we want to remove a specific section of the element's data.
 			if (name) {
 				if (thisCache) {
 					// Remove the section of cache data.
 					delete thisCache[name];
-					
+
 					// If we've removed all the data, remove the element's cache.
 					if (!Y.Object.size(thisCache))  {
 						Data.removeData(elem);
 					}
 				}
-			
+
 			// Otherwise, we want to remove all of the element's data
 			} else {
 				delete elem[Data.expando];
-				
+
 				// Completely remove the data cache
 				if (isNode) {
 					delete cache[id];
@@ -143,19 +143,19 @@ YUI.add('gallery-data-storage', function(Y) {
 			}
 		}
 	};
-	
+
 	/**
 	 * A dummy class used to augment the Y.Node class.  This class exposes
 	 * methods that allow for data to be stored, retrieved and deleted natively
 	 * on Y.Node instances.
-	 * 
+	 *
 	 * @class NodeDataExt
 	 * @constructor
 	 */
 	var NodeDataExt = function () {};
-	
+
 	NodeDataExt.prototype = {
-		
+
 		/**
          * This method is a proxy for the Y.DataStorage.data, which will get/set
          * the data associated with this node instance.
@@ -166,7 +166,7 @@ YUI.add('gallery-data-storage', function(Y) {
          * 		<li>data(key { Object }) - set data associated with this node</li>
          * 		<li>data(key, value) - set data keyed by "key" assoicated with this node</li>
          * </ul>
-         * 
+         *
          * Depending on which way it is invoked, it will perform one of those four operations.
          *
          * @method data
@@ -179,18 +179,18 @@ YUI.add('gallery-data-storage', function(Y) {
 		data: function(key, value) {
 			if (typeof key === "undefined") {
 				return Data.data(this);
-			
+
 			} else if (typeof key === "object") {
 				Data.data(this, key);
 				return this;
 			}
-			
+
 			var parts = key.split("."), data;
 			parts[1] = parts[1] ? "." + parts[1] : "";
-			
+
 			if (value === undefined) {
 				data = Data.data(this, key);
-				
+
 				return data === undefined && parts[1] ?
 						this.data(parts[0]) :
 						data;
@@ -199,7 +199,7 @@ YUI.add('gallery-data-storage', function(Y) {
 				return this;
 			}
 		},
-		
+
 		/**
          * This method is a proxy for the Y.DataStorage.removeData, which will remove
          * the data associated with this node instance.
@@ -208,7 +208,7 @@ YUI.add('gallery-data-storage', function(Y) {
          * 		<li>removeData() - remove all associated with this node</li>
          * 		<li>removeData(key) - remove data keyed by "key" associated with this node</li>
          * </ul>
-         * 
+         *
          * Depending on which way it is invoked, it will perform one of those operations.
          *
          * @method removeData
@@ -221,21 +221,21 @@ YUI.add('gallery-data-storage', function(Y) {
 			return this;
 		}
 	};
-	
+
 	Y.augment(Y.Node, NodeDataExt);
 
 	/**
 	 * A dummy class used to augment the Y.NodeList class.  This class exposes
 	 * methods that allow for data to be stored, retrieved and deleted natively
 	 * on Y.NodeList instances.
-	 * 
+	 *
 	 * @class NodeListDataExt
 	 * @constructor
-	 */	
+	 */
 	var NodeListDataExt = function () {};
-	
+
 	NodeListDataExt.prototype = {
-		
+
 		/**
          * This method is a proxy for the Y.DataStorage.data, which will get/set
          * the data associated with these nodes.
@@ -246,7 +246,7 @@ YUI.add('gallery-data-storage', function(Y) {
          * 		<li>data(key { Object }) - set data associated with each node in the list</li>
          * 		<li>data(key, value) - set data keyed by "key" assoicated with each node in the list</li>
          * </ul>
-         * 
+         *
          * Depending on which way it is invoked, it will perform one of those four operations.
          *
          * @method data
@@ -259,20 +259,20 @@ YUI.add('gallery-data-storage', function(Y) {
 		data: function(key, value) {
 			if (typeof key === "undefined") {
 				return Data.data(this.item(0));
-			
+
 			} else if (typeof key === "object") {
 				this.each(function () {
 					this.data(key);
 				});
 				return this;
 			}
-			
+
 			var parts = key.split("."), data;
 			parts[1] = parts[1] ? "." + parts[1] : "";
-			
+
 			if (value === undefined) {
 				data = Data.data(this.item(0), key);
-				
+
 				return data === undefined && parts[1] ?
 						this.data(parts[0]) :
 						data;
@@ -283,7 +283,7 @@ YUI.add('gallery-data-storage', function(Y) {
 				return this;
 			}
 		},
-		
+
 		/**
          * This method is a proxy for the Y.DataStorage.removeData, which will remove
          * the data associated with these nodes.
@@ -292,7 +292,7 @@ YUI.add('gallery-data-storage', function(Y) {
          * 		<li>removeData() - remove all associated with each node in the list</li>
          * 		<li>removeData(key) - remove data keyed by "key" associated with each node in the list</li>
          * </ul>
-         * 
+         *
          * Depending on which way it is invoked, it will perform one of those operations.
          *
          * @method removeData
@@ -309,7 +309,7 @@ YUI.add('gallery-data-storage', function(Y) {
 	};
 
 	Y.augment(Y.NodeList, NodeListDataExt);
-	
+
 	Y.DataStorage = Data;
 
 

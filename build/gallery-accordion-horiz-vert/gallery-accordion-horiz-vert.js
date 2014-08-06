@@ -9,17 +9,17 @@ var use_nonzero_empty_div = (0 < Y.UA.ie && Y.UA.ie < 8),
  * <p>Class to manage an accordion, either horizontally or vertically.
  * Allows either multiple open sections or only a single open section.
  * Provides option to always force at lease one item to be open.</p>
- * 
+ *
  * <p>An accordion can be constructed from existing markup or from strings
  * containing HTML.  Existing markup can be provided either by setting
  * <code>contentBox</code> or by specifying CSS selectors.  See the
  * <code>titles</code> and <code>sections</code> attributes.</p>
- * 
+ *
  * <p>When constructing from existing markup via <code>contentBox</code>,
  * use an unordered list (&lt;ul&gt;).  Each item must contain two
  * &lt;div&gt;'s.  The first one is used as the section title, and the
  * second one is used as the section content.</p>
- * 
+ *
  * <p>Animation is optional.  If the anim module is not available,
  * animation is automatically turned off.</p>
  *
@@ -29,11 +29,11 @@ var use_nonzero_empty_div = (0 < Y.UA.ie && Y.UA.ie < 8),
  * <li>Each title must have both a width and height.</li>
  * <li>Each section must have a width.</li>
  * </ul>
- * 
+ *
  * <p>IE doesn't accept zero height divs, so we use 1px height and zero
  * opacity.  IE6 doesn't always render correctly with opacity set, so if
  * animation is turned off, we don't use opacity at all.</p>
- * 
+ *
  * @module gallery-accordion-horiz-vert
  * @class Accordion
  * @constructor
@@ -72,7 +72,7 @@ Accordion.ATTRS =
 {
 	/**
 	 * Whether or not the accordion is horizontal.
-	 * 
+	 *
 	 * @config horizontal
 	 * @type {boolean}
 	 * @default false
@@ -88,7 +88,7 @@ Accordion.ATTRS =
 	 * A CSS selector for locating nodes, an array of nodes, or an array
 	 * of strings containing markup.  This is used to define the initial
 	 * set of section titles.
-	 * 
+	 *
 	 * @config titles
 	 * @type {String|Array}
 	 * @writeonce
@@ -102,7 +102,7 @@ Accordion.ATTRS =
 	 * Whether or not to replace the default title container node, when the
 	 * supplied title is a node.  (If the supplied title is markup, it is
 	 * always inserted inside the default title container.)
-	 * 
+	 *
 	 * @config replaceTitleContainer
 	 * @type {boolean}
 	 * @default true
@@ -117,7 +117,7 @@ Accordion.ATTRS =
 	 * A CSS selector for locating nodes, an array of nodes, or an array
 	 * of strings containing markup.  This is used to define the initial
 	 * set of section contents.
-	 * 
+	 *
 	 * @config sections
 	 * @type {String|Array}
 	 * @writeonce
@@ -131,7 +131,7 @@ Accordion.ATTRS =
 	 * Whether or not to replace the default section container node, when
 	 * the supplied title is a node.  (If the supplied content is markup,
 	 * it is always inserted inside the default section container.)
-	 * 
+	 *
 	 * @config replaceSectionContainer
 	 * @type {boolean}
 	 * @default true
@@ -145,7 +145,7 @@ Accordion.ATTRS =
 	/**
 	 * Whether or not to allow all sections to be closed at the same time.
 	 * If not, at least one section will always be open.
-	 * 
+	 *
 	 * @config allowAllClosed
 	 * @type {boolean}
 	 * @default false
@@ -165,7 +165,7 @@ Accordion.ATTRS =
 	/**
 	 * Whether or not to allow multiple sections to be open at the same
 	 * time.  If not, at most one section at a time will be open.
-	 * 
+	 *
 	 * @config allowMultipleOpen
 	 * @type {boolean}
 	 * @default false
@@ -178,7 +178,7 @@ Accordion.ATTRS =
 
 	/**
 	 * Whether or not to animate the initial rendering of the widget.
-	 * 
+	 *
 	 * @config animateRender
 	 * @type {boolean}
 	 * @default false
@@ -193,7 +193,7 @@ Accordion.ATTRS =
 
 	/**
 	 * Whether or not to animate insertion and removal of sections.
-	 * 
+	 *
 	 * @config animateInsertRemove
 	 * @type {boolean}
 	 * @default true
@@ -207,7 +207,7 @@ Accordion.ATTRS =
 
 	/**
 	 * Whether or not to animate opening and closing of sections.
-	 * 
+	 *
 	 * @config animateOpenClose
 	 * @type {boolean}
 	 * @default true
@@ -221,7 +221,7 @@ Accordion.ATTRS =
 
 	/**
 	 * Duration of all animations.
-	 * 
+	 *
 	 * @config animateDuration
 	 * @type {int}
 	 * @default whatever Y.Anim default is
@@ -237,7 +237,7 @@ Accordion.ATTRS =
 
 	/**
 	 * Easing applied to all animations.
-	 * 
+	 *
 	 * @config animateEasing
 	 * @type {function}
 	 * @default whatever Y.Anim default is
@@ -434,7 +434,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Sets the contents of the specified section title.
-	 * 
+	 *
 	 * @param index {int} the section index
 	 * @param title {String|Node} the title content
 	 */
@@ -493,7 +493,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Sets the contents of the specified section.
-	 * 
+	 *
 	 * @param index {int} the section index
 	 * @param content {String|Node} the section content
 	 */
@@ -548,7 +548,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Prepends the section to the accordion.
-	 * 
+	 *
 	 * @param title {String|Node} the section title content
 	 * @param content {String|Node} the section content
 	 */
@@ -561,7 +561,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Appends the section to the accordion.
-	 * 
+	 *
 	 * @param title {String|Node} the section title content
 	 * @param content {String|Node} the section content
 	 */
@@ -574,7 +574,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Inserts the section into the accordion at the specified location.
-	 * 
+	 *
 	 * @param index {int} the insertion index
 	 * @param title {String|Node} the section title content
 	 * @param content {String|Node} the section content
@@ -657,7 +657,7 @@ Y.extend(Accordion, Y.Widget,
 			var anim = this._createAnimator(params);
 
 			anim.on('end', function(type, index)
-			{	
+			{
 				this.section_list[index].title.setStyle(this.slide_style_name, 'auto');
 			},
 			this, index);
@@ -698,7 +698,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Removes the specified section.
-	 * 
+	 *
 	 * @param index {int} the section index
 	 */
 	removeSection: function(
@@ -796,7 +796,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Open the specified section.
-	 * 
+	 *
 	 * @param index {int} the section index
 	 */
 	openSection: function(
@@ -810,7 +810,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Close the specified section.
-	 * 
+	 *
 	 * @param index {int} the section index
 	 */
 	closeSection: function(
@@ -858,7 +858,7 @@ Y.extend(Accordion, Y.Widget,
 
 	/**
 	 * Show/hide the section content.
-	 * 
+	 *
 	 * @param index {int} the section index
 	 */
 	toggleSection: function(

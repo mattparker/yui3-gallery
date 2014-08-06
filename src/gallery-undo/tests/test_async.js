@@ -65,7 +65,7 @@ YUI({
         Y.Assert.isInstanceOf( Y.UndoableAction, action );
         Y.Assert.isNumber( index );
     }, this) );
-    
+
 
     var testAsynchronousActions = new Y.Test.Case({
         name: "Test asynchronous action",

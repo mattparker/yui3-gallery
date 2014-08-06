@@ -6,7 +6,7 @@
         .slide.current { display: block; }
         .inactive {color: #ccc; cursor: default;}
         .current {font-weight: 700;}
-    </style>    
+    </style>
 </head>
 <body>
 <h2>Slideshow with images</h2>
@@ -15,8 +15,8 @@
     <img src="media/slide_2.jpg" class="slide">
     <img src="media/slide_3.jpg" class="slide">
     <img src="media/slide_4.jpg" class="slide">
-</div>    
-    
+</div>
+
 <h2>Slideshow with images in a div with play and pause buttons (current slide not specified)</h2>
 <div class="slideshow">
     <div class="slide"><img src="media/slide_1.jpg"></div>
@@ -33,14 +33,14 @@
     <img src="media/slide_3.jpg" class="slide  current">
     <img src="media/slide_4.jpg" class="slide">
     <div>
-        <a href="" class="previous">&lt; prev</a> &nbsp; 
+        <a href="" class="previous">&lt; prev</a> &nbsp;
         <a href="" class="slideSelector">1</a>
         <a href="" class="slideSelector">2</a>
         <a href="" class="slideSelector">3</a>
         <a href="" class="slideSelector">4</a>
-        &nbsp; <a href="" class="next">next &gt;</a>  
+        &nbsp; <a href="" class="next">next &gt;</a>
     </div>
-</div>  
+</div>
 
 <div id="man_slideshow_events"  style="border: 1px solid #ccc; margin-left: 15px; float: right;">
     <h2>Manual Slideshow Events</h2>
@@ -54,14 +54,14 @@
     <img src="media/slide_4.jpg" class="slide">
     <div>
         <a href="" class="play">Play</a> &nbsp; <a href="" class="pause">Pause</a><br>
-        <a href="" class="previous">&lt; prev</a> &nbsp; 
+        <a href="" class="previous">&lt; prev</a> &nbsp;
         <a href="" class="slideSelector">1</a>
         <a href="" class="slideSelector">2</a>
         <a href="" class="slideSelector">3</a>
         <a href="" class="slideSelector">4</a>
         &nbsp; <a href="" class="next">next &gt;</a>
     </div>
-</div>  
+</div>
 
 
 <hr>
@@ -78,7 +78,7 @@
         }
     }).use("gallery-slideshow-base", "log", "dump", function(Y) {
         Y.Slideshow.auto();
-        
+
         var append_node = Y.one('#man_slideshow_events'),
             slideshow_events = [
                 'slideshow:slide-selected',

@@ -1,7 +1,7 @@
 ol.yui3-treeviewlite li,
 ul.yui3-treeviewlite li{
 	background:transparent url(treeview-sprite.gif) no-repeat scroll 0 -5600px;
-}	
+}
 ol.yui3-treeviewlite li.yui3-treeviewlite-haschild,
 ul.yui3-treeviewlite li.yui3-treeviewlite-haschild{
   background: transparent url(treeview-sprite.gif) no-repeat scroll 0 -4000px;

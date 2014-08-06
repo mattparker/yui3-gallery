@@ -4,8 +4,8 @@
  * Plugin to make elements resizeable.
  *
  * Respects (almost) all the config and methods of YUI2.x resize,
- * with the exception of wrap.  
- * 
+ * with the exception of wrap.
+ *
  * See http://developer.yahoo.com/yui/docs/YAHOO.util.Resize.html for API
  *
  *
@@ -40,7 +40,7 @@
         };
 
 
-        
+
         /**
         * @property NAME
         * @description resize
@@ -50,7 +50,7 @@
 
         /**
         * @property NS
-        * @description The Resize instance will be placed on the Node instance 
+        * @description The Resize instance will be placed on the Node instance
         *         under the resize namespace. It can be accessed via Node.resize;
         * @type {String}
         */
@@ -63,51 +63,51 @@
          * See http://developer.yahoo.com/yui/docs/YAHOO.util.Resize.html#config_animate
          */
         Resize.ATTRS = {
-        
 
-          animate : { 
+
+          animate : {
             value: false,
             validator: function(val) {
               return Y.Lang.isNumber(val);
-            } 
+            }
           },
-          
+
           animateDuration : { value: 0.25 },
-          
+
           animateEasing : { value: ( Y.Easing === undefined ? null : Y.Easing.easeNone ) },
-          
-          autoRatio : { 
-            value: false ,        
+
+          autoRatio : {
+            value: false ,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
-            }          
+            }
           },
-          
-          draggable : { 
-            value: false,        
+
+          draggable : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
            },
-          
-          ghost : { 
-            value: false,        
+
+          ghost : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
           },
-          
-        
+
+
           handles: {
               value: [ "r", "br", "b" ],
-              setter: function( v ) { 
+              setter: function( v ) {
                 if( Y.Lang.isString( v ) && v.toLowerCase() == "all" ) {
                   return [  't', 'b', 'r', 'l', 'bl', 'br', 'tl', 'tr' ];
                 }
               }
           },
-          
-          
+
+
           height : {
             lazyAdd : false,
             setter: function(v) {
@@ -118,107 +118,107 @@
               return Y.Lang.isNumber(val);
             }
           },
-          
-          hiddenHandles : { 
-            value: false,        
+
+          hiddenHandles : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
            },
-          
-          hover : { 
-            value: false,        
+
+          hover : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
            },
-          
-          knobHandles : { 
-            value: false,        
+
+          knobHandles : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
            },
-          
-          maxHeight : {        
+
+          maxHeight : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          maxWidth : {        
+
+          maxWidth : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          maxX : {        
+
+          maxX : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          maxY : {        
+
+          maxY : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          minHeight : {        
+
+          minHeight : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          minWidth : {        
+
+          minWidth : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          minX : {        
+
+          minX : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          minY : {        
+
+          minY : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          proxy : { 
-            value: false,        
+
+          proxy : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
           },
-          
-          ratio : { 
-            value: false,        
+
+          ratio : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
            },
-          
+
           setSize : {},
-          
-          status : { 
-            value: false,        
+
+          status : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
            },
-          
-          useShim : { 
-            value: false,        
+
+          useShim : {
+            value: false,
             validator: function(val) {
               return Y.Lang.isBoolean(val);
             }
            },
-          
-          width : {            
+
+          width : {
             lazyAdd : false,
             setter: function(v) {
               this.get("host").setStyle( "width" , v + "px" );
@@ -228,23 +228,23 @@
               return Y.Lang.isNumber(val);
             }
           },
-          
+
           /*
           We don't wrap elements.  There's a good reason:
             This is a plugin.  It plugs in to a Node.  You don't want a plugin
             to one node that actually plugs into another node it creates.
-            
+
             If you want to resize fancy things like images and textareas,
             wrap the element yourself and plugin resize to that.  Use the isWrapper
             config option to resize child elements along with the wrapper.
-          
+
           wrap : {},
           */
-          
+
           /**
            * This is a wrapper for other things to resize: pass a valid selector
            * for the child elements you want resized too.
-           * 
+           *
            * Only gets children of the host node, so selector passed will have
            * #hostId prepended to the selector passed.
            */
@@ -262,11 +262,11 @@
               }
             }
           },
-          
-          
+
+
           /**
            * Whether to 'hug' the wrapped element.
-           * If there's only one element we're wrapping, 
+           * If there's only one element we're wrapping,
            * set the size of the host to the element that's wrapped.
            */
           hugWrappedEl: {
@@ -281,7 +281,7 @@
                 if( c.getStyle( "position" ) == "absolute" ){
                   h.setXY( c.getXY() );
                 }
-                
+
                 if( Y.UA.ie ){
                   hHeight += 8;
                   hWidth += 5;
@@ -292,32 +292,32 @@
               }
             }
           },
-          
-          
-          
-          xTicks : {        
+
+
+
+          xTicks : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           },
-          
-          yTicks : {        
+
+          yTicks : {
             validator: function(val) {
               return Y.Lang.isNumber(val);
             }
           }
-          
-          
 
-        
-        
+
+
+
+
         };
 
 
 
         Y.extend(Resize, Y.Plugin.Base, {
-        
-        
+
+
             /**
              *
              *
@@ -328,48 +328,48 @@
              *
              *
              */
-             
-        
+
+
             /**
              * Handle currently being used for resize
              */
             _currentHandle: false,
-            
-            
+
+
             /**
              * Whether resize is locked
              */
             _locked: false,
-            
-            
+
+
             /**
              * Ratio of h/w - used if retaining el ratio
              */
             _ratioValue: null,
-            
-            
+
+
             /**
              * The Node to resize during DD - may be the proxy
              */
             _resizeNode: null,
-            
+
             /**
              * Where we start from
              */
             _originalPosition: {},
-            
+
             /**
              * Reference to the status element
              */
             _statusNode: false,
-            
+
             /**
-             * Elements wrapped (eg images) by the resize 
+             * Elements wrapped (eg images) by the resize
              */
             _wrappedEls: [],
-            
 
- 
+
+
 
 
 
@@ -387,21 +387,21 @@
                  case 'iframe':
                  case 'select':
                    return false;
-                 
+
                }
-               
-               
+
+
                this._renderHandles();
-               
+
                this._renderStatus();
-               
+
                this._addDD();
-               
+
 
             },
-            
-            
-            
+
+
+
             /**
              *
              *
@@ -411,7 +411,7 @@
              *
              */
 
-            
+
             /**
              * Add some divs to the host node as handles
              */
@@ -438,21 +438,21 @@
                                    .append( Y.Node
                                              .create( "<div></div>" )
                                              .addClass("yui3-resize-handle-inner-" + position ) );
-                                               
+
                     };
-                
-                 Y.each( this.get("handles" ), 
+
+                 Y.each( this.get("handles" ),
                          function( v, k ){
-                            el.append( _renderHandle( v, k ) ); 
+                            el.append( _renderHandle( v, k ) );
                          }
                  );
 
 
 
                // Handlers for mouseenter/leave:
-                   
+
                  // add/remove highlight classes for mouseenter
-                 addHandleClass = function( ){ 
+                 addHandleClass = function( ){
                    Y.each( this.getAttribute( "class" ).split( " " ) ,
                            function( v , h ){ this.addClass( v + "-active" ); } ,
                            this);
@@ -460,11 +460,11 @@
                      el.removeClass( "yui3-resize-hover" );
                    }
                  };
-                 
+
                  // removes 'active' classes and add hover class:
                  removeHandleClass = function(){
                    Y.each( this.getAttribute( "class" ).split( " " ) ,
-                           function( v , h ){ if( v.slice( -7 ) == "-active" ){ 
+                           function( v , h ){ if( v.slice( -7 ) == "-active" ){
                              this.removeClass( v ); }
                            } ,
                            this);
@@ -478,45 +478,45 @@
 
 
                // Add ther css classes:
-               
+
                // classes for the main host element
                el.addClass("yui3-resize");
-               
+
                // hide the handles?
                if( this.get( "hiddenHandles" ) ){
                  el.addClass( "yui3-resize-hidden" );
                }
-               
+
                // add hovering class
                if( hover ) {
                  el.addClass( "yui3-resize-hover" );
                }
 
-               
+
                // change the display of handles to small square knobs
                if( this.get( "knobHandles" ) ) {
                  el.addClass( "yui3-resize-knob" );
                }
             },
-            
-            
+
+
             /**
              * Adds a Node to hold the status info
              */
             _renderStatus: function(){
-            
+
               if( this.get( "status" ) ){
                 this._statusNode = Y.Node.create( '<span class="yui3-resize-status"></span>' );
                 Y.Node.one( "body" ).prepend( this._statusNode );
               }
-            
+
             },
 
-            
-            
-            
-            
-            
+
+
+
+
+
             /**
              *
              *
@@ -524,20 +524,20 @@
              *
              *
              */
-            
-            
+
+
             /**
-             * Add drag drop plugin to host element and make 
+             * Add drag drop plugin to host element and make
              * .yui3-resize-handle a handle.
              * @private
              */
             _addDD: function() {
 
                var el = this.get("host");
-               
-               
+
+
                el.plug( Y.Plugin.Drag , { useShim: this.get( "useShim" ) } );
-                                           
+
                if( this.get( "proxy" ) ){
                  el.dd.plug( Y.Plugin.DDProxy , { moveOnEnd: true } );
                  this._resizeNode = Y.DD.DDM._proxy;
@@ -546,27 +546,27 @@
                else {
                  this._resizeNode = el;
                }
-                
+
                el.dd.addHandle( '.yui3-resize-handle' );
-            
+
                el.dd.on( 'drag:start' , this._startResize , this  );
                el.dd.on( 'drag:drag' , this._resize , this );
                el.dd.on( 'drag:end' , this._endResize , this );
-               
+
                // add normal dd:
                if( this.get( "draggable" ) ){
                  el.dd.addHandle( el );
                }
 
             },
-            
-            
-            
 
-            
-            
-            
-            
+
+
+
+
+
+
+
             /**
              * Handler for start of resize
              * @private
@@ -579,11 +579,11 @@
                // if it's not a resize handle we're not interested
                if( ch === undefined || !ch.hasClass( "yui3-resize-handle" ) ){
                  if( this.get( "draggable" ) ){
-                   el.dd.set( "move" , true );                  
+                   el.dd.set( "move" , true );
                  }
                  return;
                }
-               
+
 
                this._currentHandle = ch;
 
@@ -592,44 +592,44 @@
                if( this.get( "ratio" ) || ( this.get("autoRatio") && ev.currentTarget._ev_md.shiftKey  ) ) {
                  this._ratioValue = parseInt( el.getComputedStyle( "height" ) , 10 ) / parseInt( el.getComputedStyle( "width" ) , 10 );
                }
-               
+
                if( this.get( "ghost" ) ){
                   el.addClass( "yui3-resize-ghost" );
                }
-               
+
                this._originalPosition = this._getPosition( this._resizeNode );
- 
+
                this._startChildResize();
-               
+
                // show the status panel:
                this._showStatus();
-               
+
             },
-            
-            
+
+
             /**
              * Remember where child elements that are being resized are
              */
             _startChildResize: function(){
-            
-              
-            
+
+
+
             },
 
 
 
-            
+
             /**
              * Handler for actual resize
              * @private
              */
             _resize: function( ev ){
 
-              
+
                if( this._locked === true || this._currentHandle === false ) {
                  return;
                }
-          
+
                // get the current location
                var coords = this._getPosition( this._resizeNode  ),
                    orig = this._originalPosition,
@@ -657,50 +657,50 @@
 
                if( this.get( "xTicks" ) && this.get( "xTicks" ) > 0 ){
                  calcdW =  this._snapTick( dw , this.get( "xTicks" ) );
-                 
+
                }
 
                if( this.get( "yTicks" ) && this.get( "yTicks" ) > 0 ){
                  calcdH =  this._snapTick( dh , this.get( "yTicks" ) );
-               }               
+               }
 
-            
+
                if ( ch.hasClass( "yui3-resize-handle-r" ) ) {
-                   
+
                  calcdW = dw;
                  t = orig.t;
                  l = orig.l;
-               
+
                }
-               
+
                else if ( ch.hasClass( "yui3-resize-handle-l" ) ) {
 
                  calcdW = -dw;
                  calcdL = dw;
                  t = orig.t;
                }
-                   
+
                else if( ch.hasClass( "yui3-resize-handle-t" ) ) {
-                   
+
                  calcdH = -dh;
                  calcdT = dh;
                  l = orig.l;
-               
+
                }
-               
+
                else if ( ch.hasClass( "yui3-resize-handle-b" ) ) {
-               
+
                  calcdH = dh;
                  l = orig.l;
                  t = orig.t;
                }
-               
+
                else if( ch.hasClass( "yui3-resize-handle-tl" ) ) {
 
                  calcdW = -dw;
                  calcdL = dw;
                  calcdH = -dh;
-                 calcdT = dh;               
+                 calcdT = dh;
                }
 
                else if( ch.hasClass( "yui3-resize-handle-tr" ) ) {
@@ -709,19 +709,19 @@
                  calcdH = -dh;
                  calcdT = dh;
                  l = orig.l;
-               
+
                }
 
                else if( ch.hasClass( "yui3-resize-handle-bl" ) ) {
-               
+
                  calcdW = -dw;
                  calcdH = dh;
                  calcdL = dw;
-                 t = orig.t;           
-               }               
+                 t = orig.t;
+               }
 
                else if( ch.hasClass( "yui3-resize-handle-br" ) ) {
-               
+
                  calcdW = dw;
                  calcdH = dh;
                  t = orig.t; calcdT = 0;
@@ -731,7 +731,7 @@
 
 
 
-               finalCoords = this._constrainResize( { w: w + calcdW, 
+               finalCoords = this._constrainResize( { w: w + calcdW,
                                                           h: h + calcdH,
                                                           t: t + calcdT,
                                                           l: l + calcdL } );
@@ -740,40 +740,40 @@
 
 
                this._setPosition( finalCoords , this._resizeNode );
-              
+
                this._updateStatus( ev, { w: w + calcdW, h: h + calcdH, dw: dw, dh: dh } );
 
                // update any child elements we're wrapping
-               this._resizeChildren( Y.mix( { ratioW: calcdW/w, 
-                                             ratioH: calcdH/h, 
-                                             dl: calcdL, 
+               this._resizeChildren( Y.mix( { ratioW: calcdW/w,
+                                             ratioH: calcdH/h,
+                                             dl: calcdL,
                                              dt: calcdT },
                                            finalCoords) );
-                                       
+
 
 
                ev.halt( true );
 
-            
+
             },
-            
-            
-            
+
+
+
             /**
              * Resize children by same amount
              */
             _resizeChildren: function( oChange ){
-      
+
                if( this._wrappedEls === false ){
-                 return; 
+                 return;
                }
-               
+
                // single element wrapper: set to same size as wrapper
                if( this._wrappedEls.length == 1 ){
                  this._setPosition( {w: oChange.w,
                                      h: oChange.h,
                                      t: oChange.t,
-                                     l: oChange.l }, 
+                                     l: oChange.l },
                                     this._wrappedEls[ 0 ] );
                  return;
                }
@@ -786,16 +786,16 @@
                                       t: oPos.t + oChange.dt  ,
                                       l: oPos.l + oChange.dl    }, el );
                };
-               
+
                // cycle through and resize kids:
                Y.each( this._wrappedEls, doResize, this );
-            
+
             },
 
 
 
 
-           
+
             /**
              * At the end of the resize
              */
@@ -803,42 +803,42 @@
 
                // if we're resizing, don't want to move too:
                if( this.get( "draggable" ) && this._currentHandle !== false  ){
-               
+
                   this.get( "host" ).dd.set( "move" , false );
 
                }
-         
-             
+
+
                if( this.get( "proxy" )  && this._currentHandle !== false ) {
-                 
+
                  // animate...
                  if( this.get( "animate" ) ){
                    this._animPosition( this._getPosition( this._resizeNode ));
                  }
                  // or just go straight there.
-                 else {   
-                   this._setPosition( this._getPosition( this._resizeNode )); 
+                 else {
+                   this._setPosition( this._getPosition( this._resizeNode ));
                  }
                }
-                           
+
                this._currentHandle = false;
                this._ratioValue = null;
-               
+
                if( this.get( "ghost" ) ){
                   this.get("host").removeClass( "yui3-resize-ghost" );
                }
-               
+
                this._hideStatus();
-              
+
 
             },
-            
+
             /**
              * Gets position of node in one go.
              * @param Node
-             */            
+             */
             _getPosition: function( node ){
-              
+
                 if( node === undefined ){
                   node = this.get( "host" );
                 }
@@ -849,15 +849,15 @@
                        t : parseInt( node.getY() , 10 ),
                        l : parseInt( node.getX() , 10 ) };
             },
-            
-            
+
+
             /**
              * Sets position of a node in one go.
              * @param Object
              * @param Node
              */
             _setPosition: function( oPos , node ){
-          
+
                if( node === undefined ) {
                  node = this.get( "host" );
                }
@@ -866,30 +866,30 @@
                  node.setStyle( "height" , parseInt( oPos.h, 10 ) + "px" );
                  node.setStyle( "top" , parseInt( oPos.t, 10 ) + "px" );
                  node.setStyle( "left" , parseInt( oPos.l , 10 ) + "px" );
-               
-                
+
+
             },
-            
-            
+
+
             /**
              * Animate final resize
              */
             _animPosition: function( oPos , node ) {
-            
-              
+
+
               // go straight if Anim's not available.
               if( Y.Anim === undefined ){
                 return this._setPosition( oPos, node );
               }
-              
+
               // animate from the starting position before resize
               this._setPosition( this._originalPosition, this.get("host"));
-              
+
               if( node === undefined ){
                 node = this.get( "host" );
               }
-              
-              var a = new Y.Anim( { node: node, 
+
+              var a = new Y.Anim( { node: node,
                                     from: this._originalPosition,
                                     to: { width: oPos.w,
                                           height: oPos.h,
@@ -899,12 +899,12 @@
                                     duration: this.get( "animDuration" ) } );
               a.run();
             },
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
             /*
              *
              *
@@ -916,29 +916,29 @@
              *
              *
              */
-             
+
              /**
               * Shows the status panel
               */
             _showStatus: function(){
-            
+
               if( !this.get( "status" ) ){
                 return;
               }
-            
+
               this._statusNode.setStyle( "display", "inline" );
-            
+
             },
-            
+
             /**
              * Updates content and position of status panel
              */
             _updateStatus: function( ev, oCoords ){
-              
+
               if( !this.get( "status" ) ){
                 return;
               }
-       
+
               var n = this._statusNode;
               // set text:
               n.setContent("<strong>" + oCoords.w + " x " + oCoords.h + "</strong><em>" + ( oCoords.w - this._originalPosition.w ) + " x " + ( oCoords.h - this._originalPosition.h )+ "</em>" );
@@ -946,23 +946,23 @@
               n.setXY( [ ev.target.mouseXY[0] + 12 , ev.target.mouseXY[1] + 12 ] );
 
             },
-            
+
             /**
              * Hides status panel
              */
             _hideStatus: function(){
-              
+
               if( !this.get( "status" ) ){
                 return;
               }
               this._statusNode.setContent("");
-              this._statusNode.setStyle( "display", "none" ); 
+              this._statusNode.setStyle( "display", "none" );
             },
-             
-            
-            
-            
-            
+
+
+
+
+
             /**
              *
              *
@@ -971,25 +971,25 @@
              *
              *
              */
-            
-            
+
+
             /**
              * Check if resize is out of bounds
              */
             _constrainResize: function( coords ){
-            
+
                var newW = coords.w,
-                   newH = coords.h, 
-                   newT = coords.t, 
+                   newH = coords.h,
+                   newT = coords.t,
                    newL = coords.l;
-            
+
                // min and max x and y pos
                if( this.get("minX" ) && newL < this.get( "minX" ) ) {
                  newL = this.get("minX");
                }
                if( this.get("minY" ) && newT < this.get( "minY" ) ) {
                  newT = this.get("minY");
-               }               
+               }
                if( this.get("maxX" ) && newL > this.get( "maxX" ) ) {
                  newL = this.get("maxX");
                }
@@ -1009,20 +1009,20 @@
                if( this.get("maxWidth" ) && newW > this.get( "maxWidth" ) ) {
                  newW = this.get("maxWidth");
                }
-               
 
-                              
+
+
                // keep the ratio:
                if( ( this.get("ratio") === true ||  this.get("autoRatio") ) && ( this._ratioValue > 0 ) ) {
                  newH = newW * this._ratioValue;
                }
-               
+
                return { w: newW, h: newH, t: newT, l: newL };
-            
+
             },
 
 
-            /** 
+            /**
             * @private
             * @method _snapTick
             * @param {Number} size The size to tick against.
@@ -1034,7 +1034,7 @@
                 if (!size || !pix) {
                     return size;
                 }
-                var _s = size, 
+                var _s = size,
                     _x = Math.abs(size % pix);
 
                     if ( Math.abs( _x ) > (pix / 2)) {
@@ -1044,8 +1044,8 @@
                     }
 
                 return _s;
-            },            
-            
+            },
+
             /**
              *
              *
@@ -1055,91 +1055,91 @@
              *
              */
             destructor: function() {
-              
+
               // destroy the dd
               this.get("host").dd.destroy();
               this.get("host").unplug("dd");
-              
+
               // remove listeners
               this.detachAll();
-              
+
               // destroy handles
               Y.all( "#" + this.get("host").get("id") + " .yui3-resize-handle" )
                .each( function(el){ el.remove(); } );
-              
+
               // remove status node
               if( this._statusNode !== false ){
                 this._statusNode.remove();
               }
-              
+
               this.get("host").removeClass("yui3-resize")
                               .removeClass("yui3-resize-hover")
                               .removeClass("yui3-resize-knob")
                               .removeClass("yui3-resize-hidden");
-              
+
               //this.get("host").unplug("resize");
 
-              
+
             },
-            
+
             getActiveHandleEl: function() {
               return this._currentHandle;
             },
-            
+
             getProxyEl: function() {
               if( this.get( "proxy" ) ){
                 return Y.DD.DDM._proxy;
               }
               return false;
             },
-            
+
             /**
              *
              */
             getStatusEl: function() {
               return this._statusNode;
             },
-            
+
             getWrapEl: function() {
               return false;
             },
-            
+
             isActive: function() {
               return this._currentHandle === false ? false : true;
             },
-            
+
             isLocked: function() {
               return this._locked;
             },
-            
+
             lock: function() {
               this._locked = true;
-              
+
               if( this.get("host").dd ) {
                 this.get("host").dd.lock();
               }
             },
-            
+
             unlock: function() {
               this._locked = false;
-              
+
               if( this.get("host").dd ) {
                 this.get("host").dd.unlock();
               }
             },
-            
+
             reset: function() {
-            
+
             },
-            
+
             toString: function() {
               return 'Resize plugin ' + this.get("host").getAttribute( "id" );
             }
-            
-            
-        
+
+
+
         } );
-        
+
         Y.Plugin.Resize = Resize;
 
 

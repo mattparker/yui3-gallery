@@ -1,15 +1,15 @@
 YUI.add('gallery-dispatcher', function(Y) {
 
 /**
-* <p>The Dispatcher satisfies a very common need of developers using the 
-* YUI library: dynamic execution of HTML Fragments or remote content. Typical strategies to 
-* fulfill this need, like executing the innerHTML property or referencing remote 
-* scripts, are unreliable due to browser incompatibilities. The Dispatcher normalize 
+* <p>The Dispatcher satisfies a very common need of developers using the
+* YUI library: dynamic execution of HTML Fragments or remote content. Typical strategies to
+* fulfill this need, like executing the innerHTML property or referencing remote
+* scripts, are unreliable due to browser incompatibilities. The Dispatcher normalize
 * this behavior across all a-grade browsers.
-* 
+*
 * <p>To use the Dispatcher Module, simply create a new object based on Y.Dispatcher
 * and pass a reference to a node that should be handled.</p>
-* 
+*
 * <p>
 * <code>
 * &#60;script type="text/javascript"&#62; <br>
@@ -25,12 +25,12 @@ YUI.add('gallery-dispatcher', function(Y) {
 *				content: 'Please wait... (Injecting fragment.html)'<br>
 *			})).set('uri', 'fragment.html');<br>
 * <br>
-* <br>		
+* <br>
 *	&#60;/script&#62; <br>
 * </code>
 * </p>
 *
-* <p>The Dispatcher has several configuration properties that can be 
+* <p>The Dispatcher has several configuration properties that can be
 * set via an object literal that is passed as a first argument during the
 * initialization, or using "set" method.
 * </p>
@@ -89,16 +89,16 @@ Y.Dispatcher = Y.Base.create(DISPATCHER, Y.Base, [], {
 
 	// Prototype Properties for Dispatcher
 
-	/** 
+	/**
 	* @property _queue
 	* @description Execution queue.
 	* @default null
 	* @protected
 	* @type Object
-	*/	
+	*/
 	_queue: null,
 
-	/** 
+	/**
 	* @property _io
 	* @description Connection Handler for AJAX requests.
 	* @default null
@@ -138,12 +138,12 @@ Y.Dispatcher = Y.Base.create(DISPATCHER, Y.Base, [], {
 		this._queue = null;
 		this._io = null;
 	},
-	
+
 	//	Protected methods
-	
+
 	/**
 	 * @method _dispatch
-	 * @description Dispatch a content into the code, parsing out the scripts, 
+	 * @description Dispatch a content into the code, parsing out the scripts,
 	 * injecting the code into the DOM, then executing the scripts.
 	 * @protected
 	 * @param {string} content html content that should be injected in the page
@@ -224,17 +224,17 @@ Y.Dispatcher = Y.Base.create(DISPATCHER, Y.Base, [], {
 		// executing the queue
 		this._queue.run();
 	},
-	
+
 	/**
 	* @description Fetching a remote file using Y.io. The response will be dispatched thru _dispatch method...
 	* @method _fetch
 	* @protected
 	* @param {string} uri uri that should be loaded using Y.io
-	* @param {object} cfg configuration object that will be used as base configuration for Y.io 
+	* @param {object} cfg configuration object that will be used as base configuration for Y.io
 	* (http://developer.yahoo.com/yui/3/io/#configuration)
 	* @return object  Reference to the connection handler
 	*/
-	
+
 	_fetch: function(uri, cfg) {
 
 		// stopping any previous process, just in case...
@@ -266,7 +266,7 @@ Y.Dispatcher = Y.Base.create(DISPATCHER, Y.Base, [], {
 	},
 
 	//	Public methods
-	
+
 	/**
 	 * @method stop
 	 * @description Cancel the current loading and execution process immediately
@@ -284,7 +284,7 @@ Y.Dispatcher = Y.Base.create(DISPATCHER, Y.Base, [], {
 }, {
 
 	// Static Properties for Dispatcher
-	
+
 	EVENT_PREFIX: DISPATCHER,
 	/**
 	 * Static property used to define the default attribute configuration of
@@ -297,7 +297,7 @@ Y.Dispatcher = Y.Base.create(DISPATCHER, Y.Base, [], {
 	ATTRS: {
 
 		/**
-		* YUI Node Object that represent a dynamic area in the page.  
+		* YUI Node Object that represent a dynamic area in the page.
 		* @attribute node
 		* @default null
 		* @type object
@@ -345,7 +345,7 @@ Y.Dispatcher = Y.Base.create(DISPATCHER, Y.Base, [], {
 		},
 		/**
 		* Boolean indicating that a process is undergoing.
-		* 
+		*
 		* @attribute loading
 		* @default false
 		* @readonly
@@ -367,7 +367,7 @@ Y.Dispatcher = Y.Base.create(DISPATCHER, Y.Base, [], {
 			}
 		}
 	}
-	
+
 });
 
 

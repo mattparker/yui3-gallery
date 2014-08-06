@@ -5,17 +5,17 @@ YUI.add('gallery-button-toggle', function(Y) {
         CLASSES = {
     		ACTIVE : '-active'
     	};
-    
+
     Button = function() {
         Button.superclass.constructor.apply(this, arguments);
     };
-    
+
     Y.extend(Button,Y.Button, {
-    	
+
         initializer : function(config) {
             this.after('activeChange',this._activeChanged, this);
         },
-        
+
         _toggle : function() {
         	var bb = this.get('boundingBox'),
     	    activeClass = this.className + CLASSES.ACTIVE;
@@ -34,11 +34,11 @@ YUI.add('gallery-button-toggle', function(Y) {
         		this.set('active', !this.get('active'));
         	},this);
         },
-        
+
         _deactivateCallbackChange : function(e) {
             this._bindClick();
         },
-              
+
         _activeChanged : function(e) {
         	var bb = this.get('boundingBox'),
     	    activeClass = this.className + CLASSES.ACTIVE;
@@ -54,7 +54,7 @@ YUI.add('gallery-button-toggle', function(Y) {
         		}
         	}
         }
-        
+
     }, {
         NAME : 'button',
         ATTRS : {
@@ -67,7 +67,7 @@ YUI.add('gallery-button-toggle', function(Y) {
             }
         }
     });
-    
+
     Y.ButtonToggle = Button;
 
 

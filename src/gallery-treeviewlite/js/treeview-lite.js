@@ -19,23 +19,23 @@
             TREEVIEWLITE    = "treeviewlite",
         		getCN           = Y.ClassNameManager.getClassName,
             CSS_TOP         = getCN( TREEVIEWLITE ), //"yui3-treeviewlite",
-            CSS_HAS_CHILD   = getCN( TREEVIEWLITE , "haschild" ), //"yui3-treeviewlite-haschild", 
+            CSS_HAS_CHILD   = getCN( TREEVIEWLITE , "haschild" ), //"yui3-treeviewlite-haschild",
             CSS_FINAL_CHILD = getCN( TREEVIEWLITE , "lastchild" ), //"yui3-treeviewlite-lastchild",
             CSS_COLLAPSED   = getCN( TREEVIEWLITE , "collapsed" ), //"yui3-treeviewlite-collapsed";
-            
-            
-            
+
+
+
 
         TreeviewLite = function(config) {
 
             TreeviewLite.superclass.constructor.apply(this, arguments);
         };
-        
-        
 
 
 
-        
+
+
+
         /**
         * @property NAME
         * @type {String}
@@ -44,7 +44,7 @@
 
         /**
         * @property NS
-        * @description The treeview instance will be placed on the Node instance 
+        * @description The treeview instance will be placed on the Node instance
         *         under the treeviewlight namespace. It can be accessed via Node.treeviewlight;
         * @type {String}
         */
@@ -56,9 +56,9 @@
          * There are no attributes to set.  It's that simple.
          */
         TreeviewLite.ATTRS = {};
-        
+
         Y.extend(TreeviewLite, Y.Plugin.Base, {
-            
+
             /**
              * Stores handles for delegated event listener(s).
              * @property _delegates
@@ -66,21 +66,21 @@
              * @type Array
              */
             _delegates: [],
-            
-            
+
+
             /**
              * Lifecycle: add classes and a delegated listener
              * @method initializer
              */
             initializer: function(){
-            
+
 
               this.renderUI();
               this.bindUI();
-                
+
 
             },
-            
+
             /**
              * Lifecycle: removes classes and listener(s)
              * @method destructor
@@ -88,7 +88,7 @@
             destructor: function(){
 
               var host = this.get(HOST);
-              
+
               host.removeClass( CSS_TOP );
               host.all( "li" ).removeClass( CSS_HAS_CHILD )
                               .removeClass( CSS_COLLAPSED )
@@ -103,23 +103,23 @@
              */
             renderUI : function() {
               var host = this.get(HOST);
-              
+
               host.addClass( CSS_TOP );
-              
-              Y.each( host.all( "li" ) , function(n){ 
-                   
+
+              Y.each( host.all( "li" ) , function(n){
+
                    // add class if they have child lists
                    n.removeClass( CSS_HAS_CHILD );
                    if( n.one( "ol li,ul li" ) ){
                        n.addClass( CSS_HAS_CHILD );
                    }
-                   
+
                    // add a 'last child' css.
                    n.removeClass( CSS_FINAL_CHILD );
                    if( n.next() === null ) {
                      n.addClass( CSS_FINAL_CHILD );
                    }
-              });            
+              });
             },
 
 
@@ -130,26 +130,26 @@
              * @method bindUI
              */
             bindUI : function() {
-                 
+
                  // add a delegated listener to expand collapsed sub trees
-                 this._delegates.push( this.get(HOST).delegate( "click" , 
-                    this._toggleCollapse , 
-                    "li." + CSS_HAS_CHILD + " span" , 
-                    this, 
+                 this._delegates.push( this.get(HOST).delegate( "click" ,
+                    this._toggleCollapse ,
+                    "li." + CSS_HAS_CHILD + " span" ,
+                    this,
                     true)
-                 );            
+                 );
             },
-            
+
             /**
              * <p>Opens or collapses a nested list.</p>
              * @method _toggleCollapse
              * @param {EventFacade} e Event object
-             * @protected 
+             * @protected
              */
             _toggleCollapse : function( ev ){
                  var parent = ev.currentTarget.get( "parentNode" );
                  if( parent.one("ol,ul") ){
-                   if( parent.hasClass( CSS_COLLAPSED ) ) { 
+                   if( parent.hasClass( CSS_COLLAPSED ) ) {
                      /**
                       * <p>Event fired when a list is opened</p>
                       * @event open
@@ -167,13 +167,13 @@
                    parent.toggleClass( CSS_COLLAPSED );
                  }
             }
-            
-            
-            
+
+
+
         } );
-        
-        
-        
-        
-        
+
+
+
+
+
         Y.Plugin.TreeviewLite = TreeviewLite;

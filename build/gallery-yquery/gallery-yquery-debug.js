@@ -29,10 +29,10 @@ function YQuery( src ) {
 
 		// Allows for override to use dev version
 		type : 'production',
-		
+
 		// Undocumented but allows for override of the setTimeout function; in milliseconds
 		timeout : 10000,
-		
+
 		// Undocumented but allows for overriding the callback if ever necessary
 		callback : null,
 
@@ -43,7 +43,7 @@ function YQuery( src ) {
 				opts.scope		= this;
 
 			var type = ( this.type === 'production' ) ? '.min' : '';
-			
+
 			if ( Y.Lang.isNull( this.callback ) ) { this.callback = queue.pop(); }
 
 			if ( this.autodetect || Y.Lang.isObject( this.version ) ) {
@@ -68,7 +68,7 @@ function YQuery( src ) {
 								space		: this.version[ i ].namespace,
 								callback	: c
 							};
-							
+
 							opts.onSuccess	= function( d ) {
 								if ( ! Y.Lang.isUndefined( d.data.space ) ) { win[d.data.space] = jQuery.noConflict( true ); }
 								if ( d.data.callback ) { this.scope._invokeReady(); }
@@ -96,18 +96,18 @@ function YQuery( src ) {
 				}
 
 			} else {
-				
+
 				// This gets fired if jQuery autodetect has been overridden
 				this._invokeReady();
 
 			}
 
 		},
-		
+
 		_invokeReady : function() {
 
 			Y.on( 'domready', function() { this.callback(); }, this );
-			
+
 		}
 
 	};

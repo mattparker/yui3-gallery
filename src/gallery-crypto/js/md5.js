@@ -21,7 +21,7 @@ _C.MD5 = function (msg) {
 		II = function(a, b, c, d, x, s, ac) {
 			return transform_common((c ^ (b | (~d))), a, b, x, s, ac);
 		},
-		data = _C.stringToByteArray(msg), 
+		data = _C.stringToByteArray(msg),
 		len = msg.length * 8,
 		a = 0x67452301,
 		b = 0xefcdab89,

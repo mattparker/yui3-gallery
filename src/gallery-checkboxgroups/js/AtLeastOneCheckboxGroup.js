@@ -3,7 +3,7 @@
  * the active, adjacent one is turned on.  The exact algorithm is explained
  * in "Tog on Interface".  The checkboxes are assumed to be ordered in the
  * order they were added.
- * 
+ *
  * @module gallery-checkboxgroups
  * @class AtLeastOneCheckboxGroup
  * @constructor

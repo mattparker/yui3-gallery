@@ -35,7 +35,7 @@ Y.extend(
             }) }, self);
 
             // manage the browser's autocomplete, since that'll interefere,
-            // but we need to make sure that we don't prevent pre-filling 
+            // but we need to make sure that we don't prevent pre-filling
             // when the user navs back to the page, unless the developer has
             // specifically disabled that feature in the markup.
             manageBrowserAC(host);
@@ -161,7 +161,7 @@ function manageBrowserAC (host) {
 
 function handleQueryResponse (e) {
     var res = (e && e.response && e.response.results) ? e.response.results : e;
-    
+
     // if there is a result, and it's not an empty array
     if (res && !(res && ("length" in res) && res.length === 0)) this.fire("ac:load", {
         results : res,

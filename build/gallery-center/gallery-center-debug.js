@@ -43,7 +43,7 @@ Y.extend(C, Object, {
     },
 
     /**
-     * Sets the center of the node to the position supplied.  
+     * Sets the center of the node to the position supplied.
      * accepts x/y coordinates as individual paramters or an array.  Also
      * accepts an event object with pageX and pageY attributes.
      */

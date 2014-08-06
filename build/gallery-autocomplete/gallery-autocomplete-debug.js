@@ -3,7 +3,7 @@ YUI.add('gallery-ac-plugin', function(Y) {
 /**
  * ACPlugin - A plugin that exposes the proper events to make AutoComplete work
  * on a form element (input or textarea, typically).
- * 
+ *
  * This utility is not intended to be used in isolation, but rather as a glue
  * layer to work with ACWidget or some other display mechanism.
  **/
@@ -65,7 +65,7 @@ Y.Plugin.ACPlugin = Y.extend(
             }) }, self);
 
             // manage the browser's autocomplete, since that'll interefere,
-            // but we need to make sure that we don't prevent pre-filling 
+            // but we need to make sure that we don't prevent pre-filling
             // when the user navs back to the page, unless the developer has
             // specifically disabled that feature in the markup.
             manageBrowserAC(host);
@@ -84,17 +84,17 @@ Y.Plugin.ACPlugin = Y.extend(
         ATTRS : {
             /**
              * The value that will be queried.
-             * 
+             *
              * By default, this is just a proxy to the host's value attr, which in
              * Node objects passes through to the underlying DOM node.
-             * 
+             *
              * However, in some use cases, it may be useful to override the queryValue
              * getters and setters, for example, in the delimited case.
              *
              * Setting caches the value so that we only make new requests for user-entered
              * data, and not for programmatically-set values.  (For example, when a user
              * is scrolling through the items displayed in an  ACWidget.)
-             * 
+             *
              * @for ACPlugin
              * @type {String}
              * @public
@@ -120,12 +120,12 @@ Y.Plugin.ACPlugin = Y.extend(
              * It is not required that it be a DataSource object per se, but it
              * must provide a "sendRequest" function that takes the same sort of
              * argument as the DataSource classes.
-             * 
+             *
              * It is not required to use this, as the implementor can listen to
              * ac:query events and handle them in any ad-hoc way desired.  However,
              * for the 99% use case, it's simpler to just provide a data source
              * and do things in the normal way.
-             * 
+             *
              * @for ACPlugin
              * @type Object
              **/
@@ -147,7 +147,7 @@ Y.Plugin.ACPlugin = Y.extend(
                 value : 3,
                 validator : YLang.isNumber
             },
-            
+
             /**
              * Attribute used to convert a value into a request for the
              * DataSource.  Can be a string containing "{query}" somewhere,
@@ -188,7 +188,7 @@ Y.Plugin.ACPlugin = Y.extend(
 
 /**
  * Attach the required event handles to the host node.
- * 
+ *
  * @param self {Object} The ACPlugin instance
  * @param host {Object} The host object
  * @return {Array} A list of handles
@@ -237,11 +237,11 @@ function browserACFixer (domnode) { return function () {
 /**
  * Manage the browser's builtin AutoComplete behavior, so that form values
  * will be tracked in browsers that do that.
- * 
+ *
  * First, disable the browser's autocomplete, since that'll cause issues.
  * If the element is not set up to disable the browser's builtin autocomplete,
  * then set an unload listener to re-enable it.
- * 
+ *
  * @private
  * @param host {Object} The node to manage
  * @see {browserACFixer}
@@ -273,7 +273,7 @@ function manageBrowserAC (host) {
  **/
 function handleQueryResponse (e) {
     var res = (e && e.response && e.response.results) ? e.response.results : e;
-    
+
     // if there is a result, and it's not an empty array
     if (res && !(res && ("length" in res) && res.length === 0)) this.fire("ac:load", {
         results : res,
@@ -344,7 +344,7 @@ Y.ACWidget = Y.extend(
          * @public
          * @for ACWidget
          **/
-        setSize : function () {            
+        setSize : function () {
             return this.set("width", this.get("ac").get("host").getComputedStyle("width"));
         },
         /**
@@ -359,14 +359,14 @@ Y.ACWidget = Y.extend(
                 cb = widget.get("contentBox"), //INHERITED
                 currentAC = widget.get("ac"),
                 category = Y.stamp(widget)+"|";
-            
+
             if (ac && currentAC !== ac && widget[BOUND]) {
                 // supplied something, it's new, and we're bound to something else.
                 Y.detach(category);
                 widget[BOUND] = 0; // small and falsey
             }
             ac = ac || currentAC;
-            
+
             // if we have an ac, and we're not bound right now, then bind.
             if (ac && !widget[BOUND]) {
                 widget[BOUND] = 1;
@@ -447,9 +447,9 @@ Y.ACWidget = Y.extend(
                 replRegexp = self.get("hiliteTpl")
                     .replace(/\$/g, '\\$')
                     .replace(/\{term\}/g, '$1');
-            
+
             return out.replace(findRegexp, replRegexp);
-            
+
             // YArrayeach(queryTerms, function (term) {
             //     if (!term) return;
             //     term = regexpEscape(term);
@@ -465,7 +465,7 @@ Y.ACWidget = Y.extend(
          **/
         next : function () {
             var self = this;
-            
+
             return (
                 self.get("visible") ? self.selectNext()
                 : self.get("data") ? self.show()
@@ -567,7 +567,7 @@ Y.ACWidget = Y.extend(
 /**
  * The item that is selected, for example when the user presses the down arrow to cycle
  * through the available results.
- * 
+ *
  * Changing this value causes the ACPlugin to set its queryValue to the new setting.
  * Setting it to -1 makes it go back to what the user had entered.
  * Setting it to less than -1 or greater than the number of items will cause it to wrap around.
@@ -576,7 +576,7 @@ Y.ACWidget = Y.extend(
  * @for ACWidget
  **/
 // don't define this one inline, so that we can compress the key
-// 
+//
 ACWidget.ATTRS[selectedIndex] = {
     value : -1,
     // validator should be the name to of an instance method
@@ -594,7 +594,7 @@ ACWidget.ATTRS[selectedIndex] = {
             selClass = this.getClassName("selected"); //INHERITED
         if (isNaN(current)) current = -1;
         if (!d || !l) return;
-        
+
         // first normalize them both to a number between
         // (-1)..(d.length - 1) where -1 means "what the user typed"
         // this should probably be a function, rather than copy pasta.
@@ -603,22 +603,22 @@ ACWidget.ATTRS[selectedIndex] = {
         while (si < -1) si += l + 1;
         si = (si + 1) % (l + 1) - 1;
         current = (current + 1) % (l + 1) - 1;
-                            
+
         // actually set it, the rest is just monkey business.
         self[_selectedIndex] = si;
-        
+
         // hang onto this, we'll need it later.
         if (current === -1) {
             self[_originalValue] = ac.get(queryValue);
         }
-        
+
         // nothing changing!
         if (current === si) return;
-        
+
         // undo the current one, but only if it's not -1
         var curItem = self.get("contentBox").one("."+selClass);
         if (curItem) curItem.removeClass(selClass);
-        
+
         // handle the new thing
         if (si === -1) {
             // back to the start

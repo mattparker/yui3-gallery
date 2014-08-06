@@ -1,7 +1,7 @@
 YUI.add("gallery-base-componentmgr",function(Y){
 /*
 	 * Base Component Manager
-	 * 
+	 *
 	 * Oddnut Software
 	 * Copyright (c) 2010 Eric Ferraiuolo - http://eric.ferraiuolo.name
 	 * YUI BSD License - http://developer.yahoo.com/yui/license.html

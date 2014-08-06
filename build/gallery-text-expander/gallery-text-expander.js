@@ -40,10 +40,10 @@ Y.extend(TextExpander, Y.Plugin.Base, {
             } else {
                 this.set('max_height', 450);
             }
-            
+
         }
         this.t_area.setStyle('overflow', 'hidden');
-        
+
         this.t_area.on('keyup', function(e) {
             if (e.keyCode === 8 || e.keyCode === 46 || (e.keycode == 88 && (e.ctrlKey || e.metaKey))) {
                 //Backspace or delete
@@ -53,14 +53,14 @@ Y.extend(TextExpander, Y.Plugin.Base, {
         }, this);
         this.enlarge_area();
     },
-    
+
     enlarge_area: function() {
         var area = this.t_area,
             h = parseInt(area.getStyle('height'), 10),
             new_h = 0,
             scroll_h = area.get('scrollHeight'),
             line_height = this.get('line_height') || (scroll_h - this.prev_scroll_height);
-        
+
         if (scroll_h > h) {
             if (! this.line_height_set) {
                 if (line_height > 50) {
@@ -74,25 +74,25 @@ Y.extend(TextExpander, Y.Plugin.Base, {
                 } else {
                     this.previous_line_height = line_height;
                 }
-                
+
             }
             new_h = Math.min(scroll_h+line_height, this.get('max_height'));
             area.setStyle('height', (new_h+'px'));
             this.set_overflow();
             this.prev_scroll_height = scroll_h+line_height;
-        }       
+        }
     },
-    
+
     shrink_area: function() {
         // This method is expensive on large text areas and creates some flicker
         // so we want to minimize it's use to only be shrinking the text area.
-        var area = this.t_area, 
-            current_len = area.get('value').length, 
+        var area = this.t_area,
+            current_len = area.get('value').length,
             current_width = area.get('offsetWidth'),
             scroll_h = 0,
             h = 0;
-        
-        // First time through have to set the prev lengths, don't do this on 
+
+        // First time through have to set the prev lengths, don't do this on
         // initialize as it can take a bit to count and may not be needed.
         if (! this.prev_len) {
             this.prev_len = current_len;
@@ -103,20 +103,20 @@ Y.extend(TextExpander, Y.Plugin.Base, {
 
         if (current_len < this.prev_len || current_width > this.prev_width) {
             area.setStyle('height', "1px");
-            
+
             scroll_h = area.get('scrollHeight');
             h = Math.max(this.get('min_height'), scroll_h);
-            
+
             area.setStyle('height', h + "px");
             this.set_overflow();
-            this.prev_len = current_len; 
-            this.prev_width = current_width; 
-        }       
+            this.prev_len = current_len;
+            this.prev_width = current_width;
+        }
     },
-    
+
     set_overflow: function() {
-        this.t_area.setStyle('overflow', 
-            (this.t_area.get('scrollHeight') > this.get('max_height') ? "auto" : "hidden")); 
+        this.t_area.setStyle('overflow',
+            (this.t_area.get('scrollHeight') > this.get('max_height') ? "auto" : "hidden"));
     }
 });
 Y.TextExpander = TextExpander;

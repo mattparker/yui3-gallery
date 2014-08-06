@@ -21,11 +21,11 @@
  * can be used to store custom attributes.  TreeView.getNode(s)ByProperty
  * can be used to retrieve a node by one of the attributes.
  * @param oParent {YAHOO.widget.Node} this node's parent node
- * @param expanded {boolean} the initial expanded/collapsed state (deprecated; use oData.expanded) 
+ * @param expanded {boolean} the initial expanded/collapsed state (deprecated; use oData.expanded)
  */
 YAHOO.widget.TextNode = function(oData, oParent, expanded) {
 
-    if (oData) { 
+    if (oData) {
         if (Lang.isString(oData)) {
             oData = { label: oData };
         }
@@ -37,7 +37,7 @@ var NS = Y.namespace('apm');
 NS.TextNode = YAHOO.widget.TextNode;
 
 Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
-    
+
     /**
      * The CSS class for the label href.  Defaults to ygtvlabel, but can be
      * overridden to provide a custom presentation for a specific node.
@@ -68,7 +68,7 @@ Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
      * @type string
      */
     title: null,
-    
+
     /**
      * The href for the node's label.  If one is not specified, the href will
      * be set so that it toggles the node.
@@ -83,7 +83,7 @@ Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
      * @type string
      */
     target: "_self",
-    
+
     /**
      * The node type
      * @property _type
@@ -99,11 +99,11 @@ Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
      * @method setUpLabel
      * @param oData string containing the label, or an object with a label property
      */
-    setUpLabel: function(oData) { 
-        
+    setUpLabel: function(oData) {
+
         if (Lang.isString(oData)) {
-            oData = { 
-                label: oData 
+            oData = {
+                label: oData
             };
         } else {
             if (oData.style) {
@@ -114,7 +114,7 @@ Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
         this.label = oData.label;
 
         this.labelElId = "ygtvlabelel" + this.index;
-        
+
     },
 
     /**
@@ -123,12 +123,12 @@ Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
      * @method getLabelEl
      * @return {object} the element
      */
-    getLabelEl: function() { 
+    getLabelEl: function() {
         return document.getElementById(this.labelElId);
     },
 
     // overrides YAHOO.widget.Node
-    getContentHtml: function() { 
+    getContentHtml: function() {
         var sb = [];
         sb[sb.length] = this.href?'<a':'<span';
         sb[sb.length] = ' id="' + this.labelElId + '"';
@@ -136,7 +136,7 @@ Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
         if (this.href) {
             sb[sb.length] = ' href="' + this.href + '"';
             sb[sb.length] = ' target="' + this.target + '"';
-        } 
+        }
         if (this.title) {
             sb[sb.length] = ' title="' + this.title + '"';
         }
@@ -164,13 +164,13 @@ Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
         if (this.labelStyle != 'ygtvlabel') { def.style = this.labelStyle; }
         if (this.title) { def.title = this.title; }
         if (this.href) { def.href = this.href; }
-        if (this.target != '_self') { def.target = this.target; }       
+        if (this.target != '_self') { def.target = this.target; }
 
         return def;
-    
+
     },
 
-    toString: function() { 
+    toString: function() {
         return YAHOO.widget.TextNode.superclass.toString.call(this) + ": " + this.label;
     },
 
@@ -187,9 +187,9 @@ Y.extend(YAHOO.widget.TextNode, YAHOO.widget.Node, {
             label.target = this.target;
         }
     }
-        
-    
 
-    
+
+
+
 });
 })();

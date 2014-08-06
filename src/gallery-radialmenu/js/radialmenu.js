@@ -211,7 +211,7 @@ var	Lang = Y.Lang,
 	});
 
 Y.RadialMenuPanel = RadialMenuPanel;
-	
+
 	// constants
 var	CLS_PANEL = 'yui-' + Y.RadialMenuPanel.NAME.toLowerCase(),
 
@@ -320,7 +320,7 @@ var	CLS_PANEL = 'yui-' + Y.RadialMenuPanel.NAME.toLowerCase(),
 		_isKeyPressed: false,
 
 		_selectedPanel: null,
-		
+
 		_nodeClickHandle: null,
 
 		_keyDownHandle: null,
@@ -342,7 +342,7 @@ var	CLS_PANEL = 'yui-' + Y.RadialMenuPanel.NAME.toLowerCase(),
 
 			if (node) {
 				panel = _getPanel(panels, node);
-				
+
 				if (panel) {
 					e.halt();
 					i = panel.get('index');
@@ -544,7 +544,7 @@ var	CLS_PANEL = 'yui-' + Y.RadialMenuPanel.NAME.toLowerCase(),
 
 				RadialMenu.superclass.show.apply(_this, arguments);
 			}
-			
+
 			Y.later(200, _this, _this.bindUI);
 		},
 
@@ -567,7 +567,7 @@ var	CLS_PANEL = 'yui-' + Y.RadialMenuPanel.NAME.toLowerCase(),
 					viewport.top + (viewport.height - 5) / 2
 				];
 			}
-			
+
 			Y.each(panels, function(panel, i) {
 				reg = panel.get('boundingBox').get('region');
 				a = (angle * i - 90) * Math.PI / 180;
@@ -588,7 +588,7 @@ var	CLS_PANEL = 'yui-' + Y.RadialMenuPanel.NAME.toLowerCase(),
 Y.RadialMenu = RadialMenu;
 
 
-if (Y.Anim && Y.Plugin) {	
+if (Y.Anim && Y.Plugin) {
 		/**
 		 * The RadialMenu constructor.
 		 * @method RadialMenuAnim
